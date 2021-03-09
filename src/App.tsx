@@ -30,7 +30,7 @@ class App extends React.Component {
             <h1>
               Never Touch Fiat Again
             </h1>
-            <small>Digital collectibles from my company</small>
+            <small>Digital collectibles backed by real gold!</small>
             </div>
             <div className="frame-wrapper">
                 <iframe id="opensea-iframe" title="Embedded OpenSea Marketplace" src={embeddedUrl} width='100%' height='100%' frameBorder='0' allowFullScreen></iframe>

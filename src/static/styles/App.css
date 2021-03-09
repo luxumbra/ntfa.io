@@ -40,7 +40,6 @@
   min-height: 150px;
   background-color: #1e7157;
   position: relative;
-
   font-weight: 700;
   font-family: 'Titillium Web', 'Roboto', 'Avenir', 'Helvetica Neue', sans-serif;
   color: white;
@@ -78,6 +77,13 @@
   background-position: center center;
   background-repeat: no-repeat;
   opacity: 0.6;
+}
+.frame-wrapper {
+    /* min-height: 100vh; */
+}
+#opensea-iframe {
+    height: 1000px !important;
+    overflow-y: scroll;
 }
 
 @keyframes App-logo-spin {

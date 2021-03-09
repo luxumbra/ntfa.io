@@ -20,19 +20,21 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            
+
           </p>
           <i className="material-icons right">menu</i>
         </header>
         <main className="App-main">
           <div className="App-hero">
             <div className="App-hero-image"></div>
-            <p>
-              My Marketplace
-            </p>
+            <h1>
+              Never Touch Fiat Again
+            </h1>
             <small>Digital collectibles from my company</small>
-          </div>
-          <iframe id="opensea-iframe" title="Embedded OpenSea Marketplace" src={embeddedUrl} width='100%' height='100%' frameBorder='0' allowFullScreen></iframe>
+            </div>
+            <div className="frame-wrapper">
+                <iframe id="opensea-iframe" title="Embedded OpenSea Marketplace" src={embeddedUrl} width='100%' height='100%' frameBorder='0' allowFullScreen></iframe>
+            </div>
         </main>
         <footer className="App-footer">
           {/* Placeholder image for footer */}

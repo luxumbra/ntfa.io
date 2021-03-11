@@ -1,18 +1,19 @@
 import React, { FC } from 'react';
-import { Box, Link } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
-type AssetContainerProps = {
+export interface AssetContainerInterface {
     height: string
     width: string
     margin?: string
+    d?: string
     bg?: string
-    sx?: any
-    children?: any
+    children?: React.ReactNode
+    className?: string
 }
 
-export const AssetContainer = ({height, width, margin, bg, sx, children}: AssetContainerProps) => {
+export const AssetContainer: FC<AssetContainerInterface> = ({ height, width, margin, d, bg, children, className}) => {
     return(
-        <Box height={height} width={width} margin={margin} backgroundImage={bg} position="relative" sx={sx}>
+        <Box className={className} height={height} width={width} margin={margin} backgroundImage={bg} position="relative" d={d}>
             {children}
         </Box>
     )

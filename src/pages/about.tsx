@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import ReactPlayer from 'react-player';
 //
 import { MetadataComponent } from '../components/shared/Metadata';
@@ -12,18 +12,15 @@ export function IndexComponent() {
     return(
         <Box className="scene" d="flex" flexDirection="row" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch">
             <MetadataComponent/>
-            <HeaderComponent className="scene__left" sx={{ minW: `33%`}} />
+            <HeaderComponent className="scene__left" minW="33%" />
             <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
-                <AssetContainer height="5%" width="100%" className="spacer" sx={{}}></AssetContainer>
+                <AssetContainer height="5%" width="100%" className="spacer"></AssetContainer>
                 <AssetContainer width="100%" height="33%" className="nft-video">
                     <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
                 </AssetContainer>
-                <AssetContainer height="60%" width="100%" className="spacer" sx={{}}>
+                <AssetContainer height="60%" width="100%" className="spacer">
                     <Box className="spacer" height="10%"></Box>
-                    <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" sx={{
-                        backgroundColor: `blue.300`, zIndex: 0, "&:hover": {
-                        backgroundColor: `pink.600`, cursor: `pointer`
-                    } }}>
+                    <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" color="blue.300"  z={0}>
                         <>
                         <h3>About NTFA</h3>
                         <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
@@ -35,7 +32,7 @@ export function IndexComponent() {
                     </Building>
                 </AssetContainer>
             </Box>
-            <FooterComponent className="scene__right" sx={{ minW: `33%`}}/>
+            <FooterComponent className="scene__right" minW="33%"/>
         </Box>
     )
 }

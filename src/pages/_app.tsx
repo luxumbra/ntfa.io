@@ -14,7 +14,8 @@ const theme = extendTheme({
     styles: {
         global: {
             html: {
-                height: `100%`
+                height: `100%`,
+                scrollBehavior: `smooth`
             },
             body: {
                 backgroundColor: `blue.900`,

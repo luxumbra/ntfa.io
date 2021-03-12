@@ -22,7 +22,8 @@ export const MetadataComponent: FC<MetadataInterface> = ({ title, description })
             <meta property="og:title" content={outputTitle}/>
             <meta property="og:image" content=""/>
             <meta property="og:description" content={outputDescription}/>
-
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link href="https://fonts.googleapis.com/css2?family=Asset&display=swap" rel="stylesheet"/>
             <link rel="icon" type="image/jpg" href=""/>
         </Head>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link, chakra, forwardRef, HTMLChakraProps } from '@chakra-ui/react';
+import { Box, Link, Heading, chakra, forwardRef, HTMLChakraProps } from '@chakra-ui/react';
 import ReactPlayer from 'react-player';
 import {
     useViewportScroll,
@@ -53,12 +53,12 @@ export function IndexComponent() {
                 <StoreSceneLeft className="scene__left" minW="33%" />
 
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexFlow="column wrap" alignItems="center">
-                    <AssetContainer width="100%" height="25%" className="logo">
+                    <AssetContainer width="100%" height="33%" className="logo">
                         <Box className="spacer" height="80%">
                         </Box>
                     </AssetContainer>
-                    <Box width="100%" height="65%" d="flex" flexFlow="row wrap" alignContent="center" justifyContent="space-between" className="store">
-                        <Box width="49%" className="nft-video" mb={5}>
+                    <Box width="100%" height="33%" d="flex" flexFlow="row nowrap" alignItems="center" justifyContent="space-between" className="store">
+                        <Box width="33%" className="nft-video" mb={5}>
                             <MotionBox
                                 className="box"
                                 style={{ y: y2, x: 0 }}
@@ -66,7 +66,7 @@ export function IndexComponent() {
                                 <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
                             </MotionBox>
                         </Box>
-                        <Box width="49%" className="nft-video" mb={5}>
+                        <Box width="33%" className="nft-video" mb={5}>
                             <MotionBox
                                 className="box"
                                 style={{ y: y2, x: 0 }}
@@ -74,7 +74,7 @@ export function IndexComponent() {
                                 <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
                             </MotionBox>
                          </Box>
-                        <Box width="49%" className="nft-video" mb={5}>
+                        <Box width="33%" className="nft-video" mb={5}>
                              <MotionBox
                                 className="box"
                                 style={{ y: y2, x: 0 }}
@@ -87,8 +87,8 @@ export function IndexComponent() {
 
                         <Box className="spacer" height="10%"></Box>
 
-                        <Building buildingName="sign1" width="20%" height="40%" margin="15% 0 0 65%"  img="/assets/signs/bitcoin-logo.jpg" imgAlt="/assets/signs/bitcoin-logo.jpg" z={300}>
-                            <Link href="#section2" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>Bitcoin & Gold</Link>
+                        <Building buildingName="sign1" width="200%" height="40%"  img="" imgAlt="" z={300} position="absolute" bottom={10} right={-50}>
+                            <Link href="#section2" sx={{ color: `white`, textShadow: `10px 10px 0 rgba(0,0,0,0.8)`, fontSize: `3.5vw`, fontFamily: `Asset, sans-serif`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`}}>Bitcoin & Gold</Link>
                         </Building>
 
                     </AssetContainer>
@@ -103,7 +103,7 @@ export function IndexComponent() {
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer height="33%" width="100%" className="spacer"></AssetContainer>
                     <AssetContainer width="100%" height="33%" className="nft-video">
-                        <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
+                        {/* <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/> */}
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
@@ -118,35 +118,51 @@ export function IndexComponent() {
             <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
                 <AboutSceneLeft className="scene__left" minW="33%" />
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
-                    <AssetContainer height="5%" width="100%" className="spacer"></AssetContainer>
-                    <AssetContainer width="100%" height="33%" className="nft-video">
-                        <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
+                    <AssetContainer width="100%" height="5%" className="nft-video">
+                        {/* <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/> */}
                     </AssetContainer>
                     <AssetContainer height="60%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={0}>
+                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700}>
                             <Box p="5%" margin="3%" sx={{
-                                backgroundColor: `rgba(0,0,0,0.6)`,
+                                backgroundColor: `rgba(0,0,0,0.4)`,
                                 backdropFilter: `blur(3px)`,
-                                boxShadow: `0 0 15px rgba(236, 201, 75,0.6)`,
+                                boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                                 color: `white`,
-                                borderRadius: `5%`,
-                                overflow: `hidden`
+                                borderRadius: `1`,
+                                overflow: `hidden`,
+                                lineHeight: `1.2rem`,
+                                "p": {
+                                    marginBottom: `3%`,
+                                    "&:first-of-type": {
+                                        marginTop: `3%`
+                                    }
+                                }
                             }}>
-                                <Box>
-                                <h3>About NTFA</h3>
+                                <Box p="5%">
+                                <Heading as="h3" size="xl">About NTFA</Heading>
                                 <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
 
                                 <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
 
-                                    <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
+                                <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
+                                                                <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
+
+                                <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
+
+                                <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
+                                                                <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
+
+                                <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
+
+                                <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
                                     </Box>
                             </Box>
                         </Building>
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="60%" height="70%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" bottom={6} left={-16}>
+                        <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" bottom={5} left={-16}>
                             <Link href="#section2" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>

@@ -20,6 +20,13 @@ const theme = extendTheme({
             body: {
                 backgroundColor: `blue.900`,
                 height: `100%`
+            },
+            "a.chakra-link": {
+                transition: `all 0.3s ease`,
+                "&:hover": {
+                    color: `yellow.500`,
+                    textDecoration: `none`,
+                }
             }
         }
     }

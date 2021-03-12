@@ -23,7 +23,8 @@ const theme = extendTheme({
             body: {
                 backgroundColor: `blue.900`,
                 fontFamily: `'Hero', sans-serif`,
-                height: `100%`
+                height: `100%`,
+                fontSize: `16px`,
             },
             "a.chakra-link": {
                 transition: `all 0.3s ease`,
@@ -32,10 +33,29 @@ const theme = extendTheme({
                     textDecoration: `none`,
                 }
             },
-
+            h2: {
+                fontFamily: `'Hero', sans-serif`,
+                fontSize: `1.5vw`,
+                marginBottom: `1vh`
+            },
             h3: {
                 fontFamily: `'Hero', sans-serif`,
-
+                fontSize: `1.5vw`,
+                marginBottom: `0.8vw`
+            },
+            "p": {
+                fontSize: `0.9vw`,
+                marginBottom: `3%`,
+                lineHeight: `1vw`,
+            },
+            ol: {
+                listStyle: `none`,
+                marginBottom: `0.8vh`
+            },
+            li: {
+                fontSize: `0.9vw`,
+                marginBottom: `0.8vw`,
+                lineHeight: `1vw`,
             }
         }
     }

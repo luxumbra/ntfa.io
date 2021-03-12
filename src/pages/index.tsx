@@ -62,7 +62,7 @@ export function IndexComponent() {
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="160%" height="40%"  img="" imgAlt="" z={300} position="absolute" bottom={10} right={-30}>
-                            <Link href="#section2" sx={{ color: `white`, textShadow: `10px 10px 0 rgba(0,0,0,0.8)`, fontSize: `3.5vw`, fontFamily: `Asset, sans-serif`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`}}>Bitcoin & Gold</Link>
+                            <Link href="#section2" sx={{ color: `white`, textShadow: `10px 10px 0 rgba(0,0,0,0.8)`, fontSize: `3.5vw`, fontFamily: `Federal, serif`, textTransform: `uppercase`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`}}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>
                 </Box>
@@ -98,38 +98,36 @@ export function IndexComponent() {
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700}>
                             <Box p="5%" margin="3%" sx={{
-                                backgroundColor: `rgba(0,0,0,0.4)`,
+                                backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,
                                 boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                                 color: `white`,
                                 borderRadius: `1`,
                                 overflow: `hidden`,
-                                lineHeight: `1.2rem`,
-                                "p": {
-                                    marginBottom: `3%`,
-                                    "&:first-of-type": {
-                                        marginTop: `3%`
-                                    }
-                                }
                             }}>
-                                <Box p="5%">
-                                <Heading as="h3" size="xl">About NTFA</Heading>
-                                <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
+                                <Box
+                                    p="5%"
+                                    sx={{
 
-                                <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
+                                }}>
+                                    <h2>Never Touch FIAT Again</h2>
+                                    <ol>
+                                        <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
+                                        <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>
+                                        <li>NFTs are ownable digital records used to store information.</li>
+                                    </ol>
 
-                                <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
-                                                                <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
+                                    <h3>What is your Dollar?</h3>
+                                     <p>NFTs can prove ownership of pretty much anything, like for example gold.</p>
 
-                                <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
+                                    <p>Fiat becomes dirty money when the printers go BRRRRRRRRRRRRRRRR!!!</p>
+                                    <p>Where did all that money come from?!</p>
 
-                                <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
-                                                                <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
+                                    <p>The best way to keep your hands clean is to...</p>
 
-                                <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
-
-                                <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
-                                    </Box>
+                                    <h3>Never Touch FIAT Again</h3>
+                                    <p>Gold and Art are a perfect match. Be rich and look good doing it! While the world crumbles, you can be a golden space cowboy!</p>
+                                </Box>
                             </Box>
                         </Building>
                     </AssetContainer>

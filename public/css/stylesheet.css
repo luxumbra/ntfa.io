@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Federal';
+    src: url('Federal-Regular.woff2') format('woff2'),
+        url('Federal-Regular.woff') format('woff'),
+        url('Federal-Regular.svg#Federal-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FederalSix';
+    src: url('FederalSix-Bevel.woff2') format('woff2'),
+        url('FederalSix-Bevel.woff') format('woff'),
+        url('FederalSix-Bevel.svg#FederalSix-Bevel') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FederalSix';
+    src: url('FederalSix-Diagonal.woff2') format('woff2'),
+        url('FederalSix-Diagonal.woff') format('woff'),
+        url('FederalSix-Diagonal.svg#FederalSix-Diagonal') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FederalEighteen';
+    src: url('FederalEighteen-Horizontal.woff2') format('woff2'),
+        url('FederalEighteen-Horizontal.woff') format('woff'),
+        url('FederalEighteen-Horizontal.svg#FederalEighteen-Horizontal') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

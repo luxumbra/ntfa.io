@@ -38,7 +38,7 @@ export const Building: FC<BuildingInterface> = ({ height, width, margin, img, im
             backgroundRepeat="no-repeat"
             backgroundColor={buildingDestroyed ? `transparent` : color}
             transition="all 0.2s 0.1s ease-in-out"
-            sx={{ "&:hover": { backgroundColor: color, cursor: `not-allowed` }, position: position ? position : `inherit`, zIndex: z, top: top ? `${top}%` : `auto`, right: right ? `${right}%` : `auto`, bottom: bottom ? `${bottom}%` : `auto`, left: left ? `${left}%` : `auto`,  }} onClick={toggleDestroy}>
+            sx={{ "&:hover": { backgroundColor: color }, position: position ? position : `inherit`, zIndex: z, top: top ? `${top}%` : `auto`, right: right ? `${right}%` : `auto`, bottom: bottom ? `${bottom}%` : `auto`, left: left ? `${left}%` : `auto`,  }} onClick={toggleDestroy}>
             {children}
         </Box>
     )

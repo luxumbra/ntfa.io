@@ -17,7 +17,7 @@ export const AboutSceneRight: FC<AboutSceneRightInterface> = ({ className, minW 
             <AssetContainer width="100%" height="35%" className="logo">
                 <Box className="spacer" height="60%">
                 </Box>
-                <Building buildingName="store" margin="-12% 0 0 47%" img="/assets/signs/bitcoin-logo.jpg" imgAlt="/assets/signs/bitcoin-logo.jpg" height="55%" width="25%" color="yellow.700" z={0}>
+                <Building buildingName="store" margin="-12% 0 0 47%" img="/assets/signs/bitcoin-logo.png" imgAlt="/assets/signs/bitcoin-logo.png" height="55%" width="25%" z={0}>
                     <Link href="#section1" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, padding: `1% 3%`}}>Store</Link>
                 </Building>
             </AssetContainer>

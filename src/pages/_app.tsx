@@ -2,7 +2,10 @@ import React from 'react';
 import App, { AppContext, AppInitialProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { extendTheme } from "@chakra-ui/react"
-// 2. Call `extendTheme` and pass your custom values
+
+import '../../public/css/font-face.css';
+import '../../public/css/stylesheet.css';
+
 const theme = extendTheme({
     colors: {
         brand: {
@@ -19,6 +22,7 @@ const theme = extendTheme({
             },
             body: {
                 backgroundColor: `blue.900`,
+                fontFamily: `'Hero', sans-serif`,
                 height: `100%`
             },
             "a.chakra-link": {
@@ -27,6 +31,11 @@ const theme = extendTheme({
                     color: `yellow.500`,
                     textDecoration: `none`,
                 }
+            },
+
+            h3: {
+                fontFamily: `'Hero', sans-serif`,
+
             }
         }
     }

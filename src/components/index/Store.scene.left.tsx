@@ -15,7 +15,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({className, minW}) =
             <AssetContainer width="100%" height="20%" className="logo">
                 <Box className="spacer" height="30%">
                 </Box>
-                <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 75%" img="/assets/ntfa-logo.png" imgAlt="" color="teal.600" z={300}>
+                <Building buildingName="sign1" width="100%" height="40%" margin="0 0 0 75%" img="/assets/ntfa-logo.png" imgAlt="" color="teal.600" z={300}>
                     <Link href="#section1" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>NTFA Logo</Link>
                 </Building>
             </AssetContainer>

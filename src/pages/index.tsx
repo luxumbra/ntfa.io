@@ -46,13 +46,13 @@ export function IndexComponent() {
     console.log(entry);
 
     return(
-        <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch">
+        <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
             <MetadataComponent />
             <Box id="section1" className="industrial" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize="100% 100%">
 
-                <StoreSceneLeft className="scene__left" minW="33%" />
+                <StoreSceneLeft className="scene__left" minW="10%" />
 
-                <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexFlow="column wrap" alignItems="center">
+                <Box className="scene__center" as="main" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer width="100%" height="33%" className="logo">
                         <Box className="spacer" height="80%">
                         </Box>
@@ -87,13 +87,13 @@ export function IndexComponent() {
 
                         <Box className="spacer" height="10%"></Box>
 
-                        <Building buildingName="sign1" width="200%" height="40%"  img="" imgAlt="" z={300} position="absolute" bottom={10} right={-50}>
+                        <Building buildingName="sign1" width="160%" height="40%"  img="" imgAlt="" z={300} position="absolute" bottom={10} right={-30}>
                             <Link href="#section2" sx={{ color: `white`, textShadow: `10px 10px 0 rgba(0,0,0,0.8)`, fontSize: `3.5vw`, fontFamily: `Asset, sans-serif`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`}}>Bitcoin & Gold</Link>
                         </Building>
 
                     </AssetContainer>
                 </Box>
-                <StoreSceneRight className="scene__right" minW="33%"/>
+                <StoreSceneRight className="scene__right" minW="10%"/>
             </Box>
 
             <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/cityscape.jpg) 50% no-repeat" backgroundSize="100% 100%">

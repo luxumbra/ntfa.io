@@ -16,7 +16,7 @@ export const IndexSceneRight: FC<IndexSceneRightInterface> = ({ className, minW 
             <AssetContainer width="100%" height="25%" className="logo" parallax="background">
                 <Box className="spacer" height="80%">
                 </Box>
-                <Building buildingName="store" margin="0 0 0 18%" img="/assets/signs/rooftop-martini.png" imgAlt="/assets/signs/rooftop-martini.png" height="20%" width="25%"z={0}>
+                <Building buildingName="store" margin="0 0 0 17%" img="/assets/signs/rooftop-martini.png" imgAlt="/assets/signs/rooftop-martini.png" height="20%" width="25%"z={0}>
                     <Link href="#section1" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, padding: `1% 3%`}}>Store</Link>
                 </Building>
             </AssetContainer>

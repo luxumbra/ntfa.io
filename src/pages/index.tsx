@@ -9,11 +9,8 @@ import {
     HTMLMotionProps
 } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-//
 
 import { MetadataComponent } from '../components/shared/Metadata';
-// import { HeaderComponent } from '../components/shared/Header';
-// import { FooterComponent } from '../components/shared/Footer';
 import { AssetContainer } from '../components/shared/AssetContainer';
 import { Building } from "../components/shared/Building";
 import { IndexSceneLeft } from '../components/index/Index.scene.left';
@@ -23,6 +20,7 @@ import { StoreSceneRight } from '../components/index/Store.scene.right';
 import { AboutSceneLeft } from '../components/index/About.scene.left';
 import { AboutSceneRight } from '../components/index/About.scene.right';
 import { MotionBox } from '../components/shared/MotionBox';
+import { ShowcaseFeaturedComponent } from '../components/showcase/Showcase.featured';
 
 
 
@@ -54,43 +52,18 @@ export function IndexComponent() {
 
                 <Box className="scene__center" as="main" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer width="100%" height="33%" className="logo">
-                        <Box className="spacer" height="80%">
-                        </Box>
+                        <Box className="spacer" height="80%"/>
                     </AssetContainer>
+
                     <Box width="100%" height="33%" d="flex" flexFlow="row nowrap" alignItems="center" justifyContent="space-between" className="store">
-                        <Box width="33%" className="nft-video" mb={5}>
-                            <MotionBox
-                                className="box"
-                                style={{ y: y2, x: 0 }}
-                            >
-                                <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
-                            </MotionBox>
-                        </Box>
-                        <Box width="33%" className="nft-video" mb={5}>
-                            <MotionBox
-                                className="box"
-                                style={{ y: y2, x: 0 }}
-                            >
-                                <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
-                            </MotionBox>
-                         </Box>
-                        <Box width="33%" className="nft-video" mb={5}>
-                             <MotionBox
-                                className="box"
-                                style={{ y: y2, x: 0 }}
-                            >
-                                <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/>
-                            </MotionBox>
-                        </Box>
+                        <ShowcaseFeaturedComponent url="/preview/seed.card.mp4" title="Meta SEED Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
                     </Box>
+
                     <AssetContainer height="33%" width="100%" className="spacer">
-
                         <Box className="spacer" height="10%"></Box>
-
                         <Building buildingName="sign1" width="160%" height="40%"  img="" imgAlt="" z={300} position="absolute" bottom={10} right={-30}>
                             <Link href="#section2" sx={{ color: `white`, textShadow: `10px 10px 0 rgba(0,0,0,0.8)`, fontSize: `3.5vw`, fontFamily: `Asset, sans-serif`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`}}>Bitcoin & Gold</Link>
                         </Building>
-
                     </AssetContainer>
                 </Box>
                 <StoreSceneRight className="scene__right" minW="10%"/>

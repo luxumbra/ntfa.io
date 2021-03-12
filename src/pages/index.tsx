@@ -56,9 +56,6 @@ export function IndexComponent() {
                     <AssetContainer width="100%" height="25%" className="logo">
                         <Box className="spacer" height="80%">
                         </Box>
-                        <Building buildingName="sign2" margin="0 0 0 18%" img="" imgAlt="" height="30%" width="35%" color="yellow.400" z={0}>
-                            {/* <Link href="/store" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, padding: `1% 3%`}}>Another link</Link> */}
-                        </Building>
                     </AssetContainer>
                     <Box width="100%" height="65%" d="flex" flexFlow="row wrap" alignContent="center" justifyContent="space-between" className="store">
                         <Box width="49%" className="nft-video" mb={5}>
@@ -110,7 +107,7 @@ export function IndexComponent() {
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="70%" height="40%" margin="22% 0 0 50%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300}>
+                        <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" bottom={6} left={-16}>
                             <Link href="#section3" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>About</Link>
                         </Building>
                     </AssetContainer>
@@ -127,20 +124,29 @@ export function IndexComponent() {
                     </AssetContainer>
                     <AssetContainer height="60%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" color="blue.300"  z={0}>
-                            <>
-                            <h3>About NTFA</h3>
-                            <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
+                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={0}>
+                            <Box p="5%" margin="3%" sx={{
+                                backgroundColor: `rgba(0,0,0,0.6)`,
+                                backdropFilter: `blur(3px)`,
+                                boxShadow: `0 0 15px rgba(236, 201, 75,0.6)`,
+                                color: `white`,
+                                borderRadius: `5%`,
+                                overflow: `hidden`
+                            }}>
+                                <Box>
+                                <h3>About NTFA</h3>
+                                <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
 
-                            <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
+                                <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
 
-                            <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
-                                </>
+                                    <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
+                                    </Box>
+                            </Box>
                         </Building>
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 75%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300}>
+                        <Building buildingName="sign1" width="60%" height="70%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" bottom={6} left={-16}>
                             <Link href="#section2" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>

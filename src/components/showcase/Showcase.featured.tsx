@@ -78,7 +78,7 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                 }}>
                     <Box w="100%">
                         <Heading as="h2" fontSize="1.2vw" mb="1vw" d="inline-flex" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${title}"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `2%`, left: `0`, width: `100%`}}}>{title}</Heading>
-                        <Heading as="h3" fontSize="1.4vw" mx="auto" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, display: `inline-flex`, width: `auto`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${price.toFixed(4)} ETH"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `1%`, left: `0`, width: `100%`}}}>{price.toFixed(4)} ETH</Heading>
+                        <Heading as="h3" fontSize="1.4vw" mx="auto" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, display: `inline-flex`, width: `auto`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${price.toFixed(4)} ETH"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `2%`, left: `0`, width: `100%`}}}>{price.toFixed(4)} ETH</Heading>
                         <ButtonGroup
                             size="lg"
                             alignItems="center"

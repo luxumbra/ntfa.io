@@ -73,7 +73,7 @@ export function IndexComponent() {
                 <StoreSceneRight className="scene__right" minW="10%"/>
             </Box>
 
-            <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/bg-bridge-scene.png) 50% no-repeat" backgroundSize="100% 100%">
+            <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" pos="relative" background="url(/assets/scenes/bg-scene.png) 50% no-repeat" backgroundSize="100% 100%">
 
                 <IndexSceneLeft className="scene__left" minW="33%" />
 
@@ -83,11 +83,12 @@ export function IndexComponent() {
                         {/* <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/> */}
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
-                        <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" bottom={6} left={-16}>
+                        <Box className="spacer" height="0%"></Box>
+                        <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" top={-3} left={-16}>
                             <Link href="#section3" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>About</Link>
                         </Building>
                     </AssetContainer>
+                    <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="100% 100%" bottom="0" left="0" zIndex="1000"></Box>
                 </Box>
                 <IndexSceneRight className="scene__right" minW="33%"/>
             </Box>

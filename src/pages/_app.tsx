@@ -18,7 +18,8 @@ const theme = extendTheme({
         Heading: {
             baseStyle: {
                 fontFamily: `Hero, sans-serif`,
-                fontWeight: `bold`
+                fontWeight: `bold`,
+                fontSize: `1vw`,
             },
             fontSizes: {
                 lg: `1.5vw`,

@@ -77,14 +77,16 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                     boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                 }}>
                     <Box w="100%">
-                        <Heading as="h2" size="xl" mb="1vw" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${title}"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `2%`, left: `2.5%`},  width: `auto`}}>{title}</Heading>
-                        <Heading size="lg" mx="auto" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, display: `inline`, width: `auto`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${price.toFixed(4)} ETH"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `-1%`, left: `0`,}}}>{price.toFixed(4)} ETH</Heading>
+                        <Heading as="h2" fontSize="1.2vw" mb="1vw" d="inline-flex" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${title}"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `2%`, left: `0`, width: `100%`}}}>{title}</Heading>
+                        <Heading as="h3" fontSize="1.4vw" mx="auto" fontFamily="Federal, serif" fontWeight="100" textAlign="center" sx={{ position: `relative`, display: `inline-flex`, width: `auto`, "&:after": { color: `green.600`, opacity: 0.8, content: `"${price.toFixed(4)} ETH"`, fontFamily: `FederalEighteen, serif`, fontSize: `inherit`, position: `absolute`, top: `1%`, left: `0`, width: `100%`}}}>{price.toFixed(4)} ETH</Heading>
                         <ButtonGroup
                             size="lg"
                             alignItems="center"
                             justifyContent="center"
                             width="100%"
                             mt="1vw"
+
+                            fontFamily="'Hero', sans-serif"
                             onClick={async e => {
                                 if (typeof window.ethereum !== 'undefined') {
                                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -106,8 +108,8 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                                 }
                             }}
                         >
-                            <Button width="120px" pt="5px" colorScheme="purple">BUY</Button>
-                            <Button width="120px" pt="5px" colorScheme="green">BID</Button>
+                            <Button width="45%" maxW="120px" pt="5px" fontSize="1vw" colorScheme="purple">BUY</Button>
+                            <Button width="45%" maxW="120px" pt="5px" fontSize="1vw" colorScheme="green">BID</Button>
                         </ButtonGroup>
                     </Box>
 

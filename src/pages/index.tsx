@@ -84,7 +84,7 @@ export function IndexComponent() {
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="0%"></Box>
-                        <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" top={-3} left={-16}>
+                        <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" top={-3} left={-16} damageY={71} damageX={37} damageH={30} damageW={100}>
                             <Link href="#section3" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>About</Link>
                         </Building>
                     </AssetContainer>
@@ -93,7 +93,7 @@ export function IndexComponent() {
                 <IndexSceneRight className="scene__right" minW="33%"/>
             </Box>
 
-            <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
+            <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh"  pos="relative" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
                 <AboutSceneLeft className="scene__left" minW="33%" />
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
                     <AssetContainer width="100%" height="5%" className="nft-video">
@@ -138,10 +138,11 @@ export function IndexComponent() {
                     </AssetContainer>
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/buildings/building-2.png" z={300} position="absolute" bottom={5} left={-16}>
+                        <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}>
                             <Link href="#section2" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>
+                    <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="cover" maxH="8vh" bottom="0" left="0" zIndex="1000"></Box>
                 </Box>
 
                 <AboutSceneRight className="scene__right" minW="33%"/>

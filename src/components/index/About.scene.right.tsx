@@ -23,13 +23,13 @@ export const AboutSceneRight: FC<AboutSceneRightInterface> = ({ className, minW 
             </AssetContainer>
 
             <AssetContainer width="100%" height="65%" className="block" d="flex">
-                <Building buildingName="sky1" width="20%" height="75%" margin="8% 0 0 25%" img="/assets/buildings/building-4.png" imgAlt="/assets/buildings/building-4.destroyed.png" z={400}>
+                <Building buildingName="sky1" width="20%" height="75%" margin="8% 0 0 25%" img="/assets/buildings/building-4.png" imgAlt="/assets/effects/fog.png" z={400} damageY={90} damageX={70} damageH={30} damageW={200}>
                 </Building>
-                <Building buildingName="sky2" width="30%" height="95%" margin="-10% 0 0 -3%" img="/assets/buildings/building-3.png" imgAlt="/assets/normal-building.png" z={300}>
+                <Building buildingName="sky2" width="30%" height="95%" margin="-10% 0 0 -3%" img="/assets/buildings/building-3.png" imgAlt="/assets/effects/b3.png" z={300} damageH={50} damageW={120} damageY={50} damageX={-2}>
                 </Building>
-                <Building buildingName="sky2" width="60%" height="20%" img="/assets/buildings/building-2.png" imgAlt="/assets/normal-building.png" z={400} position="absolute" top={75.5} left={16}>
+                <Building buildingName="sky2" width="60%" height="20%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={400} position="absolute" top={75.5} left={16} damageY={30} damageX={20}>
                 </Building>
-                <Building buildingName="sky2" width="60%" height="40%" img="/assets/buildings/building-2.png" imgAlt="/assets/normal-building.png" z={100} position="absolute" bottom={6} left={-16}></Building>
+                <Building buildingName="sky2" width="40%" height="20%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={500} position="absolute" bottom={8} left={-16} damageY={30} damageX={20}></Building>
             </AssetContainer>
         </Box>
     )

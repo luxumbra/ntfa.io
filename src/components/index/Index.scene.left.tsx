@@ -25,7 +25,7 @@ export const IndexSceneLeft: FC<IndexSceneLeftInterface> = ({className, minW}) =
             <AssetContainer width="100%" height="80%" className="block" d="flex">
                 <Building buildingName="sky1" width="20%" height="65%" margin="25% 0 0 15%" img="/assets/buildings/building-4.png" imgAlt="/assets/effects/fog.png" z={400} damageY={52} damageX={10} damageH={30} damageW={150}>
                 </Building>
-                <Building buildingName="sky2" width="25%" height="85%" margin="0 0 0 -10%" img="/assets/buildings/building-3.png" imgAlt="/assets/effects/b3.png" z={300} damageH={50} damageW={120} damageY={50} damageX={-2}>
+                <Building buildingName="building2" width="25%" height="85%" margin="0 0 0 -10%" img="/assets/buildings/building-3.png" imgAlt="/assets/effects/b3.png" z={300} damageH={50} damageW={120} damageY={50} damageX={-2}>
                 </Building>
                 <Building buildingName="sky2" width="60%" height="20%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={400} position="absolute" bottom={5} left={5} damageY={30} damageX={20}>
                 </Building>

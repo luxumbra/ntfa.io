@@ -55,21 +55,25 @@ export function IndexComponent() {
                         <Box className="spacer" height="80%"/>
                     </AssetContainer>
 
-                    <Box width="100%" height="33%" d="flex" flexFlow="row nowrap" alignItems="center" justifyContent="space-between" className="store">
+                    <AssetContainer width="100%" height="33%" d="flex" className="store">
                         <ShowcaseFeaturedComponent url="/preview/seed.card.mp4" title="Meta SEED Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
-                    </Box>
+                    </AssetContainer>
 
                     <AssetContainer height="33%" width="100%" className="spacer">
-                        <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="160%" height="40%"  img="" imgAlt="" z={300} position="absolute" bottom={10} right={-30}>
-                            <Link href="#section2" sx={{ color: `white`, textShadow: `10px 10px 0 rgba(0,0,0,0.8)`, fontSize: `3.5vw`, fontFamily: `Federal, serif`, textTransform: `uppercase`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`}}>Bitcoin & Gold</Link>
+                        <Box className="spacer" height="43.5%"></Box>
+                        <Building buildingName="sign1" width="80%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
+                            <Link href="#section2" sx={{
+                                color: `transparent`, textShadow: `10px 10px 0 rgba(0,0,0,0)`, fontSize: `3.4vw`, fontFamily: `Federal, serif`, textTransform: `uppercase`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
+                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(-1)`,
+                                "&:hover": { color: `transparent !important`, textShadow: `10px 10px 0 rgba(0,0,0,0)` }
+                            }}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>
                 </Box>
                 <StoreSceneRight className="scene__right" minW="10%"/>
             </Box>
 
-            <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/cityscape.jpg) 50% no-repeat" backgroundSize="100% 100%">
+            <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/bg-bridge-scene.png) 50% no-repeat" backgroundSize="100% 100%">
 
                 <IndexSceneLeft className="scene__left" minW="33%" />
 
@@ -110,14 +114,14 @@ export function IndexComponent() {
                                     sx={{
 
                                 }}>
-                                    <h2>Never Touch FIAT Again</h2>
+                                    <Heading as="h2">Never Touch FIAT Again</Heading>
                                     <ol>
                                         <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
                                         <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>
                                         <li>NFTs are ownable digital records used to store information.</li>
                                     </ol>
 
-                                    <h3>What is your Dollar?</h3>
+                                    <Heading as="h3">What is your Dollar?</Heading>
                                      <p>NFTs can prove ownership of pretty much anything, like for example gold.</p>
 
                                     <p>Fiat becomes dirty money when the printers go BRRRRRRRRRRRRRRRR!!!</p>
@@ -125,7 +129,7 @@ export function IndexComponent() {
 
                                     <p>The best way to keep your hands clean is to...</p>
 
-                                    <h3>Never Touch FIAT Again</h3>
+                                    <Heading as="h3">Never Touch FIAT Again</Heading>
                                     <p>Gold and Art are a perfect match. Be rich and look good doing it! While the world crumbles, you can be a golden space cowboy!</p>
                                 </Box>
                             </Box>

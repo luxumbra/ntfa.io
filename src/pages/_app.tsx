@@ -14,6 +14,18 @@ const theme = extendTheme({
             900: "#1a202c",
         },
     },
+    components: {
+        Heading: {
+            baseStyle: {
+                fontFamily: `Hero, sans-serif`,
+                fontWeight: `bold`
+            },
+            fontSizes: {
+                lg: `1.5vw`,
+                xl: `2.3vw`
+            }
+        }
+    },
     styles: {
         global: {
             html: {
@@ -34,23 +46,21 @@ const theme = extendTheme({
                 }
             },
             h2: {
-                fontFamily: `'Hero', sans-serif`,
                 fontSize: `1.5vw`,
-                marginBottom: `1vh`
+                marginBottom: `0.8vw`
             },
             h3: {
-                fontFamily: `'Hero', sans-serif`,
                 fontSize: `1.5vw`,
                 marginBottom: `0.8vw`
             },
             "p": {
                 fontSize: `0.9vw`,
-                marginBottom: `3%`,
+                marginBottom: `0.8vw`,
                 lineHeight: `1vw`,
             },
             ol: {
                 listStyle: `none`,
-                marginBottom: `0.8vh`
+                marginBottom: `0.8vw`
             },
             li: {
                 fontSize: `0.9vw`,

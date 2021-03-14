@@ -16,9 +16,12 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
             <AssetContainer width="100%" height="98%" className="logo">
                 <Box className="spacer" height="60%">
                 </Box>
-                <Building buildingName="store" margin="65% 0 0 -25%" img="/assets/effects/fingerprint.png" imgAlt="/assets/effects/fingerprint.png" height="20%" width="99%" z={0}>
+                <Building buildingName="store" margin="65% 0 0 -25%" img="" imgAlt="" height="20%" width="99%" z={0}>
                     <Box position="relative" pt="100%" h="0">
-                        <Link href="#section3" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, padding: `1% 3%`, borderRadius: `50%`}}>About</Link>
+                        <Link href="#section2" maxW="200px" maxH="200px" sx={{
+                            color: `white`, fontSize: `1.5vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: `-120%`, top: `-150%`, textAlign: `center`,
+                            backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1.2)`, opacity: 0.6,
+                            "&:hover": { color: `transparent !important`, textShadow: `10px 10px 0 rgba(0,0,0,0)`, opacity: 0.3, }}}>About NTFA</Link>
 
                     </Box>
                 </Building>

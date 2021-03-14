@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Box, Link, Image } from '@chakra-ui/react';
+import { css, jsx } from "@emotion/react";
 //
 import { AssetContainer } from '../shared/AssetContainer';
 import { Building } from "../shared/Building";
@@ -7,18 +8,19 @@ import { Building } from "../shared/Building";
 export interface AboutSceneLeftInterface {
     className: string
     minW: string
+    animation?: string
 }
 
-export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW }) => {
+export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, animation }) => {
 
     return(
         <Box className={className} as="div" d="flex" flexDirection="column" flexGrow={1} minW={minW}>
-            <AssetContainer width="100%" height="20%" className="logo">
+            <AssetContainer width="15%" height="20%" className="logo">
                 <Box className="spacer" height="30%">
                 </Box>
                 <Building buildingName="sign1" width="100%" height="70%" maxW="200px" margin="0 0 0 75%" img="" imgAlt="" z={300}>
                     <Link href="#section1" display="inline-block" position="relative" pt="56.25%" height="0" width="100%" maxW="300px">
-                        <Image src="/assets/logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0}} />
+                        <Image src="/assets/logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: `200%`, top: 0,}} css={css`animation: ${animation};`} />
                     </Link>
                 </Building>
             </AssetContainer>

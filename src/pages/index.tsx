@@ -9,6 +9,8 @@ import {
     HTMLMotionProps
 } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { keyframes, css, jsx } from "@emotion/react";
+import styled from "@emotion/styled";
 
 import { MetadataComponent } from '../components/shared/Metadata';
 import { AssetContainer } from '../components/shared/AssetContainer';
@@ -21,6 +23,7 @@ import { AboutSceneLeft } from '../components/index/About.scene.left';
 import { AboutSceneRight } from '../components/index/About.scene.right';
 import { MotionBox } from '../components/shared/MotionBox';
 import { ShowcaseFeaturedComponent } from '../components/showcase/Showcase.featured';
+
 
 
 
@@ -41,14 +44,24 @@ export function IndexComponent() {
             y: 50
         }
     }
-    console.log(entry);
+    const upDown = keyframes`
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(30px);
+        }
+        `
+    const upDownAnimation = css`
+        ${upDown} 10s ease-in-out infinite alternate;
+    `
 
     return(
         <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
             <MetadataComponent />
             <Box id="section1" className="industrial" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize="100% 100%">
 
-                <StoreSceneLeft className="scene__left" minW="10%" />
+                <StoreSceneLeft className="scene__left" minW="10%" animation={upDownAnimation.styles} />
 
                 <Box className="scene__center" as="main" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer width="100%" height="33%" className="logo">
@@ -60,12 +73,12 @@ export function IndexComponent() {
                     </AssetContainer>
 
                     <AssetContainer height="33%" width="100%" className="spacer">
-                        <Box className="spacer" height="43.5%"></Box>
-                        <Building buildingName="sign1" width="80%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
-                            <Link href="#section2" sx={{
-                                color: `transparent`, textShadow: `10px 10px 0 rgba(0,0,0,0)`, fontSize: `3.4vw`, fontFamily: `Federal, serif`, textTransform: `uppercase`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
-                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(-1)`,
-                                "&:hover": { color: `transparent !important`, textShadow: `10px 10px 0 rgba(0,0,0,0)` }
+                        <Box className="spacer" height="30.5%"></Box>
+                        <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
+                            <Link href="#section2" maxW="140px" maxH="140px" sx={{
+                                color: `white`, fontSize: `1.5vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
+                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6,
+                                "&:hover": { color: `transparent !important`, opacity: 0.3, }
                             }}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>
@@ -75,7 +88,7 @@ export function IndexComponent() {
 
             <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" pos="relative" background="url(/assets/scenes/bg-scene.png) 50% no-repeat" backgroundSize="100% 100%">
 
-                <IndexSceneLeft className="scene__left" minW="33%" />
+                <IndexSceneLeft className="scene__left" minW="33%" animation={upDownAnimation.styles} />
 
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer height="33%" width="100%" className="spacer"></AssetContainer>
@@ -85,7 +98,8 @@ export function IndexComponent() {
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="0%"></Box>
                         <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" top={-3} left={-16} damageY={71} damageX={37} damageH={30} damageW={100}>
-                            <Link href="#section3" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>About</Link>
+                            <Link href="#section3" sx={{ color: `gray.400`, fontSize: `1.5vw`, fontWeight: `bold`,position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, opacity: 0.6,
+                                "&:hover": { color: `transparent !important`, opacity: 0.3, }}}>About</Link>
                         </Building>
                     </AssetContainer>
                     <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="100% 100%" bottom="0" left="0" zIndex="1000"></Box>
@@ -94,7 +108,7 @@ export function IndexComponent() {
             </Box>
 
             <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh"  pos="relative" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
-                <AboutSceneLeft className="scene__left" minW="33%" />
+                <AboutSceneLeft className="scene__left" minW="33%" animation={upDownAnimation.styles} />
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
                     <AssetContainer width="100%" height="5%" className="nft-video">
                         {/* <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/> */}
@@ -139,7 +153,8 @@ export function IndexComponent() {
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}>
-                            <Link href="#section2" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0}}>Bitcoin & Gold</Link>
+                            <Link href="#section2" sx={{ color: `white`, fontSize: `1.5vw`, fontWeight: `bold`,position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, opacity: 0.6,
+                                "&:hover": { color: `transparent !important`, opacity: 0.3, }}}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>
                     <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="cover" maxH="8vh" bottom="0" left="0" zIndex="1000"></Box>

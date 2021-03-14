@@ -47,24 +47,26 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
 
     return(
         <Box display="flex" alignItems="center" justifyContent="left" width="100%" sx={{}}>
-            <Box width="33%" textAlign="center">
+            <Box width="33%">
                 <Box
                     position="relative"
                     width="100%"
                     height="100%"
-                    maxW="480px" maxH="480px"
+                    maxW={{ base: `300px`, lg: `290px`, xl: "275px", xxl: "320px", xxxl: "390px" }} maxH="480px"
                     overflow="hidden"
-                    margin="0 auto"
+                    margin={{ base: "2% 0 0 2%", lg: "2% 0 0 2%", xl: "2.5% 0 0 0%", xxl: "2% 0 0 -3%", xxxl: "3% 0 0 -0.5%" }}
                     borderRadius="50%" border="5px solid #7D216B"
+                    boxShadow="0 0 30px rgba(0,0,0,0.8) inset"
+                    zIndex={300}
                 >
-                    <Box className="playerWrapper" position="relative" paddingTop="100%" bg="blue.900">
+                    <Box className="playerWrapper" position="relative" paddingTop="100%" bg="blue.900" zIndex={200}>
                         <ReactPlayer
                             url={url}
                             playing={true}
                             loop={true}
-                            width="100%"
-                            height="100%"
-                            style={{ position: 'absolute', left: 0, top: 0 }}
+                            width="200%"
+                            height="200%"
+                            style={{ position: 'absolute', left: `-50%`, top: `-50%`, zIndex: 200 }}
                         />
                     </Box>
                 </Box>
@@ -73,7 +75,7 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
             <Box width="33%" d="flex" h="100%" justifyContent="center" alignContent="center">
                 <Box p="3%" height="100%" d="flex" alignItems="center" width="100%" color="white" fontFamily="Federal, serif" borderRadius="15px" textAlign="center" sx={{
                     backgroundColor: `rgba(0,0,0,0.5)`,
-                    backdropFilter: `blur(7px)`,
+                    backdropFilter: `blur(2px)`,
                     boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                 }}>
                     <Box w="100%">

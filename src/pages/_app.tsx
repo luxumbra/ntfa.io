@@ -1,12 +1,22 @@
 import React from 'react';
 import App, { AppContext, AppInitialProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import { extendTheme } from "@chakra-ui/react"
+import { extendTheme, ChakraProvider } from "@chakra-ui/react"
+import { createBreakpoints } from "@chakra-ui/theme-tools"
 
 import '../../public/css/font-face.css';
 import '../../public/css/stylesheet.css';
 
+const breakpoints = createBreakpoints({
+    sm: "320px",
+    md: "768px",
+    lg: "960px",
+    xl: "1200px",
+    xxl: "1440px",
+    xxxl: "1920px",
+});
+
 const theme = extendTheme({
+    breakpoints,
     colors: {
         brand: {
             100: "#f7fafc",
@@ -34,7 +44,7 @@ const theme = extendTheme({
                 scrollBehavior: `smooth`
             },
             body: {
-                backgroundColor: `blue.900`,
+                backgroundColor: `black`,
                 fontFamily: `'Hero', sans-serif`,
                 height: `100%`,
                 fontSize: `16px`,
@@ -47,11 +57,11 @@ const theme = extendTheme({
                 }
             },
             h2: {
-                fontSize: `1.5vw`,
+                fontSize: `1.3vw`,
                 marginBottom: `0.8vw`
             },
             h3: {
-                fontSize: `1.5vw`,
+                fontSize: `1.3vw`,
                 marginBottom: `0.8vw`
             },
             "p": {

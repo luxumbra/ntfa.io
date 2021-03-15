@@ -1,17 +1,5 @@
 import React from 'react';
-import { Box, Link, Heading, chakra, forwardRef, HTMLChakraProps } from '@chakra-ui/react';
-import ReactPlayer from 'react-player';
-import {
-    useViewportScroll,
-    motion,
-    useTransform,
-    useMotionValue,
-    HTMLMotionProps
-} from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { keyframes, css, jsx } from "@emotion/react";
-import styled from "@emotion/styled";
-
+import { Box, Link, Heading } from '@chakra-ui/react';
 import { MetadataComponent } from '../components/shared/Metadata';
 import { AssetContainer } from '../components/shared/AssetContainer';
 import { Building } from "../components/shared/Building";
@@ -21,47 +9,14 @@ import { StoreSceneLeft } from '../components/index/Store.scene.left';
 import { StoreSceneRight } from '../components/index/Store.scene.right';
 import { AboutSceneLeft } from '../components/index/About.scene.left';
 import { AboutSceneRight } from '../components/index/About.scene.right';
-import { MotionBox } from '../components/shared/MotionBox';
 import { ShowcaseFeaturedComponent } from '../components/showcase/Showcase.featured';
 
-
-
-
 export function IndexComponent() {
-    const { scrollY } = useViewportScroll();
-    const y1 = useTransform(scrollY, [0, 300], [0, 200]);
-    const y2 = useTransform(scrollY, [0, 300], [0, -100]);
-    const y3 = useTransform(scrollY, [0, 300], [0, 5]);
-    const [ref, inView, entry] = useInView({
-        threshold: 0.5,
-        triggerOnce: false
-    })
-    const variants = {
-        visible: { opacity: 1, scale: 1, y: 0 },
-        hidden: {
-            opacity: 0,
-            scale: 0.65,
-            y: 50
-        }
-    }
-    const upDown = keyframes`
-        from {
-            transform: translateY(0);
-        }
-        to {
-            transform: translateY(30px);
-        }
-        `
-    const upDownAnimation = css`
-        ${upDown} 10s ease-in-out infinite alternate;
-    `
-
     return(
         <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
             <MetadataComponent />
             <Box id="section1" className="industrial" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize="100% 100%">
-
-                <StoreSceneLeft className="scene__left" minW="10%" animation={upDownAnimation.styles} />
+                <StoreSceneLeft className="scene__left" minW="10%"/>
 
                 <Box className="scene__center" as="main" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer width="100%" height="33%" className="logo">
@@ -88,7 +43,7 @@ export function IndexComponent() {
 
             <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" pos="relative" background="url(/assets/scenes/bg-scene.png) 50% no-repeat" backgroundSize="100% 100%">
 
-                <IndexSceneLeft className="scene__left" minW="33%" animation={upDownAnimation.styles} />
+                <IndexSceneLeft className="scene__left" minW="33%" />
 
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer height="33%" width="100%" className="spacer"></AssetContainer>
@@ -108,11 +63,8 @@ export function IndexComponent() {
             </Box>
 
             <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh"  pos="relative" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
-                <AboutSceneLeft className="scene__left" minW="33%" animation={upDownAnimation.styles} />
+                <AboutSceneLeft className="scene__left" minW="33%" />
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
-                    <AssetContainer width="100%" height="5%" className="nft-video">
-                        {/* <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/> */}
-                    </AssetContainer>
                     <AssetContainer height="60%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700}>

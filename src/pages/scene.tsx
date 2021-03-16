@@ -8,6 +8,7 @@ import { SceneMissile1 } from '../components/scene/Scene.missile.1';
 export function SceneComponent() {
     return(
         <Box
+            position="relative"
             width="100vw"
             height="100vh"
             backgroundImage="url(/assets/scenes/bg-scene.png)"

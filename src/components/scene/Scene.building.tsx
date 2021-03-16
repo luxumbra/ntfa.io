@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
 import { Image } from '@chakra-ui/react';
 
-export const SceneBridge: FC = () => {
+export interface SceneBuildingInterface {
+    src?: string;
+}
+
+export const SceneBuilding: FC<SceneBuildingInterface> = ({ src }) => {
     return (
         <Image
-            src="/assets/buildings/bridge.png"
+            src={src}
             position="absolute"
             left="0"
             bottom="0"

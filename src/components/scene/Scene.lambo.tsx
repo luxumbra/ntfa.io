@@ -8,8 +8,9 @@ export const SceneLambo: FC = () => {
             src="/assets/lambo.png"
             position="absolute"
             left="-240px"
-            bottom={{ base: '30px', lg: '140px' }}
+            bottom={{ base: '30px', lg: '155px' }}
             width={{ base: '90px', lg: '240px' }}
+            zIndex="14"
             css={css`
                 @keyframes lamboanim {
                     0% { transform: translateX(0); }

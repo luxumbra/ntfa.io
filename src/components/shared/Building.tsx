@@ -24,9 +24,10 @@ export interface BuildingInterface {
     damageX?: number
     damageH?: number
     damageW?: number
+    overflowY?: string
 }
 
-export const Building: FC<BuildingInterface> = ({ height, width, maxW, maxH, margin, img, imgAlt, color, z, children, buildingName, bottom, top, left, right, position, damageY, damageX, damageH, damageW }) => {
+export const Building: FC<BuildingInterface> = ({ height, width, maxW, maxH, margin, img, imgAlt, color, z, children, buildingName, bottom, top, left, right, position, damageY, damageX, damageH, damageW, overflowY }) => {
     const [buildingDestroyed, setBuildingDestroyed] = useState(false);
     const toggleDestroy = () => {
         setBuildingDestroyed(!buildingDestroyed);
@@ -46,7 +47,7 @@ export const Building: FC<BuildingInterface> = ({ height, width, maxW, maxH, mar
             backgroundRepeat="no-repeat"
             backgroundColor={buildingDestroyed ? `transparent` : color}
             transition="all 0.2s 0.1s ease-in-out"
-            sx={{ "&:hover": { backgroundColor: color }, position: position ? position : `inherit`, zIndex: z, top: top ? `${top}%` : `auto`, right: right ? `${right}%` : `auto`, bottom: bottom ? `${bottom}%` : `auto`, left: left ? `${left}%` : `auto`, }} onClick={toggleDestroy}>
+            sx={{ "&:hover": { backgroundColor: color }, position: position ? position : `inherit`, zIndex: z, top: top ? `${top}%` : `auto`, right: right ? `${right}%` : `auto`, bottom: bottom ? `${bottom}%` : `auto`, left: left ? `${left}%` : `auto`, overflowY: overflowY ? overflowY : `initial` }} onClick={toggleDestroy}>
             {buildingDestroyed && (
                 <Box pos="absolute"
                     minH={`${damageH}%`}

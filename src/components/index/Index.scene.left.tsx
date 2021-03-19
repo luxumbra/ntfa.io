@@ -18,7 +18,15 @@ export const IndexSceneLeft: FC<IndexSceneLeftInterface> = ({ className, minW, a
                 <Box className="spacer" height="70%">
                 </Box>
                 <Building buildingName="sign1" width="100%" height="30%" maxW="120px" margin="0 0 0 75%" img="" imgAlt="" z={300}>
-                    <Link href="#section1" display="inline-block" position="relative" pt="56.25%" height="0" width="100%">
+                    <Link href="#section1" display="inline-block" position="relative" pt="56.25%" height="0" width="100%" css={css`
+                            @keyframes logo-anim {
+                                0% { transform: translateY(25px); }
+                                50% { transform: translateY(35px); }
+                                100% { transform: translateY(25px); }
+                            }
+
+                            animation: logo-anim 5s infinite;
+                        `}>
                         <Image src="/assets/logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: `-150%`, top: `150%`}} css={css`animation: ${animation};`} />
                     </Link>
                 </Building>

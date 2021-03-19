@@ -25,14 +25,14 @@ export function IndexComponent() {
                     </AssetContainer>
 
                     <AssetContainer width="100%" height="33%" d="flex" className="store">
-                        <ShowcaseFeaturedComponent url="/preview/seed.card.mp4" title="Meta SEED Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
+                        <ShowcaseFeaturedComponent url="https://cdn.discordapp.com/attachments/778053490098307183/822255346340855838/test_2.mov" title="Meta SEED Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
                     </AssetContainer>
 
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="30.5%"></Box>
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
                             <Link href="#section2" maxW="140px" maxH="140px" sx={{
-                                color: `white`, fontSize: `1.5vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
+                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
                                 backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6,
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }
                             }}>Bitcoin & Gold</Link>
@@ -49,8 +49,8 @@ export function IndexComponent() {
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
                     <AssetContainer height="60%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700}>
-                            <Box p="5%" margin="3%" sx={{
+                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700} maxH="70%" overflowY="auto">
+                            <Box p="2%" sx={{
                                 backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,
                                 boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
@@ -60,25 +60,23 @@ export function IndexComponent() {
                             }}>
                                 <Box
                                     p="5%"
-                                    sx={{
-
-                                }}>
-                                    <Heading as="h2">Never Touch FIAT Again</Heading>
+                                    fontSize="0.8vw">
+                                <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Never Touch FIAT Again</Heading>
                                     <ol>
                                         <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
                                         <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>
                                         <li>NFTs are ownable digital records used to store information.</li>
                                     </ol>
 
-                                    <Heading as="h3">What is your Dollar?</Heading>
-                                     <p>NFTs can prove ownership of pretty much anything, like for example gold.</p>
+                                    <Heading as="h3" fontSize={{ base: `2vw`, xl: `1vw` }}>What is your Dollar?</Heading>
+                                    <p>NFTs can prove ownership of pretty much anything, like for example gold.</p>
 
                                     <p>Fiat becomes dirty money when the printers go BRRRRRRRRRRRRRRRR!!!</p>
                                     <p>Where did all that money come from?!</p>
 
                                     <p>The best way to keep your hands clean is to...</p>
 
-                                    <Heading as="h3">Never Touch FIAT Again</Heading>
+                                    <Heading as="h3" fontSize={{ base: `2vw`, xl: `1vw` }}>Never Touch FIAT Again</Heading>
                                     <p>Gold and Art are a perfect match. Be rich and look good doing it! While the world crumbles, you can be a golden space cowboy!</p>
                                 </Box>
                             </Box>
@@ -87,7 +85,7 @@ export function IndexComponent() {
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}>
-                            <Link href="#section2" sx={{ color: `white`, fontSize: `1.5vw`, fontWeight: `bold`,position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, opacity: 0.6,
+                            <Link href="#section2" sx={{ color: `white`, fontSize: `1vw`, fontWeight: `bold`,position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, opacity: 0.6,
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }}}>Bitcoin & Gold</Link>
                         </Building>
                     </AssetContainer>

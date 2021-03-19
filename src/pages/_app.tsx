@@ -27,13 +27,13 @@ const theme = extendTheme({
     components: {
         Heading: {
             baseStyle: {
-                fontFamily: `Hero, sans-serif`,
+                fontFamily: `Federal, sans-serif`,
                 fontWeight: `bold`,
                 fontSize: `1vw`,
             },
             fontSizes: {
-                lg: `1.5vw`,
-                xl: `2.3vw`
+                lg: `1vw`,
+                xl: `1vw`
             }
         }
     },
@@ -57,26 +57,30 @@ const theme = extendTheme({
                 }
             },
             h2: {
-                fontSize: `1.3vw`,
-                marginBottom: `0.8vw`
-            },
-            h3: {
-                fontSize: `1.3vw`,
-                marginBottom: `0.8vw`
-            },
-            "p": {
                 fontSize: `0.9vw`,
                 marginBottom: `0.8vw`,
-                lineHeight: `1vw`,
+                fontWeight: `100`
+            },
+            h3: {
+                fontSize: `0.9vw`,
+                marginBottom: {base: `1.5vw`, xl: `0.8vw`},
+                fontWeight: `100`
+            },
+            "p": {
+                fontSize: { base: `1.8vw`, xl: `0.7vw` },
+                marginBottom: {base: `1.5vw`, xl: `0.8vw`},
+                lineHeight: {base: `2.4vw`, xl: `1.2vw`},
+                fontWeight: `100`
             },
             ol: {
                 listStyle: `none`,
                 marginBottom: `0.8vw`
             },
             li: {
-                fontSize: `0.9vw`,
-                marginBottom: `0.8vw`,
-                lineHeight: `1vw`,
+                fontSize: { base: `1.8vw`, xl: `0.7vw` },
+                marginBottom: {base: `1.5vw`, xl: `0.8vw`},
+                lineHeight: {base: `2.4vw`, xl: `1.2vw`},
+                fontWeight: `100`
             }
         }
     }

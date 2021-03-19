@@ -4,6 +4,7 @@ import { SceneBridge } from './Scene.bridge';
 import { SceneLambo } from './Scene.lambo';
 import { SceneMissile } from './Scene.missile';
 import { SceneBuilding } from './Scene.building';
+import { SceneCopy } from './Scene.copy';
 
 export const missiles = [
     {
@@ -41,19 +42,20 @@ export function SceneCore() {
             backgroundImage="url(/assets/scenes/bg-scene.png)"
             backgroundSize="cover"
             overflow="hidden"
+            id="section2"
         >
-            
+            <SceneCopy />
 
             <Button
                 position="absolute"
                 right={{ base: "calc(50% - 120px)", lg: "45px" }}
-                bottom={{ base: "60%", lg: "45px" }}
+                bottom={{ base: "40%", lg: "45px" }}
                 zIndex="21"
                 size="lg"
                 colorScheme="green"
                 width={{ base: "240px", lg: "420px" }}
                 height={{ base: "40px", lg: "90px" }}
-                fontSize={{ base: "24px", lg: "42px" }}
+                fontSize={{ base: "3.4vw", lg: "1.4vw" }}
                 onClick={e => {
                     if (canReplay) {
                         clearTimeout(timeoutState);

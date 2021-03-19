@@ -6,9 +6,10 @@ export interface SceneMissileInterface {
     left: any;
     translation: string;
     delay: string;
+    playState: string;
 }
 
-export const SceneMissile: FC<SceneMissileInterface> = ({ left, translation, delay }) => {
+export const SceneMissile: FC<SceneMissileInterface> = ({ left, translation, delay, playState }) => {
     return (
         <Image
             src="/assets/missile.png"
@@ -32,6 +33,7 @@ export const SceneMissile: FC<SceneMissileInterface> = ({ left, translation, del
                 animation: missileanim 10s infinite;
                 animation-easing: linear;
                 animation-delay: ${delay};
+                animation-play-state: ${playState};
             `}
         />
     )

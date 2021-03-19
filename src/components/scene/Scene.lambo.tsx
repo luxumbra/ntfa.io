@@ -2,7 +2,11 @@ import React, { FC } from 'react';
 import { Image } from '@chakra-ui/react';
 import { css } from "@emotion/react";
 
-export const SceneLambo: FC = () => {
+export interface SceneLamboInterface {
+    playState: string;
+}
+
+export const SceneLambo: FC<SceneLamboInterface> = ({ playState }) => {
     return (
         <Image
             src="/assets/lambo.png"
@@ -19,6 +23,7 @@ export const SceneLambo: FC = () => {
 
                 animation: lamboanim 10s infinite;
                 animation-easing: linear;
+                animation-play-state: ${playState};
             `}
         />
     )

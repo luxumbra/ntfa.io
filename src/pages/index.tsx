@@ -10,6 +10,7 @@ import { StoreSceneRight } from '../components/index/Store.scene.right';
 import { AboutSceneLeft } from '../components/index/About.scene.left';
 import { AboutSceneRight } from '../components/index/About.scene.right';
 import { ShowcaseFeaturedComponent } from '../components/showcase/Showcase.featured';
+import { SceneCore } from '../components/scene/Scene.core';
 
 export function IndexComponent() {
     return(
@@ -41,26 +42,7 @@ export function IndexComponent() {
                 <StoreSceneRight className="scene__right" minW="10%"/>
             </Box>
 
-            <Box id="section2" className="cityScape" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" pos="relative" background="url(/assets/scenes/bg-scene.png) 50% no-repeat" backgroundSize="100% 100%">
-
-                <IndexSceneLeft className="scene__left" minW="33%" />
-
-                <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexFlow="column wrap" alignItems="center">
-                    <AssetContainer height="33%" width="100%" className="spacer"></AssetContainer>
-                    <AssetContainer width="100%" height="33%" className="nft-video">
-                        {/* <ReactPlayer url="/preview/seed.card.gold.mp4" playing={true} loop={true} width="100%" height="100%"/> */}
-                    </AssetContainer>
-                    <AssetContainer height="33%" width="100%" className="spacer">
-                        <Box className="spacer" height="0%"></Box>
-                        <Building buildingName="sign1" width="70%" height="60%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" top={-3} left={-16} damageY={71} damageX={37} damageH={30} damageW={100}>
-                            <Link href="#section3" sx={{ color: `gray.400`, fontSize: `1.5vw`, fontWeight: `bold`,position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, opacity: 0.6,
-                                "&:hover": { color: `transparent !important`, opacity: 0.3, }}}>About</Link>
-                        </Building>
-                    </AssetContainer>
-                    <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="100% 100%" bottom="0" left="0" zIndex="1000"></Box>
-                </Box>
-                <IndexSceneRight className="scene__right" minW="33%"/>
-            </Box>
+            <SceneCore/>
 
             <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh"  pos="relative" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
                 <AboutSceneLeft className="scene__left" minW="33%" />

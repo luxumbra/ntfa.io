@@ -53,21 +53,22 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                     width="100%"
                     height="100%"
                     maxW={{ base: `300px`, lg: `290px`, xl: "275px", xxl: "320px", xxxl: "390px" }} maxH="480px"
-                    overflow="hidden"
                     margin={{ base: "2% 0 0 2%", lg: "2% 0 0 2%", xl: "2.5% 0 0 0%", xxl: "2% 0 0 -3%", xxxl: "3% 0 0 -0.5%" }}
-                    border="5px solid #7D216B"
-                    borderRadius="8px"
-                    boxShadow="0 0 30px rgba(0,0,0,0.8) inset"
                     zIndex={300}
                 >
-                    <Box className="playerWrapper" position="relative" paddingTop="100%" bg="blue.900" zIndex={200}>
+                    <Box
+                        className="playerWrapper"
+                        position="relative"
+                        paddingTop="100%"
+                        zIndex={200}
+                    >
                         <ReactPlayer
                             url={url}
                             playing={true}
                             loop={true}
-                            width="150%"
-                            height="150%"
-                            style={{ position: 'absolute', left: `-25%`, top: `-25%`, zIndex: 200 }}
+                            width="100%"
+                            height="100%"
+                            style={{ position: 'absolute', left: `0`, top: `0`, zIndex: 200 }}
                         />
                     </Box>
                 </Box>

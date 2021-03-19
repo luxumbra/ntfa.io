@@ -46,7 +46,7 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
     }, [contract]);
 
     return(
-        <Box display="flex" alignItems="center" justifyContent="left" width="100%" sx={{}}>
+        <Box display="flex" alignItems="center" alignContent="center" justifyContent="left" width="100%">
             <Box width="33%">
                 <Box
                     position="relative"

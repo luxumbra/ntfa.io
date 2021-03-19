@@ -33,9 +33,9 @@ export function IndexComponent() {
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
                             <Link href="#section2" maxW="140px" maxH="140px" sx={{
                                 color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
-                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6,
+                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }
-                            }}>Bitcoin & Gold</Link>
+                            }}><span>Bitcoin & Gold</span></Link>
                         </Building>
                     </AssetContainer>
                 </Box>
@@ -47,9 +47,9 @@ export function IndexComponent() {
             <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh"  pos="relative" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
                 <AboutSceneLeft className="scene__left" minW="33%" />
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
-                    <AssetContainer height="60%" width="100%" className="spacer">
+                    <AssetContainer height="83%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700} maxH="70%" overflowY="auto">
+                        <Building buildingName="sign1" width="100%" height="90%" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
                             <Box p="2%" sx={{
                                 backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,
@@ -57,6 +57,7 @@ export function IndexComponent() {
                                 color: `white`,
                                 borderRadius: `1`,
                                 overflow: `hidden`,
+                                height: `100%`
                             }}>
                                 <Box
                                     p="5%"
@@ -82,12 +83,9 @@ export function IndexComponent() {
                             </Box>
                         </Building>
                     </AssetContainer>
-                    <AssetContainer height="33%" width="100%" className="spacer">
+                    <AssetContainer height="13%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}>
-                            <Link href="#section2" sx={{ color: `white`, fontSize: `1vw`, fontWeight: `bold`,position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, opacity: 0.6,
-                                "&:hover": { color: `transparent !important`, opacity: 0.3, }}}>Bitcoin & Gold</Link>
-                        </Building>
+                        <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}/>
                     </AssetContainer>
                     <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="cover" maxH="8vh" bottom="0" left="0" zIndex="1000"></Box>
                 </Box>

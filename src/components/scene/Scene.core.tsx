@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Link } from '@chakra-ui/react';
 import { SceneBridge } from './Scene.bridge';
 import { SceneLambo } from './Scene.lambo';
 import { SceneMissile } from './Scene.missile';
@@ -56,6 +56,7 @@ export function SceneCore() {
                 width={{ base: "240px", lg: "420px" }}
                 height={{ base: "40px", lg: "90px" }}
                 fontSize={{ base: "3.4vw", lg: "1.4vw" }}
+                fontFamily="'Federal', serif"
                 onClick={e => {
                     if (canReplay) {
                         clearTimeout(timeoutState);
@@ -86,7 +87,6 @@ export function SceneCore() {
                     />
                 )
             })}
-
             <SceneBuilding
                 src="/assets/buildings/building-4.png"
                 left={{ base: '180px', lg: '1150px' }}

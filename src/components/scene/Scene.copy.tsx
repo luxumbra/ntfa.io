@@ -3,7 +3,7 @@ import { Box, Link, Heading, Image } from '@chakra-ui/react';
 
 export const SceneCopy: FC = () => {
     return (
-        <Box pos="absolute" width={{ base: `90%`, xl: `45%` }} left={{base: `5%`, xl: `2.5%`}} top={`5%`} maxH="70%" overflowY="auto">
+        <Box pos="absolute" width={{ base: `90%`, xl: `45%` }} left={{base: `5%`, xl: `2.5%`}} top={`5%`} maxH="70%" overflowY="auto" zIndex="200">
                 <Box p="2%" sx={{
                     backgroundColor: `rgba(0,0,0,0.6)`,
                     backdropFilter: `blur(3px)`,
@@ -15,7 +15,7 @@ export const SceneCopy: FC = () => {
                     <Box
                         p="5%"
                         fontSize="0.8vw">
-                    <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Never Touch FIAT Again</Heading>
+                    <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Bitcoin & Gold</Heading>
                         <ol>
                             <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
                             <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>

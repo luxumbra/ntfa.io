@@ -64,9 +64,9 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                             url={url}
                             playing={true}
                             loop={true}
-                            width="200%"
-                            height="200%"
-                            style={{ position: 'absolute', left: `-50%`, top: `-50%`, zIndex: 200 }}
+                            width="150%"
+                            height="150%"
+                            style={{ position: 'absolute', left: `-25%`, top: `-25%`, zIndex: 200 }}
                         />
                     </Box>
                 </Box>

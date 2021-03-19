@@ -25,7 +25,7 @@ export function IndexComponent() {
                     </AssetContainer>
 
                     <AssetContainer width="100%" height="33%" d="flex" className="store">
-                        <ShowcaseFeaturedComponent url="https://cdn.discordapp.com/attachments/778053490098307183/822255346340855838/test_2.mov" title="Meta SEED Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
+                        <ShowcaseFeaturedComponent url="/preview/vector.gold.mp4" title="Vector Gold Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
                     </AssetContainer>
 
                     <AssetContainer height="33%" width="100%" className="spacer">
@@ -59,30 +59,30 @@ export function IndexComponent() {
                                 overflow: `hidden`,
                                 height: `100%`
                             }}>
-                                <Box
-                                    p="5%"
-                                    fontSize="0.8vw">
-                                <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Never Touch FIAT Again</Heading>
-                                    <ol>
-                                        <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
-                                        <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>
-                                        <li>NFTs are ownable digital records used to store information.</li>
-                                    </ol>
+                                <Box p="15px">
+                                    <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `0.9vw` }}>Never Touch FIAT Again</Heading>
+                                    <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>
+                                    <p style={{ fontWeight: 'bold' }}>- Ralph Waldo Emerson</p>
 
-                                    <Heading as="h3" fontSize={{ base: `2vw`, xl: `1vw` }}>What is your Dollar?</Heading>
-                                    <p>NFTs can prove ownership of pretty much anything, like for example gold.</p>
+                                    <p>With the exception only of the period of the gold standard, practically all governments of history have used their exclusive power to issue money to defraud and plunder the people.</p>
+                                    <p style={{ fontWeight: 'bold' }}>- Friedrich August von Hayek </p>
 
-                                    <p>Fiat becomes dirty money when the printers go BRRRRRRRRRRRRRRRR!!!</p>
-                                    <p>Where did all that money come from?!</p>
+                                    <p>He who bets on governments and government money bets against 6,000 years of recorded human history.</p>
+                                    <p style={{ fontWeight: 'bold' }}>- Gary North </p>
 
-                                    <p>The best way to keep your hands clean is to...</p>
+                                    <p>Borrowers will default. Markets will collapse. Gold (the ultimate form of safe money) will skyrocket.</p>
+                                    <p style={{ fontWeight: 'bold' }}>- Mike Belkin</p>
 
-                                    <Heading as="h3" fontSize={{ base: `2vw`, xl: `1vw` }}>Never Touch FIAT Again</Heading>
-                                    <p>Gold and Art are a perfect match. Be rich and look good doing it! While the world crumbles, you can be a golden space cowboy!</p>
+                                    <p>The history of paper money is an account of abuse, mismanagement, and financial disaster.</p>
+                                    <p style={{ fontWeight: 'bold' }}>- Richard Ebeling</p>
+
+                                    <p>Gold and Silver are money ... everything else is credit.</p>
+                                    <p style={{ fontWeight: 'bold' }}>- J.P. Morgan</p>
                                 </Box>
                             </Box>
                         </Building>
                     </AssetContainer>
+
                     <AssetContainer height="13%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}/>
@@ -91,10 +91,7 @@ export function IndexComponent() {
                 </Box>
 
                 <AboutSceneRight className="scene__right" minW="33%"/>
-
             </Box>
-
-            {/* <FooterComponent className="scene__right" minW="33%"/> */}
         </Box>
     )
 }

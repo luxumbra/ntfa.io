@@ -55,7 +55,8 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                     maxW={{ base: `300px`, lg: `290px`, xl: "275px", xxl: "320px", xxxl: "390px" }} maxH="480px"
                     overflow="hidden"
                     margin={{ base: "2% 0 0 2%", lg: "2% 0 0 2%", xl: "2.5% 0 0 0%", xxl: "2% 0 0 -3%", xxxl: "3% 0 0 -0.5%" }}
-                    borderRadius="50%" border="5px solid #7D216B"
+                    border="5px solid #7D216B"
+                    borderRadius="8px"
                     boxShadow="0 0 30px rgba(0,0,0,0.8) inset"
                     zIndex={300}
                 >

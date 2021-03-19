@@ -33,6 +33,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                             }
 
                             animation: logo-anim 2.5s infinite;
+                            animation-play-state: paused;
                         `}
                     >
                         <Image src="/assets/logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />

@@ -24,7 +24,7 @@ export function IndexComponent() {
                         <Box className="spacer" height="80%"/>
                     </AssetContainer>
 
-                    <AssetContainer width="100%" height="33%" d="flex" className="store">
+                    <AssetContainer width="75%" height="33%" d="flex" className="store">
                         <ShowcaseFeaturedComponent url="/preview/vector.gold.mp4" title="Vector Gold Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
                     </AssetContainer>
 

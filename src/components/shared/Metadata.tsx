@@ -17,9 +17,10 @@ export const MetadataComponent: FC<MetadataInterface> = ({ title, description })
 
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:title" content={outputTitle}/>
-            <meta name="twitter:description" content={outputDescription}/>
+            <meta name="twitter:description" content={outputDescription} />
+            <meta name="twitter:image" content="/assets/banner.jpg"></meta>
             <meta property="og:title" content={outputTitle}/>
-            <meta property="og:image" content="/assets/lambo.png"/>
+            <meta property="og:image" content="/assets/banner.jpg"/>
             <meta property="og:description" content={outputDescription} />
 
             <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>

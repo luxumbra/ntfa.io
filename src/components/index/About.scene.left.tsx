@@ -18,7 +18,7 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
             <AssetContainer width="15%" height="20%" className="logo">
                 <Box className="spacer" height="30%">
                 </Box>
-                <Building buildingName="sign1" width="100%" height="70%" maxW="200px" margin="0 0 0 227%" img="" imgAlt="" z={300}>
+                <Building buildingName="sign1" width="100%" height="60%" maxW="100px" margin="0 0 0 227%" img="" imgAlt="" z={300}>
                     <Link
                         href="#section1"
                         display="inline-block"
@@ -26,7 +26,6 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
                         // pt="26.25%"
                         height="0"
                         width="100%"
-                        maxW="100px"
                         css={css`
                             @keyframes logo-anim {
                                 0% { transform: translateY(25px); }

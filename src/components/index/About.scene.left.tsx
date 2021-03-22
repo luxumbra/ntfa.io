@@ -18,8 +18,16 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
             <AssetContainer width="15%" height="20%" className="logo">
                 <Box className="spacer" height="30%">
                 </Box>
-                <Building buildingName="sign1" width="100%" height="70%" maxW="200px" margin="0 0 0 75%" img="" imgAlt="" z={300}>
-                    <Link href="#section1" display="inline-block" position="relative" pt="56.25%" height="0" width="100%" maxW="300px" css={css`
+                <Building buildingName="sign1" width="100%" height="70%" maxW="200px" margin="0 0 0 227%" img="" imgAlt="" z={300}>
+                    <Link
+                        href="#section1"
+                        display="inline-block"
+                        position="relative"
+                        // pt="26.25%"
+                        height="0"
+                        width="100%"
+                        maxW="100px"
+                        css={css`
                             @keyframes logo-anim {
                                 0% { transform: translateY(25px); }
                                 50% { transform: translateY(35px); }
@@ -27,8 +35,10 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
                             }
 
                             animation: logo-anim 5s infinite;
-                        `}>
-                        <Image src="/assets/logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: `200%`, top: 0,}} css={css`animation: ${animation};`} />
+                            /* animation-play-state: paused; */
+                        `}
+                    >
+                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                     </Link>
                 </Building>
             </AssetContainer>

@@ -12,10 +12,8 @@ export const SceneCopy: FC = () => {
                     borderRadius: `1`,
                     overflow: `hidden`,
                 }}>
-                    <Box
-                        p="5%"
-                        fontSize="0.8vw">
-                    <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Bitcoin & Gold</Heading>
+                    <Box p="5%">
+                      <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Bitcoin & Gold</Heading>
                         <ol>
                             <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
                             <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>

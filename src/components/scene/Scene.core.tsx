@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Image } from '@chakra-ui/react';
+import { Box, Button, Link, Image } from '@chakra-ui/react';
+import { css, jsx } from "@emotion/react";
 import { SceneBridge } from './Scene.bridge';
 import { SceneLambo } from './Scene.lambo';
 import { SceneMissile } from './Scene.missile';
@@ -59,7 +60,7 @@ export function SceneCore() {
                 colorScheme="green"
                 width={{ base: "240px", lg: "420px" }}
                 height={{ base: "40px", lg: "90px" }}
-                fontSize={{ base: "3.4vw", lg: "1.4vw" }}
+                fontSize={{ base: "3.4vw", lg: "1vw" }}
                 fontFamily="'Federal', serif"
                 onClick={e => {
                     if (canReplay) {
@@ -74,7 +75,7 @@ export function SceneCore() {
                                 setToggle3(true);
                             }, 3 * 1000)
                         )
-                        
+
                         setTimeoutState(
                             setTimeout(() => {
                                 setCanReplay(true);
@@ -89,7 +90,36 @@ export function SceneCore() {
             >
                 Click To Win
             </Button>
+            <Box pos="absolute" bottom="1%" right="25%" height="300px" width="300px" z={1000}>
+                    <Link href="#section3" maxW="200px" maxH="200px" sx={{
+                        color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
+                        backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
+                        "&:hover": { color: `transparent !important`, opacity: 0.3, }
+                    }}><span>Bitcoin & Gold</span></Link>
+                </Box>
+                <Box pos="absolute" top="3%" right="10%" width="300px" z={300}>
+                    <Link
+                        href="#section1"
+                        display="inline-block"
+                        position="relative"
+                        // pt="26.25%"
+                        height="0"
+                        width="100%"
+                        maxW="100px"
+                        css={css`
+                            @keyframes logo-anim {
+                                0% { transform: translateY(25px); }
+                                50% { transform: translateY(35px); }
+                                100% { transform: translateY(25px); }
+                            }
 
+                            animation: logo-anim 5s infinite;
+                            /* animation-play-state: paused; */
+                        `}
+                    >
+                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                    </Link>
+                </Box>
             <SceneBridge/>
             <SceneLambo playState={playState}/>
 
@@ -129,7 +159,7 @@ export function SceneCore() {
                     src="/assets/buildings/building-1.png"
                     left={{ base: '130px', lg: '1000px' }}
                     bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '180px' }} 
+                    width={{ base: '50px', lg: '180px' }}
                 />
             </Box>
 
@@ -159,7 +189,7 @@ export function SceneCore() {
                 bottom={{ base: '-10px', lg: '-20px' }}
                 width={{ base: '200px', lg: '640px' }}
             />
-            
+
             <Image
                 src="/assets/effects/fog.png"
                 position="absolute"

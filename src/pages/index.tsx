@@ -31,9 +31,9 @@ export function IndexComponent() {
                     <AssetContainer height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="30.5%"></Box>
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
-                            <Link href="#section2" maxW="140px" maxH="140px" sx={{
-                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, textAlign: `center`,
-                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
+                            <Link href="#section2" maxW="160px" maxH="160px" sx={{
+                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
+                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `100%`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }
                             }}><span>Bitcoin & Gold</span></Link>
                         </Building>
@@ -49,7 +49,7 @@ export function IndexComponent() {
                 <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
                     <AssetContainer height="83%" width="100%" className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="90%" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
+                        <Building buildingName="sign1" width="120%" height="70%" margin="0 0 0 -17%" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
                             <Box p="2%" sx={{
                                 backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,
@@ -59,8 +59,8 @@ export function IndexComponent() {
                                 overflow: `hidden`,
                                 height: `100%`
                             }}>
-                                <Box p="15px">
-                                    <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `0.9vw` }}>Never Touch FIAT Again</Heading>
+                                <Box p="5%" sx={{ "p:nth-of-type(even)": {fontSize: { base: `1.6vw`, xl: `0.7vw` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
+                                    <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Never Touch FIAT Again</Heading>
                                     <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>
                                     <p style={{ fontWeight: 'bold' }}>- Ralph Waldo Emerson</p>
 

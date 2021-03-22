@@ -64,20 +64,27 @@ const theme = extendTheme({
             h3: {
                 fontSize: `0.9vw`,
                 marginBottom: {base: `1.5vw`, xl: `0.8vw`},
-                fontWeight: `100`
+                fontWeight: `100`,
+
             },
             "p": {
-                fontSize: { base: `1.8vw`, xl: `0.7vw` },
+                fontSize: { base: `1.8vw`, xl: `1vw` },
                 marginBottom: {base: `1.5vw`, xl: `0.8vw`},
                 lineHeight: {base: `2.4vw`, xl: `1.2vw`},
-                fontWeight: `100`
+                fontWeight: `100`,
+                "& + h3": {
+                    mt: `50px`
+                }
             },
             ol: {
                 listStyle: `none`,
-                marginBottom: `0.8vw`
+                marginBottom: `0.8vw`,
+                "& + h3": {
+                    mt: `50px`
+                }
             },
             li: {
-                fontSize: { base: `1.8vw`, xl: `0.7vw` },
+                fontSize: { base: `1.8vw`, xl: `1vw` },
                 marginBottom: {base: `1.5vw`, xl: `0.8vw`},
                 lineHeight: {base: `2.4vw`, xl: `1.2vw`},
                 fontWeight: `100`

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Box, Link, Heading } from '@chakra-ui/react';
 import { MetadataComponent } from '../components/shared/Metadata';
 import { AssetContainer } from '../components/shared/AssetContainer';

@@ -16,7 +16,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
     return(
         <Box className={className} as="div" flexGrow={1} d="flex" flexFlow="column wrap" minW={minW}>
             <AssetContainer width="100%" height="20%" className="logo">
-                <Building buildingName="sign1" width="100%" height="70%" maxW="200px" margin="0 0 0 75%" img="" imgAlt="" z={300}>
+                <Building buildingName="sign1" width="100%" height="90%" maxW="300px" margin="0 0 0 75%" img="" imgAlt="" z={300}>
                     <Link
                         href="#section1"
                         display="inline-block"
@@ -36,7 +36,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                             animation-play-state: paused;
                         `}
                     >
-                        <Image src="/assets/logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                        <Image src="/assets/ntfa-logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                     </Link>
                 </Building>
             </AssetContainer>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { Image } from '@chakra-ui/react';
 
 export interface SceneBuildingInterface {
@@ -6,6 +6,7 @@ export interface SceneBuildingInterface {
     left: any;
     bottom: any;
     width: any;
+    onClick?: (e: any) => void;
 }
 
 export const SceneBuilding: FC<SceneBuildingInterface> = ({ src, left, bottom, width }) => {

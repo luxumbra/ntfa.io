@@ -23,6 +23,9 @@ const theme = extendTheme({
             // ...
             900: "#1a202c",
         },
+        accent: {
+            primary: "#6b7867"
+        }
     },
     components: {
         Heading: {

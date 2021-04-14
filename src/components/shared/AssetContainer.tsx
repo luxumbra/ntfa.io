@@ -12,7 +12,7 @@ import { MotionBox } from './MotionBox';
 
 export interface AssetContainerInterface {
     height: string|any
-    width: string
+    width: string|any
     margin?: string
     d?: string
     bg?: string

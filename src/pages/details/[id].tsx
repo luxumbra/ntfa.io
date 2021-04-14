@@ -1,64 +1,159 @@
-import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
-import ReactPlayer from 'react-player';
-import { useRouter } from "next/router"
+import React from "react";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import ReactPlayer from "react-player";
+import { useRouter } from "next/router";
 //
-import { MetadataComponent } from '../../components/shared/Metadata';
-import { AboutSceneLeft } from '../../components/index/About.scene.left';
-import { FooterComponent } from '../../components/shared/Footer';
-import { AssetContainer } from '../../components/shared/AssetContainer';
+import { MetadataComponent } from "../../components/shared/Metadata";
+import { AboutSceneLeft } from "../../components/index/About.scene.left";
+import { FooterComponent } from "../../components/shared/Footer";
+import { AssetContainer } from "../../components/shared/AssetContainer";
 import { Building } from "../../components/shared/Building";
 
 export function AssetDetails() {
-    const router = useRouter()
+    const router = useRouter();
     const {
         query: { id },
-    } = router
+    } = router;
 
     const goldVids = [
         {
-            name: "Piggy Banksy 1oz",
-            path: `/assets/nfts/PiggyBanksy619262.mp4`,
-        },
-        {
-            name: "Space Cowboy 50g",
-            path: `/assets/nfts/Space_Cowboy_8642.mp4`,
-        },
-        {
-            name: "Vector 777 100g",
+            creator: "Never Touch Fiat Again",
+            title: "Vector V777",
             path: `/assets/nfts/Vector150768.mp4`,
+            summary:
+                "The Vector V777 comes equipped with 100 Grams of pure golden firepower. Make a splash as you enter the party with dual stage rocket launchers and Racer X upgrades. Handmade by time travelers from the year 1955 this car is as much a relic as it is a work of art. The Golden Vector comes with a matching gold certificate for 100 Grams of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 100Grams of gold Stored in a Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
+        },
+        {
+            creator: "Never Touch Fiat Again",
+            title: "Piggy Banksy",
+            path: `/assets/nfts/PiggyBanksy619262.mp4`,
+            summary:
+                "The Piggy Banksy is the perfect thing to smash on the way out of the country to buy your next drop. Piggy Banksy comes with a matching gold certificate for 1 oz of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 1 oz of gold Stored in a Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
+        },
+        {
+            creator: "Never Touch Fiat Again",
+            title: "Space Cowboy",
+            path: `/assets/nfts/Space_Cowboy_8642.mp4`,
+            summary:
+                "The Space Cowboy blasted off many moons ago and now lives in his street style space suit ready for the next launch. Space Cowboy comes with a matching gold certificate for 50 Grams of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 50Grams of gold Stored in a  Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
         },
     ];
     return (
-        <Box className="scene" d="flex" flexDirection="row" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" backgroundImage="url(/assets/scenes/bg-scene.png)"
-            backgroundSize="cover">
+        <Box
+            className="scene"
+            d="flex"
+            flexDirection="row"
+            minHeight="100vh"
+            width="100vw"
+            maxW="100%"
+            alignContent="stretch"
+            backgroundImage="url(/assets/scenes/bg-scene.png)"
+            backgroundSize="cover"
+        >
             <MetadataComponent />
             <AboutSceneLeft className="scene__left" minW="33%" />
-            <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
-                <AssetContainer height="5%" width="100%" className="spacer"></AssetContainer>
-                <AssetContainer width="100%" height="33%" className="nft-video">
-                    <ReactPlayer url={id && goldVids[+id].path} playing={true} volume={0} muted={true} loop={true} controls={true} width="100%" height="100%" />
-                </AssetContainer>
+            <Box
+                className="scene__center"
+                as="main"
+                flex={["0 0 66%", "0 0 33%"]}
+                d="flex"
+                flexDirection="column"
+                alignItems="center"
+            >
+                <AssetContainer
+                    height="5%"
+                    width="100%"
+                    className="spacer"
+                ></AssetContainer>
+                <Box
+                    position="relative"
+                    width="100%"
+                    maxHeight={`${(212 / 373) * 100}%`}
+                    zIndex={300}
+                    color="white"
+                >
+                    <Box
+                        className="playerWrapper"
+                        position="relative"
+                        paddingTop={`${(212 / 373) * 100}%`}
+                        width="100%"
+                        height="0"
+                        // maxWidth="512px"
+                        zIndex={200}
+                        overflow="hidden"
+
+                    >
+                        <ReactPlayer
+                            url={id && goldVids[+id].path}
+                            playing={true}
+                            volume={0}
+                            muted={true}
+                            loop={true}
+                            controls={true}
+                            width="100%"
+                            height="100%"
+                            style={{
+                                position: "absolute",
+                                left: `0`,
+                                top: `0`,
+                                zIndex: 200,
+                            }}
+                        />
+                    </Box>
+                </Box>
                 <AssetContainer height="60%" width="100%" className="spacer">
-                    <Box width="100%" height="70%" margin="0" img="" imgAlt="" backgroundColor="rgba(255,255,255,0.6)"
+                    <Box
+                        width="100%"
+                        margin="0"
+                        img=""
+                        imgAlt=""
+                        backgroundColor="rgba(255,255,255,0.6)"
                         backdropFilter="blur(7px)"
                         borderRadius=" 0 0 6px 6px"
-                        overflow="hidden" z={0}>
+                        overflow="hidden"
+                        z={0}
+                    >
                         <Box p="25px">
-                            <Heading as="h3" size="sm" color="accent.primary">{id && goldVids[+id].name}</Heading>
-                            <p>Sed in libero ut nibh placerat accumsan. Phasellus magna. In hac habitasse platea dictumst. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Quisque ut nisi.</p>
-
-                            <p>Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Morbi vestibulum volutpat enim. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam feugiat lorem non metus. Donec id justo.</p>
-
-                            <p>Nam eget dui. Morbi ac felis. Aliquam erat volutpat. Fusce a quam. Phasellus blandit leo ut odio.</p>
+                            <Heading as="h3" size="sm" color="accent.primary">
+                                {id && goldVids[+id].title}
+                            </Heading>
+                            <Text>
+                                {id && goldVids[+id].summary}
+                            </Text>
+                            <Text>
+                                {id && goldVids[+id].description}
+                            </Text>
                         </Box>
                     </Box>
                 </AssetContainer>
             </Box>
-            <Box className="scene__right" minW="33%" />
-            <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="cover" maxH="8vh" bottom="0" left="0" zIndex="1000"></Box>
+            <Box className="scene__right" minW="33%" display={["none", "initial"]} />
+            <Box
+                pos="absolute"
+                width="100vw"
+                height="20vh"
+                backgroundImage="url(/assets/buildings/bridge.png)"
+                backgroundRepeat="repeat-x"
+                backgroundSize="cover"
+                maxH="8vh"
+                bottom="0"
+                left="0"
+                zIndex="1000"
+            ></Box>
         </Box>
-    )
+    );
 }
 
 export default AssetDetails;

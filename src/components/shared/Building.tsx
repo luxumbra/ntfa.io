@@ -6,7 +6,7 @@ import { Box, Image } from '@chakra-ui/react';
 export interface BuildingInterface {
     height: string|any
     width: string|any
-    maxW?: string
+    maxW?: string|any
     maxH?: string
     margin?: string|any
     img: string

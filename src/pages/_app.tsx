@@ -61,7 +61,7 @@ const theme = extendTheme({
             },
             h2: {
                 fontSize: `0.9vw`,
-                marginBottom: `0.8vw`,
+                marginBottom: `1vw`,
                 fontWeight: `100`
             },
             h3: {

@@ -82,7 +82,7 @@ export function IndexComponent() {
                                 backdropFilter: `blur(3px)`,
                                 boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                                 color: `white`,
-                                borderRadius: `1`,
+                                borderRadius: `6px`,
                                 overflow: `hidden`,
                                 height: `100%`
                             }}>

@@ -1,6 +1,6 @@
 import React from 'react';
-
-import { Box, Link, Heading } from '@chakra-ui/react';
+import { css, jsx } from "@emotion/react";
+import { Box, Link, Heading, Image } from '@chakra-ui/react';
 import { MetadataComponent } from '../components/shared/Metadata';
 import { AssetContainer } from '../components/shared/AssetContainer';
 import { Building } from "../components/shared/Building";
@@ -20,7 +20,7 @@ export function IndexComponent() {
             <Box id="section1" className="industrial" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize="100% 100%">
                 <StoreSceneLeft className="scene__left" minW="10%"/>
 
-                <Box className="scene__center" as="main" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
+                <Box className="scene__center" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
                     <AssetContainer width="100%" height={["0%", "33%"]} className="logo">
                         <Box className="spacer" height="80%"/>
                     </AssetContainer>
@@ -45,12 +45,38 @@ export function IndexComponent() {
 
             <SceneCore/>
 
-            <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh"  pos="relative" background="url(/assets/scenes/industrial.jpg) 50% no-repeat" backgroundSize="100% 100%">
-                <AboutSceneLeft className="scene__left" minW="33%" />
-                <Box className="scene__center" as="main" flex="0 0 33%" d="flex" flexDirection="column" alignItems="center">
-                    <AssetContainer height="83%" width="100%" className="spacer">
+            <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch"
+                justifyContent={["center", "unset"]} minH="100vh" pos="relative" background="url(/assets/scenes/bg-industrial.png) 50% no-repeat" backgroundSize={["cover", "cover"]} overflow="hidden">
+                <Box className="scene__left" minW={["0", "25%"]} w={["5%", "auto"]} overflowY="hidden">
+                    <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "100px"]} bottom={["21%","45%"]} left={["62%", "45%"]} img="" imgAlt="" z={100}>
+                    <Link
+                        href="/#section1"
+                        display="inline-block"
+                        position="relative"
+                        // pt="26.25%"
+                        height="0"
+                        width="100%"
+                            cursor="pointer"
+                            // zIndex="3000"
+                        css={css`
+                            @keyframes logo-anim {
+                                0% { transform: translateY(25px); }
+                                50% { transform: translateY(35px); }
+                                100% { transform: translateY(25px); }
+                            }
+
+                            animation: logo-anim 5s infinite;
+                            /* animation-play-state: paused; */
+                        `}
+                    >
+                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                    </Link>
+                </Box>
+                </Box>
+                <Box className="scene__center" flex={["0 0 90%", "0 0 33%"]} ml={["auto", "auto"]} d="flex" flexDirection="column" alignItems="center" pointerEvents="none">
+                    <AssetContainer height="83%" width={["100%", "120%"]} className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="120%" height="70%" margin="0 0 0 -17%" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
+                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
                             <Box p="2%" sx={{
                                 backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,
@@ -83,15 +109,10 @@ export function IndexComponent() {
                             </Box>
                         </Building>
                     </AssetContainer>
-
-                    <AssetContainer height="13%" width="100%" className="spacer">
-                        <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="60%" height="95%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={300} position="absolute" bottom={5} left={-16} damageY={41} damageX={37} damageH={30} damageW={100}/>
-                    </AssetContainer>
-                    <Box pos="absolute" width="100vw" height="20vh" backgroundImage="url(/assets/buildings/bridge.png)" backgroundRepeat="repeat-x" backgroundSize="cover" maxH="8vh" bottom="0" left="0" zIndex="1000"></Box>
+                    <Box position="absolute" bottom="0" left="0" background={["url(/assets/buildings/building-industrial.png) 0 100% no-repeat", "url(/assets/buildings/building-industrial.png) 0 110px no-repeat"]} backgroundSize={["contain", "contain"]} width="100%" minW="100vw" minH="100vh" zIndex="200"></Box>
                 </Box>
 
-                <AboutSceneRight className="scene__right" minW="33%"/>
+                <Box className="scene__right" minW={["5%", "33%"]}/>
             </Box>
         </Box>
     )

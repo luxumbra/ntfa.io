@@ -188,7 +188,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                           "&:hover": {
                               boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
                             "&::after": {
-                                transform: "translate3d(0, -300%, 0)",
+                                transform: "translate3d(0, -400%, 0)",
                                 opacity: 1
                               },
                             "&::before": {

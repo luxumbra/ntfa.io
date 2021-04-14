@@ -8,7 +8,7 @@ export interface BuildingInterface {
     width: string|any
     maxW?: string
     maxH?: string
-    margin?: string
+    margin?: string|any
     img: string
     imgAlt: string
     color?: string

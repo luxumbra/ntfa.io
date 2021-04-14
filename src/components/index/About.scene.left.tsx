@@ -23,7 +23,7 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
             <AssetContainer width={["20%","10%"]} height={["10%", "20%"]} className="logo">
                 <Box className="spacer" height="70%">
                 </Box>
-                <Building buildingName="sign1" width="100%" height="20%" maxW="100px" margin="30% 0 0 500%" img="" imgAlt="" z={300}>
+                <Building buildingName="sign1" width="100%" height={["30%", "20%"]} maxW="100px" margin={["30% 0 0 100%","30% 0 0 500%"]} img="" imgAlt="" z={300}>
                     <Link
                         href="/#section1"
                         display="inline-block"

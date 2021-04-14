@@ -10,7 +10,7 @@ import { StoreSceneLeft } from '../components/index/Store.scene.left';
 import { StoreSceneRight } from '../components/index/Store.scene.right';
 import { AboutSceneLeft } from '../components/index/About.scene.left';
 import { AboutSceneRight } from '../components/index/About.scene.right';
-import { ShowcaseFeaturedComponent } from '../components/showcase/Showcase.featured';
+import { ShowcaseGridComponent } from '../components/showcase/Showcase.grid';
 import { SceneCore } from '../components/scene/Scene.core';
 
 export function IndexComponent() {
@@ -26,7 +26,7 @@ export function IndexComponent() {
                     </AssetContainer>
 
                     <AssetContainer width="75%" height="33%" d="flex" className="store">
-                        <ShowcaseFeaturedComponent url="/preview/vector.gold.mp4" title="Vector Gold Card" contract="0x06012c8cf97bead5deae237070f9587f8e7a266d" tokenId={515874}/>
+                        <ShowcaseGridComponent collection="100-bees-hexel-collection" />
                     </AssetContainer>
 
                     <AssetContainer height="33%" width="100%" className="spacer">
@@ -34,7 +34,7 @@ export function IndexComponent() {
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
                             <Link href="#section2" maxW="160px" maxH="160px" sx={{
                                 color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
-                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `100%`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
+                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `70%`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }
                             }}><span>Bitcoin & Gold</span></Link>
                         </Building>

@@ -28,7 +28,7 @@ const theme = extendTheme({
         Heading: {
             baseStyle: {
                 fontFamily: `Federal, sans-serif`,
-                fontWeight: `bold`,
+                fontWeight: `100`,
                 fontSize: `1vw`,
             },
             fontSizes: {
@@ -62,6 +62,7 @@ const theme = extendTheme({
                 fontWeight: `100`
             },
             h3: {
+                fontFamily: `'Hero', sans-serif`,
                 fontSize: `0.9vw`,
                 marginBottom: {base: `1.5vw`, xl: `0.8vw`},
                 fontWeight: `100`,

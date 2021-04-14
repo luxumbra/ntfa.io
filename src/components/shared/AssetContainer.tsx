@@ -11,7 +11,7 @@ import { useInView } from 'react-intersection-observer';
 import { MotionBox } from './MotionBox';
 
 export interface AssetContainerInterface {
-    height: string
+    height: string|any
     width: string
     margin?: string
     d?: string

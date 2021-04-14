@@ -18,17 +18,6 @@ export function AssetDetails() {
     const goldVids = [
         {
             creator: "Never Touch Fiat Again",
-            title: "Vector V777",
-            path: `/assets/nfts/Vector150768.mp4`,
-            summary:
-                "The Vector V777 comes equipped with 100 Grams of pure golden firepower. Make a splash as you enter the party with dual stage rocket launchers and Racer X upgrades. Handmade by time travelers from the year 1955 this car is as much a relic as it is a work of art. The Golden Vector comes with a matching gold certificate for 100 Grams of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 100Grams of gold Stored in a Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
-        {
-            creator: "Never Touch Fiat Again",
             title: "Piggy Banksy",
             path: `/assets/nfts/PiggyBanksy619262.mp4`,
             summary:
@@ -46,6 +35,17 @@ export function AssetDetails() {
                 "The Space Cowboy blasted off many moons ago and now lives in his street style space suit ready for the next launch. Space Cowboy comes with a matching gold certificate for 50 Grams of gold!",
             description:
                 "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 50Grams of gold Stored in a  Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
+        },
+        {
+            creator: "Never Touch Fiat Again",
+            title: "Vector V777",
+            path: `/assets/nfts/Vector150768.mp4`,
+            summary:
+                "The Vector V777 comes equipped with 100 Grams of pure golden firepower. Make a splash as you enter the party with dual stage rocket launchers and Racer X upgrades. Handmade by time travelers from the year 1955 this car is as much a relic as it is a work of art. The Golden Vector comes with a matching gold certificate for 100 Grams of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 100Grams of gold Stored in a Singaporean Vault. X.",
             NFT: "FILLIN",
             vault: "This asset is securely stored in the following facility: FILLIN",
         },
@@ -71,6 +71,7 @@ export function AssetDetails() {
                 d="flex"
                 flexDirection="column"
                 alignItems="center"
+                pr="25px"
             >
                 <AssetContainer
                     height="5%"
@@ -125,7 +126,7 @@ export function AssetDetails() {
                         overflow="hidden"
                         z={0}
                     >
-                        <Box p="25px">
+                        <Box p={["15px", "25px"]}>
                             <Heading as="h3" size="sm" color="accent.primary">
                                 {id && goldVids[+id].title}
                             </Heading>

@@ -4,8 +4,8 @@ import { Box, Image } from '@chakra-ui/react';
 
 
 export interface BuildingInterface {
-    height: string
-    width: string
+    height: string|any
+    width: string|any
     maxW?: string
     maxH?: string
     margin?: string

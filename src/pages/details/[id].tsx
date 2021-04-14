@@ -19,7 +19,7 @@ export function AssetDetails() {
         {
             creator: "Never Touch Fiat Again",
             title: "Piggy Banksy",
-            path: `/assets/nfts/PiggyBanksy619262.mp4`,
+            path: `/assets/nfts/PiggyBanksy619263_smallcloud.mp4`,
             summary:
                 "The Piggy Banksy is the perfect thing to smash on the way out of the country to buy your next drop. Piggy Banksy comes with a matching gold certificate for 1 oz of gold!",
             description:

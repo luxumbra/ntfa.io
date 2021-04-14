@@ -46,7 +46,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   const goldVids = [
     {
       name: "Piggy Banksy 1oz",
-      path: `/assets/nfts/PiggyBanksy619262.mp4`,
+      path: `/assets/nfts/PiggyBanksy619263_smallcloud.mp4`,
     },
     {
       name: "Space Cowboy 50g",

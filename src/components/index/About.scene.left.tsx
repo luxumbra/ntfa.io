@@ -20,7 +20,7 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
                 </Box>
                 <Building buildingName="sign1" width="100%" height="60%" maxW="100px" margin="0 0 0 227%" img="" imgAlt="" z={300}>
                     <Link
-                        href="#section1"
+                        href="/#section1"
                         display="inline-block"
                         position="relative"
                         // pt="26.25%"
@@ -51,7 +51,7 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
                 </Building>
                 <Building buildingName="sky2" width="60%" height="20%" img="/assets/buildings/building-2.png" imgAlt="/assets/effects/fog.png" z={400} position="absolute" bottom={2} left={15} damageY={30} damageX={20}>
                 </Building>
-                <Building buildingName="sky2" width="60%" height="20%" img="/assets/buildings/building-4.png" imgAlt="/assets/effects/fog.png" z={200} position="absolute" bottom={10} left={45} damageW={350} damageY={30} damageX={20}>
+                <Building buildingName="sky2" width="60%" height="20%" img="/assets/buildings/building-4.png" imgAlt="/assets/effects/fog.png" z={200} position="absolute" bottom={5} left={45} damageW={350} damageY={30} damageX={20}>
                 </Building>
             </AssetContainer>
         </Box>

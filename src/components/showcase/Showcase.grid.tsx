@@ -143,6 +143,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
               assets.map((asset, i) => (
                 <Link
                       key={i}
+                      href={`/details/${i}`}
                       opacity={turbo ? 0 : 1}
                       transition="opacity 0.3s .3s ease-in"
                       display="flex"
@@ -168,26 +169,26 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                               opacity: 0,
                               transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease"
                           },
-                          "&::before": {
-                              content: "'Get the low down'",
-                              display: "inline-flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              position: "absolute",
-                              color: "white",
-                              backgroundColor: "accent.primary",
-                              width: "100%",
-                              height: "50px",
-                            bottom: 0,
-                              right: 0,
-                              opacity: 0,
-                              transform: "translate3d(0, 40px, 0)",
-                              transition: "transform 0.5s ease-in, opacity 0.2s ease-in"
-                          },
+                        //   "&::before": {
+                        //       content: "'Get the low down'",
+                        //       display: "inline-flex",
+                        //       alignItems: "center",
+                        //       justifyContent: "center",
+                        //       position: "absolute",
+                        //       color: "white",
+                        //       backgroundColor: "accent.primary",
+                        //       width: "100%",
+                        //       height: "50px",
+                        //     bottom: 0,
+                        //       right: 0,
+                        //       opacity: 0,
+                        //       transform: "translate3d(0, 40px, 0)",
+                        //       transition: "transform 0.5s ease-in, opacity 0.2s ease-in"
+                        //   },
                           "&:hover": {
                               boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
                             "&::after": {
-                                transform: "translate3d(0, -90px, 0)",
+                                transform: "translate3d(0, -300%, 0)",
                                 opacity: 1
                               },
                             "&::before": {

@@ -7,8 +7,11 @@ import {
   Button,
   Image,
   SimpleGrid,
-  IconButton,
+    IconButton,
+  Link,
+  transition
 } from "@chakra-ui/react";
+// import Link from 'next/link';
 import Web3 from "web3";
 import { OpenSeaPort, Network } from "opensea-js";
 import axios from "axios";
@@ -138,21 +141,69 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
             {!turbo &&
               assets &&
               assets.map((asset, i) => (
-                <Box
-                  key={i}
-                  opacity={turbo ? 0 : 1}
-                  transition="opacity 0.3s .3s ease-in"
-                  alignItems="center"
-                  display="flex"
+                <Link
+                      key={i}
+                      opacity={turbo ? 0 : 1}
+                      transition="opacity 0.3s .3s ease-in"
+                      display="flex"
+                      flexFlow="column nowrap"
+                      backgroundColor="rgba(255,255,255,0.8)"
+                      backdropFilter="blur(3px)"
+                      borderRadius="6px"
+                      overflow="hidden"
+                      boxShadow="0 0 10px rgba(0,0,0,0.7)"
+                      position="relative"
+                      sx={{
+                          "&::after": {
+                              content: "''",
+                              backgroundImage: "url(/assets/ntfa-logo.png)",
+                              backgroundSize: "100%",
+                              backgroundRepeat: "no-repeat",
+                              position: "absolute",
+                              bottom: 0,
+                              right: 0,
+                              height: "60px",
+                              width: "60px",
+                              transform: "translate3d(0, 40px, 0)",
+                              opacity: 0,
+                              transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease"
+                          },
+                          "&::before": {
+                              content: "'Get the low down'",
+                              display: "inline-flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              position: "absolute",
+                              color: "white",
+                              backgroundColor: "accent.primary",
+                              width: "100%",
+                              height: "50px",
+                            bottom: 0,
+                              right: 0,
+                              opacity: 0,
+                              transform: "translate3d(0, 40px, 0)",
+                              transition: "transform 0.5s ease-in, opacity 0.2s ease-in"
+                          },
+                          "&:hover": {
+                              boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
+                            "&::after": {
+                                transform: "translate3d(0, -90px, 0)",
+                                opacity: 1
+                              },
+                            "&::before": {
+                                transform: "translate3d(0, 10px, 0)",
+                                opacity: 1
+                          }
+                          },
+                      }}
                 >
                   <Box
                     position="relative"
                     width="100%"
-                    height={`${(212 / 373) * 100}%`}
+                    maxHeight={`${(212 / 373) * 100}%`}
                     zIndex={300}
                           color="white"
-                          borderRadius="6px"
-                          overflow="hidden"
+                    flex="1 0 100%"
                   >
                     <Box
                       className="playerWrapper"
@@ -162,7 +213,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       maxWidth="512px"
                       zIndex={200}
                       overflow="hidden"
-                      flex="1 0 100%"
+
                     >
                       <ReactPlayer
                         url={goldVids[i].path}
@@ -180,7 +231,11 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       />
                     </Box>
                   </Box>
-                </Box>
+                      <Box position="relative" width="100%" p="20px 15px 15px" display="flex" flexFlow="column nowrap">
+                          <Heading as="h3" size="sm" color="accent.primary">{goldVids[i].name}</Heading>
+                          <Box fontSize="0.7vw" color="black.300">Curabitur blandit mollis lacus. Curabitur ullamcorper ultricies nisi. Phasellus a est. Aenean commodo ligula eget dolor.</Box>
+                      </Box>
+                </Link>
               ))}
           </>
         )}

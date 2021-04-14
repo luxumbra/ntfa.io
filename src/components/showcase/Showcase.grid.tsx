@@ -86,7 +86,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
       >
         Turbo Gold
       </Button> */}
-      <SimpleGrid columns={3} spacing={3} width="100%">
+      <SimpleGrid columns={[1,3]} spacing={3} width="100%">
         {(loading && <p>Loading...</p>) || (
           <>
             {turbo &&
@@ -232,8 +232,8 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                     </Box>
                   </Box>
                       <Box position="relative" width="100%" p="20px 15px 15px" display="flex" flexFlow="column nowrap">
-                          <Heading as="h3" size="sm" color="accent.primary">{goldVids[i].name}</Heading>
-                          <Box fontSize="0.7vw" color="black.300">Curabitur blandit mollis lacus. Curabitur ullamcorper ultricies nisi. Phasellus a est. Aenean commodo ligula eget dolor.</Box>
+                          <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary">{goldVids[i].name}</Heading>
+                          <Box fontSize={["10px", "0.7vw"]} color="black.300">Curabitur blandit mollis lacus. Curabitur ullamcorper ultricies nisi. Phasellus a est. Aenean commodo ligula eget dolor.</Box>
                       </Box>
                 </Link>
               ))}

@@ -21,11 +21,11 @@ export function IndexComponent() {
                 <StoreSceneLeft className="scene__left" minW="10%"/>
 
                 <Box className="scene__center" as="main" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
-                    <AssetContainer width="100%" height="33%" className="logo">
+                    <AssetContainer width="100%" height={["0%", "33%"]} className="logo">
                         <Box className="spacer" height="80%"/>
                     </AssetContainer>
 
-                    <AssetContainer width="75%" height="33%" d="flex" className="store">
+                    <AssetContainer width="75%" height={["66%", "33%"]} d="flex" className="store">
                         <ShowcaseGridComponent collection="100-bees-hexel-collection" />
                     </AssetContainer>
 
@@ -33,7 +33,7 @@ export function IndexComponent() {
                         <Box className="spacer" height="30.5%"></Box>
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
                             <Link href="#section2" maxW="160px" maxH="160px" sx={{
-                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
+                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: ["-80px", 0], top: `0`, textAlign: `center`,
                                 backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `70%`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }
                             }}><span>Bitcoin & Gold</span></Link>

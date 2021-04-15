@@ -53,15 +53,23 @@ export function SceneCore() {
 
             <Button
                 position="absolute"
-                right={{ base: "calc(50% - 120px)", lg: "45px" }}
-                bottom={{ base: "40%", lg: "45px" }}
+                right={{ base: "calc(50% - 175px)", lg: "45px" }}
+                bottom={{ base: "30%", lg: "25px" }}
                 zIndex="21"
                 size="lg"
                 colorScheme="green"
-                width={{ base: "240px", lg: "420px" }}
-                height={{ base: "40px", lg: "90px" }}
-                fontSize={{ base: "3.4vw", lg: "1vw" }}
+                width={{ base: "120px", lg: "250px" }}
+                height={{ base: "120px", lg: "250px" }}
+                fontSize={{ base: "3.4vw", lg: "1.4vw" }}
+                fontWeight="100"
                 fontFamily="'Federal', serif"
+                whiteSpace="break-spaces"
+                borderRadius="50%"
+                boxShadow="0 0 10px rgba(0,0,0,0.6)"
+                transform="rotate(-20deg)"
+                transition="all 0.2s 0.1s ease-in"
+                opacity={toggle1 ? 0 : 1}
+                sx={{"&:hover": {boxShadow: "0 0 3px rgba(0,0,0,0.6)"}}}
                 onClick={e => {
                     if (canReplay) {
                         clearTimeout(timeoutState);
@@ -97,7 +105,7 @@ export function SceneCore() {
                         "&:hover": { color: `transparent !important`, opacity: 0.3, }
                     }}><span>Bitcoin & Gold</span></Link>
                 </Box>
-                <Box pos="absolute" top="3%" right="10%" width="300px" z={300}>
+                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "100px"]} bottom={["25%","75%"]} left={["65%", "64%"]} img="" imgAlt="" z={100}>
                     <Link
                         href="#section1"
                         display="inline-block"
@@ -146,9 +154,9 @@ export function SceneCore() {
             <Image
                 src="/assets/buildings/building-4.destroyed.png"
                 position="absolute"
-                left={{ base: '160px', lg: '1100px' }}
-                bottom={{ base: '0', lg: '100px' }}
-                width={{ base: '110px', lg: '320px' }}
+                left={{ base: '160px', lg: '1111px' }}
+                bottom={{ base: '0', lg: '86px' }}
+                width={{ base: '110px', lg: '306px' }}
                 opacity={toggle1 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
@@ -186,7 +194,7 @@ export function SceneCore() {
             <SceneBuilding
                 src="/assets/buildings/building-2.png"
                 left={{ base: '100px', lg: '900px' }}
-                bottom={{ base: '-10px', lg: '-20px' }}
+                bottom={{ base: '0', lg: '-20px' }}
                 width={{ base: '200px', lg: '640px' }}
             />
 

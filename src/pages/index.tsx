@@ -17,28 +17,28 @@ export function IndexComponent() {
     return(
         <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
             <MetadataComponent />
-            <Box id="section1" className="industrial" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize="100% 100%">
+            <Box id="section1" className="store" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize={["fill", "100% 100%"]}>
                 <StoreSceneLeft className="scene__left" minW="10%"/>
 
-                <Box className="scene__center" flex="0 0 80%" d="flex" flexFlow="column wrap" alignItems="center">
-                    <AssetContainer width="100%" height={["0%", "33%"]} className="logo">
+                <Box className="scene__center" flex={["0 0 66%"]} d="flex" flexFlow="column wrap" alignItems="center">
+                    <AssetContainer width="100%" height={["10%", "33%"]} className="logo">
                         <Box className="spacer" height="80%"/>
                     </AssetContainer>
 
-                    <AssetContainer width="75%" height={["66%", "33%"]} d="flex" className="store">
+                    <AssetContainer width="100%" height={["80%", "33%"]} d="flex" className="store">
                         <ShowcaseGridComponent collection="100-bees-hexel-collection" />
                     </AssetContainer>
 
-                    <AssetContainer height="33%" width="100%" className="spacer">
+                    <Box position="absolute" bottom={["-50px", "0"]} right={["0", ""]} height="33%" width="100%" className="spacer">
                         <Box className="spacer" height="30.5%"></Box>
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
                             <Link href="#section2" maxW="160px" maxH="160px" sx={{
-                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: ["-80px", 0], top: `0`, textAlign: `center`,
+                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: ["10px", 0], top: `0`, textAlign: `center`,
                                 backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `70%`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
                                 "&:hover": { color: `transparent !important`, opacity: 0.3, }
                             }}><span>Bitcoin & Gold</span></Link>
                         </Building>
-                    </AssetContainer>
+                    </Box>
                 </Box>
                 <StoreSceneRight className="scene__right" minW="10%"/>
             </Box>
@@ -76,7 +76,7 @@ export function IndexComponent() {
                 <Box className="scene__center" flex={["0 0 90%", "0 0 33%"]} ml={["auto", "auto"]} d="flex" flexDirection="column" alignItems="center" pointerEvents="none">
                     <AssetContainer height="83%" width={["100%", "120%"]} className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="70%" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
+                        <Building buildingName="sign1" width="100%" height="auto" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
                             <Box p="2%" sx={{
                                 backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,

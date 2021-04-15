@@ -201,10 +201,11 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                   <Box
                     position="relative"
                     width="100%"
-                    maxHeight={`${(212 / 373) * 100}%`}
+                          maxHeight={`233px`}
+                          height="100%"
                     zIndex={300}
-                          color="white"
-                    flex="1 0 100%"
+                    color="white"
+                    flex="0 1 auto"
                   >
                     <Box
                       className="playerWrapper"
@@ -232,9 +233,9 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       />
                     </Box>
                   </Box>
-                      <Box position="relative" width="100%" p="20px 15px 15px" display="flex" flexFlow="column nowrap">
+                      <Box position="relative" width="100%" p={["1% 2%", "20px 15px 15px"]} display="flex" flexFlow="column nowrap">
                           <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary">{goldVids[i].name}</Heading>
-                          <Box fontSize={["10px", "0.7vw"]} color="black.300">Curabitur blandit mollis lacus. Curabitur ullamcorper ultricies nisi. Phasellus a est. Aenean commodo ligula eget dolor.</Box>
+                          <Box fontSize={["10px", "0.7vw"]} color="black.300" display={["none", "block"]}>Curabitur blandit mollis lacus. Curabitur ullamcorper ultricies nisi. Phasellus a est. Aenean commodo ligula eget dolor.</Box>
                       </Box>
                 </Link>
               ))}

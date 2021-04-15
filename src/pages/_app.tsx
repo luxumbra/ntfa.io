@@ -1,10 +1,10 @@
-import React from 'react';
-import App, { AppContext, AppInitialProps } from 'next/app';
-import { extendTheme, ChakraProvider } from "@chakra-ui/react"
-import { createBreakpoints } from "@chakra-ui/theme-tools"
+import React from "react";
+import App, { AppContext, AppInitialProps } from "next/app";
+import { extendTheme, ChakraProvider } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 
-import '../../public/css/font-face.css';
-import '../../public/css/stylesheet.css';
+import "../../public/css/font-face.css";
+import "../../public/css/stylesheet.css";
 
 const breakpoints = createBreakpoints({
     sm: "320px",
@@ -24,27 +24,24 @@ const theme = extendTheme({
             900: "#1a202c",
         },
         accent: {
-            primary: "#6b7867"
-        }
+            primary: "#6b7867",
+        },
     },
     components: {
         Heading: {
             baseStyle: {
-                fontFamily: `Federal, sans-serif`,
-                fontWeight: `100`,
+                fontFamily: "Federal, sans-serif",
                 fontSize: `1vw`,
-            },
-            fontSizes: {
-                lg: `1vw`,
-                xl: `1vw`
+                marginBottom: `1vw`,
+                fontWeight: `100`,
             }
         }
     },
-    styles: {
+  styles: {
         global: {
             html: {
                 height: `100%`,
-                scrollBehavior: `smooth`
+                scrollBehavior: `smooth`,
             },
             body: {
                 backgroundColor: `black`,
@@ -61,51 +58,53 @@ const theme = extendTheme({
                 "&:hover": {
                     color: `yellow.500`,
                     textDecoration: `none`,
-                }
+                },
             },
             h2: {
+                fontFamily: "'Federal', serif",
                 fontSize: `0.9vw`,
                 marginBottom: `1vw`,
-                fontWeight: `100`
+                fontWeight: `100`,
             },
             h3: {
                 fontFamily: `'Hero', sans-serif`,
                 fontSize: `0.9vw`,
-                marginBottom: {base: `1.5vw`, xl: `0.8vw`},
+                marginBottom: { base: `1.5vw`, xl: `0.8vw` },
                 fontWeight: `100`,
-
             },
             p: {
                 fontSize: { base: `1.8vw`, xl: `1vw` },
-                marginBottom: {base: `1.5vw`, xl: `0.8vw`},
-                lineHeight: {base: `2.4vw`, xl: `1.2vw`},
+                marginBottom: { base: `1.5vw`, xl: `0.8vw` },
+                lineHeight: { base: `2.4vw`, xl: `1.2vw` },
                 fontWeight: `100`,
-                "& + h3": {
-                    mt: {base: `20px`, xl: `50px`},
-                }
-            },
+          },
+            "p+h3": {
+                    mt: { base: `20px`, xl: `50px` },
+                },
             ol: {
                 listStyle: `none`,
                 marginBottom: `0.8vw`,
                 "& + h3": {
-                    mt: {base: `20px`, xl: `50px`},
-                }
+                    mt: { base: `20px`, xl: `50px` },
+                },
             },
             li: {
                 fontSize: { base: `1.8vw`, xl: `1vw` },
-                marginBottom: {base: `1.5vw`, xl: `0.8vw`},
-                lineHeight: {base: `2.4vw`, xl: `1.2vw`},
-                fontWeight: `100`
-            }
-        }
-    }
-})
+                marginBottom: { base: `1.5vw`, xl: `0.8vw` },
+                lineHeight: { base: `2.4vw`, xl: `1.2vw` },
+                fontWeight: `100`,
+            },
+        },
+    },
+});
 
 export class NTFApp extends App<AppInitialProps> {
     public static async getInitialProps({ Component, ctx }: AppContext) {
         return {
             pageProps: {
-                ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+                ...(Component.getInitialProps
+                    ? await Component.getInitialProps(ctx)
+                    : {}),
                 appProp: ctx.pathname,
             },
         };
@@ -114,11 +113,11 @@ export class NTFApp extends App<AppInitialProps> {
     public render() {
         const { Component, pageProps } = this.props;
 
-        return(
+        return (
             <ChakraProvider theme={theme} resetCSS={true}>
-                <Component {...pageProps}/>
+                <Component {...pageProps} />
             </ChakraProvider>
-        )
+        );
     }
 }
 

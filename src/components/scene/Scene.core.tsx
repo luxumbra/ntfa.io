@@ -98,14 +98,14 @@ export function SceneCore() {
             >
                 Click To Win
             </Button>
-            <Box pos="absolute" bottom="1%" right="25%" height="300px" width="300px" z={1000}>
+            <Box pos="absolute" bottom={["44%", "70%"]} right={["0", "45%"]} height={["200px", "300px"]} width={["200px", "300px"]} zIndex={1000}>
                     <Link href="#section3" maxW="200px" maxH="200px" sx={{
                         color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
-                        backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `6.5vw`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
+                        backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: [`50px`,`6.5vw`], backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
                         "&:hover": { color: `transparent !important`, opacity: 0.3, }
                     }}><span>Bitcoin & Gold</span></Link>
                 </Box>
-                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "100px"]} bottom={["25%","75%"]} left={["65%", "64%"]} img="" imgAlt="" z={100}>
+                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "60px"]} bottom={["25%","67%"]} left={["65%", "64%"]} img="" imgAlt="" z={100}>
                     <Link
                         href="#section1"
                         display="inline-block"
@@ -194,7 +194,7 @@ export function SceneCore() {
             <SceneBuilding
                 src="/assets/buildings/building-2.png"
                 left={{ base: '100px', lg: '900px' }}
-                bottom={{ base: '0', lg: '-20px' }}
+                bottom={{ base: '-2px', lg: '-20px' }}
                 width={{ base: '200px', lg: '640px' }}
             />
 

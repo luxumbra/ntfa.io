@@ -61,6 +61,7 @@ export function AssetDetails() {
             alignContent="stretch"
             backgroundImage="url(/assets/scenes/bg-scene.png)"
             backgroundSize="cover"
+            overflow="hidden"
         >
             <MetadataComponent />
             <AboutSceneLeft className="scene__left" minW="33%" />
@@ -114,7 +115,7 @@ export function AssetDetails() {
                         />
                     </Box>
                 </Box>
-                <AssetContainer height="60%" width="100%" className="spacer">
+                <AssetContainer height="auto" width="100%" className="spacer">
                     <Box
                         width="100%"
                         margin="0"
@@ -144,15 +145,16 @@ export function AssetDetails() {
             <Box
                 pos="absolute"
                 width="100vw"
-                height="20vh"
+                maxW="100%"
+                height={["20%", "180px"]}
                 backgroundImage="url(/assets/buildings/bridge.png)"
                 backgroundRepeat="repeat-x"
-                backgroundSize="cover"
-                maxH="8vh"
+                backgroundPosition="bottom"
+                backgroundSize="contain"
                 bottom="0"
                 left="0"
                 zIndex="1000"
-            ></Box>
+             />
         </Box>
     );
 }

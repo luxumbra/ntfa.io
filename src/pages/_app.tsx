@@ -51,6 +51,10 @@ const theme = extendTheme({
                 fontFamily: `'Hero', sans-serif`,
                 height: `100%`,
                 fontSize: `16px`,
+                overflowX: `hidden`,
+                // "div": {
+                //     outline: "1px solid red"
+                // }
             },
             "a.chakra-link": {
                 transition: `all 0.3s ease`,
@@ -71,20 +75,20 @@ const theme = extendTheme({
                 fontWeight: `100`,
 
             },
-            "p": {
+            p: {
                 fontSize: { base: `1.8vw`, xl: `1vw` },
                 marginBottom: {base: `1.5vw`, xl: `0.8vw`},
                 lineHeight: {base: `2.4vw`, xl: `1.2vw`},
                 fontWeight: `100`,
                 "& + h3": {
-                    mt: `50px`
+                    mt: {base: `20px`, xl: `50px`},
                 }
             },
             ol: {
                 listStyle: `none`,
                 marginBottom: `0.8vw`,
                 "& + h3": {
-                    mt: `50px`
+                    mt: {base: `20px`, xl: `50px`},
                 }
             },
             li: {

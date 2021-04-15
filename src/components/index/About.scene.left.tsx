@@ -19,11 +19,9 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
     const [toggle3, setToggle3] = useState(false);
 
     return(
-        <Box className={className} as="div" d="flex" flexDirection="column" flexGrow={1} minW={minW}>
-            <AssetContainer width={["20%","10%"]} height={["10%", "20%"]} className="logo">
-                <Box className="spacer" height="70%">
-                </Box>
-                <Building buildingName="sign1" width="100%" height={["30%", "20%"]} maxW="100px" margin={["30% 0 0 100%","30% 0 0 500%"]} img="" imgAlt="" z={300}>
+        <Box position="relative" className={className} as="div" d="flex" flexDirection="column" flexGrow={1} minW={minW}>
+            <Box width={["50%","10%"]} height={["10%", "20%"]} className="logo">
+                <Box position="absolute" width="100%" height={["25%", "10%"]} maxW={["25px", "70px"]} bottom={["19%","69%"]} left={["148%", "45%"]} img="" imgAlt="" z={500}>
                     <Link
                         href="/#section1"
                         display="inline-block"
@@ -44,10 +42,10 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
                     >
                         <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                     </Link>
-                </Building>
-            </AssetContainer>
+                </Box>
+            </Box>
 
-                        <Box onClick={e => setToggle1(!toggle1)}>
+            <Box onClick={e => setToggle1(!toggle1)}>
                 <SceneBuilding
                     src="/assets/buildings/building-4.png"
                     left={{ base: '180px', lg: '259px' }}

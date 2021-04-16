@@ -53,7 +53,7 @@ export const AssetContainer: FC<AssetContainerInterface> = ({ height, width, mar
     }
     console.log('movement', movement);
     return(
-        <MotionBox className={className} height={height} width={width} margin={margin} backgroundImage={bg} position="relative" d={d} style={{x: 0, y: movement}}>
+        <MotionBox className={className} height={height} width={width} margin={margin} backgroundImage={bg} position="relative" d={d} pointerEvents="none" style={{x: 0, y: movement}}>
             {children}
         </MotionBox>
     )

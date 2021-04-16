@@ -192,22 +192,6 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                               opacity: 0,
                               transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease"
                           },
-                        //   "&::before": {
-                        //       content: "'Get the low down'",
-                        //       display: "inline-flex",
-                        //       alignItems: "center",
-                        //       justifyContent: "center",
-                        //       position: "absolute",
-                        //       color: "white",
-                        //       backgroundColor: "accent.primary",
-                        //       width: "100%",
-                        //       height: "50px",
-                        //     bottom: 0,
-                        //       right: 0,
-                        //       opacity: 0,
-                        //       transform: "translate3d(0, 40px, 0)",
-                        //       transition: "transform 0.5s ease-in, opacity 0.2s ease-in"
-                        //   },
                           "&:hover": {
                               boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
                             "&::after": {
@@ -259,7 +243,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       <Box position="relative" width="100%" p={["1% 2%", "20px 15px 15px"]} flex="1 0 auto">
                           <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary" mb="5px">{goldVids[i].title}</Heading>
                           {/* <Box fontSize={["10px", "0.7vw"]} color="black.300" display={["none", "block"]}> */}
-                              <Text fontSize="sm" lineHeight="1.2" noOfLines={[2, 4]}>
+                              <Text fontSize="sm" lineHeight="1.2" noOfLines={[2, 4]} d={["none", "initial"]}>
                                   {goldVids[i].summary}
                               </Text>
                           {/* </Box> */}

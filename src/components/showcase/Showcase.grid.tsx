@@ -9,7 +9,8 @@ import {
   SimpleGrid,
     IconButton,
   Link,
-  transition
+    transition,
+  Text
 } from "@chakra-ui/react";
 // import Link from 'next/link';
 import Web3 from "web3";
@@ -43,20 +44,41 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
     setLoading(false);
   };
 
-  const goldVids = [
-    {
-      name: "Piggy Banksy 1oz",
-      path: `/assets/nfts/PiggyBanksy619263_smallcloud.mp4`,
-    },
-    {
-      name: "Space Cowboy 50g",
-      path: `/assets/nfts/Space_Cowboy_8642.mp4`,
-    },
-    {
-      name: "Vector 777 100g",
-      path: `/assets/nfts/Vector150768.mp4`,
-    },
-  ];
+    const goldVids = [
+        {
+            creator: "Never Touch Fiat Again",
+            title: "Piggy Banksy",
+            path: `/assets/nfts/PiggyBanksy619263_smallcloud.mp4`,
+            summary:
+                "The Piggy Banksy is the perfect thing to smash on the way out of the country to buy your next drop. Piggy Banksy comes with a matching gold certificate for 1 oz of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 1 oz of gold Stored in a Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
+        },
+        {
+            creator: "Never Touch Fiat Again",
+            title: "Space Cowboy",
+            path: `/assets/nfts/Space_Cowboy_8642.mp4`,
+            summary:
+                "The Space Cowboy blasted off many moons ago and now lives in his street style space suit ready for the next launch. Space Cowboy comes with a matching gold certificate for 50 Grams of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 50Grams of gold Stored in a  Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
+        },
+        {
+            creator: "Never Touch Fiat Again",
+            title: "Vector V777",
+            path: `/assets/nfts/Vector150768.mp4`,
+            summary:
+                "The Vector V777 comes equipped with 100 Grams of pure golden firepower. Make a splash as you enter the party with dual stage rocket launchers and Racer X upgrades. Handmade by time travelers from the year 1955 this car is as much a relic as it is a work of art. The Golden Vector comes with a matching gold certificate for 100 Grams of gold!",
+            description:
+                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 100Grams of gold Stored in a Singaporean Vault. X.",
+            NFT: "FILLIN",
+            vault: "This asset is securely stored in the following facility: FILLIN",
+        },
+    ];
 
   useEffect(() => {
     getCollection = axios
@@ -160,6 +182,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                               backgroundImage: "url(/assets/ntfa-logo.png)",
                               backgroundSize: "100%",
                               backgroundRepeat: "no-repeat",
+                              filter: "drop-shadow(0 0 5px rgba(0,0,0,.4))",
                               position: "absolute",
                               bottom: 0,
                               right: 0,
@@ -233,9 +256,13 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       />
                     </Box>
                   </Box>
-                      <Box position="relative" width="100%" p={["1% 2%", "20px 15px 15px"]} display="flex" flexFlow="column nowrap">
-                          <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary">{goldVids[i].name}</Heading>
-                          <Box fontSize={["10px", "0.7vw"]} color="black.300" display={["none", "block"]}>Curabitur blandit mollis lacus. Curabitur ullamcorper ultricies nisi. Phasellus a est. Aenean commodo ligula eget dolor.</Box>
+                      <Box position="relative" width="100%" p={["1% 2%", "20px 15px 15px"]} flex="1 0 auto">
+                          <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary" mb="5px">{goldVids[i].title}</Heading>
+                          {/* <Box fontSize={["10px", "0.7vw"]} color="black.300" display={["none", "block"]}> */}
+                              <Text fontSize="sm" lineHeight="1.2" noOfLines={[2, 4]}>
+                                  {goldVids[i].summary}
+                              </Text>
+                          {/* </Box> */}
                       </Box>
                 </Link>
               ))}

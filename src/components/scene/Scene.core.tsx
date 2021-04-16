@@ -154,9 +154,9 @@ export function SceneCore() {
             <Image
                 src="/assets/buildings/building-4.destroyed.png"
                 position="absolute"
-                left={{ base: '160px', lg: '1111px' }}
-                bottom={{ base: '0', lg: '86px' }}
-                width={{ base: '110px', lg: '306px' }}
+                left={{ base: '166px', lg: '1111px' }}
+                bottom={{ base: '14px', lg: '86px' }}
+                width={{ base: '95px', lg: '306px' }}
                 opacity={toggle1 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"

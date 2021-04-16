@@ -19,9 +19,10 @@ export interface AssetContainerInterface {
     children?: React.ReactNode
     className?: string
     parallax?: string
+    pointerEvents?: string|any
 }
 
-export const AssetContainer: FC<AssetContainerInterface> = ({ height, width, margin, d, bg, children, className, parallax }) => {
+export const AssetContainer: FC<AssetContainerInterface> = ({ height, width, margin, d, bg, children, className, parallax, pointerEvents }) => {
     const { scrollY } = useViewportScroll();
     const y1 = useTransform(scrollY, [0, 300], [600, 100]);
     const y2 = useTransform(scrollY, [0, 300], [0, -100]);
@@ -53,7 +54,7 @@ export const AssetContainer: FC<AssetContainerInterface> = ({ height, width, mar
     }
     console.log('movement', movement);
     return(
-        <MotionBox className={className} height={height} width={width} margin={margin} backgroundImage={bg} position="relative" d={d} pointerEvents="none" style={{x: 0, y: movement}}>
+        <MotionBox className={className} height={height} width={width} margin={margin} backgroundImage={bg} position="relative" d={d} pointerEvents={pointerEvents} style={{x: 0, y: movement}}>
             {children}
         </MotionBox>
     )

@@ -17,10 +17,10 @@ export function IndexComponent() {
     return(
         <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
             <MetadataComponent />
-            <Box id="section1" className="store" as="section" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize={["fill", "100% 100%"]}>
+            <Box id="section1" className="store" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize={["fill", "100% 100%"]} zIndex="1000">
                 <StoreSceneLeft className="scene__left" minW="10%"/>
 
-                <Box className="scene__center" flex={["0 0 66%"]} d="flex" flexFlow="column wrap" alignItems="center">
+                <Box className="scene__center" flex={["0 0 66%"]} d="flex" flexFlow="column wrap" alignItems="center" zIndex="0">
                     <AssetContainer width="100%" height={["10%", "33%"]} className="logo">
                         <Box className="spacer" height="80%"/>
                     </AssetContainer>
@@ -45,10 +45,10 @@ export function IndexComponent() {
 
             <SceneCore/>
 
-            <Box id="section3" className="ntfa" as="section" d="flex" flexDir="row" alignContent="stretch"
+            <Box id="section3" className="ntfa" d="flex" flexDir="row" alignContent="stretch"
                 justifyContent={["center", "unset"]} minH="100vh" pos="relative" background="url(/assets/scenes/bg-industrial.png) 50% no-repeat" backgroundSize={["cover", "cover"]} overflow="hidden">
                 <Box className="scene__left" minW={["0", "25%"]} w={["5%", "auto"]} overflowY="hidden">
-                    <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "100px"]} bottom={["21%","45%"]} left={["62%", "45%"]} img="" imgAlt="" z={100}>
+                    <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "75px"]} bottom={["21%","43%"]} left={["62%", "23%"]} img="" imgAlt="" z={100}>
                     <Link
                         href="/#section1"
                         display="inline-block"
@@ -73,7 +73,7 @@ export function IndexComponent() {
                     </Link>
                 </Box>
                 </Box>
-                <Box className="scene__center" flex={["0 0 90%", "0 0 33%"]} ml={["auto", "auto"]} d="flex" flexDirection="column" alignItems="center" pointerEvents="none">
+                <Box className="scene__center" flex={["0 0 90%", "0 0 33%"]} ml={["auto", "auto"]} d="flex" flexDirection="column" alignItems="center">
                     <AssetContainer height="83%" width={["100%", "120%"]} className="spacer">
                         <Box className="spacer" height="10%"></Box>
                         <Building buildingName="sign1" width="100%" height="auto" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
@@ -109,10 +109,18 @@ export function IndexComponent() {
                             </Box>
                         </Building>
                     </AssetContainer>
-                    <Box position="absolute" bottom="0" left="0" background={["url(/assets/buildings/building-industrial.png) 0 100% no-repeat", "url(/assets/buildings/building-industrial.png) 0 110px no-repeat"]} backgroundSize={["contain", "contain"]} width="100%" minW="100vw" minH="100vh" zIndex="200"></Box>
                 </Box>
+                    <Box position="absolute" bottom="0" left="0" background={["url(/assets/buildings/building-industrial.png) 0 100% no-repeat", "url(/assets/buildings/building-industrial.png) 0 110px no-repeat"]} backgroundSize={["contain", "contain"]} width="100%" minW="100vw" minH="100vh" zIndex="200" pointerEvents="none"></Box>
 
-                <Box className="scene__right" minW={["5%", "33%"]}/>
+                <Box position="relative" className="scene__right" minW={["5%", "33%"]} zIndex="1000">
+                    <Box pos="absolute" bottom={["44%", "70%"]} right={["0", "77%"]} height={["200px", "200px"]} width={["200px", "150px"]} zIndex={2000}>
+                        <Link href="#section2" maxW="200px" maxH="200px" sx={{
+                            color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
+                            backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: [`50px`,`6.5vw`], backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
+                            "&:hover": { color: `transparent !important`, opacity: 0.3, }
+                        }}><span>Bitcoin & Gold</span></Link>
+                    </Box>
+                </Box>
             </Box>
         </Box>
     )

@@ -98,7 +98,7 @@ export function SceneCore() {
             >
                 Click To Win
             </Button>
-            <Box pos="absolute" bottom={["44%", "70%"]} right={["0", "45%"]} height={["200px", "300px"]} width={["200px", "300px"]} zIndex={1000}>
+            <Box pos="absolute" bottom={["44%", "20%"]} right={["0", "45%"]} height={["200px", "300px"]} width={["200px", "300px"]} zIndex={1000}>
                     <Link href="#section3" maxW="200px" maxH="200px" sx={{
                         color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
                         backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: [`50px`,`6.5vw`], backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},

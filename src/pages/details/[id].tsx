@@ -128,16 +128,20 @@ export function AssetDetails() {
                         z={0}
                     >
                         <Box p={["15px", "25px"]}>
-                            <Heading as="h3" size="sm" color="accent.primary">
+                            <Heading as="h3" size={"sm"} color="accent.primary">
                                 {id && goldVids[+id].title}
                             </Heading>
-                            <Text>
-                                {id && goldVids[+id].summary}
-                            </Text>
-                            <Text>
-                                {id && goldVids[+id].description}
-                            </Text>
-                        </Box>
+                            <Box d="flex" flexFlow="row wrap" fontSize={["12px", "14px"]}>
+                                <p>{id && goldVids[+id].NFT}</p>
+                                <p>{id && goldVids[+id].vault}</p>
+                            </Box>
+                            <Box fontsize={["15px", "17px"]}>
+                                <p>{id && goldVids[+id].summary.replace('<br />', '\n')}</p>
+                            </Box>
+                            <Box fontSize={["12px", "14px"]}>
+                                <p>{id && goldVids[+id].description.replace('<br />', '\n')}</p>
+                            </Box>
+                           </Box>
                     </Box>
                 </AssetContainer>
             </Box>

@@ -13,10 +13,9 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
 
     return(
         <Box position="relative" className={className} as="footer" d="flex" flexDirection="column" flexGrow={1} minW={minW}>
-            <Box position="absolute" bottom={["40%", "0"]} right={["15px", "20px"]} width="100%" height="98%" className="logo">
-                <Box className="spacer" height="60%">
-                </Box>
-                <Box top={["0", "165%"]} left="15%" img="" imgAlt="" height="20%" width="99%" z={0}>
+            <Box position="absolute" bottom={["8%", "0"]} right={["15px", "20px"]} width="100%" height={["auto", "98%"]} className="logo">
+                <Box className="spacer" height="60%" />
+                <Box top={["60%", "165%"]} left="10%" height="auto" width="100%" z={0}>
                     <Box position="relative" pt="100%" h="0">
                         <Link href="#section3" maxW="200px" maxH="200px" sx={{
                             color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: `0`, top: `0`, textAlign: `center`,

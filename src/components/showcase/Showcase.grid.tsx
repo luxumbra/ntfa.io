@@ -208,7 +208,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                   <Box
                     position="relative"
                     width="100%"
-                          maxHeight={`233px`}
+                          maxHeight={[`154px`, `233px`]}
                           height="100%"
                     zIndex={300}
                     color="white"
@@ -240,10 +240,10 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       />
                     </Box>
                   </Box>
-                      <Box position="relative" width="100%" p={["1% 2%", "20px 15px 15px"]} flex="1 0 auto">
+                      <Box position="relative" width="100%" p={["4%", "20px 15px 15px"]} d={["flex", "unset"]} flex="1 0 auto">
                           <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary" mb="5px">{goldVids[i].title}</Heading>
                           {/* <Box fontSize={["10px", "0.7vw"]} color="black.300" display={["none", "block"]}> */}
-                              <Text fontSize="sm" lineHeight="1.2" noOfLines={[2, 4]} d={["none", "initial"]}>
+                              <Text fontSize="sm" variant="summary" noOfLines={[2, 2]} d={["none", "unset"]}>
                                   {goldVids[i].summary}
                               </Text>
                           {/* </Box> */}

@@ -53,19 +53,19 @@ export function SceneCore() {
 
             <Button
                 position="absolute"
-                right={{ base: "calc(50% - 175px)", lg: "45px" }}
-                bottom={{ base: "30%", lg: "25px" }}
-                zIndex="21"
+                right={{ base: "67%", lg: "45px" }}
+                bottom={{ base: "23%", lg: "calc(100% - 275px)" }}
+                zIndex="2000"
                 size="lg"
                 colorScheme="green"
-                width={{ base: "120px", lg: "250px" }}
-                height={{ base: "120px", lg: "250px" }}
-                fontSize={{ base: "3.4vw", lg: "1.4vw" }}
+                width={{ base: "120px", lg: "225px" }}
+                height={{ base: "120px", lg: "225px" }}
+                fontSize={{ base: "3.4vw", lg: "1.2vw" }}
                 fontWeight="100"
                 fontFamily="'Federal', serif"
                 whiteSpace="break-spaces"
                 borderRadius="50%"
-                boxShadow="0 0 10px rgba(0,0,0,0.6)"
+                boxShadow="0 0 5px rgba(0,0,0,0.6)"
                 transform="rotate(-20deg)"
                 transition="all 0.2s 0.1s ease-in"
                 opacity={toggle1 ? 0 : 1}
@@ -105,7 +105,7 @@ export function SceneCore() {
                         "&:hover": { color: `transparent !important`, opacity: 0.3, }
                     }}><span>Bitcoin & Gold</span></Link>
                 </Box>
-                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "60px"]} bottom={["25%","67%"]} left={["65%", "64%"]} img="" imgAlt="" z={100}>
+                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "60px"]} bottom={["170px","70%"]} left={["calc(50% + 50px)", "64%"]} img="" imgAlt="" z={100}>
                     <Link
                         href="#section1"
                         display="inline-block"

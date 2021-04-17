@@ -21,7 +21,7 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = ({ className, minW, a
     return(
         <Box position="relative" className={className} as="div" d="flex" flexDirection="column" flexGrow={1} minW={minW}>
             <Box width={["50%","10%"]} height={["10%", "20%"]} className="logo">
-                <Box position="absolute" width="100%" height={["25%", "10%"]} maxW={["25px", "70px"]} bottom={["19%","69%"]} left={["148%", "45%"]} img="" imgAlt="" z={500}>
+                <Box position="absolute" width="100%" height={["25%", "10%"]} maxW={["25px", "70px"]} bottom={["90px","69%"]} left={["195px", "45%"]} img="" imgAlt="" z={500}>
                     <Link
                         href="/#section1"
                         display="inline-block"

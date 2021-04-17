@@ -16,7 +16,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
     return(
         <Box className={className} as="div" flexGrow={1} d="flex" flexFlow="column wrap" minW={minW}>
             <AssetContainer width="100%" height="20%" className="logo">
-                <Box position="absolute" width="100%" height={["25%", "10%"]} maxW={["65px", "130px"]} bottom={["80%","69%"]} left={["5%", "45%"]} img="" imgAlt="" z={500}>
+                <Box position="absolute" width="100%" height={["25%", "10%"]} maxW={["65px", "130px"]} bottom={["80%","73%"]} left={["2%", "45%"]} img="" imgAlt="" z={500}>
                     <Link
                         href="#section1"
                         display="inline-block"

@@ -35,6 +35,17 @@ const theme = extendTheme({
                 marginBottom: `1vw`,
                 fontWeight: `100`,
             }
+        },
+        Text: {
+            variants: {
+                summary: {
+                    fontSize: { base: "10px", xl: "8px"},
+                    lineHeight: 0.5,
+                },
+                meta: {
+                    color: "green"
+                }
+            }
         }
     },
   styles: {
@@ -73,9 +84,9 @@ const theme = extendTheme({
                 fontWeight: `100`,
             },
             p: {
-                fontSize: { base: `1.8vw`, xl: `1vw` },
-                marginBottom: { base: `1.5vw`, xl: `0.8vw` },
-                lineHeight: { base: `2.4vw`, xl: `1.2vw` },
+                fontSize: { base: `11px`, xl: `16px` },
+                marginBottom: { base: `10px`, xl: `0.8vw` },
+                lineHeight: { base: `1.2` },
                 fontWeight: `100`,
           },
             "p+h3": {
@@ -89,9 +100,9 @@ const theme = extendTheme({
                 },
             },
             li: {
-                fontSize: { base: `1.8vw`, xl: `1vw` },
-                marginBottom: { base: `1.5vw`, xl: `0.8vw` },
-                lineHeight: { base: `2.4vw`, xl: `1.2vw` },
+                fontSize: { base: `11px`, xl: `16px` },
+                marginBottom: { base: `10px`, xl: `0.8vw` },
+                lineHeight: { base: `1.2` },
                 fontWeight: `100`,
             },
         },

@@ -29,7 +29,7 @@ export function IndexComponent() {
                         <ShowcaseGridComponent collection="100-bees-hexel-collection" />
                     </AssetContainer>
 
-                    <Box position="absolute" bottom={["-50px", "0"]} right={["0", ""]} height="33%" width="100%" className="spacer">
+                    <Box position="absolute" bottom={["20%", "30%"]} right={["62%", "72%"]} height="33%" width="100%" className="spacer" transform={["scaleX(-1)", "scaleX(-1)"]}>
                         <Box className="spacer" height="30.5%"></Box>
                         <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
                             <Link href="#section2" maxW="160px" maxH="160px" sx={{
@@ -74,9 +74,9 @@ export function IndexComponent() {
                 </Box>
                 </Box>
                 <Box className="scene__center" flex={["0 0 90%", "0 0 33%"]} ml={["auto", "auto"]} d="flex" flexDirection="column" alignItems="center">
-                    <AssetContainer height="83%" width={["100%", "120%"]} className="spacer">
+                    <AssetContainer height="auto" width={["100%", "120%"]} className="spacer">
                         <Box className="spacer" height="10%"></Box>
-                        <Building buildingName="sign1" width="100%" height="auto" margin="0" img="" imgAlt="" z={700} maxH="90%" overflowY="auto">
+                        <Building buildingName="sign1" width="100%" height="auto" margin="0" img="" imgAlt="" z={700} maxH="90%">
                             <Box p="2%" sx={{
                                 backgroundColor: `rgba(0,0,0,0.6)`,
                                 backdropFilter: `blur(3px)`,
@@ -86,7 +86,7 @@ export function IndexComponent() {
                                 overflow: `hidden`,
                                 height: `100%`
                             }}>
-                                <Box p="5%" sx={{ "p:nth-of-type(even)": {fontSize: { base: `1.6vw`, xl: `0.7vw` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
+                                <Box p="5%" sx={{ "p:nth-of-type(even)": {fontSize: { base: `1.6vw`, xl: `1vw` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
                                     <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw` }}>Never Touch FIAT Again</Heading>
                                     <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>
                                     <p style={{ fontWeight: 'bold' }}>- Ralph Waldo Emerson</p>

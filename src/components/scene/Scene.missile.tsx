@@ -15,9 +15,9 @@ export const SceneMissile: FC<SceneMissileInterface> = ({ left, translation, del
             src="/assets/missile.png"
             position="absolute"
             left={left}
-            bottom={{ base: '60px', lg: '250px' }}
-            width={{ base: '20px', lg: '40px' }}
-            height={{ base: '5px', lg: '12.5px'}}
+            bottom={{ base: '60px', lg: '160px', xxxl: '250px' }}
+            width={{ base: '15px', lg: '30px', xxxl: '40px' }}
+            height={{ base: '5px', lg: '9px', xxxl: '12.5px'}}
             opacity="0"
             zIndex="20"
             css={css`
@@ -29,7 +29,7 @@ export const SceneMissile: FC<SceneMissileInterface> = ({ left, translation, del
                     51% { opacity: 0; }
                     100% { opacity: 0; }
                 }
-                
+
                 animation: missileanim 10s infinite;
                 animation-easing: linear;
                 animation-delay: ${delay};

@@ -11,9 +11,9 @@ export const SceneLambo: FC<SceneLamboInterface> = ({ playState }) => {
         <Image
             src="/assets/lambo.png"
             position="absolute"
-            left="-240px"
-            bottom={{ base: '30px', lg: '155px' }}
-            width={{ base: '90px', lg: '240px' }}
+            left={{base: "-180px", lg: "-240px", xxxl: "-240px"}}
+            bottom={{ base: '30px', lg: '77px', xxxl: '155px' }}
+            width={{ base: '90px', lg: '200px', xxxl: '240px' }}
             zIndex="14"
             css={css`
                 @keyframes lamboanim {

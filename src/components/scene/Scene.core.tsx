@@ -9,22 +9,22 @@ import { SceneCopy } from './Scene.copy';
 
 export const missiles = [
     {
-        left: { base: '-60px', lg: '80px' },
+        left: { base: '-25px', lg: '-20px', xxxl: '80px' },
         translation: `translate(150vw, -50vh)`,
         delay: '0s',
     },
     {
-        left: { base: '-50px', lg: '180px' },
+        left: { base: '-15px', lg: '80px', xxl: '180px' },
         translation: `translate(150vw, -30vh)`,
         delay: '0.15s',
     },
     {
-        left: { base: '-40px', lg: '280px' },
+        left: { base: '-5px', lg: '180px', xxxl: '280px' },
         translation: `translate(150vw, -40vh)`,
         delay: '0.3s',
     },
     {
-        left: { base: '-30px', lg: '380px' },
+        left: { base: '5px', lg: '280px', xxxl: '380px' },
         translation: `translate(150vw, -40vh)`,
         delay: '0.45s',
     },
@@ -58,9 +58,9 @@ export function SceneCore() {
                 zIndex="2000"
                 size="lg"
                 colorScheme="green"
-                width={{ base: "120px", lg: "225px" }}
-                height={{ base: "120px", lg: "225px" }}
-                fontSize={{ base: "3.4vw", lg: "1.2vw" }}
+                width={{ base: "120px", lg: "170px", xxxl: "225px" }}
+                height={{ base: "120px", lg: "170px", xxxl: "225px" }}
+                fontSize={{ base: "3.4vw", lg: "16px", xxxl: "1.2vw" }}
                 fontWeight="100"
                 fontFamily="'Federal', serif"
                 whiteSpace="break-spaces"
@@ -98,37 +98,41 @@ export function SceneCore() {
             >
                 Click To Win
             </Button>
-            <Box pos="absolute" bottom={["44%", "20%"]} right={["0", "45%"]} height={["200px", "300px"]} width={["200px", "300px"]} zIndex={1000}>
-                    <Link href="#section3" maxW="200px" maxH="200px" sx={{
-                        color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
-                        backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: [`50px`,`6.5vw`], backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
-                        "&:hover": { color: `transparent !important`, opacity: 0.3, }
-                    }}><span>Bitcoin & Gold</span></Link>
-                </Box>
-                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "60px"]} bottom={["170px","70%"]} left={["calc(50% + 50px)", "64%"]} img="" imgAlt="" z={100}>
-                    <Link
-                        href="#section1"
-                        display="inline-block"
-                        position="relative"
-                        // pt="26.25%"
-                        height="0"
-                        width="100%"
-                        maxW="100px"
-                        css={css`
-                            @keyframes logo-anim {
-                                0% { transform: translateY(25px); }
-                                50% { transform: translateY(35px); }
-                                100% { transform: translateY(25px); }
-                            }
 
-                            animation: logo-anim 5s infinite;
-                            /* animation-play-state: paused; */
-                        `}
-                    >
-                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
-                    </Link>
-                </Box>
-            <SceneBridge/>
+            <Box pos="absolute" bottom={{base: "44%", lg: "280px", xxxl: "280px"}} right={{base: "0", lg: "50%", xxxl: "50%"}} height={{base: "200px", lg: "300px", xxxl: "300px"}} width={{base: "200px", lg: "100px", xxxl: "300px"}} zIndex={1000}>
+                <Link href="#section3" w="100%" h="100%" sx={{
+                    color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
+                    backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: {base: `50px`, lg: `100%`, xxxl: `6.5vw`}, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
+                    "&:hover": { color: `transparent !important`, opacity: 0.3, }
+                }}><span>Bitcoin & Gold</span></Link>
+            </Box>
+
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "60px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "61%", xxxl: "70%"}} left={{base: "50%", lg: "67%", xxl: "59%", xxxl: "64%"}} z={1000}>
+                <Link
+                    href="#section1"
+                    display="inline-block"
+                    position="relative"
+                    // pt="26.25%"
+                    height="0"
+                    width="100%"
+                    maxW="100px"
+                    css={css`
+                        @keyframes logo-anim {
+                            0% { transform: translateY(25px); }
+                            50% { transform: translateY(35px); }
+                            100% { transform: translateY(25px); }
+                        }
+
+                        animation: logo-anim 5s infinite;
+                        /* animation-play-state: paused; */
+                    `}
+                >
+                    <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                </Link>
+            </Box>
+
+            <SceneBridge />
+
             <SceneLambo playState={playState}/>
 
             {missiles.map(missile => {
@@ -145,18 +149,18 @@ export function SceneCore() {
             <Box onClick={e => setToggle1(!toggle1)}>
                 <SceneBuilding
                     src="/assets/buildings/building-4.png"
-                    left={{ base: '180px', lg: '1150px' }}
+                    left={{ base: '180px', lg: '800px', xxxl: '1150px' }}
                     bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '170px' }}
+                    width={{ base: '50px', lg: '110px', xxxl: '170px' }}
                 />
             </Box>
 
             <Image
                 src="/assets/buildings/building-4.destroyed.png"
                 position="absolute"
-                left={{ base: '166px', lg: '1111px' }}
-                bottom={{ base: '14px', lg: '86px' }}
-                width={{ base: '95px', lg: '306px' }}
+                left={{ base: '166px', lg: '775px', xxxl: '1111px' }}
+                bottom={{ base: '14px', lg: '58px', xxxl: '86px' }}
+                width={{ base: '95px', lg: '196px', xxxl: '306px' }}
                 opacity={toggle1 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
@@ -165,27 +169,27 @@ export function SceneCore() {
             <Box onClick={e => setToggle3(!toggle3)}>
                 <SceneBuilding
                     src="/assets/buildings/building-1.png"
-                    left={{ base: '130px', lg: '1000px' }}
-                    bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '180px' }}
+                    left={{ base: '130px', lg: '710px', xxxl: '1000px' }}
+                    bottom={{ base: '0', lg: '-25px', xxxl: '0' }}
+                    width={{ base: '50px', lg: '120px', xxxl: '180px' }}
                 />
             </Box>
 
             <Box onClick={e => setToggle2(!toggle2)}>
                 <SceneBuilding
                     src="/assets/buildings/building-3.png"
-                    left={{ base: '230px', lg: '1300px' }}
+                    left={{ base: '230px', lg: '900px', xxxl: '1300px' }}
                     bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '180px' }}
+                    width={{ base: '50px', lg: '120px', xxxl: '180px' }}
                 />
             </Box>
 
             <Image
                 src="/assets/effects/b3.png"
                 position="absolute"
-                left={{ base: '230px', lg: '1300px' }}
-                bottom={{ base: '110px', lg: '370px' }}
-                width={{ base: '58px', lg: '210px' }}
+                left={{ base: '230px', lg: '903px', xxxl: '1300px' }}
+                bottom={{ base: '110px', lg: '252px', xxxl: '370px' }}
+                width={{ base: '58px', lg: '138px', xxxl: '210px' }}
                 opacity={toggle2 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
@@ -193,17 +197,17 @@ export function SceneCore() {
 
             <SceneBuilding
                 src="/assets/buildings/building-2.png"
-                left={{ base: '100px', lg: '900px' }}
-                bottom={{ base: '-2px', lg: '-20px' }}
-                width={{ base: '200px', lg: '640px' }}
+                left={{ base: '100px', lg: '750px', xxxl: '900px' }}
+                bottom={{ base: '-2px', lg: '-20px', xxxl: '-20px' }}
+                width={{ base: '200px', lg: '640px', xxxl: '640px' }}
             />
 
             <Image
                 src="/assets/effects/fog.png"
                 position="absolute"
-                left={{ base: '150px', lg: '1050px' }}
-                bottom={{ base: '100px', lg: '380px' }}
-                width={{ base: '140px', lg: '640px' }}
+                left={{ base: '150px', lg: '770px', xxxl: '1050px' }}
+                bottom={{ base: '100px', lg: '220px', xxxl: '380px' }}
+                width={{ base: '140px', lg: '400px', xxxl: '640px' }}
                 opacity={toggle3 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"

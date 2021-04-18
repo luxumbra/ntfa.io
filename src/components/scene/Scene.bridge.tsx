@@ -10,7 +10,7 @@ export const SceneBridge: FC = () => {
             bottom={["0"]}
             minW="100%"
             zIndex="15"
-            height={{ base: '40px', lg: '180px' }}
+            height={{ base: '40px', lg: '90px', xxxl: '180px' }}
         />
     )
 }

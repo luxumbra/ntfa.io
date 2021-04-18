@@ -100,15 +100,8 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
 
   return (
     <>
-      {/* <Button
-        className="turboToggle"
-        onClick={toggleTurbo}
-        position="absolute"
-        top="-50px"
-      >
-        Turbo Gold
-      </Button> */}
-      <SimpleGrid columns={[1,3]} spacing={3} width="100%">
+
+          <SimpleGrid columns={{ base: 1, xl: 3}} spacing={3} width="100%">
         {(loading && <p>Loading...</p>) || (
           <>
             {turbo &&
@@ -154,9 +147,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                         }}
                       />
                     </Box>
-                    {/* <Box p="10px">
-                                    <h3>{asset.name}</h3>
-                                </Box> */}
+
                   </Box>
                 </Box>
               ))}
@@ -205,49 +196,47 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                           },
                       }}
                 >
-                  <Box
-                    position="relative"
-                    width="100%"
-                          maxHeight={[`154px`, `233px`]}
-                          height="100%"
-                    zIndex={300}
-                    color="white"
-                    flex="0 1 auto"
-                  >
                     <Box
-                      className="playerWrapper"
-                      position="relative"
-                      paddingTop={`${(212 / 373) * 100}%`}
-                      width="100%"
-                      maxWidth="512px"
-                      zIndex={200}
-                      overflow="hidden"
-
-                    >
-                      <ReactPlayer
-                        url={goldVids[i].path}
-                        playing={false}
-                        loop={true}
+                        position="relative"
                         width="100%"
-                        height="100%"
-                        controls={true}
-                        style={{
-                          position: "absolute",
-                          left: `0`,
-                          top: `0`,
-                          zIndex: 200,
-                        }}
-                      />
+                            maxHeight={{base: `154px`, xl: `233px`}}
+                            height="auto"
+                        zIndex={300}
+                        color="white"
+                        flex="1 0 auto"
+                    >
+                        <Box
+                        className="playerWrapper"
+                        position="relative"
+                        paddingTop={`${(212 / 373) * 100}%`}
+                        height="0"
+                        width="100%"
+                        maxWidth="512px"
+                        zIndex={200}
+                        overflow="hidden"
+                        >
+                            <ReactPlayer
+                                url={goldVids[i].path}
+                                playing={false}
+                                loop={true}
+                                width="100%"
+                                height="auto"
+                                controls={true}
+                                style={{
+                                position: "absolute",
+                                left: `0`,
+                                top: `0`,
+                                zIndex: 200,
+                                }}
+                            />
+                        </Box>
                     </Box>
-                  </Box>
-                      <Box position="relative" width="100%" p={["4%", "20px 15px 15px"]} d={["flex", "unset"]} flex="1 0 auto">
-                          <Heading as="h3" fontSize={["10px", "16px"]} color="accent.primary" mb="5px">{goldVids[i].title}</Heading>
-                          {/* <Box fontSize={["10px", "0.7vw"]} color="black.300" display={["none", "block"]}> */}
-                              <Text fontSize="sm" variant="summary" noOfLines={[2, 2]} d={["none", "unset"]}>
+                    <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
+                         <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{goldVids[i].title}</Heading>
+                         <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
                                   {goldVids[i].summary}
-                              </Text>
-                          {/* </Box> */}
-                      </Box>
+                        </Text>
+                    </Box>
                 </Link>
               ))}
           </>

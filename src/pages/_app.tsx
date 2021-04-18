@@ -40,7 +40,7 @@ const theme = extendTheme({
             variants: {
                 summary: {
                     fontSize: { base: "10px", xl: "8px"},
-                    lineHeight: 0.5,
+                    lineHeight: {base: 0.5, xl: 0.1},
                 },
                 meta: {
                     color: "green"

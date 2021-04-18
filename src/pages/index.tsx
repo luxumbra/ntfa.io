@@ -12,36 +12,14 @@ import { AboutSceneLeft } from '../components/index/About.scene.left';
 import { AboutSceneRight } from '../components/index/About.scene.right';
 import { ShowcaseGridComponent } from '../components/showcase/Showcase.grid';
 import { SceneCore } from '../components/scene/Scene.core';
+import { StoreCore } from '../components/store/Store.core';
 
 export function IndexComponent() {
     return(
         <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
             <MetadataComponent />
-            <Box id="section1" className="store" d="flex" flexDir="row" alignContent="stretch" minH="100vh" background="url(/assets/scenes/dollar-bill-yo.jpg) 50% no-repeat" backgroundSize={["fill", "100% 100%"]} zIndex="1000">
-                <StoreSceneLeft className="scene__left" minW="10%"/>
 
-                <Box className="scene__center" flex={["0 0 66%"]} d="flex" flexFlow="column wrap" alignItems="center" zIndex="0">
-                    <AssetContainer width="100%" height={["10%", "33%"]} className="logo">
-                        <Box className="spacer" height="80%"/>
-                    </AssetContainer>
-
-                    <AssetContainer width="100%" height={["80%", "33%"]} d="flex" className="store">
-                        <ShowcaseGridComponent collection="100-bees-hexel-collection" />
-                    </AssetContainer>
-
-                    <Box position="absolute" bottom={["20%", "30%"]} right={["62%", "72%"]} height="33%" width="100%" className="spacer" transform={["scaleX(-1)", "scaleX(-1)"]}>
-                        <Box className="spacer" height="30.5%"></Box>
-                        <Building buildingName="sign1" width="20%" height="40%" margin="0 0 0 10%"  img="" imgAlt="" z={300}>
-                            <Link href="#section2" maxW="160px" maxH="160px" sx={{
-                                color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: ["10px", 0], top: `0`, textAlign: `center`,
-                                backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: `70%`, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
-                                "&:hover": { color: `transparent !important`, opacity: 0.3, }
-                            }}><span>Bitcoin & Gold</span></Link>
-                        </Building>
-                    </Box>
-                </Box>
-                <StoreSceneRight className="scene__right" minW="10%"/>
-            </Box>
+            <StoreCore />
 
             <SceneCore/>
 

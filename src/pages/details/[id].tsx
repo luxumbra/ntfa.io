@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
 //
 import { MetadataComponent } from "../../components/shared/Metadata";
-import { AboutSceneLeft } from "../../components/index/About.scene.left";
+import { AboutSceneLeft } from "../../components/about/About.scene.left";
 import { FooterComponent } from "../../components/shared/Footer";
 import { AssetContainer } from "../../components/shared/AssetContainer";
 import { Building } from "../../components/shared/Building";
@@ -68,98 +68,84 @@ export function AssetDetails() {
             id="section2"
         >
             <Box
-                className="scene__center"
-                flex={["0 0 90%", "0 0 33%"]}
-                width={["90%", "33%"]}
+                className="content"
+                flex={{base: "0 0 90%", lg: "0 0 33%"}}
+                width={{base: "90%", lg: "33%"}}
                 d="flex"
                 flexDirection="column"
-                alignItems="center"
-                mt={[3, "50px"]}
-                ml={["5%", "50px"]}
+                alignItems="flex-start"
+                mt={{base: 3, lg: "50px"}}
+                ml={{base: "5%", lg: "50px"}}
                 px="0"
                 boxShadow="0 0 10px rgba(0,0,0,.6)"
                 borderRadius="6px"
+                overflow="hidden"
             >
                 <Box
+                    className="playerWrapper"
                     position="relative"
+                    paddingTop={`${(356 / 633) * 100}%`}
                     width="100%"
-                    maxHeight={`${(212 / 373) * 100}%`}
-                    zIndex={300}
-                    color="white"
+                    height="0"
+                    zIndex={200}
+                    overflow="hidden"
                 >
-                    <Box
-                        className="playerWrapper"
-                        position="relative"
-                        paddingTop={`${(212 / 373) * 100}%`}
+                    <ReactPlayer
+                        url={id && goldVids[+id].path}
+                        playing={true}
+                        volume={0}
+                        muted={true}
+                        loop={true}
+                        controls={true}
                         width="100%"
-                        height="0"
-                        // maxWidth="512px"
-                        zIndex={200}
-                        overflow="hidden"
-                    >
-                        <ReactPlayer
-                            url={id && goldVids[+id].path}
-                            playing={true}
-                            volume={0}
-                            muted={true}
-                            loop={true}
-                            controls={true}
-                            width="100%"
-                            height="100%"
-                            style={{
-                                position: "absolute",
-                                left: `0`,
-                                top: `0`,
-                                zIndex: 0,
-
-                            }}
-                        />
-                    </Box>
+                        height="auto"
+                        style={{
+                            position: "absolute",
+                            left: `0`,
+                            top: `0`,
+                            zIndex: 0,
+                        }}
+                    />
                 </Box>
-                <AssetContainer height="auto" width="100%" className="spacer">
-                    <Box
-                        width="100%"
-                        margin="0"
-                        img=""
-                        imgAlt=""
-                        backgroundColor="rgba(255,255,255,0.6)"
-                        backdropFilter="blur(7px)"
-                        borderRadius=" 0 0 6px 6px"
-                        overflow="hidden"
-                        z={0}
-                    >
-                        <Box p={["15px", "25px"]}>
-                            <Heading as="h3" size={"sm"} color="accent.primary" mb="2">
-                                {id && goldVids[+id].title}
-                            </Heading>
-                            <Box d="flex" flexFlow="column wrap" mb="4" sx={{
-                                "& > span": {
-                                    fontSize: ["10px", "12px"],
-                                    mb: 0,
-                                    fontWeight: "100"
-                            }}}>
-                                <span>{id && goldVids[+id].NFT}</span>
-                                <span>{id && goldVids[+id].vault}</span>
-                            </Box>
-                            <Box fontsize={["15px", "17px"]}>
-                                <p>{id && goldVids[+id].summary.replace('<br />', '\n')}</p>
-                            </Box>
-                            <Box fontSize={["12px", "14px"]}>
-                                <p>{id && goldVids[+id].description.replace('<br />', '\n')}</p>
-                            </Box>
+
+                <Box
+                    width="100%"
+                    margin="0"
+                    backgroundColor="rgba(255,255,255,0.6)"
+                    backdropFilter="blur(7px)"
+                    z={0}
+                >
+                    <Box p={{base: "15px", lg: "25px"}}>
+                        <Heading as="h3" size={"sm"} color="accent.primary" mb="2">
+                            {id && goldVids[+id].title}
+                        </Heading>
+                        <Box d="flex" flexFlow="column wrap" mb="4" sx={{
+                            "& > span": {
+                                fontSize: {base: "10px", lg: "12px"},
+                                mb: 0,
+                                fontWeight: "100"
+                        }}}>
+                            <span>{id && goldVids[+id].NFT}</span>
+                            <span>{id && goldVids[+id].vault}</span>
+                        </Box>
+                        <Box fontsize={{base: "15px", lg: "17px"}}>
+                            <p>{id && goldVids[+id].summary.replace('<br />', '\n')}</p>
+                        </Box>
+                        <Box fontSize={{base: "12px", lg: "14px"}}>
+                            <p>{id && goldVids[+id].description.replace('<br />', '\n')}</p>
                         </Box>
                     </Box>
-                </AssetContainer>
+                </Box>
             </Box>
 
-                <Box position="absolute" width="100%" height={["10%", "10%"]} maxW={["25px", "60px"]} bottom={["34%","70%"]} left={["54%", "60%"]} img="" imgAlt="" zIndex={0}>
+                <Box position="absolute" width="100%" height={{base: "10%", lg: "10%"}} maxW={{base: "25px", lg: "45px", xxxl: "60px"}} bottom={{base: "34%", lg: "60%", xl: "60%", xxl: "55%", xxxl: "70%"}} left={{base: "54%", lg: "66%", xxl: "58%", xxxl: "64%"}} img="" imgAlt="" zIndex={0}>
                     <Link
                         href="/#section1"
                         display="inline-block"
                         position="relative"
                         height="100%"
                         width="100%"
-                    maxW="100px"
+                        maxW="100px"
                         css={css`
                             @keyframes logo-anim {
                                 0% { transform: translateY(25px); }
@@ -173,24 +159,25 @@ export function AssetDetails() {
                     >
                         <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                     </Link>
-                </Box>
+            </Box>
+
             <SceneBridge/>
 
-            <Box onClick={e => setToggle1(!toggle1)}>
+           <Box onClick={e => setToggle1(!toggle1)}>
                 <SceneBuilding
                     src="/assets/buildings/building-4.png"
-                    left={{ base: '180px', lg: '1150px' }}
+                    left={{ base: '180px', lg: '800px', xxxl: '1150px' }}
                     bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '170px' }}
+                    width={{ base: '50px', lg: '110px', xxxl: '170px' }}
                 />
             </Box>
 
             <Image
                 src="/assets/buildings/building-4.destroyed.png"
                 position="absolute"
-                left={{ base: '166px', lg: '1111px' }}
-                bottom={{ base: '14px', lg: '86px' }}
-                width={{ base: '95px', lg: '306px' }}
+                left={{ base: '166px', lg: '775px', xxxl: '1111px' }}
+                bottom={{ base: '14px', lg: '58px', xxxl: '86px' }}
+                width={{ base: '95px', lg: '196px', xxxl: '306px' }}
                 opacity={toggle1 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
@@ -199,27 +186,27 @@ export function AssetDetails() {
             <Box onClick={e => setToggle3(!toggle3)}>
                 <SceneBuilding
                     src="/assets/buildings/building-1.png"
-                    left={{ base: '130px', lg: '1000px' }}
-                    bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '180px' }}
+                    left={{ base: '130px', lg: '710px', xxxl: '1000px' }}
+                    bottom={{ base: '0', lg: '-25px', xxxl: '0' }}
+                    width={{ base: '50px', lg: '120px', xxxl: '180px' }}
                 />
             </Box>
 
             <Box onClick={e => setToggle2(!toggle2)}>
                 <SceneBuilding
                     src="/assets/buildings/building-3.png"
-                    left={{ base: '230px', lg: '1300px' }}
+                    left={{ base: '230px', lg: '900px', xxxl: '1300px' }}
                     bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '180px' }}
+                    width={{ base: '50px', lg: '120px', xxxl: '180px' }}
                 />
             </Box>
 
             <Image
                 src="/assets/effects/b3.png"
                 position="absolute"
-                left={{ base: '230px', lg: '1300px' }}
-                bottom={{ base: '110px', lg: '370px' }}
-                width={{ base: '58px', lg: '210px' }}
+                left={{ base: '230px', lg: '903px', xxxl: '1300px' }}
+                bottom={{ base: '110px', lg: '252px', xxxl: '370px' }}
+                width={{ base: '58px', lg: '138px', xxxl: '210px' }}
                 opacity={toggle2 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
@@ -227,17 +214,17 @@ export function AssetDetails() {
 
             <SceneBuilding
                 src="/assets/buildings/building-2.png"
-                left={{ base: '100px', lg: '900px' }}
-                bottom={{ base: '-2px', lg: '-20px' }}
-                width={{ base: '200px', lg: '640px' }}
+                left={{ base: '100px', lg: '650px', xxl: '650px', xxxl: '900px' }}
+                bottom={{ base: '-2px', lg: '-20px', xxxl: '-20px' }}
+                width={{ base: '200px', lg: '540px', xxl: '540px', xxxl: '640px' }}
             />
 
             <Image
                 src="/assets/effects/fog.png"
                 position="absolute"
-                left={{ base: '150px', lg: '1050px' }}
-                bottom={{ base: '100px', lg: '380px' }}
-                width={{ base: '140px', lg: '640px' }}
+                left={{ base: '150px', lg: '770px', xxxl: '1050px' }}
+                bottom={{ base: '100px', lg: '220px', xxxl: '380px' }}
+                width={{ base: '140px', lg: '400px', xxxl: '640px' }}
                 opacity={toggle3 ? 1 : 0}
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"

@@ -3,26 +3,14 @@ import ReactPlayer from "react-player";
 import {
   Box,
   Heading,
-  ButtonGroup,
-  Button,
-  Image,
   SimpleGrid,
-    IconButton,
   Link,
-    transition,
   Text
 } from "@chakra-ui/react";
-// import Link from 'next/link';
 import Web3 from "web3";
 import { OpenSeaPort, Network } from "opensea-js";
 import axios from "axios";
-import {
-  FaPlay,
-  FaPause,
-  FaVolumeMute,
-  FaVolumeUp,
-  FaExpand,
-} from "react-icons/fa";
+
 
 export let getCollection: any;
 

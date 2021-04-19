@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Box, Link } from '@chakra-ui/react';
 //
 
-
 export interface AboutSceneRightInterface {
     // className: string
     // minW: string

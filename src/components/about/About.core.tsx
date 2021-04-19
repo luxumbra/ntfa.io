@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Box, Button, Link, Image, Heading } from '@chakra-ui/react';
-import { css, jsx } from "@emotion/react";
+import React from 'react';
+import { Box, Heading } from '@chakra-ui/react';
 //
-import { Building } from "../shared/Building";
 import { AboutSceneLeft } from './About.scene.left';
 import { AboutSceneRight } from './About.scene.right';
 
@@ -26,7 +24,7 @@ export function AboutCore() {
                         height: `100%`
                     }}>
                         <Box p={{base: "5%", xxxl: "4%"}} sx={{ "p:nth-of-type(even)": {fontSize: { base: `1.6vw`, xl: `1vw`, xxxl: `0.8vw` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
-                            <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw`, xl: `1.1vw` }}>Never Touch FIAT Again</Heading>
+                            <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw`, xxxl: `1.1vw` }}>Never Touch FIAT Again</Heading>
                             <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>
                             <p style={{ fontWeight: 'bold' }}>- Ralph Waldo Emerson</p>
 

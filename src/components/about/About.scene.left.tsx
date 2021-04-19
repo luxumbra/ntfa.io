@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Box, Link, Image } from '@chakra-ui/react';
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 //
 
 

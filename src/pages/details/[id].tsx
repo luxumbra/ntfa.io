@@ -5,10 +5,6 @@ import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
 //
 import { MetadataComponent } from "../../components/shared/Metadata";
-import { AboutSceneLeft } from "../../components/about/About.scene.left";
-import { FooterComponent } from "../../components/shared/Footer";
-import { AssetContainer } from "../../components/shared/AssetContainer";
-import { Building } from "../../components/shared/Building";
 import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 
@@ -67,6 +63,7 @@ export function AssetDetails() {
             overflow="hidden"
             id="section2"
         >
+            <MetadataComponent />
             <Box
                 className="content"
                 flex={{base: "0 0 90%", lg: "0 0 33%"}}

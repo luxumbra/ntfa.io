@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Link, Heading, Image } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 
 export const SceneCopy: FC = () => {
     return (

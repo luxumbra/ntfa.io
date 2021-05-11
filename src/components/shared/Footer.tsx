@@ -1,31 +1,93 @@
 import React, { FC } from 'react';
-import { Box, Link } from '@chakra-ui/react';
+import { Box, Link, Image, HStack } from "@chakra-ui/react";
+import { css, jsx } from "@emotion/react";
 //
 import { AssetContainer } from './AssetContainer';
 import { Building } from "./Building";
 
-export interface FooterInterface {
-    className: string
-    minW: string
-}
+// export interface FooterInterface {
+//     className: string
+//     minW: string
+// }
 
-export const FooterComponent: FC<FooterInterface> = ({ className, minW }) => {
+export const FooterComponent: FC<FooterInterface> = () => {
     return(
-        <Box className={className} as="footer" d="flex" flexDirection="column" flexGrow={1} minW={minW}>
-            <AssetContainer width="100%" height="25%" className="logo">
-                <Box className="spacer" height="80%">
-                </Box>
-                <Building buildingName="store" margin="0 0 0 18%" img="" imgAlt="" height="10%" width="35%" color="yellow.700" z={0}>
-                    <Link href="/store" sx={{ position: `absolute`, width: `100%`, height: `100%`, left: 0, top: 0, padding: `1% 3%`}}>Store</Link>
-                </Building>
-            </AssetContainer>
+        <Box position="absolute" bottom="0" left="0" width="100vw" height={{base: "90px", xxl: "150px", xxxl: "200px"}} zIndex={300}>
+            <Box
+                d="flex"
+                flexFlow="column nowrap"
+                w="auto"
+                textAlign="center"
+                border="5px solid white"
+                borderRadius="15px"
+                backgroundColor="#01735C"
+                boxShadow="0 0 2px rgba(0,0,0,0.5)"
+                justifyItems="center"
+                pos="relative"
+                overflow="hidden"
+                alignContent={{base: "center", xl: "flex-start"}}
+                h="100%"
+                maxH={{base: "90px", xl: "120px"}}
+                width="auto"
+                maxW="768px"
+                m="0 auto"
+                py={{base: 3, xl: 5}}>
+                <HStack
+                    spacing="30px"
+                    sx={{
+                        "a": { color: "white", fontFamily: "Hero", fontSize: { base: "14px", xxl: "18px", xxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
+                    }}>
+                    <Link href="/">Home</Link>
+                    <Link href="/about">About NTFA</Link>
+                    <Link href="/#section2">Burn FIAT</Link>
+                </HStack>
+                <HStack
+                    spacing="30px"
+                    sx={{
+                        "a": {
+                            color: "white",
+                            "&:hover": {
+                                "img": {
+                                    animation: "dps-rotate 3s infinite"
+                                }
+                            },
+                        }, color: "white", mx: "auto",
+                    }}
+                    css={css`
+                        @keyframes dps-rotate {
+                            0% { transform: rotate(0); }
+                            100% { transform: rotate(360deg); }
+                        }
+                        @keyframes heart-beat {
+                            0% {transform: scale(1);}
+                            25% {transform: scale(.97);}
+                            35% {transform: scale(.9);}
+                            45% {transform: scale(1.1);}
+                            55% {transform: scale(.9);}
+                            65% {transform: scale(1.1);}
+                            75% {transform: scale(1.03);}
+                            100% {transform: scale(1);}
+                        }
+                        a {
+                            color: white;
+                            &:hover {
+                                img {
+                                    animation: dps-rotate 3s infinite;
+                                }
+                            }
+                        }
+                        .heart {
+                            filter: drop-shadow(0 0 5px rgba(0,0,0,.4));
+                            &:hover {
+                                animation: heart-beat 1.6s infinite;
+                            }
+                        }
 
-            <AssetContainer width="100%" height="75%" className="block" d="flex">
-                <Building buildingName="sky1" width="40%" height="60%" margin="0 0 0 15%" img="/assets/Anim_Building03.png" imgAlt="/assets/normal-building.png" color="teal.300" z={300}>
-                </Building>
-                <Building buildingName="sky2" width="20%" height="40%" margin="25% 0 0 -5%" img="/assets/Anim_Building03.png" imgAlt="/assets/normal-building.png" color="teal.500" z={0}>
-                </Building>
-            </AssetContainer>
+                        /* animation-play-state: paused; */
+                    `}>
+                    <Box d="inline-flex" alignItems="center">Site from the <span className="heart">🫀</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }}/></Link></Box>
+                </HStack>
+            </Box>
         </Box>
     )
 }

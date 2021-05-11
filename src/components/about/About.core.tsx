@@ -47,7 +47,7 @@ export function AboutCore() {
                 </Box>
             </Box>
 
-            <Box position="absolute" bottom="0" left="0" background={{base: "url(/assets/buildings/building-industrial.png) 0 100% no-repeat", lg: "url(/assets/buildings/building-industrial.png) 0 110px no-repeat"}} backgroundSize={{base: "contain", lg: "contain"}} width="100%" minW="100vw" minH="100vh" zIndex="200" pointerEvents="none"></Box>
+            <Box position="absolute" bottom="0" left="0" background={{base: "url(/assets/buildings/building-industrial.png) 0 100% no-repeat", lg: "url(/assets/buildings/building-industrial.png) 0 110px no-repeat"}} backgroundSize={{base: "contain", lg: "contain"}} width="100%" minW="100vw" minH="100vh" zIndex="0" pointerEvents="none"></Box>
 
             <AboutSceneRight />
         </Box>

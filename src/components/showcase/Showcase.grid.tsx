@@ -5,7 +5,8 @@ import {
   Heading,
   SimpleGrid,
   Link,
-  Text
+  Text,
+  Button
 } from "@chakra-ui/react";
 import Web3 from "web3";
 import { OpenSeaPort, Network } from "opensea-js";
@@ -68,6 +69,14 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
         },
     ];
 
+    function truncateString(str = '', n = 0) {
+        if (str.length > n) {
+        return str.substring(0, n) + "...";
+        } else {
+        return str;
+        }
+    }
+
   useEffect(() => {
     getCollection = axios
       .get(
@@ -88,13 +97,13 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
 
   return (
     <>
-
+        <Button onClick={toggleTurbo} position="absolute" top="-50px" left={0}>Gold Boost {turbo ? 'on' : 'off'}</Button>
           <SimpleGrid columns={{ base: 1, xl: 3}} spacing={3} width="100%">
         {(loading && <p>Loading...</p>) || (
           <>
             {turbo &&
-              goldAssets &&
-              goldAssets.map((asset, i) => (
+              goldVids &&
+              goldVids.map((asset, i) => (
                 <Box
                   key={i}
                   opacity={turbo ? 1 : 0}
@@ -121,7 +130,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                       boxShadow="0 0 8px rgba(0,0,0,0.8)"
                     >
                       <ReactPlayer
-                        url={goldVids[i].path}
+                        url={asset.path}
                         playing={false}
                         loop={true}
                         width="100%"
@@ -135,13 +144,18 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                         }}
                       />
                     </Box>
-
+                    <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
+                         <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{asset.title}</Heading>
+                         <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
+                                  {truncateString(asset.summary, 100)}
+                        </Text>
+                    </Box>
                   </Box>
                 </Box>
               ))}
             {!turbo &&
-              assets &&
-              assets.map((asset, i) => (
+              goldVids &&
+                goldVids.map((asset, i) => (
                 <Link
                       key={i}
                       href={`/details/${i}`}
@@ -196,7 +210,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                         overflow="hidden"
                         >
                             <ReactPlayer
-                                url={goldVids[i].path}
+                                url={asset.path}
                                 playing={false}
                                 loop={true}
                                 width="100%"
@@ -211,9 +225,9 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                             />
                         </Box>
                     <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
-                         <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{goldVids[i].title}</Heading>
+                         <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{asset.title}</Heading>
                          <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
-                                  {goldVids[i].summary}
+                                  {truncateString(asset.summary, 100)}
                         </Text>
                     </Box>
                 </Link>

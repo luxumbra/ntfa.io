@@ -19,7 +19,7 @@ export function StoreCore() {
 
                 <Box width="100%" height={{base: "10%", xl: "33%"}} />
 
-                <Box width="100%" height={{base: "80%", xl: "33%"}} d="flex" className="store">
+                <Box width="100%" height={{base: "80%", xl: "33%"}} d="flex" className="store" position="relative">
                     <ShowcaseGridComponent collection="100-bees-hexel-collection" />
                 </Box>
 

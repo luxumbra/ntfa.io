@@ -18,7 +18,7 @@ export const AboutSceneLeft: FC<AboutSceneLeftInterface> = () => {
 
     return(
         <Box className="scene__left" minW={{base: "0", lg: "33%", xxl: "25%"}} w={{base: "5%", lg: "auto"}} overflowY="hidden">
-            <Box position="absolute" width="100%" height={{base: "10%", lg: "10%"}} maxW={{base: "25px", lg: "50px", xxxl: "75px"}} bottom={{base: "21%", lg: "45%", xxxl: "43%"}} left={{base: "62%", lg: "26%", xxxl: "23%"}} img="" imgAlt="" z={100}>
+            <Box position="absolute" width="100%" height={{base: "10%", lg: "10%"}} maxW={{base: "25px", lg: "50px", xxxl: "75px"}} bottom={{base: "21%", lg: "45%", xxxl: "43%"}} left={{base: "62%", lg: "26%", xxxl: "23%"}} z={100}>
                 <Link
                     href="/#section1"
                     display="inline-block"

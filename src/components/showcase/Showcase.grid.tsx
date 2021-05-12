@@ -18,6 +18,96 @@ export let getCollection: any;
 export interface ShowcaseGridInterface {
   collection: string;
 }
+// export interface NFTCardInterface {
+//     asset:
+// }
+
+const NFTCard = ({ asset = {}, id = 0}) => {
+    function truncateString(str = '', n = 0) {
+        if (str.length > n) {
+            return str.substring(0, n) + "...";
+        } else {
+            return str;
+        }
+    }
+
+    return (
+        <Link
+            key={id}
+            href={`/details/${id}`}
+            transition="opacity 0.3s .3s ease-in"
+            display="flex"
+            flexFlow="column nowrap"
+            backgroundColor="rgba(255,255,255,0.8)"
+            backdropFilter="blur(3px)"
+            borderRadius="6px"
+            overflow="hidden"
+            boxShadow="0 0 10px rgba(0,0,0,0.7)"
+            position="relative"
+            sx={{
+                "&::after": {
+                    content: "''",
+                    backgroundImage: "url(/assets/ntfa-logo.png)",
+                    backgroundSize: "100%",
+                    backgroundRepeat: "no-repeat",
+                    filter: "drop-shadow(0 0 5px rgba(0,0,0,.4))",
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    height: "60px",
+                    width: "60px",
+                    transform: "translate3d(0, 40px, 0)",
+                    opacity: 0,
+                    transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease"
+                },
+                "&:hover": {
+                    boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
+                "&::after": {
+                    transform: "translate3d(0, -400%, 0)",
+                    opacity: 1
+                    },
+                "&::before": {
+                    transform: "translate3d(0, 10px, 0)",
+                    opacity: 1
+                }
+                },
+            }}
+        >
+
+            <Box
+            className="playerWrapper"
+            position="relative"
+            paddingTop={`${(212 / 373) * 100}%`}
+            height="0"
+            width="100%"
+            maxWidth="512px"
+            zIndex={200}
+            overflow="hidden"
+            >
+                <ReactPlayer
+                    url={asset.path}
+                    playing={false}
+                    loop={true}
+                    width="100%"
+                    height="auto"
+                    controls={true}
+                    style={{
+                    position: "absolute",
+                    left: `0`,
+                    top: `0`,
+                    zIndex: 200,
+                    }}
+                />
+            </Box>
+        <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
+                <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{asset.title}</Heading>
+                <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
+                        {truncateString(asset.summary, 100)}
+            </Text>
+        </Box>
+    </Link>
+    )
+}
 
 export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   collection,
@@ -69,13 +159,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
         },
     ];
 
-    function truncateString(str = '', n = 0) {
-        if (str.length > n) {
-        return str.substring(0, n) + "...";
-        } else {
-        return str;
-        }
-    }
+
 
   useEffect(() => {
     getCollection = axios
@@ -104,133 +188,12 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
             {turbo &&
               goldVids &&
               goldVids.map((asset, i) => (
-                <Box
-                  key={i}
-                  opacity={turbo ? 1 : 0}
-                  transition="opacity 0.3s .3s ease-in"
-                  alignContent="center"
-                  display="flex"
-                >
-                  <Box
-                    position="relative"
-                    width="100%"
-                    height="auto"
-                    zIndex={300}
-                    color="white"
-                  >
-                    <Box
-                      className="playerWrapper"
-                      position="relative"
-                      paddingTop={`${(212 / 373) * 100}%`}
-                      width="100%"
-                      maxWidth="512px"
-                      zIndex={200}
-                      overflow="hidden"
-                      flex="1 0 100%"
-                      boxShadow="0 0 8px rgba(0,0,0,0.8)"
-                    >
-                      <ReactPlayer
-                        url={asset.path}
-                        playing={false}
-                        loop={true}
-                        width="100%"
-                        height="100%"
-                        controls={true}
-                        style={{
-                          position: "absolute",
-                          left: `0`,
-                          top: `0`,
-                          zIndex: 200,
-                        }}
-                      />
-                    </Box>
-                    <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
-                         <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{asset.title}</Heading>
-                         <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
-                                  {truncateString(asset.summary, 100)}
-                        </Text>
-                    </Box>
-                  </Box>
-                </Box>
+                  <NFTCard asset={asset} id={i} turbo={turbo} />
               ))}
             {!turbo &&
               goldVids &&
                 goldVids.map((asset, i) => (
-                <Link
-                      key={i}
-                      href={`/details/${i}`}
-                      opacity={turbo ? 0 : 1}
-                      transition="opacity 0.3s .3s ease-in"
-                      display="flex"
-                      flexFlow="column nowrap"
-                      backgroundColor="rgba(255,255,255,0.8)"
-                      backdropFilter="blur(3px)"
-                      borderRadius="6px"
-                      overflow="hidden"
-                      boxShadow="0 0 10px rgba(0,0,0,0.7)"
-                      position="relative"
-                      sx={{
-                          "&::after": {
-                              content: "''",
-                              backgroundImage: "url(/assets/ntfa-logo.png)",
-                              backgroundSize: "100%",
-                              backgroundRepeat: "no-repeat",
-                              filter: "drop-shadow(0 0 5px rgba(0,0,0,.4))",
-                              position: "absolute",
-                              bottom: 0,
-                              right: 0,
-                              height: "60px",
-                              width: "60px",
-                              transform: "translate3d(0, 40px, 0)",
-                              opacity: 0,
-                              transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease"
-                          },
-                          "&:hover": {
-                              boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
-                            "&::after": {
-                                transform: "translate3d(0, -400%, 0)",
-                                opacity: 1
-                              },
-                            "&::before": {
-                                transform: "translate3d(0, 10px, 0)",
-                                opacity: 1
-                          }
-                          },
-                      }}
-                >
-
-                        <Box
-                        className="playerWrapper"
-                        position="relative"
-                        paddingTop={`${(212 / 373) * 100}%`}
-                        height="0"
-                        width="100%"
-                        maxWidth="512px"
-                        zIndex={200}
-                        overflow="hidden"
-                        >
-                            <ReactPlayer
-                                url={asset.path}
-                                playing={false}
-                                loop={true}
-                                width="100%"
-                                height="auto"
-                                controls={true}
-                                style={{
-                                position: "absolute",
-                                left: `0`,
-                                top: `0`,
-                                zIndex: 200,
-                                }}
-                            />
-                        </Box>
-                    <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
-                         <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{asset.title}</Heading>
-                         <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
-                                  {truncateString(asset.summary, 100)}
-                        </Text>
-                    </Box>
-                </Link>
+                <NFTCard asset={asset} id={i} turbo={turbo} />
               ))}
           </>
         )}

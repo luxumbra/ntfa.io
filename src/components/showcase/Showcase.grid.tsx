@@ -18,11 +18,21 @@ export let getCollection: any;
 export interface ShowcaseGridInterface {
   collection: string;
 }
-// export interface NFTCardInterface {
-//     asset:
-// }
 
-const NFTCard = ({ asset = {}, id = 0}) => {
+type AssetType = {
+    asset: {
+    creator: string;
+    title: string;
+    path: string;
+    summary: string;
+    description: string;
+    NFT: string;
+    vault: string;
+
+    }
+}
+
+const NFTCard = (asset: AssetType, id = 0) => {
     function truncateString(str = '', n = 0) {
         if (str.length > n) {
             return str.substring(0, n) + "...";
@@ -188,12 +198,12 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
             {turbo &&
               goldVids &&
               goldVids.map((asset, i) => (
-                  <NFTCard asset={asset} id={i} turbo={turbo} />
+                  <NFTCard asset={asset} id={i} />
               ))}
             {!turbo &&
               goldVids &&
                 goldVids.map((asset, i) => (
-                <NFTCard asset={asset} id={i} turbo={turbo} />
+                <NFTCard asset={asset} id={i} />
               ))}
           </>
         )}

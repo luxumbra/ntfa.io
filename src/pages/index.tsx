@@ -12,9 +12,9 @@ export function IndexComponent() {
 
             <StoreCore />
 
-            <SceneCore/>
-
             <AboutCore />
+
+            <SceneCore/>
         </Box>
     )
 }

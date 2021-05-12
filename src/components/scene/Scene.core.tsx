@@ -6,6 +6,7 @@ import { SceneLambo } from './Scene.lambo';
 import { SceneMissile } from './Scene.missile';
 import { SceneBuilding } from './Scene.building';
 import { SceneCopy } from './Scene.copy';
+import { FooterComponent } from '../shared/Footer';
 
 export const missiles = [
     {
@@ -99,12 +100,37 @@ export function SceneCore() {
                 Click To Win
             </Button>
 
-            <Box pos="absolute" bottom={{base: "44%", lg: "280px", xxxl: "280px"}} right={{base: "0", lg: "50%", xxxl: "50%"}} height={{base: "200px", lg: "300px", xxxl: "300px"}} width={{base: "200px", lg: "100px", xxxl: "300px"}} zIndex={1000}>
-                <Link href="#section3" w="100%" h="100%" sx={{
-                    color: `white`, fontSize: `0.8vw`, fontWeight: `bold`, position: `absolute`, width: `100%`, height: `100%`, left: 0, top: `0`, textAlign: `center`,
-                    backgroundImage: `url(/assets/effects/fingerprint.png)`, backgroundRepeat: `no-repeat`, backgroundSize: {base: `50px`, lg: `100%`, xxxl: `6.5vw`}, backgroundPosition: `90%`, transform: `scaleX(1)`, opacity: 0.6, "& > span": {visibility: `hidden`},
-                    "&:hover": { color: `transparent !important`, opacity: 0.3, }
-                }}><span>Bitcoin & Gold</span></Link>
+            <Box
+                pos="absolute"
+                bottom={{ base: "44%", lg: "70%", xxxl: "70%" }}
+                right={{ base: "0", lg: "50%", xxxl: "50%" }}
+                height={{ base: "200px", lg: "300px", xxxl: "300px" }}
+                width={{ base: "200px", lg: "100px", xxxl: "300px" }}
+                zIndex={1000}>
+                <Link
+                    href="#section3"
+                    w="100%"
+                    h="100%"
+                    sx={{
+                        color: `white`,
+                        fontSize: `0.8vw`,
+                        fontWeight: `bold`,
+                        position: `absolute`,
+                        width: `100%`,
+                        height: `100%`,
+                        left: 0, top: `0`,
+                        textAlign: `center`,
+                        backgroundImage: `url(/assets/effects/fingerprint.png)`,
+                        backgroundRepeat: `no-repeat`,
+                        backgroundSize: { base: `50px`, lg: `100%`, xxxl: `6.5vw` },
+                        backgroundPosition: `90%`,
+                        transform: `scaleX(1)`,
+                        opacity: 0.6,
+                        "& > span": { visibility: `hidden` },
+                        "&:hover": { color: `transparent !important`, opacity: 0.3, }
+                    }}>
+                    <span>Bitcoin & Gold</span>
+                </Link>
             </Box>
 
             <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "60px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "61%", xxxl: "70%"}} left={{base: "50%", lg: "67%", xxl: "59%", xxxl: "64%"}} z={1000}>
@@ -212,6 +238,7 @@ export function SceneCore() {
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
             />
+            <FooterComponent />
         </Box>
     )
 }

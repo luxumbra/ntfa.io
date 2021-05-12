@@ -2,15 +2,9 @@ import React, { FC } from 'react';
 import { Box, Link, Image, HStack } from "@chakra-ui/react";
 import { css, jsx } from "@emotion/react";
 //
-import { AssetContainer } from './AssetContainer';
-import { Building } from "./Building";
 
-// export interface FooterInterface {
-//     className: string
-//     minW: string
-// }
 
-export const FooterComponent: FC<FooterInterface> = () => {
+export const FooterComponent = () => {
     return(
         <Box position="absolute" bottom="0" left="0" width="100vw" height={{base: "90px", xxl: "150px", xxxl: "200px"}} zIndex={300}>
             <Box
@@ -35,7 +29,7 @@ export const FooterComponent: FC<FooterInterface> = () => {
                 <HStack
                     spacing="30px"
                     sx={{
-                        "a": { color: "white", fontFamily: "Hero", fontSize: { base: "14px", xxl: "18px", xxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
+                        "a": { color: "white", fontFamily: "Hero", fontSize: { base: "14px", xxl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
                     <Link href="/">Home</Link>
                     <Link href="/about">About NTFA</Link>

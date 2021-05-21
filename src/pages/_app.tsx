@@ -10,7 +10,7 @@ const breakpoints = createBreakpoints({
     sm: "320px",
     md: "768px",
     lg: "960px",
-    xl: "1200px",
+    xl: "1280px",
     xxl: "1440px",
     xxxl: "1920px",
 });
@@ -84,9 +84,9 @@ const theme = extendTheme({
                 fontWeight: `100`,
             },
             p: {
-                fontSize: { base: `11px`, xl: `16px` },
+                fontSize: { base: `11px`, xl: `14px` },
                 marginBottom: { base: `10px`, xl: `0.8vw` },
-                lineHeight: { base: `1.2` },
+                lineHeight: { base: `1.2`, xl: `1.3` },
                 fontWeight: `100`,
           },
             "p+h3": {

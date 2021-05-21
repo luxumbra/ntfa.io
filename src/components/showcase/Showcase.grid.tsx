@@ -6,11 +6,15 @@ import {
   SimpleGrid,
   Link,
   Text,
-  Button
+  Button,
+  UnorderedList,
+  ListItem
 } from "@chakra-ui/react";
 import Web3 from "web3";
 import { OpenSeaPort, Network } from "opensea-js";
 import axios from "axios";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 
 export let getCollection: any;
@@ -19,20 +23,60 @@ export interface ShowcaseGridInterface {
   collection: string;
 }
 
-type AssetType = {
-    asset: {
-    creator: string;
-    title: string;
-    path: string;
-    summary: string;
-    description: string;
-    NFT: string;
-    vault: string;
-
-    }
+export interface AssetTypeInterface {
+    asset: any;
+    id: number;
 }
 
-const NFTCard = (asset: AssetType, id = 0) => {
+export interface CustomCarouselDotInterface {
+    onClick?: any;
+    active?: boolean;
+    index?: number;
+    carouselState?: any;
+}
+
+export const CustomCarouselDot: FC<CustomCarouselDotInterface> = ({ onClick, active, index, carouselState }) => {
+  const { currentSlide } = carouselState;
+  return (
+    //   <li key={index}>
+      <Button
+        backgroundColor={active ? "transparent" : "transparent" }
+              onClick={() => onClick()}
+              pos="relative" w="30px" h="30px" mx="10px"
+          sx={{
+              fontSize: "14px",
+              fontFamily: "Federal",
+              color: "white",
+            "&::after": {
+                content: "''",
+                backgroundImage: "url(/assets/ntfa-logo.png)",
+                backgroundSize: "100%",
+                backgroundRepeat: "no-repeat",
+                filter: "drop-shadow(0 0 5px rgba(0,0,0,.4))",
+                position: "absolute",
+                top: 0,
+                right: 0,
+                height: "100%",
+                width: "100%",
+                transform: "translate3d(0, 0, 0)",
+                opacity: active ? 1 : 0.8,
+                transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease",
+                zIndex: 0
+            },
+            "&:hover": {
+                backgroundColor: "transparent",
+                "&::after": {
+                    opacity: 1,
+                },
+            }
+        }}
+      >{index && index + 1}</Button>
+    // </li>
+  );
+};
+
+
+export const NFTCard: FC<AssetTypeInterface> = ({ asset, id }) => {
     function truncateString(str = '', n = 0) {
         if (str.length > n) {
             return str.substring(0, n) + "...";
@@ -42,6 +86,7 @@ const NFTCard = (asset: AssetType, id = 0) => {
     }
 
     return (
+        <Box>
         <Link
             key={id}
             href={`/details/${id}`}
@@ -54,6 +99,10 @@ const NFTCard = (asset: AssetType, id = 0) => {
             overflow="hidden"
             boxShadow="0 0 10px rgba(0,0,0,0.7)"
             position="relative"
+            paddingTop={{base: `${(207 / 305) * 100}%`, xl: `${78}%`}}
+            maxWidth="350px"
+            width="100%"
+            height="0"
             sx={{
                 "&::after": {
                     content: "''",
@@ -83,39 +132,42 @@ const NFTCard = (asset: AssetType, id = 0) => {
                 },
             }}
         >
-
-            <Box
-            className="playerWrapper"
-            position="relative"
-            paddingTop={`${(212 / 373) * 100}%`}
-            height="0"
-            width="100%"
-            maxWidth="512px"
-            zIndex={200}
-            overflow="hidden"
-            >
-                <ReactPlayer
-                    url={asset.path}
-                    playing={false}
-                    loop={true}
-                    width="100%"
-                    height="auto"
-                    controls={true}
-                    style={{
-                    position: "absolute",
-                    left: `0`,
-                    top: `0`,
-                    zIndex: 200,
-                    }}
-                />
+            <Box position="absolute" top="0" left="0" w="100%" h="100%">
+                <Box
+                className="playerWrapper"
+                position="relative"
+                paddingTop={`${(212 / 373) * 100}%`}
+                height="0"
+                width="100%"
+                zIndex={200}
+                overflow="hidden"
+                >
+                    <ReactPlayer
+                        url={asset.path}
+                        playing={false}
+                        loop={true}
+                        width="100%"
+                        height="auto"
+                        controls={true}
+                        style={{
+                        position: "absolute",
+                        left: `0`,
+                        top: `0`,
+                        zIndex: 200,
+                        }}
+                    />
+                </Box>
+                <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "block", xl: "block"}} h="auto">
+                    <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "16px" }} color="accent.primary" mb="5px">{asset.title}</Heading>
+                    <Box fontSize={{ base: "11px", xl: "12px" }} d={{base: "none", xl: "block"}}>
+                        <Text noOfLines={{ base: 2, xl: 4 }}>
+                                {truncateString(asset.summary, 200)}
+                        </Text>
+                    </Box>
+                </Box>
             </Box>
-        <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "flex", xl: "unset"}} flex="0 0 auto">
-                <Heading as="h3" fontSize={{base: "10px", xl: "14px", xxxl: "16px"}} color="accent.primary" mb="5px">{asset.title}</Heading>
-                <Text fontSize="sm" variant="summary" noOfLines={{ base: 2, xl: 2 }} d={{base: "none", xl: "unset"}}>
-                        {truncateString(asset.summary, 100)}
-            </Text>
+            </Link>
         </Box>
-    </Link>
     )
 }
 
@@ -169,7 +221,29 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
         },
     ];
 
-
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 3,
+            partialVisibilityGutter: 40
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3,
+            partialVisibilityGutter: 40
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2,
+            partialVisibilityGutter: 40
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1,
+            partialVisibilityGutter: 40
+        }
+    };
 
   useEffect(() => {
     getCollection = axios
@@ -191,21 +265,43 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
 
   return (
     <>
-        <Button onClick={toggleTurbo} position="absolute" top="-50px" left={0}>Gold Boost {turbo ? 'on' : 'off'}</Button>
-          <SimpleGrid columns={{ base: 1, xl: 3}} spacing={3} width="100%">
-        {(loading && <p>Loading...</p>) || (
-          <>
-            {turbo &&
+        {/* <Button onClick={toggleTurbo} position="absolute" top="-50px" left={0}>Gold Boost {turbo ? 'on' : 'off'}</Button> */}
+          <SimpleGrid columns={{ base: 1, xl: 1 }} spacing={0} position="relative" pb="50px" width="100%" sx={{ ".carousel-item-wrapper": {  }}}>
+        {(loading && <Heading>Loading...</Heading>) || (
+            <Carousel
+            additionalTransfrom={0}
+            swipeable={true}
+            draggable={false}
+            showDots={true}
+            responsive={responsive}
+            ssr={true}
+            infinite={false}
+            autoPlay={false}
+            autoPlaySpeed={1000}
+            keyBoardControl={true}
+            customTransition="all 1s linear"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            dotListClass="custom-dot-list-style"
+                      itemClass="carousel-item-padding-40-px carousel-item-wrapper"
+                      slidesToSlide={1}
+                      renderButtonGroupOutside={false}
+                      renderDotsOutside={false}
+                      customDot={<CustomCarouselDot />}
+
+        >
+            {!turbo &&
               goldVids &&
               goldVids.map((asset, i) => (
-                  <NFTCard asset={asset} id={i} />
+                <NFTCard asset={asset} id={i} />
               ))}
             {!turbo &&
               goldVids &&
                 goldVids.map((asset, i) => (
                 <NFTCard asset={asset} id={i} />
               ))}
-          </>
+          </Carousel>
         )}
       </SimpleGrid>
     </>

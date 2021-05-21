@@ -16,159 +16,14 @@ import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
+import { NFTCard } from "./NFTCard"
+import { CustomCarouselDot } from "./CustomCarouselDot";
+//
 
 export let getCollection: any;
 
 export interface ShowcaseGridInterface {
   collection: string;
-}
-
-export interface AssetTypeInterface {
-    asset: any;
-    id: number;
-}
-
-export interface CustomCarouselDotInterface {
-    onClick?: any;
-    active?: boolean;
-    index?: number;
-    carouselState?: any;
-}
-
-export const CustomCarouselDot: FC<CustomCarouselDotInterface> = ({ onClick, active, index, carouselState }) => {
-  const { currentSlide } = carouselState;
-  return (
-    //   <li key={index}>
-      <Button
-        backgroundColor={active ? "transparent" : "transparent" }
-              onClick={() => onClick()}
-              pos="relative" w="30px" h="30px" mx="10px"
-          sx={{
-              fontSize: "14px",
-              fontFamily: "Federal",
-              color: "white",
-            "&::after": {
-                content: "''",
-                backgroundImage: "url(/assets/ntfa-logo.png)",
-                backgroundSize: "100%",
-                backgroundRepeat: "no-repeat",
-                filter: "drop-shadow(0 0 5px rgba(0,0,0,.4))",
-                position: "absolute",
-                top: 0,
-                right: 0,
-                height: "100%",
-                width: "100%",
-                transform: "translate3d(0, 0, 0)",
-                opacity: active ? 1 : 0.8,
-                transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease",
-                zIndex: 0
-            },
-            "&:hover": {
-                backgroundColor: "transparent",
-                "&::after": {
-                    opacity: 1,
-                },
-            }
-        }}
-      >{index && index + 1}</Button>
-    // </li>
-  );
-};
-
-
-export const NFTCard: FC<AssetTypeInterface> = ({ asset, id }) => {
-    function truncateString(str = '', n = 0) {
-        if (str.length > n) {
-            return str.substring(0, n) + "...";
-        } else {
-            return str;
-        }
-    }
-
-    return (
-        <Box>
-        <Link
-            key={id}
-            href={`/details/${id}`}
-            transition="opacity 0.3s .3s ease-in"
-            display="flex"
-            flexFlow="column nowrap"
-            backgroundColor="rgba(255,255,255,0.8)"
-            backdropFilter="blur(3px)"
-            borderRadius="6px"
-            overflow="hidden"
-            boxShadow="0 0 10px rgba(0,0,0,0.7)"
-            position="relative"
-            paddingTop={{base: `${(207 / 305) * 100}%`, xl: `${78}%`}}
-            maxWidth="350px"
-            width="100%"
-            height="0"
-            sx={{
-                "&::after": {
-                    content: "''",
-                    backgroundImage: "url(/assets/ntfa-logo.png)",
-                    backgroundSize: "100%",
-                    backgroundRepeat: "no-repeat",
-                    filter: "drop-shadow(0 0 5px rgba(0,0,0,.4))",
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    height: "60px",
-                    width: "60px",
-                    transform: "translate3d(0, 40px, 0)",
-                    opacity: 0,
-                    transition: "transform 2.4s 0.4s ease-in-out, opacity 0.2s 0.4s ease"
-                },
-                "&:hover": {
-                    boxShadow: `0 0 5px rgba(0,0,0,0.4)`,
-                "&::after": {
-                    transform: "translate3d(0, -400%, 0)",
-                    opacity: 1
-                    },
-                "&::before": {
-                    transform: "translate3d(0, 10px, 0)",
-                    opacity: 1
-                }
-                },
-            }}
-        >
-            <Box position="absolute" top="0" left="0" w="100%" h="100%">
-                <Box
-                className="playerWrapper"
-                position="relative"
-                paddingTop={`${(212 / 373) * 100}%`}
-                height="0"
-                width="100%"
-                zIndex={200}
-                overflow="hidden"
-                >
-                    <ReactPlayer
-                        url={asset.path}
-                        playing={false}
-                        loop={true}
-                        width="100%"
-                        height="auto"
-                        controls={true}
-                        style={{
-                        position: "absolute",
-                        left: `0`,
-                        top: `0`,
-                        zIndex: 200,
-                        }}
-                    />
-                </Box>
-                <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "block", xl: "block"}} h="auto">
-                    <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "16px" }} color="accent.primary" mb="5px">{asset.title}</Heading>
-                    <Box fontSize={{ base: "11px", xl: "12px" }} d={{base: "none", xl: "block"}}>
-                        <Text noOfLines={{ base: 2, xl: 4 }}>
-                                {truncateString(asset.summary, 200)}
-                        </Text>
-                    </Box>
-                </Box>
-            </Box>
-            </Link>
-        </Box>
-    )
 }
 
 export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
@@ -266,8 +121,14 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   return (
     <>
         {/* <Button onClick={toggleTurbo} position="absolute" top="-50px" left={0}>Gold Boost {turbo ? 'on' : 'off'}</Button> */}
-          <SimpleGrid columns={{ base: 1, xl: 1 }} spacing={0} position="relative" pb="50px" width="100%" sx={{ ".carousel-item-wrapper": {  }}}>
-        {(loading && <Heading>Loading...</Heading>) || (
+          <SimpleGrid columns={{ base: 1, xl: 1 }} spacing={0} position="relative" width="100%" sx={{ ".carousel-item-wrapper": {  }}}>
+              {(loading && <Heading sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  color: "rgba(255,255,255,0.6)",
+                  textShadow: "0 0 5px rgba(0,0,0,0.6)"}}>Burning FIAT...</Heading>) || (
             <Carousel
             additionalTransfrom={0}
             swipeable={true}
@@ -285,7 +146,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
             removeArrowOnDeviceType={["tablet", "mobile"]}
             dotListClass="custom-dot-list-style"
                       itemClass="carousel-item-padding-40-px carousel-item-wrapper"
-                      slidesToSlide={1}
+                      slidesToSlide={3}
                       renderButtonGroupOutside={false}
                       renderDotsOutside={false}
                       customDot={<CustomCarouselDot />}

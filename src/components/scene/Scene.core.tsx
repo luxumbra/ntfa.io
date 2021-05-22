@@ -55,15 +55,15 @@ export function SceneCore() {
             <Button
                 position="absolute"
                 display={{base: "none", sm: "block"}}
-                right={{ base: "77%", md: "67%", lg: "45px" }}
+                right={{ base: "70%", md: "67%", lg: "45px" }}
                 bottom={{ base: "20%", md: "18%", lg: "calc(100% - 275px)" }}
                 zIndex="2000"
                 size="lg"
                 backgroundColor="#01735C"
                 colorScheme="green"
-                width={{ base: "80px", md: "120px", lg: "170px", xxxl: "225px" }}
-                height={{ base: "80px", md: "120px", lg: "170px", xxxl: "225px" }}
-                fontSize={{ base: "11px", md: "16px", lg: "16px", xxxl: "1.2vw" }}
+                width={{ base: "80px", sm: "120px", md: "120px", lg: "170px", xxxl: "225px" }}
+                height={{ base: "80px", sm: "120px", md: "120px", lg: "170px", xxxl: "225px" }}
+                fontSize={{ base: "10px", md: "16px", lg: "16px", xxxl: "1.2vw" }}
                 fontWeight="100"
                 fontFamily="'Federal', serif"
                 whiteSpace="break-spaces"

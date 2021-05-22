@@ -35,7 +35,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
             borderRadius="6px"
             boxShadow="0 0 10px rgba(0,0,0,0.7)"
             position="relative"
-            paddingTop={{base: `${(207 / 305) * 100}%`, xl: "83%", xxl: "81%", xxxl: "81%"}}
+            paddingTop={{base: `${(207 / 305) * 100}%`, xl: "83%", xxl: "81%", xxxl: "72%"}}
             maxWidth={{base: "280px", xl: "260px", xxl: "290px", xxxl: "400px"}}
             width="100%"
                 height="0"

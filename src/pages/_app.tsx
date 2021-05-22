@@ -7,7 +7,7 @@ import "../../public/css/font-face.css";
 import "../../public/css/stylesheet.css";
 
 const breakpoints = createBreakpoints({
-    sm: "320px",
+    sm: "360px",
     md: "768px",
     lg: "960px",
     xl: "1280px",

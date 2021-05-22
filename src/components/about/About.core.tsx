@@ -24,7 +24,7 @@ export function AboutCore() {
                         height: `100%`
                     }}>
                         <Box p={{base: "5%", xxxl: "4%"}} sx={{ "p:nth-of-type(even)": {fontSize: { base: `10px`, xl: `12px`, xxxl: `14px` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
-                            <Heading as="h2" fontSize={{ base: `11px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
+                            <Heading as="h2" fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
                                 mb: 2
                             }}>Never Touch FIAT Again</Heading>
                             <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>

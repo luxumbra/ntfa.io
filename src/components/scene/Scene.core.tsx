@@ -58,6 +58,7 @@ export function SceneCore() {
                 bottom={{ base: "23%", lg: "calc(100% - 275px)" }}
                 zIndex="2000"
                 size="lg"
+                backgroundColor="#01735C"
                 colorScheme="green"
                 width={{ base: "120px", lg: "170px", xxxl: "225px" }}
                 height={{ base: "120px", lg: "170px", xxxl: "225px" }}

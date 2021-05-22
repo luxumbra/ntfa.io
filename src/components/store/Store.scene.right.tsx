@@ -17,7 +17,8 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
                 position="absolute"
                 bottom={{ base: "8%", xl: "50px" }}
                 right={{ base: "15px", xl: "20px" }}
-                width={{ base: "100%", xl: "100px" }}
+                width={{base: "200%", xl: "100%"}}
+                maxW={{ base: "100px", xl: "150px" }}
                 height={{ base: "auto", xl: "auto" }}
                 className="fingerprint">
                 <Box

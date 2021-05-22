@@ -91,12 +91,12 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
         tablet: {
             breakpoint: { max: 1024, min: 464 },
             items: 2,
-            partialVisibilityGutter: 40
+            partialVisibilityGutter: 30
         },
         mobile: {
             breakpoint: { max: 464, min: 0 },
             items: 1,
-            partialVisibilityGutter: 40
+            partialVisibilityGutter: 10
         }
     };
 
@@ -121,7 +121,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   return (
     <>
         {/* <Button onClick={toggleTurbo} position="absolute" top="-50px" left={0}>Gold Boost {turbo ? 'on' : 'off'}</Button> */}
-          <SimpleGrid columns={{ base: 1, xl: 1 }} spacing={0} position="relative" width="100%" sx={{ ".carousel-item-wrapper": {  }}}>
+          <SimpleGrid columns={{ base: 1, xl: 1 }} rows={2} spacing={0} position="relative" width="100%" sx={{ ".custom-dot-list-style": { maxH: "15px" }}}>
               {(loading && <Heading sx={{
                   display: "flex",
                   alignItems: "center",
@@ -129,7 +129,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
                   textAlign: "center",
                   color: "rgba(255,255,255,0.6)",
                   textShadow: "0 0 5px rgba(0,0,0,0.6)"}}>Burning FIAT...</Heading>) || (
-            <Carousel
+        <Carousel
             additionalTransfrom={0}
             swipeable={true}
             draggable={false}
@@ -145,12 +145,12 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
             containerClass="carousel-container"
             removeArrowOnDeviceType={["tablet", "mobile"]}
             dotListClass="custom-dot-list-style"
-                      itemClass="carousel-item-padding-40-px carousel-item-wrapper"
-                      slidesToSlide={3}
-                      renderButtonGroupOutside={false}
-                      renderDotsOutside={false}
-                      customDot={<CustomCarouselDot />}
-
+            itemClass="carousel-item-padding-40-px carousel-item-wrapper"
+            slidesToSlide={1}
+            partialVisible
+            renderButtonGroupOutside={false}
+            renderDotsOutside={true}
+            customDot={<CustomCarouselDot />}
         >
             {!turbo &&
               goldVids &&

@@ -14,17 +14,18 @@ export interface StoreSceneLeftInterface {
 export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, animation }) => {
 
     return(
-        <Box className={className} flexGrow={1} minW={minW} position="relative">
+        <Box className={className} flexGrow={1} minW={minW} position="relative" zIndex="2000">
             <Box
-                className="logo" position="absolute" width="100%" height={{ base: "20%", xl: "auto" }} maxW={{ base: "65px", xl: "130px" }} top={{ base: "0", xl: "0" }} left={{ base: "10px", xl: "50px" }} z={500} >
+                className="logo" position="absolute" width="100%" height={{ base: "20%", xl: "auto" }} maxW={{ base: "100px", xl: "130px" }} top={{ base: "0", xl: "0" }} left={{ base: "10px", xl: "50px" }} z={500} >
                     <Link
                         href="#section1"
                         display="inline-block"
                         position="relative"
-                        pt="56.25%"
+                    pt={{base: `${(75 / 44) * 100}%`, xl: "56%"}}
+                        filter="drop-shadow(0 0 5px rgba(0,0,0,.4))"
                         height="0"
-                        width="100%"
-                        maxW="130px"
+                        width="200%"
+                        maxW={{base: "100px", xl: "100px"}}
                         css={css`
                             @keyframes logo-anim {
                                 0% { transform: translateY(25px); }
@@ -43,9 +44,9 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
             <Box
                 position="absolute"
                 bottom={{ base: "50%", xl: "30%" }}
-                right={{ base: "20%", xl: "-30px" }}
+                right={{ base: "-42%", xl: "-30px" }}
                 height="auto"
-                width="100%"
+                width={{base: "200%", xl: "100%"}}
                 maxW={{ base: "100px", xl: "150px" }}
                 className="spacer"
                 transform={{ base: "scaleX(-1)", xl: "scaleX(-1)" }}

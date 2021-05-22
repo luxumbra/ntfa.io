@@ -34,8 +34,8 @@ export const FooterComponent = () => {
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "14px", xxl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
                     <Link href="/">Home</Link>
-                    <Link href="/about">About NTFA</Link>
-                    <Link href="/#section2">Burn FIAT</Link>
+                    <Link href="/#section2">About NTFA</Link>
+                    <Link href="/#section3">Burn FIAT</Link>
                 </HStack>
                 <HStack
                     spacing="30px"
@@ -81,7 +81,7 @@ export const FooterComponent = () => {
 
                         /* animation-play-state: paused; */
                     `}>
-                    <Box d="inline-flex" fontSize={{ base: "12px" }} alignItems="center">Site from the <span className="heart">🫀</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
+                    <Box d="inline-flex" fontSize={{ base: "12px" }} alignItems="center">Site from the <span className="heart">💛</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
                   </HStack>
                     <VStack color="white" fontSize={{base: "12px"}} sx={{"p": {fontSize: {base: "10px", lg: "12px"}, margin: 0}}}>
                         <p>Copyright {currentYear} NTFA Limited, all rights reserved. NTFA Limited is a registed  inHK THIS NEEDSUPDATING</p>

@@ -48,7 +48,7 @@ export function SceneCore() {
             backgroundImage="url(/assets/scenes/bg-scene.png)"
             backgroundSize="cover"
             overflow="hidden"
-            id="section2"
+            id="section3"
         >
             <SceneCopy />
 
@@ -109,7 +109,7 @@ export function SceneCore() {
                 width={{ base: "200px", lg: "100px", xxxl: "300px" }}
                 zIndex={1000}>
                 <Link
-                    href="#section3"
+                    href="#section2"
                     w="100%"
                     h="100%"
                     sx={{
@@ -130,7 +130,7 @@ export function SceneCore() {
                         "& > span": { visibility: `hidden` },
                         "&:hover": { color: `transparent !important`, opacity: 0.3, }
                     }}>
-                    <span>Bitcoin & Gold</span>
+                    <span>Never Touch Fiat Again</span>
                 </Link>
             </Box>
 

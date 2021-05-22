@@ -28,7 +28,7 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
                     w="100%"
                     maxW="200px">
                     <Link
-                        href="#section2"
+                        href="#section3"
                         w="100%"
                         h="100%"
                         sx={{

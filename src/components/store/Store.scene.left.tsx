@@ -58,7 +58,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                     w="100%"
                     maxW="200px">
                     <Link
-                        href="#section3"
+                        href="#section2"
                         w="100%"
                         h="100%"
                         sx={{
@@ -83,7 +83,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                                 opacity: 0.3,
                             }
                         }}>
-                        <span>Bitcoin & Gold</span>
+                        <span>Never Touch Fiat Again</span>
                     </Link>
                 </Box>
             </Box>

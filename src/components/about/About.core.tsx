@@ -7,7 +7,7 @@ import { AboutSceneRight } from './About.scene.right';
 
 export function AboutCore() {
     return(
-        <Box id="section3" className="ntfa" d="flex" flexDir="row" alignContent="stretch"
+        <Box id="section2" className="ntfa" d="flex" flexDir="row" alignContent="stretch"
         justifyContent={["center", "unset"]} minH="100vh" pos="relative" background="url(/assets/scenes/bg-industrial.png) 50% no-repeat" backgroundSize={["cover", "cover"]} overflow="hidden">
 
             <AboutSceneLeft />
@@ -23,8 +23,10 @@ export function AboutCore() {
                         overflow: `hidden`,
                         height: `100%`
                     }}>
-                        <Box p={{base: "5%", xxxl: "4%"}} sx={{ "p:nth-of-type(even)": {fontSize: { base: `1.6vw`, xl: `1vw`, xxxl: `0.8vw` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
-                            <Heading as="h2" fontSize={{ base: `2.5vw`, xl: `1.2vw`, xxxl: `1.1vw` }}>Never Touch FIAT Again</Heading>
+                        <Box p={{base: "5%", xxxl: "4%"}} sx={{ "p:nth-of-type(even)": {fontSize: { base: `10px`, xl: `12px`, xxxl: `14px` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
+                            <Heading as="h2" fontSize={{ base: `11px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
+                                mb: 2
+                            }}>Never Touch FIAT Again</Heading>
                             <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>
                             <p style={{ fontWeight: 'bold' }}>- Ralph Waldo Emerson</p>
 

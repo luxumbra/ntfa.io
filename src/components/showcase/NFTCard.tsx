@@ -16,7 +16,7 @@ export interface NFTCardInterface {
 export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
     function truncateString(str = '', n = 0) {
         if (str.length > n) {
-            return str.substring(0, n) + "...";
+            return str.substring(0, n) + "... read more";
         } else {
             return str;
         }
@@ -35,7 +35,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
             borderRadius="6px"
             boxShadow="0 0 10px rgba(0,0,0,0.7)"
             position="relative"
-            paddingTop={{base: `${(207 / 305) * 100}%`, md: `${(207 / 305) * 100}%`, lg: `${(207 / 305) * 100}%`, xl: "83%", xxl: "81%", xxxl: "72%"}}
+            paddingTop={{base: `${93}%`, md: `${(207 / 305) * 100}%`, lg: `${(207 / 305) * 100}%`, xl: "83%", xxl: "81%", xxxl: "72%"}}
             maxWidth={{base: "280px", md: "280px", lg: "320px", xl: "290px", xxl: "320px", xxxl: "400px"}}
             width="100%"
             height="0"
@@ -118,8 +118,8 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                 </Box>
                 <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "block", xl: "block"}} h="auto">
                     <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "14px" }} color="accent.primary" mb="5px">{asset.title}</Heading>
-                    <Box d={{base: "none", lg: "block"}}>
-                        <Text noOfLines={{ base: 2, lg: 3 }}>
+                    <Box d={{base: "block", lg: "block"}}>
+                        <Text noOfLines={{ base: 5, lg: 3, xxl: 4 }} sx={{fontSize: { base: `11px`, lg: `12px`, xxl: `12px`, xxxl: `14px` }}}>
                                 {truncateString(asset.summary, 200)}
                         </Text>
                     </Box>

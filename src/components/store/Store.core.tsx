@@ -17,7 +17,7 @@ export function StoreCore() {
 
             <Box className="scene__center" flex={{base: "0 0 66%"}} d="flex" flexFlow="column wrap" alignItems="center" zIndex="0">
 
-                <Box width="80vw" height={{base: "30%", xl: "33%"}} />
+                <Box width="80vw" height={{base: "30%", md: "40%", lg: "33%", xl: "33%"}} />
 
                 <Box width="100%" height={{base: "40%", xl: "33%"}} className="store" position="relative">
                     <ShowcaseGridComponent collection="100-bees-hexel-collection" />

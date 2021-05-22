@@ -55,7 +55,7 @@ export function SceneCore() {
             <Button
                 position="absolute"
                 right={{ base: "67%", lg: "45px" }}
-                bottom={{ base: "23%", lg: "calc(100% - 275px)" }}
+                bottom={{ base: "18%", lg: "calc(100% - 275px)" }}
                 zIndex="2000"
                 size="lg"
                 backgroundColor="#01735C"
@@ -134,7 +134,7 @@ export function SceneCore() {
                 </Link>
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "60px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "61%", xxxl: "70%"}} left={{base: "50%", lg: "67%", xxl: "59%", xxxl: "64%"}} z={1000}>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "60px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "61%", xxxl: "70%"}} left={{base: "50%", lg: "67%", xxl: "59%", xxxl: "64%"}} zIndex={1000}>
                 <Link
                     href="#section1"
                     display="inline-block"

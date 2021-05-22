@@ -84,7 +84,7 @@ const theme = extendTheme({
                 fontWeight: `100`,
             },
             p: {
-                fontSize: { base: `11px`, xxl: `12px`, xxxl: `16px` },
+                fontSize: { base: `11px`, lg: `14px`, xxl: `16px`, xxxl: `16px` },
                 marginBottom: { base: `10px`, xl: `0.8vw` },
                 lineHeight: { base: `1.2`, xl: `1.3` },
                 fontWeight: `100`,
@@ -100,7 +100,7 @@ const theme = extendTheme({
                 },
             },
             li: {
-                fontSize: { base: `11px`, xl: `16px` },
+                fontSize: { base: `11px`, lg: `14px`, xxl: `16px`, xxxl: `16px` },
                 marginBottom: { base: `10px`, xl: `0.8vw` },
                 lineHeight: { base: `1.2` },
                 fontWeight: `100`,

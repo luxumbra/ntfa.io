@@ -35,10 +35,10 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
             borderRadius="6px"
             boxShadow="0 0 10px rgba(0,0,0,0.7)"
             position="relative"
-            paddingTop={{base: `${(207 / 305) * 100}%`, xl: "83%", xxl: "81%", xxxl: "72%"}}
-            maxWidth={{base: "280px", xl: "260px", xxl: "290px", xxxl: "400px"}}
+            paddingTop={{base: `${(207 / 305) * 100}%`, md: `${(207 / 305) * 100}%`, lg: `${(207 / 305) * 100}%`, xl: "83%", xxl: "81%", xxxl: "72%"}}
+            maxWidth={{base: "280px", md: "280px", lg: "320px", xl: "290px", xxl: "320px", xxxl: "400px"}}
             width="100%"
-                height="0"
+            height="0"
             overflow="hidden"
             sx={{
                 "&::after": {
@@ -79,7 +79,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                     justifyContent: "center",
                     bottom: 0,
                     right: 0,
-                    height: `${100 - (212 / 373) * 100}%`,
+                    height: {base: `${100 - (212 / 373) * 100}%`, md: `${100 - (212 / 373) * 100}%`,  lg: `${100 - (212 / 300) * 100}%`, xxl: `${100 - (212 / 373) * 100}%`},
                     width: "100%",
                     backgroundColor: "rgba(255,255,255,0.8)",
                     // backdropFilter: "blur(5px)",
@@ -118,8 +118,8 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                 </Box>
                 <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "block", xl: "block"}} h="auto">
                     <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "14px" }} color="accent.primary" mb="5px">{asset.title}</Heading>
-                    <Box d={{base: "none", xl: "block"}}>
-                        <Text noOfLines={{ base: 2, xl: 3 }}>
+                    <Box d={{base: "none", lg: "block"}}>
+                        <Text noOfLines={{ base: 2, lg: 3 }}>
                                 {truncateString(asset.summary, 200)}
                         </Text>
                     </Box>

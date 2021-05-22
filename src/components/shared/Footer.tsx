@@ -8,7 +8,7 @@ export const FooterComponent = () => {
     const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear())
 
     return(
-        <Box position="absolute" bottom="0" left="0" width="100vw" height={{base: "90px", xl: "150px", xxxl: "160px"}} zIndex={300}>
+        <Box position="absolute" bottom="0" left="0" width="100vw" height={{base: "90px", lg: "120px", xl: "150px", xxxl: "160px"}} zIndex={300}>
             <Box
                 d="flex"
                 flexFlow="column nowrap"
@@ -23,7 +23,7 @@ export const FooterComponent = () => {
                 overflow="hidden"
                 alignContent={{base: "center", xl: "flex-start"}}
                 h="100%"
-                maxH={{base: "90px", xl: "200px"}}
+                maxH={{base: "90px", lg: "300px", xl: "200px"}}
                 width="auto"
                 maxW="768px"
                 m="0 auto"
@@ -83,7 +83,7 @@ export const FooterComponent = () => {
                     `}>
                     <Box d="inline-flex" fontSize={{ base: "12px" }} alignItems="center">Site from the <span className="heart">🫀</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
                   </HStack>
-                    <VStack color="white" fontSize={{base: "12px"}} sx={{"p": {fontSize: "12px", margin: 0}}}>
+                    <VStack color="white" fontSize={{base: "12px"}} sx={{"p": {fontSize: {base: "10px", lg: "12px"}, margin: 0}}}>
                         <p>Copyright {currentYear} NTFA Limited, all rights reserved. NTFA Limited is a registed  inHK THIS NEEDSUPDATING</p>
                     <UnorderedList sx={{ display: "inline-flex", listStyle: "none", m: 0, "li": { fontSize: "12px", mx: 3 }}}>
                             <ListItem>Contact: <Link href="mailto:gold@ntfa.io">gold@ntfa.io</Link></ListItem>

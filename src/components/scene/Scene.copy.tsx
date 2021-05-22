@@ -37,14 +37,14 @@ export const SceneCopy: FC = () => {
                         }
                     }
                     }}>
-                      <Heading as="h2" fontSize={{ base: `16px`, xl: `1.2vw`, xl: `1.2vw` }}>Bitcoin & Gold</Heading>
+                      <Heading as="h2" fontSize={{ base: `16px`, xl: `20px`, xxl: `22px`, xxxl: "26px" }}>Bitcoin & Gold</Heading>
                         <ul>
                             <li>Bitcoin is based on cryptographically proven randomness and scarcity over time.</li>
                             <li>Gold is a rare earth metal used in countless tools, jewelry and as a store of wealth.</li>
                             <li>NFTs are ownable digital records used to store information.</li>
                         </ul>
 
-                        <Heading as="h3" fontSize={{ base: `11px`, xl: `1.2vw`, xl: `1vw` }}>What is your Dollar?</Heading>
+                        <Heading as="h3" fontSize={{ base: `11px`, xl: `14px`, xxl: `18px`, xxxl: "20px" }}>What is your Dollar?</Heading>
                           <p>NFTs can prove ownership of pretty much anything, like for example gold.</p>
 
                         <p>Fiat becomes dirty money when the printers go BRRRRRRRRRRRRRRRR!!!</p>
@@ -52,7 +52,7 @@ export const SceneCopy: FC = () => {
 
                         <p>The best way to keep your hands clean is to...</p>
 
-                        <Heading as="h3" fontSize={{ base: `11px`, xl: `1.2vw`, xl: `1vw` }}>Never Touch FIAT Again</Heading>
+                        <Heading as="h3" fontSize={{ base: `11px`, xl: `14px`, xxl: `18px`, xxxl: "20px" }}>Never Touch FIAT Again</Heading>
                         <p>Gold and Art are a perfect match. Be rich and look good doing it! While the world crumbles, you can be a golden space cowboy!</p>
                     </Box>
                 </Box>

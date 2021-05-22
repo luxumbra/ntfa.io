@@ -1,6 +1,6 @@
 # Never Touch Fiat Again
 
-The storefront for [Never Touch Fiat Againt](https://ntfa.io).
+The storefront for [Never Touch Fiat Again](https://ntfa.io).
 
 ## Development
 

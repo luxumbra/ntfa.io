@@ -73,6 +73,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                     content: `'View ${asset.title}'`,
                     color: "accent.primary",
                     position: "absolute",
+                    fontWeight: "900",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -80,8 +81,8 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                     right: 0,
                     height: `${100 - (212 / 373) * 100}%`,
                     width: "100%",
-                    backgroundColor: "rgba(255,255,255,0.6)",
-                    backdropFilter: "blur(5px)",
+                    backgroundColor: "rgba(255,255,255,0.8)",
+                    // backdropFilter: "blur(5px)",
                     textAlign: "center",
                     // transform: `translate3d(0, ${100 - (212 / 373)}%, 0)`,
                     opacity: 0,
@@ -116,7 +117,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                     />
                 </Box>
                 <Box position="relative" width="100%" p={{base: "4%"}} d={{base: "block", xl: "block"}} h="auto">
-                    <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "16px" }} color="accent.primary" mb="5px">{asset.title}</Heading>
+                    <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "14px" }} color="accent.primary" mb="5px">{asset.title}</Heading>
                     <Box d={{base: "none", xl: "block"}}>
                         <Text noOfLines={{ base: 2, xl: 3 }}>
                                 {truncateString(asset.summary, 200)}

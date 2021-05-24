@@ -4,11 +4,13 @@ import Head from 'next/head';
 export interface MetadataInterface {
     title?: string;
     description?: string;
+    socialImage?: string;
 }
 
-export const MetadataComponent: FC<MetadataInterface> = ({ title, description }) => {
+export const MetadataComponent: FC<MetadataInterface> = ({ title, description, socialImage }) => {
     const outputTitle = title ? title : 'Never Touch Fiat Again';
     const outputDescription = description ? description : 'The Never Touch Fiat Again Store Front';
+    const imgPath = socialImage ? socialImage : '/assets/banner.jpg';
 
     return(
         <Head>
@@ -18,9 +20,9 @@ export const MetadataComponent: FC<MetadataInterface> = ({ title, description })
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:title" content={outputTitle}/>
             <meta name="twitter:description" content={outputDescription} />
-            <meta name="twitter:image" content="/assets/banner.jpg"></meta>
+            <meta name="twitter:image" content={imgPath}></meta>
             <meta property="og:title" content={outputTitle}/>
-            <meta property="og:image" content="/assets/banner.jpg"/>
+            <meta property="og:image" content={imgPath}/>
             <meta property="og:description" content={outputDescription} />
 
             <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>

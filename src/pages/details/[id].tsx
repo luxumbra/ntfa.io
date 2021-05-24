@@ -68,7 +68,7 @@ export function AssetDetails() {
             overflow="hidden"
             id="section2"
         >
-            <MetadataComponent />
+            <MetadataComponent title={id && goldVids[+id].title} description={id && goldVids[+id].description} socialImage={`/assets/${id}-banner.png`} />
             <Box
                 className="content"
                 flex={{base: "0 0 90%", lg: "0 0 33%"}}

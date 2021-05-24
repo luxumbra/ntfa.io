@@ -39,7 +39,6 @@ export function SceneCore() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
-    const [pigAnchored, setPigAnchored] = useState(true);
 
     return(
         <Box
@@ -57,7 +56,7 @@ export function SceneCore() {
                 position="absolute"
                 display={{base: "none", sm: "block"}}
                 right={{ base: "70%", md: "67%", lg: "45px" }}
-                bottom={{ base: "20%", md: "18%", lg: "calc(100% - 275px)" }}
+                bottom={{ base: "20%", md: "18%", lg: "calc(100% - 200px)", xxl: "calc(100% - 275px)" }}
                 zIndex="2000"
                 size="lg"
                 backgroundColor="#01735C"
@@ -85,7 +84,6 @@ export function SceneCore() {
                                 setToggle1(true);
                                 setToggle2(true);
                                 setToggle3(true);
-                                setPigAnchored(false);
                             }, 2.5 * 1000)
                         )
 
@@ -96,7 +94,6 @@ export function SceneCore() {
                                 setToggle1(false);
                                 setToggle2(false);
                                 setToggle3(false);
-                                setPigAnchored(true);
                             }, 10 * 1000)
                         )
                     }
@@ -163,7 +160,7 @@ export function SceneCore() {
                         /* animation: logo-anim 5s infinite; */
                         /* animation-play-state: paused; */
                     `}
-                    sx={{animation: pigAnchored ? 'logo-anim 5s infinite' : 'pig-release 10s 1'}}
+                    sx={{animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1'}}
                 >
                     <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                 </Link>

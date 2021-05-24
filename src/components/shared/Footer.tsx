@@ -37,7 +37,7 @@ export const FooterComponent = () => {
                     sx={{
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
-                    <Link href="/">Home</Link>
+                    <Link href="/#section1">Home</Link>
                     <Link href="/#section2">About NTFA</Link>
                     <Link href="/#section3">Burn FIAT</Link>
                     <Button as="a" onClick={() => setReveal(!reveal)} sx={{

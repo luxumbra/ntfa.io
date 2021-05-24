@@ -86,7 +86,7 @@ export function SceneCore() {
                                 setToggle2(true);
                                 setToggle3(true);
                                 setPigAnchored(false);
-                            }, 3 * 1000)
+                            }, 2.5 * 1000)
                         )
 
                         setTimeoutState(

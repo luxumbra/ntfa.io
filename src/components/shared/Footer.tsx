@@ -26,14 +26,16 @@ export const FooterComponent = () => {
                 alignContent={{ base: "center", xl: "flex-start" }}
                 h="100%"
                 maxH={{ base: "90px", lg: "300px", xl: "200px" }}
-                width="auto"
+                width="100%"
                 maxW="768px"
                 m="0 auto"
-                py={{ base: 3, xl: 5 }}>
+                py={{ base: 1, xl: 5 }}
+            px={{base: 1, lg: 3}}>
                 <HStack
-                    spacing="30px"
+                    spacing={{ base: "30px" }}
+                    maxH={{base: "20px", lg: "50px"}}
                     sx={{
-                        "a": { color: "white", fontFamily: "Hero", fontSize: { base: "14px", xxl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
+                        "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
                     <Link href="/">Home</Link>
                     <Link href="/#section2">About NTFA</Link>
@@ -44,11 +46,12 @@ export const FooterComponent = () => {
                             background: "transparent",
                             color: "yellow.500",
                             cursor: "pointer"
-                        }
+                        },
+                        px: 0
                     }}>Mattereum</Button>
                 </HStack>
                 <HStack
-                    spacing="30px"
+                    spacing={{base: "10px", lg: "30px"}}
                     sx={{
                         "a": {
                             color: "white",
@@ -58,6 +61,7 @@ export const FooterComponent = () => {
                                 }
                             },
                         }, color: "white", mx: "auto",
+                        mb: { base: 0, lg: 1 }
                     }}
                     css={css`
                         @keyframes dps-rotate {
@@ -91,11 +95,11 @@ export const FooterComponent = () => {
 
                         /* animation-play-state: paused; */
                     `}>
-                    <Box d="inline-flex" fontSize={{ base: "12px" }} alignItems="center">Site from the <span className="heart">💛</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
+                    <Box d="inline-flex" fontSize={{ base: "10px", lg: "12px" }} alignItems="center">Site from the <span className="heart">💛</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
                 </HStack>
-                <VStack color="white" fontSize={{ base: "12px" }} sx={{ "p": { fontSize: { base: "10px", lg: "12px" }, margin: 0 } }}>
+                <VStack spacing={{base: 1, lg: 3}} color="white" fontSize={{ base: "9px", lg: "12px" }} sx={{ "p": { fontSize: { base: "9px", lg: "12px" }, margin: 0 } }}>
                     <p>Copyright {currentYear} NTFA Limited, all rights reserved. NTFA Limited is a registed  inHK THIS NEEDSUPDATING</p>
-                    <UnorderedList sx={{ display: "inline-flex", listStyle: "none", m: 0, "li": { fontSize: "12px", mx: 3 } }}>
+                    <UnorderedList sx={{ display: "inline-flex", listStyle: "none", m: 0, "li": { fontSize: {base: "9px", lg: "12px"}, mx: 3 } }}>
                         <ListItem>Contact: <Link href="mailto:gold@ntfa.io">gold@ntfa.io</Link></ListItem>
                         <ListItem>Report: <Link href="mailto:support@ntfa.io">support@ntfa.io</Link></ListItem>
                     </UnorderedList>
@@ -117,8 +121,7 @@ export const FooterComponent = () => {
                     borderRadius="6px"
                     overflow="hidden"
                     opacity={reveal ? 1 : 0}
-                    // transform={`translate3d(${reveal ? '100%, -500px, 0' : '-400px, -500px, 0'})`}
-                    transition="all 0.2s ease-in-out, opacity 0.3s 0.2s ease-in-out"
+                    transition="opacity 0.3s 0.2s ease-in-out"
                     zIndex={reveal ? "200" : -20}
                 >
 
@@ -146,8 +149,8 @@ export const FooterComponent = () => {
                                 right: "0",
                                 zIndex: 200
                             }}>Mattereum</IconButton>
-                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" mb={2}>Mattereum</Heading>
-                            <Box sx={{ "p": { fontSize: { base: "12px", lg: "12px" } } }}>
+                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" mb={{ base: 0, lg: 2 }}>Mattereum</Heading>
+                            <Box sx={{ "p": { fontSize: { base: "9px", lg: "12px" } } }}>
                                 <p>Mattereum is a trading name and registered trademark of MTRM Industries Limited, registered in England company number 10899201. VAT registration number: GB 283834768. Registered office: 69 Kingfisher Heights, Waterside Way, London, England, N17 9GL.</p>
                             </Box>
                         </Box>

@@ -110,7 +110,7 @@ export const FooterComponent = () => {
                     height="100%"
                     d="flex"
                     flexDirection="column"
-                    alignItems="flex-start"
+                    alignItems="center"
                     mt={0}
                     ml={0}
                     px="0"
@@ -124,6 +124,8 @@ export const FooterComponent = () => {
 
                     <Box
                         position="relative"
+                        display="flex"
+                        alignItems="center"
                         width="100%"
                         height="100%"
                         margin="0"
@@ -144,7 +146,7 @@ export const FooterComponent = () => {
                                 right: "0",
                                 zIndex: 200
                             }}>Mattereum</IconButton>
-                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900">Mattereum</Heading>
+                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" mb={2}>Mattereum</Heading>
                             <Box sx={{ "p": { fontSize: { base: "12px", lg: "12px" } } }}>
                                 <p>Mattereum is a trading name and registered trademark of MTRM Industries Limited, registered in England company number 10899201. VAT registration number: GB 283834768. Registered office: 69 Kingfisher Heights, Waterside Way, London, England, N17 9GL.</p>
                             </Box>

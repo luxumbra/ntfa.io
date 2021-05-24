@@ -8,7 +8,7 @@ export interface MetadataInterface {
 }
 
 export const MetadataComponent: FC<MetadataInterface> = ({ title, description, socialImage }) => {
-    const outputTitle = title ? title : 'Never Touch Fiat Again';
+    const outputTitle = title ? `${title} - Gold backed NFT by Never Touch Fiat Again`  : 'Never Touch Fiat Again';
     const outputDescription = description ? description : 'The Never Touch Fiat Again Store Front';
     const imgPath = socialImage ? socialImage : '/assets/banner.jpg';
 

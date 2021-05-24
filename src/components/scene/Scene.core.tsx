@@ -39,6 +39,7 @@ export function SceneCore() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
+    const [pigAnchored, setPigAnchored] = useState(true);
 
     return(
         <Box
@@ -84,6 +85,7 @@ export function SceneCore() {
                                 setToggle1(true);
                                 setToggle2(true);
                                 setToggle3(true);
+                                setPigAnchored(false);
                             }, 3 * 1000)
                         )
 
@@ -94,6 +96,7 @@ export function SceneCore() {
                                 setToggle1(false);
                                 setToggle2(false);
                                 setToggle3(false);
+                                setPigAnchored(true);
                             }, 10 * 1000)
                         )
                     }
@@ -135,7 +138,7 @@ export function SceneCore() {
                 </Link>
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "60px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "61%", xxxl: "70%"}} left={{base: "50%", lg: "67%", xxl: "59%", xxxl: "64%"}} zIndex={1000}>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "60px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={1000}>
                 <Link
                     href="#section1"
                     display="inline-block"
@@ -150,10 +153,17 @@ export function SceneCore() {
                             50% { transform: translateY(35px); }
                             100% { transform: translateY(25px); }
                         }
-
-                        animation: logo-anim 5s infinite;
+                        @keyframes pig-release {
+                            0% {
+                                transform: translateY(-15px) scale(1);
+                            }
+                            50% { transform: translateY(-400px) translateX(100px) scale(0.5); }
+                            100% { transform: translateY(-700px) translateX(200px) scale(0.3); }
+                        }
+                        /* animation: logo-anim 5s infinite; */
                         /* animation-play-state: paused; */
                     `}
+                    sx={{animation: pigAnchored ? 'logo-anim 5s infinite' : 'pig-release 10s 1'}}
                 >
                     <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                 </Link>

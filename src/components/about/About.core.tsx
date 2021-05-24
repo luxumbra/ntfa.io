@@ -16,7 +16,7 @@ export function AboutCore() {
                 <Box width="100%" height="auto" margin="50px 0 0" zIndex={1000} maxH="90%">
                     <Box p="2%" sx={{
                         backgroundColor: `rgba(0,0,0,0.6)`,
-                        backdropFilter: `blur(3px)`,
+                        // backdropFilter: `blur(3px)`,
                         boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                         color: `white`,
                         borderRadius: `6px`,
@@ -49,7 +49,7 @@ export function AboutCore() {
                 </Box>
             </Box>
 
-            <Box position="absolute" bottom="0" left="0" background={{base: "url(/assets/buildings/building-industrial.png) 0 100% no-repeat", lg: "url(/assets/buildings/building-industrial.png) 0 110px no-repeat"}} backgroundSize={{base: "contain", lg: "contain"}} width="100%" minW="100vw" minH="100vh" zIndex="0" pointerEvents="none"></Box>
+            <Box position="absolute" bottom="0" left="0" background={{base: "url(/assets/buildings/building-industrial.png) bottom left no-repeat", lg: "url(/assets/buildings/building-industrial.png) bottom left no-repeat"}} backgroundSize={{base: "contain", lg: "contain"}} width={{base: "100%", lg: "70%"}} height="0" pt={`${(1722/2318) * 100}%`} zIndex="0" pointerEvents="none"></Box>
 
             <AboutSceneRight />
         </Box>

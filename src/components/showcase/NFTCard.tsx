@@ -79,7 +79,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                     justifyContent: "center",
                     bottom: 0,
                     right: 0,
-                    height: {base: `${100 - (212 / 373) * 100}%`, md: `${100 - (212 / 373) * 100}%`,  lg: `${100 - (212 / 300) * 100}%`, xxl: `${100 - (212 / 373) * 100}%`},
+                    height: {base: `${100 - (212 / 373) * 100}%`, md: `${100 - (212 / 373) * 100}%`,  lg: `${100 - (212 / 300) * 100}%`, xl: `${100 - (212 / 373) * 100}%`},
                     width: "100%",
                     backgroundColor: "rgba(255,255,255,0.8)",
                     // backdropFilter: "blur(5px)",

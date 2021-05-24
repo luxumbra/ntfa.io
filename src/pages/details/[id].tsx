@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Link, Image } from "@chakra-ui/react";
+import { Box, Heading, Link, Image, Button } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
@@ -21,6 +21,7 @@ export function AssetDetails() {
     const {
         query: { id },
     } = router;
+
 
     const goldVids = [
         {
@@ -139,27 +140,36 @@ export function AssetDetails() {
                 </Box>
             </Box>
 
-                <Box position="absolute" width="100%" height={{base: "10%", lg: "10%"}} maxW={{base: "25px", lg: "45px", xxxl: "60px"}} bottom={{base: "34%", lg: "60%", xl: "60%", xxl: "55%", xxxl: "70%"}} left={{base: "54%", lg: "66%", xxl: "58%", xxxl: "64%"}} img="" imgAlt="" zIndex={0}>
-                    <Link
-                        href="/#section1"
-                        display="inline-block"
-                        position="relative"
-                        height="100%"
-                        width="100%"
-                        maxW="100px"
-                        css={css`
-                            @keyframes logo-anim {
-                                0% { transform: translateY(25px); }
-                                50% { transform: translateY(35px); }
-                                100% { transform: translateY(25px); }
-                            }
 
-                            animation: logo-anim 5s infinite;
-                            /* animation-play-state: paused; */
-                        `}
-                    >
-                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
-                    </Link>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "50px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={{base: 1000, lg: 0}}>
+                <Link
+                    href="/#section1"
+                    display="inline-block"
+                    position="relative"
+                    // pt="26.25%"
+                    height="0"
+                    width="100%"
+                    maxW="100px"
+                    css={css`
+                        @keyframes logo-anim {
+                            0% { transform: translateY(25px); }
+                            50% { transform: translateY(35px); }
+                            100% { transform: translateY(25px); }
+                        }
+                        @keyframes pig-release {
+                            0% {
+                                transform: translateY(-15px) scale(1);
+                            }
+                            50% { transform: translateY(-400px) translateX(100px) scale(0.5); }
+                            100% { transform: translateY(-700px) translateX(200px) scale(0.3); }
+                        }
+                        /* animation: logo-anim 5s infinite; */
+                        /* animation-play-state: paused; */
+                    `}
+                    sx={{animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1'}}
+                >
+                    <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                </Link>
             </Box>
 
             <SceneBridge/>

@@ -55,9 +55,9 @@ export function SceneCore() {
             <Button
                 position="absolute"
                 display={{base: "none", sm: "block"}}
-                right={{ base: "70%", md: "67%", lg: "45px" }}
-                bottom={{ base: "20%", md: "18%", lg: "calc(100% - 200px)", xxl: "calc(100% - 275px)" }}
-                zIndex="2000"
+                right={{ base: "70%", smd: "80%", md: "67%", lg: "45px" }}
+                bottom={{ base: "20%", smd: "calc(100% - 150px)", md: "18%", lg: "calc(100% - 200px)", xxl: "calc(100% - 275px)" }}
+                zIndex={{base: 300, lg: 2000}}
                 size="lg"
                 backgroundColor="#01735C"
                 colorScheme="green"
@@ -106,9 +106,9 @@ export function SceneCore() {
                 pos="absolute"
                 bottom={{ base: "44%", lg: "70%", xxxl: "70%" }}
                 right={{ base: "0", lg: "50%", xxxl: "50%" }}
-                height={{ base: "200px", lg: "300px", xxxl: "300px" }}
-                width={{ base: "200px", lg: "100px", xxxl: "300px" }}
-                zIndex={1000}>
+                height={{ base: "100px", smd: "60px", lg: "300px", xxxl: "300px" }}
+                width={{ base: "100px", smd: "60px", lg: "100px", xxxl: "300px" }}
+                zIndex={{base: 300, lg: 1000}}>
                 <Link
                     href="#section2"
                     w="100%"
@@ -135,7 +135,7 @@ export function SceneCore() {
                 </Link>
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "45px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={{base: 500, lg: 0}}>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "45px", xxxl: "60px"}} bottom={{base: "220px", smd: "250px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", smd: "25%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={{base: 500, lg: 0}}>
                 <Link
                     href="#section1"
                     display="inline-block"

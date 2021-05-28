@@ -14,7 +14,7 @@ export const FooterComponent = () => {
         <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={300}>
             <IconButton
                 position="absolute"
-                top="-87vh"
+                top={{base: "-87vh", smd: "-79vh"}}
                 right="0"
                 onClick={() => setShowMenu(!showMenu)}
                 icon={<HamburgerIcon />}
@@ -35,7 +35,7 @@ export const FooterComponent = () => {
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"
                 pos={{base: "absolute", lg: "relative"}}
-                top={{base: showMenu ? "-86.5vh" : "-200vh", lg: 0}}
+                top={{base: showMenu ? "-86.5vh" : "-200vh", smd: showMenu ? "-78vh" : "-200vh",  lg: 0}}
                 overflow="hidden"
                 alignContent={{ base: "center", xl: "flex-start" }}
                 h={{base: "100vh", lg: "100%"}}

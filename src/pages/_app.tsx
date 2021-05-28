@@ -8,6 +8,7 @@ import "../../public/css/stylesheet.css";
 
 const breakpoints = createBreakpoints({
     sm: "360px",
+    smd: "660px",
     md: "768px",
     lg: "960px",
     xl: "1280px",

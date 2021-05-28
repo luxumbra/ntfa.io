@@ -150,7 +150,7 @@ export function AssetDetails() {
                 </Box>
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px"}} bottom={{base: "220px", smd: "235px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px"}} zIndex={{base: 1000, smd: 0, lg: 0}}>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px"}} bottom={{base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px"}} zIndex={{base: 1000, smd: 0, lg: 0}}>
                 <Link
                     href="/#section1"
                     display="inline-block"

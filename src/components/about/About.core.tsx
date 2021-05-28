@@ -12,8 +12,8 @@ export function AboutCore() {
 
             <AboutSceneLeft />
 
-            <Box className="scene__center" flex={{base: "0 0 90%", lg: "0 0 45%", xxxl: "0 0 33%"}} ml={["auto", "auto"]} d="flex" flexDirection="column" alignItems="center" zIndex="1000">
-                <Box width="100%" height="auto" margin="50px 0 0" zIndex={1000} maxH="90%">
+            <Box className="scene__center" flex={{base: "0 0 90%", smd: "0 0 45%", lg: "0 0 45%", xxxl: "0 0 33%"}} ml={["auto", "auto"]} mr={{base: "auto"}} d="flex" flexDirection="column" alignItems="center" zIndex="1000">
+                <Box width="100%" height="auto" margin={{base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0"}} zIndex={1000} maxH="90%">
                     <Box p="2%" sx={{
                         backgroundColor: `rgba(0,0,0,0.6)`,
                         // backdropFilter: `blur(3px)`,

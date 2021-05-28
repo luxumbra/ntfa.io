@@ -16,7 +16,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
     return(
         <Box className={className} flexGrow={1} minW={minW} position="relative" zIndex="2000">
             <Box
-                className="logo" position="absolute" width="100%" height={{ base: "20%", xl: "auto" }} maxW={{ base: "100px", xl: "130px" }} top={{ base: "0", xl: "0" }} left={{ base: "10px", xl: "50px" }} z={500} >
+                className="logo" position="absolute" width="100%" height={{ base: "20%", xl: "auto" }} maxW={{ base: "100px", smd: "60px", xl: "130px" }} top={{ base: "0", xl: "0" }} left={{ base: "10px", xl: "50px" }} z={500} >
                     <Link
                         href="#section1"
                         display="inline-block"
@@ -25,7 +25,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                         filter="drop-shadow(0 0 5px rgba(0,0,0,.4))"
                         height="0"
                         width="200%"
-                        maxW={{base: "100px", xl: "100px"}}
+                        maxW={{base: "80px", smd: "60px", xl: "100px"}}
                         css={css`
                             @keyframes logo-anim {
                                 0% { transform: translateY(25px); }

@@ -72,23 +72,31 @@ export function AssetDetails() {
             <MetadataComponent title={id && goldVids[+id].title} description={id && goldVids[+id].description} socialImage={`/assets/${id}-banner.png`} />
             <Box
                 className="content"
-                flex={{base: "0 0 90%", lg: "0 0 33%"}}
-                width={{base: "90%", lg: "33%"}}
+                position="relative"
+                flex={{base: "0 0 90%", smd: "0 0 98%", lg: "0 0 33%"}}
+                width={{base: "90%", smd: "98%", lg: "33%"}}
                 d="flex"
-                flexDirection="column"
-                alignItems="flex-start"
+                flexDirection={{base: "column", smd: "row", lg: "column"}}
+                alignItems={{base: "flex-start", smd: "center", lg: "flex-start"}}
                 mt={{base: 7, lg: "10px", xl: "10px", xxl: "50px"}}
-                ml={{ base: "5%", lg: "auto" }}
-                mr={{base: "5%", lg: "auto"}}
+                ml={{ base: "5%", smd: "auto", lg: "auto" }}
+                mr={{base: "5%", smd: "auto", lg: "auto"}}
                 px="0"
                 boxShadow="0 0 10px rgba(0,0,0,.6)"
                 borderRadius="6px"
                 overflow="hidden"
+                zIndex={{ base: 100 }}
+                backgroundColor="rgba(255,255,255,0.6)"
+                backdropFilter="blur(7px)"
             >
                 <Box
                     className="playerWrapper"
                     position="relative"
-                    paddingTop={`${(356 / 633) * 100}%`}
+                    paddingTop={{
+                        base: `${(356 / 633) * 100}%`,
+                        smd: `${31}%`,
+                        lg: `${(356 / 633) * 100}%`
+                    }}
                     width="100%"
                     height="0"
                     zIndex={200}
@@ -113,13 +121,13 @@ export function AssetDetails() {
                 </Box>
 
                 <Box
-                    width="100%"
+                    width={{base: "100%", smd: "80%", lg: "100%"}}
                     margin="0"
-                    backgroundColor="rgba(255,255,255,0.6)"
-                    backdropFilter="blur(7px)"
+                    // backgroundColor="rgba(255,255,255,0.6)"
+                    // backdropFilter="blur(7px)"
                     z={0}
                 >
-                    <Box p={{base: "15px", lg: "25px"}}>
+                    <Box p={{base: "15px", smd: "10px", lg: "25px"}}>
                         <Heading as="h3" size={"sm"} color="accent.primary" mb="2">
                             {id && goldVids[+id].title}
                         </Heading>
@@ -142,8 +150,7 @@ export function AssetDetails() {
                 </Box>
             </Box>
 
-
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px"}} bottom={{base: "220px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px"}} zIndex={{base: 1000, lg: 0}}>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px"}} bottom={{base: "220px", smd: "235px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px"}} zIndex={{base: 1000, smd: 0, lg: 0}}>
                 <Link
                     href="/#section1"
                     display="inline-block"
@@ -179,7 +186,7 @@ export function AssetDetails() {
            <Box onClick={e => setToggle1(!toggle1)}>
                 <SceneBuilding
                     src="/assets/buildings/building-4.png"
-                    left={{ base: '180px', lg: '120px', xl: '1050px', xxl: '1100px', xxxl: '1400px' }}
+                    left={{ base: '180px', smd: '520px', lg: '120px', xl: '1050px', xxl: '1100px', xxxl: '1400px' }}
                     bottom={{ base: '0', lg: '0' }}
                     width={{ base: '50px', lg: '110px', xxxl: '170px' }}
                 />
@@ -188,7 +195,7 @@ export function AssetDetails() {
             <Image
                 src="/assets/buildings/building-4.destroyed.png"
                 position="absolute"
-                left={{ base: '166px', lg: '96px', xl: '1026px', xxl: '1076px', xxxl: '1361px' }}
+                left={{ base: '166px', smd: '506px', lg: '96px', xl: '1026px', xxl: '1076px', xxxl: '1361px' }}
                 bottom={{ base: '14px', lg: '58px', xxxl: '86px' }}
                 width={{ base: '95px', lg: '196px', xxxl: '306px' }}
                 opacity={toggle1 ? 1 : 0}
@@ -199,7 +206,7 @@ export function AssetDetails() {
             <Box onClick={e => setToggle3(!toggle3)}>
                 <SceneBuilding
                     src="/assets/buildings/building-1.png"
-                    left={{ base: '140px', lg: '190px', xl: '970px', xxl: '990px', xxxl: '1250px' }}
+                    left={{ base: '140px', smd: '480px', lg: '190px', xl: '970px', xxl: '990px', xxxl: '1250px' }}
                     bottom={{ base: '0', lg: '-25px', xxxl: '0' }}
                     width={{ base: '50px', lg: '120px', xxxl: '180px' }}
                 />
@@ -208,7 +215,7 @@ export function AssetDetails() {
             <Box onClick={e => setToggle2(!toggle2)}>
                 <SceneBuilding
                     src="/assets/buildings/building-3.png"
-                    left={{ base: '230px', lg: '20px', xl: '1150px', xxl: '1200px', xxxl: '1550px' }}
+                    left={{ base: '230px', smd: '550px', lg: '20px', xl: '1150px', xxl: '1200px', xxxl: '1550px' }}
                     bottom={{ base: '0', lg: '0' }}
                     width={{ base: '50px', lg: '120px', xxxl: '180px' }}
                 />
@@ -217,7 +224,7 @@ export function AssetDetails() {
             <Image
                 src="/assets/effects/b3.png"
                 position="absolute"
-                left={{ base: '230px', lg: '23px', xl: '1153px', xxl: '1203px', xxxl: '1553px' }}
+                left={{ base: '230px', smd: '553px', lg: '23px', xl: '1153px', xxl: '1203px', xxxl: '1553px' }}
                 bottom={{ base: '110px', lg: '252px', xxxl: '370px' }}
                 width={{ base: '58px', lg: '138px', xxxl: '210px' }}
                 opacity={toggle2 ? 1 : 0}
@@ -227,7 +234,7 @@ export function AssetDetails() {
 
             <SceneBuilding
                 src="/assets/buildings/building-2.png"
-                left={{ base: '100px', lg: '-100px', xl: '950px', xxl: '930px', xxxl: '1150px' }}
+                left={{ base: '100px', smd: '420px', lg: '-100px', xl: '950px', xxl: '930px', xxxl: '1150px' }}
                 bottom={{ base: '-2px', lg: '-20px', xxxl: '-20px' }}
                 width={{ base: '200px', lg: '540px', xxl: '540px', xxxl: '640px' }}
             />
@@ -235,7 +242,7 @@ export function AssetDetails() {
             <Image
                 src="/assets/effects/fog.png"
                 position="absolute"
-                left={{ base: '164px', lg: '250px', xl: '1030px', xxl: '1050px', xxxl: '1300px' }}
+                left={{ base: '164px', smd: '504px', lg: '250px', xl: '1030px', xxl: '1050px', xxxl: '1300px' }}
                 bottom={{ base: '100px', lg: '220px', xxxl: '380px' }}
                 width={{ base: '140px', lg: '400px', xxxl: '640px' }}
                 opacity={toggle3 ? 1 : 0}

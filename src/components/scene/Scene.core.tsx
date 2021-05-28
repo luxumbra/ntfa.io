@@ -135,7 +135,7 @@ export function SceneCore() {
                 </Link>
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "45px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={{base: 1000, lg: 0}}>
+            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "45px", xxxl: "60px"}} bottom={{base: "220px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={{base: 500, lg: 0}}>
                 <Link
                     href="#section1"
                     display="inline-block"

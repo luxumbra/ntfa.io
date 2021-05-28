@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Box, Link, Image, HStack, VStack, UnorderedList, ListItem, Button, IconButton, Heading } from "@chakra-ui/react";
-import { CloseIcon } from '@chakra-ui/icons';
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { css, jsx } from "@emotion/react";
 //
 
@@ -8,29 +8,48 @@ import { css, jsx } from "@emotion/react";
 export const FooterComponent = () => {
     const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear())
     const [reveal, setReveal] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
 
     return (
         <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={300}>
+            <IconButton
+                position="absolute"
+                top="-87vh"
+                right="0"
+                onClick={() => setShowMenu(!showMenu)}
+                icon={<HamburgerIcon />}
+                aria-label="Show/Hide Menu"
+                backgroundColor="transparent"
+                zIndex={3000}
+                sx={{ "&:active, &:focus": { backgroundColor: "transparent", boxShadow: "none" } }}
+                display={{base: "block", lg: "none"}}
+            />
             <Box
                 d="flex"
                 flexFlow="column nowrap"
                 w="auto"
                 textAlign="center"
                 border="5px solid white"
-                borderRadius="15px"
+                borderRadius={{base: 0, lg: "15px"}}
                 backgroundColor="#01735C"
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"
-                pos="relative"
+                pos={{base: "absolute", lg: "relative"}}
+                top={{base: showMenu ? "-86.5vh" : "-200vh", lg: 0}}
                 overflow="hidden"
                 alignContent={{ base: "center", xl: "flex-start" }}
-                h="100%"
-                maxH={{ base: "90px", lg: "300px", xl: "200px" }}
+                h={{base: "100vh", lg: "100%"}}
+                maxH={{ base: "100vh", lg: "300px", xl: "200px" }}
                 width="100%"
                 maxW="768px"
                 m="0 auto"
                 py={{ base: 1, xl: 5 }}
-            px={{base: 1, lg: 3}}>
+                px={{ base: 1, lg: 3 }}
+                pt={showMenu ? "150px" : 1}
+                opacity={{base: showMenu ? 1 : 0, xl: 1}}
+                transition="all 0.3s ease-in"
+                zIndex={2900}
+            >
                 <HStack
                     spacing={{ base: "30px" }}
                     maxH={{base: "20px", lg: "50px"}}
@@ -146,7 +165,7 @@ export const FooterComponent = () => {
                                 },
                                 position: "absolute",
                                 top: "0",
-                                right: "0",
+                                right: {base: "90vw", lg: "0"},
                                 zIndex: 200
                             }}>Mattereum</IconButton>
                             <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" mb={{ base: 0, lg: 2 }}>Mattereum</Heading>

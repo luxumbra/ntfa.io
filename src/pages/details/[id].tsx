@@ -77,7 +77,7 @@ export function AssetDetails() {
                 d="flex"
                 flexDirection="column"
                 alignItems="flex-start"
-                mt={{base: 3, lg: "10px", xl: "10px", xxl: "50px"}}
+                mt={{base: 7, lg: "10px", xl: "10px", xxl: "50px"}}
                 ml={{ base: "5%", lg: "auto" }}
                 mr={{base: "5%", lg: "auto"}}
                 px="0"

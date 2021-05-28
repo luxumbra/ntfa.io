@@ -11,7 +11,7 @@ export const FooterComponent = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     return (
-        <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={300}>
+        <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={300} pointerEvents={{base: showMenu ? "auto" : "none", lg: "auto"}}>
             <IconButton
                 position="absolute"
                 top={{base: "-87vh", smd: "-79vh"}}
@@ -23,6 +23,7 @@ export const FooterComponent = () => {
                 zIndex={3000}
                 sx={{ "&:active, &:focus": { backgroundColor: "transparent", boxShadow: "none" } }}
                 display={{base: "block", lg: "none"}}
+                pointerEvents="auto"
             />
             <Box
                 d="flex"

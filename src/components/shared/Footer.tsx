@@ -14,14 +14,15 @@ export const FooterComponent = () => {
         <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={300} pointerEvents={{base: showMenu ? "auto" : "none", lg: "auto"}}>
             <IconButton
                 position="absolute"
-                top={{base: "-87vh", smd: "-79vh"}}
+                top={{base: "-87vh", smd: "-75vh"}}
                 right="0"
                 onClick={() => setShowMenu(!showMenu)}
                 icon={<HamburgerIcon />}
                 aria-label="Show/Hide Menu"
                 backgroundColor="transparent"
+                color={showMenu ? "white" : "#333"}
                 zIndex={3000}
-                sx={{ "&:active, &:focus": { backgroundColor: "transparent", boxShadow: "none" } }}
+                sx={{ "&:active, &:hover, &:focus, &[data-hover]": { backgroundColor: "transparent", boxShadow: "none" } }}
                 display={{base: "block", lg: "none"}}
                 pointerEvents="auto"
             />
@@ -36,7 +37,7 @@ export const FooterComponent = () => {
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"
                 pos={{base: "absolute", lg: "relative"}}
-                top={{base: showMenu ? "-86.5vh" : "-200vh", smd: showMenu ? "-78vh" : "-200vh",  lg: 0}}
+                top={{base: showMenu ? "-86.5vh" : "-200vh", smd: showMenu ? "-76vh" : "-200vh",  lg: 0}}
                 overflow="hidden"
                 alignContent={{ base: "center", xl: "flex-start" }}
                 h={{base: "100vh", lg: "100%"}}
@@ -157,16 +158,17 @@ export const FooterComponent = () => {
                         z={0}
                     >
                         <Box p={{ base: "15px", lg: "25px" }}>
-                            <IconButton icon={<CloseIcon />} aria-label="Close overlay" onClick={() => setReveal(!reveal)} sx={{
+                            <IconButton icon={<CloseIcon />} size="sm" aria-label="Close overlay" onClick={() => setReveal(!reveal)} sx={{
                                 background: "transparent",
+                                color: "white",
                                 "&:hover, &:focus": {
                                     background: "transparent",
-                                    color: "yellow.500",
+                                    // color: "yellow.500",
                                     cursor: "pointer"
                                 },
                                 position: "absolute",
                                 top: "0",
-                                right: {base: "90vw", lg: "0"},
+                                left: {base: "25px", smd: "0", lg: "0"},
                                 zIndex: 200
                             }}>Mattereum</IconButton>
                             <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" mb={{ base: 0, lg: 2 }}>Mattereum</Heading>

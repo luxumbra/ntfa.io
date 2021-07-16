@@ -18,8 +18,8 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
         <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={1000} pointerEvents={{ base: showMenu ? "auto" : "none", lg: toggler ? (showMenu ? "auto" : "none") : "auto" }}>
             <IconButton
                 position="absolute"
-                top={{ base: "-87vh", smd: "-75vh", md: "-80vh" }}
-                right={{ base: "0", xl: `2vw` }}
+                top={{ base: "-85vh", smd: "-75vh", md: "-80vh" }}
+                right={{ base: "2vw", xl: `2vw` }}
                 onClick={() => setShowMenu(!showMenu)}
                 icon={<HamburgerIcon />}
                 aria-label="Show/Hide Menu"

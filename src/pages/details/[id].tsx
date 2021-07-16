@@ -19,6 +19,7 @@ export interface AssetDetailsInterface {
     name: string;
     description: string;
     animation_url: string;
+    image_preview_url: string;
 }
 
 export const AssetDetails = () => {
@@ -64,7 +65,7 @@ export const AssetDetails = () => {
             overflow="hidden"
             id="section2"
         >
-            <MetadataComponent title={asset?.name} description={asset?.description} socialImage={`/assets/${id}-banner.png`} />
+            <MetadataComponent title={asset?.name} description={asset?.description} socialImage={asset?.image_preview_url} />
             <Box
                 className="content"
                 position="relative"

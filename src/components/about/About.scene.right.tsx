@@ -20,7 +20,7 @@ export const AboutSceneRight: FC<AboutSceneRightInterface> = () => {
                 width={{ base: "200px", lg: "150px" }}
                 zIndex={2000}>
                 <Link
-                    href="#section3"
+                    href="/#section3"
                     maxW="200px"
                     maxH="200px"
                     sx={{

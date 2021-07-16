@@ -26,7 +26,7 @@ function TosCore({ content }: any) {
                         left: `auto`,
                         zIndex: 1100
                     }}>NTFA Terms of Service</Heading>
-                    <Box p="0" sx={{
+                    <Box p={{ base: "5%", xl: "0" }} sx={{
                         color: `white`,
                         overflowY: `scroll`,
                         height: `100%`,
@@ -35,9 +35,14 @@ function TosCore({ content }: any) {
                         <Box p={{ base: "5%", xl: "2% 5%", xxxl: "4%" }} textAlign="left" sx={{
                             "h2": {
                                 fontFamily: `'Hero', sans-serif`,
-                                fontSize: { base: `9px`, lg: "14px", xl: `18px`, xxxl: `18px` },
+                                fontSize: { base: `12px`, lg: "14px", xl: `18px`, xxxl: `18px` },
                                 fontWeight: `900`,
                                 mt: 6
+                            },
+                            "p": {
+                                fontSize: {
+                                    base: `10px`, lg: "12px", xl: `14px`,
+                                },
                             },
                             "ul > li": {
                                 ml: 7

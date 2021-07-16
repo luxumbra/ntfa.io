@@ -20,7 +20,7 @@ export function AboutCore() {
                         // boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
                         color: `white`,
                         // borderRadius: `6px`,
-                        overflow: `scroll`,
+                        overflowY: `auto`,
                         height: `100%`
                     }}>
                         <Box p={{base: "5%", xxxl: "4%"}} sx={{ "p:nth-of-type(even)": {fontSize: { base: `10px`, xl: `12px`, xxxl: `14px` }}, "p:nth-of-type(odd)": {mb: `0`}}}>

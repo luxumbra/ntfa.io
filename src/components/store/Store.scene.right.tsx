@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Box, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
 //
 import { AssetContainer } from '../shared/AssetContainer';
 import { Building } from "../shared/Building";
@@ -27,8 +28,8 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
                     h="0"
                     w="100%"
                     maxW="200px">
-                    <Link
-                        href="#section3"
+                    <NextLink href="/#section3" prefetch passHref>
+                        <Link
                         w="100%"
                         h="100%"
                         sx={{
@@ -54,7 +55,8 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
                             }
                         }}>
                         <span>About NTFA</span>
-                    </Link>
+                        </Link>
+                    </NextLink>
                 </Box>
             </Box>
         </Box>

@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Box, Link, Image } from '@chakra-ui/react';
 import { css } from "@emotion/react";
-
+import NextLink from 'next/link';
+//
 import { AssetContainer } from '../shared/AssetContainer';
 import { Building } from "../shared/Building";
 
@@ -17,8 +18,8 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
         <Box className={className} flexGrow={1} minW={minW} position="relative" zIndex="2000">
             <Box
                 className="logo" position="absolute" width="100%" height={{ base: "20%", xl: "auto" }} maxW={{ base: "100px", smd: "60px", xl: "130px" }} top={{ base: "0", xl: "0" }} left={{ base: "10px", xl: "50px" }} z={500} >
+                <NextLink href="/#section1" prefetch passHref>
                     <Link
-                        href="#section1"
                         display="inline-block"
                         position="relative"
                         pt={{base: `${(75 / 44) * 100}%`, smd: "56%"}}
@@ -39,6 +40,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                     >
                         <Image src="/assets/ntfa-logo.png" alt="logo" width="100%" height="100%" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                     </Link>
+                </NextLink>
             </Box>
 
             <Box
@@ -57,8 +59,8 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                     h="0"
                     w="100%"
                     maxW="200px">
-                    <Link
-                        href="#section2"
+                    <NextLink href="/#section2" prefetch passHref>
+                        <Link
                         w="100%"
                         h="100%"
                         sx={{
@@ -85,6 +87,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                         }}>
                         <span>Never Touch Fiat Again</span>
                     </Link>
+                    </NextLink>
                 </Box>
             </Box>
         </Box>

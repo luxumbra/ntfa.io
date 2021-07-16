@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Link, Image } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import { css, jsx } from "@emotion/react";
 import { SceneBridge } from './Scene.bridge';
 import { SceneLambo } from './Scene.lambo';
@@ -108,9 +109,9 @@ export function SceneCore() {
                 right={{ base: "0", lg: "50%", xxxl: "50%" }}
                 height={{ base: "100px", smd: "60px", lg: "300px", xxxl: "300px" }}
                 width={{ base: "100px", smd: "60px", lg: "100px", xxxl: "300px" }}
-                zIndex={{base: 300, lg: 1000}}>
-                <Link
-                    href="#section2"
+                zIndex={{ base: 300, lg: 1000 }}>
+                <NextLink href="/#section2" prefetch passHref>
+                    <Link
                     w="100%"
                     h="100%"
                     sx={{
@@ -132,12 +133,13 @@ export function SceneCore() {
                         "&:hover": { color: `transparent !important`, opacity: 0.3, }
                     }}>
                     <span>Never Touch Fiat Again</span>
-                </Link>
+                    </Link>
+                </NextLink>
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xxl: "45px", xxxl: "60px"}} bottom={{base: "220px", smd: "250px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", smd: "27%", lg: "830px", xxl: "850px", xxxl: "1200px"}} zIndex={{base: 300, lg: 0}}>
-                <Link
-                    href="#section1"
+            <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xxl: "45px", xxxl: "60px" }} bottom={{ base: "220px", smd: "250px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "27%", lg: "830px", xxl: "850px", xxxl: "1200px" }} zIndex={{ base: 300, lg: 0 }}>
+                <NextLink href="/#section1" prefetch passHref>
+                    <Link
                     display="inline-block"
                     position="relative"
                     // pt="26.25%"
@@ -164,6 +166,7 @@ export function SceneCore() {
                 >
                     <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                 </Link>
+                </NextLink>
             </Box>
 
             <SceneBridge />

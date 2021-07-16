@@ -247,7 +247,7 @@ export function SceneCore() {
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
             />
-            <FooterComponent />
+            <FooterComponent toggler />
         </Box>
     )
 }

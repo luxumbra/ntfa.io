@@ -4,26 +4,33 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { css, jsx } from "@emotion/react";
 //
 
+export interface FooterComponentInterface {
+    toggler?: boolean;
+}
 
-export const FooterComponent = () => {
+export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
     const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear())
     const [reveal, setReveal] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    console.log(toggler);
 
     return (
-        <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={300} pointerEvents={{base: showMenu ? "auto" : "none", lg: "auto"}}>
+        <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={1000} pointerEvents={{ base: showMenu ? "auto" : "none", lg: toggler ? (showMenu ? "auto" : "none") : "auto" }}>
             <IconButton
                 position="absolute"
-                top={{base: "-87vh", smd: "-75vh"}}
-                right="0"
+                top={{ base: "-87vh", smd: "-75vh", md: "-80vh" }}
+                right={{ base: "0", xl: `2vw` }}
                 onClick={() => setShowMenu(!showMenu)}
                 icon={<HamburgerIcon />}
                 aria-label="Show/Hide Menu"
-                backgroundColor="transparent"
-                color={showMenu ? "white" : "#333"}
+                borderRadius="50%"
+                backgroundColor={showMenu ? "#fff" : "#fc79b2"}
+                color={showMenu ? "#fc79b2" : "#fff"}
+                fontSize={{ base: `14px`, xl: `24px` }}
                 zIndex={3000}
-                sx={{ "&:active, &:hover, &:focus, &[data-hover]": { backgroundColor: "transparent", boxShadow: "none" } }}
-                display={{base: "block", lg: "none"}}
+                transform={`rotate(${showMenu ? "90deg" : 0})`}
+                sx={{ "&:active, &:hover, &:focus, &[data-hover]": { backgroundColor: showMenu ? "#fff" : "#fc79b2" }, boxShadow: showMenu ? "0 0 10px rgba(0,0,0,0.6)" : "0 0 15px rgba(0,0,0,0.4)" }}
+                display={{ base: "block", lg: toggler ? "block" : "none" }}
                 pointerEvents="auto"
             />
             <Box
@@ -48,7 +55,7 @@ export const FooterComponent = () => {
                 py={{ base: 1, xl: 5 }}
                 px={{ base: 1, lg: 3 }}
                 pt={showMenu ? "150px" : 1}
-                opacity={{base: showMenu ? 1 : 0, xl: 1}}
+                opacity={{ base: showMenu ? 1 : 0, lg: toggler ? (showMenu ? 1 : 0) : 1 }}
                 transition="all 0.3s ease-in"
                 zIndex={2900}
             >
@@ -61,6 +68,7 @@ export const FooterComponent = () => {
                     <Link href="/#section1">Home</Link>
                     <Link href="/#section2">About NTFA</Link>
                     <Link href="/#section3">Burn FIAT</Link>
+                    <Link href="/tos">Legal</Link>
                     <Button as="a" onClick={() => setReveal(!reveal)} sx={{
                         background: "transparent",
                         "&:hover, &:focus": {

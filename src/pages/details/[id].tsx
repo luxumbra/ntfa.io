@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Heading, Link, Image, Button } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
+import { OpenSeaPort, Network } from "opensea-js";
+import axios from "axios";
+import NextLink from 'next/link';
 //
 import { MetadataComponent } from "../../components/shared/Metadata";
 import { SceneBridge } from '../../components/scene/Scene.bridge';
@@ -10,55 +13,41 @@ import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { rootCertificates } from "node:tls";
 
-
+export let getAsset: any;
 
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [asset, setAsset] = useState([]);
     const router = useRouter();
 
+    console.log(router);
+
     const {
-        query: { id },
+        query: { id, token },
     } = router;
 
+    useEffect(() => {
+        getAsset = axios
+            .get(
+                `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${token}`
+            )
+            .then((response) => {
+                console.log('response: ', response);
+                // debugger;
+                // setGoldAssets(response.data.assets.slice(0, 2));
+                // setAssets(response.data.assets.slice(3));
+                setAsset(response.data);
+            })
+            .then(() => {
+                setLoading(false);
+            })
+            .catch((err) => console.error(err));
+    }, [id, token]);
 
-    const goldVids = [
-        {
-            creator: "Never Touch Fiat Again",
-            title: "Vector V777",
-            path: `/assets/nfts/Vector150768.mp4`,
-            summary:
-                "The Vector V777 comes equipped with 100 Grams of pure golden firepower. Make a splash as you enter the party with dual stage rocket launchers and Racer X upgrades. Handmade by time travelers from the year 1955 this car is as much a relic as it is a work of art. The Golden Vector comes with a matching gold certificate for 100 Grams of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 100Grams of gold Stored in a Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
-        {
-            creator: "Never Touch Fiat Again",
-            title: "Space Cowboy",
-            path: `/assets/nfts/Space_Cowboy_8642.mp4`,
-            summary:
-                "The Space Cowboy blasted off many moons ago and now lives in his street style space suit ready for the next launch. Space Cowboy comes with a matching gold certificate for 50 Grams of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 50Grams of gold Stored in a  Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
 
-        {
-            creator: "Never Touch Fiat Again",
-            title: "Piggy Banksy",
-            path: `/assets/nfts/PiggyBanksy619263_smallcloud.mp4`,
-            summary:
-                "The Piggy Banksy is the perfect thing to smash on the way out of the country to buy your next drop. Piggy Banksy comes with a matching gold certificate for 1 oz of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 1 oz of gold Stored in a Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
-    ];
     return (
         <Box
             position="relative"
@@ -69,90 +58,97 @@ export function AssetDetails() {
             overflow="hidden"
             id="section2"
         >
-            <MetadataComponent title={id && goldVids[+id].title} description={id && goldVids[+id].description} socialImage={`/assets/${id}-banner.png`} />
+            <MetadataComponent title={asset && asset.name} description={asset && asset.name} socialImage={`/assets/${id}-banner.png`} />
             <Box
                 className="content"
                 position="relative"
-                flex={{base: "0 0 90%", smd: "0 0 98%", lg: "0 0 33%"}}
-                width={{base: "90%", smd: "98%", lg: "33%"}}
+                flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 33%" }}
+                width={{ base: "90%", smd: "98%", lg: "33%" }}
                 d="flex"
-                flexDirection={{base: "column", smd: "row", lg: "column"}}
-                alignItems={{base: "flex-start", smd: "center", lg: "flex-start"}}
-                mt={{base: 7, lg: "10px", xl: "10px", xxl: "50px"}}
+                flexDirection={{ base: "column", smd: "row", lg: "column" }}
+                alignItems={{ base: "flex-start", smd: "center", lg: "flex-start" }}
+                mt={{ base: 7, lg: "10px", xl: "10px", xxl: "50px" }}
                 ml={{ base: "5%", smd: "auto", lg: "auto" }}
-                mr={{base: "5%", smd: "auto", lg: "auto"}}
+                mr={{ base: "5%", smd: "auto", lg: "auto" }}
                 px="0"
                 boxShadow="0 0 10px rgba(0,0,0,.6)"
                 borderRadius="6px"
                 overflow="hidden"
                 zIndex={{ base: 100 }}
                 backgroundColor="rgba(255,255,255,0.6)"
-                backdropFilter="blur(7px)"
+                sx={{
+                    backdropFilter: "blur(7px)",
+                }}
             >
-                <Box
-                    className="playerWrapper"
-                    position="relative"
-                    paddingTop={{
-                        base: `${(356 / 633) * 100}%`,
-                        smd: `${31}%`,
-                        lg: `${(356 / 633) * 100}%`
-                    }}
-                    width="100%"
-                    height="0"
-                    zIndex={200}
-                    overflow="hidden"
-                >
-                    <ReactPlayer
-                        url={id && goldVids[+id].path}
-                        playing={true}
-                        volume={0}
-                        muted={true}
-                        loop={true}
-                        controls={true}
-                        width="100%"
-                        height="auto"
-                        style={{
-                            position: "absolute",
-                            left: `0`,
-                            top: `0`,
-                            zIndex: 0,
-                        }}
-                    />
-                </Box>
+                {loading ? (<p>Loading</p>) : (
+                    <>
+                        <Box
+                            className="playerWrapper"
+                            position="relative"
+                            paddingTop={{
+                                base: `${(356 / 633) * 100}%`,
+                                smd: `${31}%`,
+                                lg: `${(356 / 633) * 100}%`
+                            }}
+                            width="100%"
+                            height="0"
+                            zIndex={200}
+                            overflow="hidden"
+                        >
+                            <ReactPlayer
+                                url={asset?.animation_url}
+                                playing={true}
+                                volume={0}
+                                muted={true}
+                                loop={true}
+                                controls={true}
+                                width="100%"
+                                height="auto"
+                                style={{
+                                    position: "absolute",
+                                    left: `0`,
+                                    top: `0`,
+                                    zIndex: 0,
+                                }}
+                            />
+                        </Box>
 
-                <Box
-                    width={{base: "100%", smd: "80%", lg: "100%"}}
-                    margin="0"
-                    // backgroundColor="rgba(255,255,255,0.6)"
-                    // backdropFilter="blur(7px)"
-                    z={0}
-                >
-                    <Box p={{base: "15px", smd: "10px", lg: "25px"}}>
-                        <Heading as="h3" size={"sm"} color="accent.primary" mb="2">
-                            {id && goldVids[+id].title}
-                        </Heading>
-                        <Box d="flex" flexFlow="column wrap" mb="4" sx={{
-                            "& > span": {
-                                fontSize: {base: "10px", lg: "12px"},
-                                mb: 0,
-                                fontWeight: "100"
-                        }}}>
-                            <span>{id && goldVids[+id].NFT}</span>
-                            <span>{id && goldVids[+id].vault}</span>
+                        <Box
+                            width={{ base: "100%", smd: "80%", lg: "100%" }}
+                            margin="0"
+                            // backgroundColor="rgba(255,255,255,0.6)"
+                            // backdropFilter="blur(7px)"
+                            z={0}
+                        >
+                            <Box p={{ base: "15px", smd: "10px", lg: "25px" }}>
+                                <Heading as="h3" size={"sm"} color="accent.primary" mb="2">
+                                    {asset && asset.name}
+                                </Heading>
+                                <Box d="flex" flexFlow="column wrap" mb="4" sx={{
+                                    "& > span": {
+                                        fontSize: { base: "10px", lg: "12px" },
+                                        mb: 0,
+                                        fontWeight: "100"
+                                    }
+                                }}>
+                                    {/* <span>{asset && goldVids[+id].NFT}</span>
+                            <span>{asset && goldVids[+id].vault}</span> */}
+                                </Box>
+                                <Box fontSize={{ base: "15px", lg: "17px" }}>
+                                    <p>{asset && asset.summary}</p>
+                                </Box>
+                                <Box fontSize={{ base: "12px", lg: "14px" }}>
+                                    {asset?.description.replace('<br />', '\n')}
+                                </Box>
+                            </Box>
                         </Box>
-                        <Box fontsize={{base: "15px", lg: "17px"}}>
-                            <p>{id && goldVids[+id].summary.replace('<br />', '\n')}</p>
-                        </Box>
-                        <Box fontSize={{base: "12px", lg: "14px"}}>
-                            <p>{id && goldVids[+id].description.replace('<br />', '\n')}</p>
-                        </Box>
-                    </Box>
-                </Box>
+                    </>
+                )}
             </Box>
 
-            <Box position="absolute" width="100%" height={{base: "10%", xl: "10%"}} maxW={{base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px"}} bottom={{base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px"}} left={{base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px"}} zIndex={{base: 1000, smd: 0, lg: 0}}>
-                <Link
-                    href="/#section1"
+            <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 1000, smd: 0, lg: 0 }}>
+                <NextLink href="/#section1" prefetch passHref>
+                    <Link
                     display="inline-block"
                     position="relative"
                     // pt="26.25%"
@@ -175,15 +171,16 @@ export function AssetDetails() {
                         /* animation: logo-anim 5s infinite; */
                         /* animation-play-state: paused; */
                     `}
-                    sx={{animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1'}}
+                        sx={{ animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1' }}
                 >
                     <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
                 </Link>
+                </NextLink>
             </Box>
 
-            <SceneBridge/>
+            <SceneBridge />
 
-           <Box onClick={e => setToggle1(!toggle1)}>
+            <Box onClick={e => setToggle1(!toggle1)}>
                 <SceneBuilding
                     src="/assets/buildings/building-4.png"
                     left={{ base: '180px', smd: '520px', lg: '120px', xl: '1050px', xxl: '1100px', xxxl: '1400px' }}

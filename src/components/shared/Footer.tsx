@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Box, Link, Image, HStack, VStack, UnorderedList, ListItem, Button, IconButton, Heading } from "@chakra-ui/react";
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { css, jsx } from "@emotion/react";
+import NextLink from 'next/link'
 //
 
 export interface FooterComponentInterface {
@@ -65,10 +66,10 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                     sx={{
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
-                    <Link href="/#section1">Home</Link>
-                    <Link href="/#section2">About NTFA</Link>
-                    <Link href="/#section3">Burn FIAT</Link>
-                    <Link href="/tos">Legal</Link>
+                    <NextLink href="/#section1" prefetch>Home</NextLink>
+                    <NextLink href="/#section2" prefetch>About NTFA</NextLink>
+                    <NextLink href="/#section3" prefetch>Burn FIAT</NextLink>
+                    <NextLink href="/tos" prefetch>Legal</NextLink>
                     <Button as="a" onClick={() => setReveal(!reveal)} sx={{
                         background: "transparent",
                         "&:hover, &:focus": {

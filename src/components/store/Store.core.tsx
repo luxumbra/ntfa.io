@@ -20,7 +20,7 @@ export function StoreCore() {
                 <Box width="80vw" height={{base: "30%", smd: "20%", md: "40%", lg: "33%", xl: "33%"}} />
 
                 <Box width="100%" height={{base: "40%", smd: "50%", xl: "33%"}} className="store" position="relative">
-                    <ShowcaseGridComponent collection="100-bees-hexel-collection" />
+                    <ShowcaseGridComponent collection="ntfa" />
                 </Box>
 
             </Box>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Box, Heading, Link, Image, Button } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
@@ -15,12 +15,18 @@ import { rootCertificates } from "node:tls";
 
 export let getAsset: any;
 
-export function AssetDetails() {
+export interface AssetDetailsInterface {
+    name: string;
+    description: string;
+    animation_url: string;
+}
+
+export const AssetDetails = () => {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [asset, setAsset] = useState([]);
+    const [asset, setAsset] = useState({} as AssetDetailsInterface);
     const router = useRouter();
 
     console.log(router);
@@ -58,7 +64,7 @@ export function AssetDetails() {
             overflow="hidden"
             id="section2"
         >
-            <MetadataComponent title={asset && asset.name} description={asset && asset.name} socialImage={`/assets/${id}-banner.png`} />
+            <MetadataComponent title={asset?.name} description={asset?.description} socialImage={`/assets/${id}-banner.png`} />
             <Box
                 className="content"
                 position="relative"
@@ -133,9 +139,6 @@ export function AssetDetails() {
                                 }}>
                                     {/* <span>{asset && goldVids[+id].NFT}</span>
                             <span>{asset && goldVids[+id].vault}</span> */}
-                                </Box>
-                                <Box fontSize={{ base: "15px", lg: "17px" }}>
-                                    <p>{asset && asset.summary}</p>
                                 </Box>
                                 <Box fontSize={{ base: "12px", lg: "14px" }}>
                                     {asset?.description.replace('<br />', '\n')}

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Box, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
 //
 
 export interface AboutSceneRightInterface {
@@ -19,8 +20,8 @@ export const AboutSceneRight: FC<AboutSceneRightInterface> = () => {
                 height={{ base: "200px", lg: "200px" }}
                 width={{ base: "200px", lg: "150px" }}
                 zIndex={2000}>
-                <Link
-                    href="/#section3"
+                <NextLink href="/#section3" prefetch passHref>
+                    <Link
                     maxW="200px"
                     maxH="200px"
                     sx={{
@@ -42,7 +43,8 @@ export const AboutSceneRight: FC<AboutSceneRightInterface> = () => {
                         "&:hover": { color: `transparent !important`, opacity: 0.3, }
                     }}>
                     <span>Bitcoin & Gold</span>
-                </Link>
+                    </Link>
+                </NextLink>
             </Box>
 
         </Box>

@@ -26,7 +26,7 @@ function TosCore({ content }: any) {
                         left: `auto`,
                         zIndex: 1100
                     }}>NTFA Terms of Service</Heading>
-                    <Box p={{ base: "5%", xl: "0" }} sx={{
+                    <Box p={{ base: "5%", xl: "2% 5%" }} sx={{
                         color: `white`,
                         overflowY: `scroll`,
                         height: `100%`,

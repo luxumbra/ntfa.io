@@ -55,7 +55,7 @@ export function SceneCore() {
             <Button
                 position="absolute"
                 display={{base: "none", sm: "block"}}
-                right={{ base: "70%", smd: "80%", md: "67%", lg: "45px" }}
+                right={{ base: "70%", smd: "80%", md: "67%", lg: "5vw" }}
                 bottom={{ base: "20%", smd: "calc(100% - 150px)", md: "18%", lg: "calc(100% - 200px)", xxl: "calc(100% - 275px)" }}
                 zIndex={{base: 300, lg: 2000}}
                 size="lg"

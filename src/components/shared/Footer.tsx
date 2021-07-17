@@ -16,11 +16,11 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
     console.log(toggler);
 
     return (
-        <Box position="absolute" bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={1000} pointerEvents={{ base: showMenu ? "auto" : "none", lg: toggler ? (showMenu ? "auto" : "none") : "auto" }}>
+        <Box position={"fixed"} bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={1000} pointerEvents={{ base: showMenu ? "auto" : "none", lg: toggler ? (showMenu ? "auto" : "none") : "auto" }}>
             <IconButton
                 position="absolute"
-                top={{ base: "-85vh", smd: "-75vh", xl: "-78vh", xxl: "-80vh" }}
-                right={{ base: "2vw", xl: `2vw` }}
+                top={{ base: "4vh", smd: "-75vh", xl: "-78vh", xxl: "-80vh" }}
+                right={{ base: "2.5vw", xl: `2vw` }}
                 onClick={() => setShowMenu(!showMenu)}
                 icon={<HamburgerIcon />}
                 aria-label="Show/Hide Menu"
@@ -45,23 +45,25 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"
                 pos={{base: "absolute", lg: "relative"}}
-                top={{base: showMenu ? "-86.5vh" : "-200vh", smd: showMenu ? "-76vh" : "-200vh",  lg: 0}}
+                // top={{ base: showMenu ? "0" : "-200vh", smd: showMenu ? "-76vh" : "-200vh", lg: 0 }}
+                bottom={0}
+                transform={{ base: showMenu ? "translateY(0)" : "translateY(200%)" }}
                 overflow="hidden"
                 alignContent={{ base: "center", xl: "flex-start" }}
                 h={{base: "100vh", lg: "100%"}}
-                maxH={{ base: "100vh", lg: "300px", xl: "200px" }}
+                maxH={{ base: "125px", lg: "300px", xl: "200px" }}
                 width="100%"
                 maxW="768px"
                 m="0 auto"
                 py={{ base: 1, xl: 5 }}
                 px={{ base: 1, lg: 3 }}
-                pt={showMenu ? "150px" : 1}
+                pt={{ base: showMenu ? "15px" : 1, lg: showMenu ? "150px" : 1 }}
                 opacity={{ base: showMenu ? 1 : 0, lg: toggler ? (showMenu ? 1 : 0) : 1 }}
                 transition="all 0.3s ease-in"
                 zIndex={2900}
             >
                 <HStack
-                    spacing={{ base: "30px" }}
+                    spacing={{ base: "20px", lg: "30px" }}
                     maxH={{base: "20px", lg: "50px"}}
                     sx={{
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
@@ -177,10 +179,10 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                                 },
                                 position: "absolute",
                                 top: "0",
-                                left: {base: "25px", smd: "0", lg: "0"},
+                                left: { base: "0", smd: "0", lg: "0" },
                                 zIndex: 200
                             }}>Mattereum</IconButton>
-                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" mb={{ base: 0, lg: 2 }}>Mattereum</Heading>
+                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" fontSize={{ base: "12px", lg: "14px" }} mb={{ base: 0, lg: 2 }}>Mattereum</Heading>
                             <Box sx={{ "p": { fontSize: { base: "9px", lg: "12px" } } }}>
                                 <p>Mattereum is a trading name and registered trademark of MTRM Industries Limited, registered in England company number 10899201. VAT registration number: GB 283834768. Registered office: 69 Kingfisher Heights, Waterside Way, London, England, N17 9GL.</p>
                             </Box>

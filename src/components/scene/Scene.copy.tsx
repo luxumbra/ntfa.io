@@ -3,7 +3,7 @@ import { Box, Heading } from '@chakra-ui/react';
 
 export const SceneCopy: FC = () => {
     return (
-        <Box pos="absolute" width={{ base: `90%`, smd: "50%", md: "90%", lg: `45%` }} left={{base: `5%`, smd: "42%", md: "2.5%", xl: `2.5%`}} top={`5%`} maxH={{base: "70%", smd: "80%", md: "60%", lg: "70%", xxxl: "60%"}} h="100%" zIndex="200" overflowY={{base: "visible"}} sx={{borderRadius: `6px`}}>
+        <Box pos="absolute" width={{ base: `98%`, smd: "50%", md: "90%", lg: `45%` }} left={{ base: `1%`, smd: "42%", md: "2.5%", xl: `2.5%` }} top={`5%`} maxH={{ base: "70%", smd: "80%", md: "60%", lg: "70%", xxxl: "60%" }} h="100%" zIndex="200" overflowY={{ base: "visible" }} sx={{ borderRadius: `6px` }}>
                 <Box p="2%" sx={{
                     backgroundColor: `rgba(0,0,0,0.75)`,
                     // backdropFilter: `blur(3px)`,

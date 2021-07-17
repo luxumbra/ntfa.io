@@ -7,6 +7,7 @@ import {
     Link,
     Text,
 } from "@chakra-ui/react";
+import ReactMarkdown from "react-markdown";
 
 
 export interface NFTCardInterface {
@@ -22,6 +23,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
             return str;
         }
     }
+    const summaryText = truncateString(asset.description, 160);
 
     return (
         <Box>
@@ -126,10 +128,17 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                         </Box>
                         <Box position="relative" width="100%" p={{ base: "4%" }} d={{ base: "block", xl: "block" }} h="auto">
                             <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "14px" }} color="accent.primary" mb="5px">{asset.name}</Heading>
-                            <Box d={{ base: "block", lg: "block" }}>
-                                <Text noOfLines={{ base: 5, sm: 4, smd: 3, lg: 3, xxl: 4 }} sx={{ fontSize: { base: `11px`, lg: `12px`, xxl: `12px`, xxxl: `14px` } }}>
-                                    {truncateString(asset.description, 200)}
-                                </Text>
+                            <Box d={{ base: "block", lg: "block" }} sx={{
+                                "h2, h3": {
+                                    display: "none"
+                                },
+                                "p": {
+                                    fontSize: { base: `11px`, lg: `12px`, xxl: `12px`, xxxl: `14px` }
+                                }
+                            }}>
+                                <ReactMarkdown>
+                                    {summaryText}
+                                </ReactMarkdown>
                             </Box>
                         </Box>
                     </Box>

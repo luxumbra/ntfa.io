@@ -55,18 +55,18 @@ export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
                         flex: "0 0 45%",
                         d: "flex",
                         flexFlow: "row wrap",
-                        mb: 1,
+                        mb: { base: 0, lg: 1 },
                     }}>
                         <Box as="span" key={`dt-${index}`} sx={{
                             flex: "0 0 100%",
-                            fontSize: { base: "14px" },
+                            fontSize: { base: "11px", lg: "14px" },
                             fontWeight: "800",
                         }}>
                             {assetItem?.trait_type}
                         </Box>
                         <Box as="span" key={`dd-${index}`} sx={{
                             flex: "1",
-                            fontSize: { base: "14px" },
+                            fontSize: { base: "11px", lg: "14px" },
                             fontWeight: "100",
                         }}>
                             {assetItem?.value}
@@ -127,14 +127,14 @@ export function AssetDetails() {
                 className="content"
                 position="relative"
                 flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 33%" }}
-                width={{ base: "90%", smd: "98%", lg: "33%" }}
-                maxH="75vh"
+                width={{ base: "98%", smd: "98%", lg: "33%" }}
+                maxH={{ base: "83vh", lg: "75vh" }}
                 d="flex"
                 flexDirection={{ base: "column", smd: "row", lg: "column" }}
                 alignItems={{ base: "flex-start", smd: "center", lg: "flex-start" }}
                 mt={{ base: 7, lg: "10px", xl: "10px", xxl: "50px" }}
-                ml={{ base: "5%", smd: "auto", lg: "auto" }}
-                mr={{ base: "5%", smd: "auto", lg: "auto" }}
+                ml={{ base: "auto", smd: "auto", lg: "auto" }}
+                mr={{ base: "auto", smd: "auto", lg: "auto" }}
                 px="0"
                 boxShadow="0 0 10px rgba(0,0,0,.6)"
                 borderRadius="6px"
@@ -197,7 +197,7 @@ export function AssetDetails() {
                             }}
                         >
                             <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap" >
-                                <Heading as="h3" size={"sm"} color="accent.primary" mb="2">
+                                <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
                                     {asset && asset.name}
                                 </Heading>
                                 <Box d="flex" className="asset--meta" flexFlow="column wrap" mb="4" sx={{
@@ -223,7 +223,7 @@ export function AssetDetails() {
                 )}
             </Box>
 
-            <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 1000, smd: 0, lg: 0 }}>
+            <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 0, smd: 0, lg: 0 }}>
                 <NextLink href="/#section1" passHref>
                     <Link
                     display="inline-block"
@@ -323,7 +323,7 @@ export function AssetDetails() {
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
             />
-            <FooterComponent />
+            <FooterComponent toggler />
         </Box>
     );
 }

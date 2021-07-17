@@ -182,7 +182,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                                 left: { base: "0", smd: "0", lg: "0" },
                                 zIndex: 200
                             }}>Mattereum</IconButton>
-                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" fontSize={{ base: "12px", lg: "14px" }} mb={{ base: 0, lg: 2 }}>Mattereum</Heading>
+                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" fontSize={{ base: "12px", lg: "18px" }} mb={{ base: 0, lg: 2 }}>Mattereum</Heading>
                             <Box sx={{ "p": { fontSize: { base: "9px", lg: "12px" } } }}>
                                 <p>Mattereum is a trading name and registered trademark of MTRM Industries Limited, registered in England company number 10899201. VAT registration number: GB 283834768. Registered office: 69 Kingfisher Heights, Waterside Way, London, England, N17 9GL.</p>
                             </Box>

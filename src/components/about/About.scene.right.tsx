@@ -11,7 +11,7 @@ export interface AboutSceneRightInterface {
 export const AboutSceneRight: FC<AboutSceneRightInterface> = () => {
 
     return(
-        <Box position="relative" className="scene__right" minW={{base: "5%", lg: "15%", xxxl: "30%"}} zIndex="1000">
+        <Box position="relative" className="scene__right" minW={{ base: "1%", lg: "15%", xxxl: "30%" }} zIndex="1000">
 
             <Box
                 pos="absolute"

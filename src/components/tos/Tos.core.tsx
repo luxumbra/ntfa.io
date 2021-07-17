@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 //
 import { AboutSceneLeft } from '../about/About.scene.left';

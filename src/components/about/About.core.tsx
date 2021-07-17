@@ -12,7 +12,7 @@ export function AboutCore() {
 
             <AboutSceneLeft />
 
-            <Box className="scene__center" flex={{base: "0 0 90%", smd: "0 0 50%", md: "0 0 45%", xxxl: "0 0 33%"}} ml={["auto", "auto"]} mr={{base: "auto"}} d="flex" flexDirection="column" alignItems="center" zIndex="1000">
+            <Box className="scene__center" flex={{ base: "0 0 98%", smd: "0 0 50%", md: "0 0 45%", xxxl: "0 0 33%" }} ml={["auto", "auto"]} mr={{ base: "auto" }} d="flex" flexDirection="column" alignItems="center" zIndex="1000">
                 <Box width="100%" height="auto" margin={{base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0"}} zIndex={1000} maxH={{base: "90%", smd: "85%", md: "90%"}} overflow="hidden" borderRadius="6px" boxShadow="0 0 15px rgba(0,0,0,0.5)" backgroundColor="rgba(0,0,0,0.6)">
                     <Box p="2%" sx={{
                         // backgroundColor: `rgba(0,0,0,0.6)`,

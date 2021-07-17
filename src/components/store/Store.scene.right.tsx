@@ -28,7 +28,7 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
                     h="0"
                     w="100%"
                     maxW="200px">
-                    <NextLink href="/#section3" prefetch passHref>
+                    <NextLink href="/#section3" passHref>
                         <Link
                         w="100%"
                         h="100%"

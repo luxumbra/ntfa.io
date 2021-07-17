@@ -66,10 +66,10 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                     sx={{
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
-                    <NextLink href="/#section1" prefetch>Home</NextLink>
-                    <NextLink href="/#section2" prefetch>About NTFA</NextLink>
-                    <NextLink href="/#section3" prefetch>Burn FIAT</NextLink>
-                    <NextLink href="/tos" prefetch>Legal</NextLink>
+                    <NextLink href="/#section1">Home</NextLink>
+                    <NextLink href="/#section2">About NTFA</NextLink>
+                    <NextLink href="/#section3">Burn FIAT</NextLink>
+                    <NextLink href="/tos">Legal</NextLink>
                     <Button as="a" onClick={() => setReveal(!reveal)} sx={{
                         background: "transparent",
                         "&:hover, &:focus": {

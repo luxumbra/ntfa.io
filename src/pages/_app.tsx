@@ -52,13 +52,14 @@ const theme = extendTheme({
   styles: {
         global: {
             html: {
-                height: `100%`,
+                maxHeight: `100vh`,
                 scrollBehavior: `smooth`,
             },
-            body: {
+          body: {
+              position: "relative",
                 backgroundColor: `black`,
                 fontFamily: `'Hero', sans-serif`,
-                height: `100%`,
+              height: `100%`,
                 fontSize: `16px`,
                 overflowX: `hidden`,
                 // "div": {

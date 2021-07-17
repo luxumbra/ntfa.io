@@ -125,9 +125,9 @@ export function AssetDetails() {
             <Box
                 className="content"
                 position="relative"
-                flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 33%" }}
-                width={{ base: "98%", smd: "98%", lg: "33%" }}
-                maxH={{ base: "83vh", lg: "75vh" }}
+                flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 45%", xxxl: "0 0 33%" }}
+                width={{ base: "98%", smd: "98%", lg: "45%", xxxl: "33%" }}
+                maxH={{ base: "83vh", lg: "83vh", xxxl: "75vh" }}
                 height="100%"
                 d="flex"
                 flexDirection={{ base: "column", smd: "row", lg: "column" }}
@@ -216,15 +216,14 @@ export function AssetDetails() {
                                     flex: "0 0 33%",
                                     maxH: "33%",
                                         width: "100%",
-                                        "h2": {
+                                        "h2, h3": {
                                             fontFamily: "Hero, sans-serif",
+                                            fontSize: { base: "12px", lg: "16px", xl: "18px" },
                                             fontWeight: "800",
                                             mb: 0
                                         },
                                         "h3": {
-                                            fontFamily: "Hero, sans-serif",
-                                            fontWeight: "800",
-                                            mb: 0
+                                            fontSize: { base: "10px", lg: "14px", xl: "16px" },
                                         },
                                         "ul": {
                                             pl: "15px",
@@ -243,13 +242,13 @@ export function AssetDetails() {
             <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 0, smd: 0, lg: 0 }}>
                 <NextLink href="/#section1" passHref>
                     <Link
-                    display="inline-block"
-                    position="relative"
-                    // pt="26.25%"
-                    height="0"
-                    width="100%"
-                    maxW="100px"
-                    css={css`
+                        display="inline-block"
+                        position="relative"
+                        // pt="26.25%"
+                        height="0"
+                        width="100%"
+                        maxW="100px"
+                        css={css`
                         @keyframes logo-anim {
                             0% { transform: translateY(25px); }
                             50% { transform: translateY(35px); }
@@ -266,9 +265,9 @@ export function AssetDetails() {
                         /* animation-play-state: paused; */
                     `}
                         sx={{ animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1' }}
-                >
-                    <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
-                </Link>
+                    >
+                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                    </Link>
                 </NextLink>
             </Box>
 

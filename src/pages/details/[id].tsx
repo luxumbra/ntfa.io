@@ -12,6 +12,7 @@ import { MetadataComponent } from "../../components/shared/Metadata";
 import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
+import { Loading } from '../../components/shared/Loading';
 import { rootCertificates } from "node:tls";
 import { KeyObjectType } from "node:crypto";
 
@@ -101,9 +102,6 @@ export function AssetDetails() {
             )
             .then((response) => {
                 console.log('response: ', response);
-                // debugger;
-                // setGoldAssets(response.data.assets.slice(0, 2));
-                // setAssets(response.data.assets.slice(3));
                 setAsset(response.data);
             })
             .then(() => {
@@ -121,7 +119,7 @@ export function AssetDetails() {
             backgroundImage="url(/assets/scenes/bg-scene.png)"
             backgroundSize="cover"
             overflow="hidden"
-            id="section2"
+            id="section"
         >
             <MetadataComponent title={asset?.name} description={asset?.description} socialImage={asset?.image_preview_url} />
             <Box
@@ -130,6 +128,7 @@ export function AssetDetails() {
                 flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 33%" }}
                 width={{ base: "98%", smd: "98%", lg: "33%" }}
                 maxH={{ base: "83vh", lg: "75vh" }}
+                height="100%"
                 d="flex"
                 flexDirection={{ base: "column", smd: "row", lg: "column" }}
                 alignItems={{ base: "flex-start", smd: "center", lg: "flex-start" }}
@@ -146,7 +145,9 @@ export function AssetDetails() {
                     backdropFilter: "blur(7px)",
                 }}
             >
-                {loading ? (<p>Loading</p>) : (
+                {loading ? (
+                    <Loading />
+                ) : (
                     <>
                         <Box
                             className="playerWrapper"
@@ -187,7 +188,7 @@ export function AssetDetails() {
                             height={{
                                 base: `${100 * (356 / 633)}%`,
                                 smd: `${100 - 31}%`,
-                                lg: `${100 - ((356 / 633) * 100)}%`
+                                lg: `${100 - (356 / 633) - 45}%`
                             }}
                             overflowY="auto"
                             z={0}
@@ -214,7 +215,20 @@ export function AssetDetails() {
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                     flex: "0 0 33%",
                                     maxH: "33%",
-                                    width: "100%"
+                                        width: "100%",
+                                        "h2": {
+                                            fontFamily: "Hero, sans-serif",
+                                            fontWeight: "800",
+                                            mb: 0
+                                        },
+                                        "h3": {
+                                            fontFamily: "Hero, sans-serif",
+                                            fontWeight: "800",
+                                            mb: 0
+                                        },
+                                        "ul": {
+                                            pl: "15px",
+                                        }
                                 }}>
                                     <ReactMarkdown>
                                         {asset?.description}

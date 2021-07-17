@@ -32,7 +32,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                     token: asset.token_id
                 }
             }}
-                prefetch passHref>
+                passHref>
                 <Link
                     key={id}
                     transition="opacity 0.3s .3s ease-in"

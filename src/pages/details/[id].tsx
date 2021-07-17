@@ -12,6 +12,7 @@ import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { rootCertificates } from "node:tls";
+import { KeyObjectType } from "node:crypto";
 
 export let getAsset: any;
 export interface AssetDetailsInterface {
@@ -19,6 +20,63 @@ export interface AssetDetailsInterface {
     description: string;
     animation_url: string;
     image_preview_url: string;
+    traits: Array<{}>;
+}
+
+export type AssetMetaType = {
+    theAsset: {
+        traits: Array<{}>;
+    };
+
+}
+// export interface AssetTraitsInterface {
+//     traits:
+// }
+
+export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
+    console.log('theAsset:', theAsset);
+    const metaItems = [] as Array<{}>;
+    const { traits } = theAsset;
+    traits?.map((trait: {}) => {
+        metaItems.push(trait);
+    });
+
+    return (
+        <Box as="ul" d="flex" w="100%" minW="100%" listStyleType="none" flexFlow="row wrap">
+            {metaItems.map((item, index) => {
+                console.log('item: ', item);
+                type ItemType = {
+                    trait_type: string;
+                    value: string;
+                }
+                const assetItem = item as ItemType;
+                return (
+                    <Box as="li" sx={{
+                        flex: "0 0 45%",
+                        d: "flex",
+                        flexFlow: "row wrap",
+                        mb: 1,
+                    }}>
+                        <Box as="span" key={`dt-${index}`} sx={{
+                            flex: "0 0 100%",
+                            fontSize: { base: "14px" },
+                            fontWeight: "800",
+                        }}>
+                            {assetItem?.trait_type}
+                        </Box>
+                        <Box as="span" key={`dd-${index}`} sx={{
+                            flex: "1",
+                            fontSize: { base: "14px" },
+                            fontWeight: "100",
+                        }}>
+                            {assetItem?.value}
+                        </Box>
+                    </Box>
+                );
+            }
+            )}
+        </Box>
+    )
 }
 
 export function AssetDetails() {
@@ -53,54 +111,6 @@ export function AssetDetails() {
             .catch((err) => console.error(err));
     }, [id, token]);
 
-    interface AssetMetaInterface {
-        theAsset: Array<{}>;
-    }
-    const AssetMeta: FC<AssetMetaInterface> = ({ theAsset }) => {
-        console.log('theAsset:', theAsset);
-        const metaItems = [] as Array<{}>;
-
-        theAsset?.traits?.map((trait: {}) => {
-            metaItems.push(trait);
-        });
-
-        return (
-            <Box as="ul" d="flex" w="100%" minW="100%" listStyleType="none" flexFlow="row wrap">
-                {metaItems.map((item, index) => {
-                    console.log('item: ', item);
-                    type ItemType = {
-                        trait_type: string;
-                        value: string;
-                    }
-                    const assetItem = item as ItemType;
-                    return (
-                        <Box as="li" sx={{
-                            flex: "0 0 45%",
-                            d: "flex",
-                            flexFlow: "row wrap",
-                            mb: 1,
-                        }}>
-                            <Box as="span" key={`dt-${index}`} sx={{
-                                flex: "0 0 100%",
-                                fontSize: { base: "14px" },
-                                fontWeight: "800",
-                            }}>
-                                {assetItem?.trait_type}
-                            </Box>
-                            <Box as="span" key={`dd-${index}`} sx={{
-                                flex: "1",
-                                fontSize: { base: "14px" },
-                                fontWeight: "100",
-                            }}>
-                                {assetItem?.value}
-                            </Box>
-                        </Box>
-                    );
-                }
-                )}
-            </Box>
-        )
-    }
 
     return (
         <Box
@@ -181,8 +191,9 @@ export function AssetDetails() {
                             overflowY="auto"
                             z={0}
                             sx={{
-                                scrollbarColor: "red",
-                                scrollbarGutter: "red"
+                                "&::scrollbar-track": {
+                                    backgroundColor: "red",
+                                }
                             }}
                         >
                             <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap" >
@@ -197,7 +208,7 @@ export function AssetDetails() {
                                     }
                                 }}>
 
-                                    {asset && <AssetMeta theAsset={asset} />}
+                                    {asset?.traits && <AssetMeta theAsset={asset} />}
                                 </Box>
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                     flex: "0 0 33%",
@@ -213,7 +224,7 @@ export function AssetDetails() {
             </Box>
 
             <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 1000, smd: 0, lg: 0 }}>
-                <NextLink href="/#section1" prefetch passHref>
+                <NextLink href="/#section1" passHref>
                     <Link
                     display="inline-block"
                     position="relative"

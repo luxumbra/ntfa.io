@@ -17,7 +17,7 @@ export const Loading = () => {
           maxW="100px"
           margin="0 auto"
           css={css`
-                        @keyframes logo-anim {
+                        @keyframes loading-anim {
                             0% { transform: translateY(25px); opacity: 0.7; }
                             50% { transform: translateY(35px); opacity: 0.2;}
                             100% { transform: translateY(25px); opacity: 0.7; }
@@ -32,7 +32,7 @@ export const Loading = () => {
                         /* animation: logo-anim 5s infinite; */
                         /* animation-play-state: paused; */
                     `}
-          sx={{ animation: 'logo-anim 5s infinite' }}
+          sx={{ animation: 'loading-anim 5s infinite' }}
         >
           <Image src="/assets/ntfa-logo.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
         </Link>

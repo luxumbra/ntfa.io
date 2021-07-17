@@ -110,7 +110,7 @@ export function SceneCore() {
                 height={{ base: "100px", smd: "60px", lg: "300px", xxxl: "300px" }}
                 width={{ base: "100px", smd: "60px", lg: "100px", xxxl: "300px" }}
                 zIndex={{ base: 300, lg: 1000 }}>
-                <NextLink href="/#section2" prefetch passHref>
+                <NextLink href="/#section2" passHref>
                     <Link
                     w="100%"
                     h="100%"
@@ -138,7 +138,7 @@ export function SceneCore() {
             </Box>
 
             <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xxl: "45px", xxxl: "60px" }} bottom={{ base: "220px", smd: "250px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "27%", lg: "830px", xxl: "850px", xxxl: "1200px" }} zIndex={{ base: 300, lg: 0 }}>
-                <NextLink href="/#section1" prefetch passHref>
+                <NextLink href="/#section1" passHref>
                     <Link
                     display="inline-block"
                     position="relative"

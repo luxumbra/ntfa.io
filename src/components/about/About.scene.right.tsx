@@ -20,7 +20,7 @@ export const AboutSceneRight: FC<AboutSceneRightInterface> = () => {
                 height={{ base: "200px", lg: "200px" }}
                 width={{ base: "200px", lg: "150px" }}
                 zIndex={2000}>
-                <NextLink href="/#section3" prefetch passHref>
+                <NextLink href="/#section3" passHref>
                     <Link
                     maxW="200px"
                     maxH="200px"

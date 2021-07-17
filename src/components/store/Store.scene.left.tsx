@@ -18,7 +18,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
         <Box className={className} flexGrow={1} minW={minW} position="relative" zIndex="2000">
             <Box
                 className="logo" position="absolute" width="100%" height={{ base: "20%", xl: "auto" }} maxW={{ base: "100px", smd: "60px", xl: "130px" }} top={{ base: "0", xl: "0" }} left={{ base: "10px", xl: "50px" }} z={500} >
-                <NextLink href="/#section1" prefetch passHref>
+                <NextLink href="/#section1" passHref>
                     <Link
                         display="inline-block"
                         position="relative"
@@ -59,7 +59,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
                     h="0"
                     w="100%"
                     maxW="200px">
-                    <NextLink href="/#section2" prefetch passHref>
+                    <NextLink href="/#section2" passHref>
                         <Link
                         w="100%"
                         h="100%"

@@ -5,10 +5,12 @@ import matter from "gray-matter";
 import { MetadataComponent } from '../components/shared/Metadata';
 import { FooterComponent } from "../components/shared/Footer";
 import TosCore from '../components/tos/Tos.core';
+import { Loading } from '../components/shared/Loading';
 
 
 const TosPage = () => {
     const [tos, setTos] = useState('');
+    const [loading, setLoading] = useState(true);
     const page = "tos";
 
     const grabData = async (page: string) => {
@@ -20,14 +22,19 @@ const TosPage = () => {
         return (tos ? tos : 'No content');
     };
 
-    grabData(page);
+    grabData(page).then(res => {
+        setLoading(false);
+    });
 
     return (
-        <Box className="scene" d="flex" flexDirection="column" minHeight="100vh" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden">
+        <Box className="scene" d="flex" flexDirection="column" height="100vh" maxHeight="100%" width="100vw" maxW="100%" alignContent="stretch" overflowX="hidden" overflowY="hidden">
             <MetadataComponent />
-
-            <TosCore content={tos} />
-
+            {
+                loading ? (
+                    <Loading />
+                ) : (
+                    <TosCore content={tos} />
+                )}
             <FooterComponent toggler />
         </Box>
     )

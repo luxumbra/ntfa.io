@@ -6,6 +6,7 @@ import { css, jsx } from "@emotion/react";
 import { OpenSeaPort, Network } from "opensea-js";
 import axios from "axios";
 import NextLink from 'next/link';
+import ReactMarkdown from "react-markdown";
 //
 import { MetadataComponent } from "../../components/shared/Metadata";
 import { SceneBridge } from '../../components/scene/Scene.bridge';
@@ -215,7 +216,9 @@ export function AssetDetails() {
                                     maxH: "33%",
                                     width: "100%"
                                 }}>
-                                    {asset?.description.replace('<br />', ' \n\n')}
+                                    <ReactMarkdown>
+                                        {asset?.description}
+                                    </ReactMarkdown>
                                 </Box>
                             </Box>
                         </Box>
@@ -329,27 +332,3 @@ export function AssetDetails() {
 }
 
 export default AssetDetails;
-
-// AssetDetails.getInitialProps = async () => {
-//     const [loading, setLoading] = useState(true);
-//     const [asset, setAsset] = useState({} as AssetDetailsInterface);
-//     const { id, token } = router.query;
-
-//     getAsset = axios
-//         .get(
-//             `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${token}`
-//         )
-//         .then((response) => {
-//             console.log('response: ', response);
-//             // debugger;
-//             // setGoldAssets(response.data.assets.slice(0, 2));
-//             // setAssets(response.data.assets.slice(3));
-//             setAsset(response.data);
-//         })
-//         .then(() => {
-//             setLoading(false);
-//         })
-//         .catch((err) => console.error(err));
-
-//     return asset;
-// }

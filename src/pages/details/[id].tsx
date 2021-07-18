@@ -20,7 +20,10 @@ import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/ico
 import 'simplebar/dist/simplebar.css';
 import { isJSDocAugmentsTag } from "typescript";
 
+declare const window: any;
 export let getAsset: any;
+export let seaport: any;
+
 export interface AssetDetailsInterface {
     name: string;
     description: string;
@@ -35,7 +38,6 @@ export type AssetMetaType = {
     theAsset: {
         traits: Array<{}>;
     };
-
 }
 
 export const openseaRootUrl = "https://opensea.io";
@@ -92,29 +94,91 @@ export function AssetDetails() {
     const [toggle3, setToggle3] = useState(false);
     const [loading, setLoading] = useState(true);
     const [asset, setAsset] = useState({} as AssetDetailsInterface);
+    const [osAsset, setOsAsset] = useState({} as OpenSeaAsset);
+    const [price, setPrice] = useState(0);
     const router = useRouter();
 
-    console.log(router);
-
     const {
-        query: { id, token },
+        query: { id, tokenId },
     } = router;
 
-    useEffect(() => {
-        getAsset = axios
-            .get(
-                `https://api.opensea.io/api/v1/asset/${id}/${token}`
-            )
-            .then((response) => {
-                console.log('response: ', response);
-                setAsset(response.data);
-            })
-            .then(() => {
-                setLoading(false);
-            })
-            .catch((err) => console.error(err));
-    }, [id, token]);
 
+    useEffect(() => {
+        (async () => {
+            seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Rinkeby })
+            console.log("seaport: ", seaport);
+            console.log(id, tokenId);
+            const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
+            console.log("Assetstate: ", assetState);
+            // debugger;
+
+            // // assetState.then((response) => {
+            // //     console.log("assetState res: ", response);
+
+            // // })
+            // // .then(() => {
+            // //     setLoading(false);
+            // // });
+
+            if (assetState.sellOrders && assetState.sellOrders.length > 0) {
+                let price = 99999;
+
+                for (let i = 0; i < assetState.sellOrders.length; i++) {
+                    const order = assetState.sellOrders[i];
+                    const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
+
+                    if (basePrice < price) {
+                        price = basePrice;
+                    }
+                }
+
+                setPrice(price);
+            }
+
+            setOsAsset(assetState);
+
+            osAsset && setLoading(false);
+        })();
+
+        // getAsset = axios
+        //     .get(
+        //         `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${tokenId}`
+        //     )
+        //     .then((response) => {
+        //         console.log('response: ', response);
+        //         setAsset(response.data);
+        //     })
+        //     .then(() => {
+        //         setLoading(false);
+        //     })
+        //     .catch((err) => console.error(err));
+    }, [id, tokenId]);
+
+    interface BuyActionProps {
+        id: string;
+        tokenId: string;
+    }
+
+    const buyAction = async (id: string, tokenId: any) => {
+        if (typeof window.ethereum !== 'undefined') {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const offerPrice = 0.005 // (price ? price : 0.005);
+
+            await seaport.wrapEth({
+                amountInEth: offerPrice,
+                accountAddress: accounts[0],
+            })
+
+            const offer = await seaport.createBuyOrder({
+                asset: {
+                    tokenId: (tokenId?.toString()),
+                    tokenAddress: id,
+                },
+                accountAddress: accounts[0],
+                startAmount: offerPrice,
+            });
+        }
+    }
 
     return (
         <Box
@@ -126,7 +190,7 @@ export function AssetDetails() {
             overflow="hidden"
             id="section"
         >
-            <MetadataComponent title={asset?.name} description={asset?.description} socialImage={asset?.image_preview_url} />
+            <MetadataComponent title={osAsset?.name} description={osAsset?.description} socialImage={osAsset?.imagePreviewUrl} />
             <Box
                 className="content"
                 position="relative"
@@ -167,7 +231,7 @@ export function AssetDetails() {
                             zIndex={200}
                             overflow="hidden"
                         >
-                            <ReactPlayer
+                                {/* <ReactPlayer
                                 url={asset?.animation_url}
                                 playing={true}
                                 volume={0}
@@ -182,7 +246,13 @@ export function AssetDetails() {
                                     top: `0`,
                                     zIndex: 0,
                                 }}
-                            />
+                            /> */}
+                                <Image src={osAsset.imageUrl} alt={osAsset.name} width="100%" height="100%" objectFit="cover" style={{
+                                    position: "absolute",
+                                    left: `0`,
+                                    top: `0`,
+                                    zIndex: 0,
+                                }} />
                         </Box>
 
                         <Box
@@ -276,7 +346,7 @@ export function AssetDetails() {
                                         }
                                 }}>
                                     <ReactMarkdown>
-                                        {asset?.description}
+                                            {osAsset?.description}
                                     </ReactMarkdown>
                                 </Box>
                             </Box>

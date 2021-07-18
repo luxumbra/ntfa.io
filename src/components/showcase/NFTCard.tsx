@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import ReactPlayer from "react-player";
 import NextLink from 'next/link';
 import {
@@ -8,8 +8,13 @@ import {
     Text,
 } from "@chakra-ui/react";
 import ReactMarkdown from "react-markdown";
+import Web3 from 'web3';
+import { OpenSeaPort, Network } from 'opensea-js';
 
 
+declare const window: any;
+
+export let seaport: any;
 export interface NFTCardInterface {
     asset: any;
     id: number;
@@ -27,13 +32,14 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
 
     const summaryText = truncateString(asset.description, 160);
 
+
     return (
         <Box>
             <NextLink href={{
                 pathname: `/details/[id]`,
                 query: {
                     id: asset.asset_contract.address,
-                    token: asset.token_id
+                    tokenId: asset.token_id
                 }
             }}
                 passHref>

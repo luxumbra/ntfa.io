@@ -35,7 +35,7 @@ export const Loading = () => {
                     `}
           sx={{ animation: 'loading-anim 5s infinite' }}
         >
-          <Image src="/assets/ntfa-logo.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} priority />
+          <Image src="/assets/ntfa-logo.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} priority="true" />
         </Box>
         <Box width="100%" textAlign="center">
           <p>Loading...</p>

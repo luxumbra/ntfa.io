@@ -117,6 +117,39 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
                             style={{ position: 'absolute', left: `0`, top: `0`, zIndex: 200 }}
                         />
                     </Box>
+                    <Box p="30px" width="420px" backgroundColor="rgba(255, 255, 255, 0.5)" borderRadius="15px">
+                        <Heading size="xl" mb="15px" textAlign="center">{title}</Heading>
+                        <Heading size="lg" mb="15px" textAlign="center">{price.toFixed(4)} ETH</Heading>
+                        <ButtonGroup
+                            size="lg"
+                            alignItems="center"
+                            justifyContent="center"
+                            width="100%"
+                            onClick={async e => {
+                                if (typeof window.ethereum !== 'undefined') {
+                                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                                    const offerPrice = 0.005 // (price ? price : 0.005);
+
+                                    await seaport.wrapEth({
+                                        amountInEth: offerPrice,
+                                        accountAddress: accounts[0],
+                                    })
+
+                                    const offer = await seaport.createBuyOrder({
+                                        asset: {
+                                            tokenId: (tokenId.toString()),
+                                            tokenAddress: contract,
+                                        },
+                                        accountAddress: accounts[0],
+                                        startAmount: offerPrice,
+                                    });
+                                }
+                            }}
+                        >
+                            <Button width="120px" pt="5px" colorScheme="purple">BUY</Button>
+                            <Button width="120px" pt="5px" colorScheme="green">BID</Button>
+                        </ButtonGroup>
+                    </Box>
                 </Box>
             </Box>
         </Box>

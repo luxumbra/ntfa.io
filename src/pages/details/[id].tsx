@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { Box, Heading, Link, Image, Button } from "@chakra-ui/react";
+import { Box, Heading, Link, Image, Button, ButtonGroup } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
@@ -15,8 +15,12 @@ import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
 import { rootCertificates } from "node:tls";
 import { KeyObjectType } from "node:crypto";
+import { OpenSeaAsset } from "opensea-js/lib/types";
 
+declare const window: any;
 export let getAsset: any;
+export let seaport: any;
+
 export interface AssetDetailsInterface {
     name: string;
     description: string;
@@ -29,11 +33,8 @@ export type AssetMetaType = {
     theAsset: {
         traits: Array<{}>;
     };
-
 }
-// export interface AssetTraitsInterface {
-//     traits:
-// }
+
 
 export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
     console.log('theAsset:', theAsset);
@@ -53,7 +54,7 @@ export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
                 }
                 const assetItem = item as ItemType;
                 return (
-                    <Box as="li" sx={{
+                    <Box key={index} as="li" sx={{
                         flex: "0 0 45%",
                         d: "flex",
                         flexFlow: "row wrap",
@@ -87,29 +88,91 @@ export function AssetDetails() {
     const [toggle3, setToggle3] = useState(false);
     const [loading, setLoading] = useState(true);
     const [asset, setAsset] = useState({} as AssetDetailsInterface);
+    const [osAsset, setOsAsset] = useState({} as OpenSeaAsset);
+    const [price, setPrice] = useState(0);
     const router = useRouter();
 
-    console.log(router);
-
     const {
-        query: { id, token },
+        query: { id, tokenId },
     } = router;
 
-    useEffect(() => {
-        getAsset = axios
-            .get(
-                `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${token}`
-            )
-            .then((response) => {
-                console.log('response: ', response);
-                setAsset(response.data);
-            })
-            .then(() => {
-                setLoading(false);
-            })
-            .catch((err) => console.error(err));
-    }, [id, token]);
 
+    useEffect(() => {
+        (async () => {
+            seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Rinkeby })
+            console.log("seaport: ", seaport);
+            console.log(id, tokenId);
+            const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
+            console.log("Assetstate: ", assetState);
+            // debugger;
+
+            // // assetState.then((response) => {
+            // //     console.log("assetState res: ", response);
+
+            // // })
+            // // .then(() => {
+            // //     setLoading(false);
+            // // });
+
+            if (assetState.sellOrders && assetState.sellOrders.length > 0) {
+                let price = 99999;
+
+                for (let i = 0; i < assetState.sellOrders.length; i++) {
+                    const order = assetState.sellOrders[i];
+                    const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
+
+                    if (basePrice < price) {
+                        price = basePrice;
+                    }
+                }
+
+                setPrice(price);
+            }
+
+            setOsAsset(assetState);
+
+            osAsset && setLoading(false);
+        })();
+
+        // getAsset = axios
+        //     .get(
+        //         `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${tokenId}`
+        //     )
+        //     .then((response) => {
+        //         console.log('response: ', response);
+        //         setAsset(response.data);
+        //     })
+        //     .then(() => {
+        //         setLoading(false);
+        //     })
+        //     .catch((err) => console.error(err));
+    }, [id, tokenId]);
+
+    interface BuyActionProps {
+        id: string;
+        tokenId: string;
+    }
+
+    const buyAction = async (id: string, tokenId: any) => {
+        if (typeof window.ethereum !== 'undefined') {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const offerPrice = 0.005 // (price ? price : 0.005);
+
+            await seaport.wrapEth({
+                amountInEth: offerPrice,
+                accountAddress: accounts[0],
+            })
+
+            const offer = await seaport.createBuyOrder({
+                asset: {
+                    tokenId: (tokenId?.toString()),
+                    tokenAddress: id,
+                },
+                accountAddress: accounts[0],
+                startAmount: offerPrice,
+            });
+        }
+    }
 
     return (
         <Box
@@ -121,7 +184,7 @@ export function AssetDetails() {
             overflow="hidden"
             id="section"
         >
-            <MetadataComponent title={asset?.name} description={asset?.description} socialImage={asset?.image_preview_url} />
+            <MetadataComponent title={osAsset?.name} description={osAsset?.description} socialImage={osAsset?.imagePreviewUrl} />
             <Box
                 className="content"
                 position="relative"
@@ -162,7 +225,7 @@ export function AssetDetails() {
                             zIndex={200}
                             overflow="hidden"
                         >
-                            <ReactPlayer
+                                {/* <ReactPlayer
                                 url={asset?.animation_url}
                                 playing={true}
                                 volume={0}
@@ -177,7 +240,13 @@ export function AssetDetails() {
                                     top: `0`,
                                     zIndex: 0,
                                 }}
-                            />
+                            /> */}
+                                <Image src={osAsset.imageUrl} alt={osAsset.name} width="100%" height="100%" objectFit="cover" style={{
+                                    position: "absolute",
+                                    left: `0`,
+                                    top: `0`,
+                                    zIndex: 0,
+                                }} />
                         </Box>
 
                         <Box
@@ -200,7 +269,7 @@ export function AssetDetails() {
                         >
                             <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap" >
                                 <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
-                                    {asset && asset.name}
+                                        {osAsset && osAsset.name}
                                 </Heading>
                                 <Box d="flex" className="asset--meta" flexFlow="column wrap" mb="4" sx={{
                                     "& > span": {
@@ -210,8 +279,23 @@ export function AssetDetails() {
                                     }
                                 }}>
 
-                                    {asset?.traits && <AssetMeta theAsset={asset} />}
-                                </Box>
+                                        {osAsset?.traits && <AssetMeta theAsset={osAsset} />}
+                                    </Box>
+                                    <Box p="30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
+                                        <Box>
+                                            <h3>Buy / Bid on {osAsset.name}</h3>
+                                            <Box as="span">Current price: {price.toFixed(4)} ETH</Box>
+                                        </Box>
+                                        <ButtonGroup
+                                            size="sm"
+                                            alignItems="center"
+                                            justifyContent="center"
+                                            width="100%"
+                                        >
+                                            <Button width="120px" pt="5px" colorScheme="purple" onClick={() => buyAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button>
+                                            <Button width="120px" pt="5px" colorScheme="green">BID</Button>
+                                        </ButtonGroup>
+                                    </Box>
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                     flex: "0 0 33%",
                                     maxH: "33%",
@@ -230,7 +314,7 @@ export function AssetDetails() {
                                         }
                                 }}>
                                     <ReactMarkdown>
-                                        {asset?.description}
+                                            {osAsset?.description}
                                     </ReactMarkdown>
                                 </Box>
                             </Box>

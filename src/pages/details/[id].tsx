@@ -13,9 +13,11 @@ import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
+import { AssetMeta } from "../../components/detail/AssetMeta";
 import { rootCertificates } from "node:tls";
 import { KeyObjectType } from "node:crypto";
 import { OpenSeaAsset } from "opensea-js/lib/types";
+import { connectWallet } from "../../constants";
 
 declare const window: any;
 export let getAsset: any;
@@ -29,59 +31,6 @@ export interface AssetDetailsInterface {
     traits: Array<{}>;
 }
 
-export type AssetMetaType = {
-    theAsset: {
-        traits: Array<{}>;
-    };
-}
-
-
-export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
-    console.log('theAsset:', theAsset);
-    const metaItems = [] as Array<{}>;
-    const { traits } = theAsset;
-    traits?.map((trait: {}) => {
-        metaItems.push(trait);
-    });
-
-    return (
-        <Box as="ul" d="flex" w="100%" minW="100%" listStyleType="none" flexFlow="row wrap">
-            {metaItems.map((item, index) => {
-                console.log('item: ', item);
-                type ItemType = {
-                    trait_type: string;
-                    value: string;
-                }
-                const assetItem = item as ItemType;
-                return (
-                    <Box key={index} as="li" sx={{
-                        flex: "0 0 45%",
-                        d: "flex",
-                        flexFlow: "row wrap",
-                        mb: { base: 0, lg: 1 },
-                    }}>
-                        <Box as="span" key={`dt-${index}`} sx={{
-                            flex: "0 0 100%",
-                            fontSize: { base: "11px", lg: "14px" },
-                            fontWeight: "800",
-                        }}>
-                            {assetItem?.trait_type}
-                        </Box>
-                        <Box as="span" key={`dd-${index}`} sx={{
-                            flex: "1",
-                            fontSize: { base: "11px", lg: "14px" },
-                            fontWeight: "100",
-                        }}>
-                            {assetItem?.value}
-                        </Box>
-                    </Box>
-                );
-            }
-            )}
-        </Box>
-    )
-}
-
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
@@ -90,32 +39,33 @@ export function AssetDetails() {
     const [asset, setAsset] = useState({} as AssetDetailsInterface);
     const [osAsset, setOsAsset] = useState({} as OpenSeaAsset);
     const [price, setPrice] = useState(0);
+    const [creatingOrder, setCreatingOrder] = useState(false);
+    const [userAccount, setUserAccount] = useState();
     const router = useRouter();
 
     const {
         query: { id, tokenId },
     } = router;
 
+    const getSetUserAccount = async () => {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setUserAccount(accounts[0]);
+    }
 
     useEffect(() => {
+        getSetUserAccount();
         (async () => {
             seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Rinkeby })
             console.log("seaport: ", seaport);
             console.log(id, tokenId);
             const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
+            setOsAsset(assetState);
             console.log("Assetstate: ", assetState);
             // debugger;
 
-            // // assetState.then((response) => {
-            // //     console.log("assetState res: ", response);
-
-            // // })
-            // // .then(() => {
-            // //     setLoading(false);
-            // // });
 
             if (assetState.sellOrders && assetState.sellOrders.length > 0) {
-                let price = 99999;
+                let price = 9999;
 
                 for (let i = 0; i < assetState.sellOrders.length; i++) {
                     const order = assetState.sellOrders[i];
@@ -125,11 +75,15 @@ export function AssetDetails() {
                         price = basePrice;
                     }
                 }
-
                 setPrice(price);
             }
 
-            setOsAsset(assetState);
+            if (assetState && assetState.buyOrders && assetState.buyOrders.length > 0) {
+                const buyOrder = assetState.buyOrders[0];
+                const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
+                currentPrice && setPrice(currentPrice);
+            }
+
 
             osAsset && setLoading(false);
         })();
@@ -155,22 +109,36 @@ export function AssetDetails() {
 
     const buyAction = async (id: string, tokenId: any) => {
         if (typeof window.ethereum !== 'undefined') {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const offerPrice = 0.005 // (price ? price : 0.005);
+            console.log(window.ethereum);
 
-            await seaport.wrapEth({
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            console.log("Accounts: ", accounts);
+            if (!accounts[0]) {
+                await connectWallet();
+            }
+
+            const offerPrice = price ? price + 0.01 : 0.055;
+
+            const ethWrap = await seaport.wrapEth({
                 amountInEth: offerPrice,
                 accountAddress: accounts[0],
-            })
+            });
+            ethWrap && console.log("eth wrap: ", ethWrap);
 
             const offer = await seaport.createBuyOrder({
                 asset: {
                     tokenId: (tokenId?.toString()),
                     tokenAddress: id,
+                    schemaName: "ERC1155",
                 },
                 accountAddress: accounts[0],
                 startAmount: offerPrice,
             });
+            // try {
+
+            //  }
+            console.log("offer: ", offer);
+            // debugger;
         }
     }
 
@@ -283,8 +251,15 @@ export function AssetDetails() {
                                     </Box>
                                     <Box p="30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
                                         <Box>
-                                            <h3>Buy / Bid on {osAsset.name}</h3>
-                                            <Box as="span">Current price: {price.toFixed(4)} ETH</Box>
+                                            <h3>Get your hands on the {osAsset.name}</h3>
+                                            <Box as="div">
+                                                {`Highest bid: ${price.toFixed(4)} ETH`}
+                                            </Box>
+                                                <Box as="span" sx={{
+                                                    fontSize: "10px"
+                                                }}>
+                                                    {osAsset.buyOrders.length > 0 && osAsset.buyOrders[0]?.maker === userAccount ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
+                                                </Box>
                                         </Box>
                                         <ButtonGroup
                                             size="sm"

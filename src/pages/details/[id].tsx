@@ -18,10 +18,16 @@ import { rootCertificates } from "node:tls";
 import { KeyObjectType } from "node:crypto";
 import { OpenSeaAsset } from "opensea-js/lib/types";
 import { connectWallet } from "../../constants";
+import ConnectWallet from "../../components/detail/ConnectWallet";
+
 
 declare const window: any;
 export let getAsset: any;
 export let seaport: any;
+export let provider: any;
+export let web3: any;
+export let accounts: any;
+
 
 export interface AssetDetailsInterface {
     name: string;
@@ -42,24 +48,81 @@ export function AssetDetails() {
     const [creatingOrder, setCreatingOrder] = useState(false);
     const [userAccount, setUserAccount] = useState();
     const router = useRouter();
-
     const {
         query: { id, tokenId },
     } = router;
 
+
+
+    // set the current users account address so we can check it against the highest bidder address
     const getSetUserAccount = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        !accounts && console.log("Getting accounts...");
+
         setUserAccount(accounts[0]);
     }
 
+    interface BuyActionProps {
+        id: string;
+        tokenId: string;
+    }
+
+    const bidAction = async (id: string, tokenId: any) => {
+        if (typeof window.ethereum !== 'undefined') {
+            console.log(window.ethereum);
+
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            console.log("Accounts: ", accounts);
+            if (!accounts[0]) {
+                await connectWallet();
+            }
+
+            const offerPrice = price ? price + 0.01 : 0.055;
+
+            const ethWrap = await seaport.wrapEth({
+                amountInEth: offerPrice,
+                accountAddress: accounts[0],
+            });
+
+            !ethWrap && setCreatingOrder(true);
+            ethWrap && console.log("eth wrap: ", ethWrap);
+
+            setCreatingOrder(false);
+
+            const offer = await seaport.createBuyOrder({
+                asset: {
+                    tokenId: (tokenId?.toString()),
+                    tokenAddress: id,
+                    schemaName: "ERC1155",
+                },
+                accountAddress: accounts[0],
+                startAmount: offerPrice,
+            });
+            !offer && setCreatingOrder(true);
+
+            //  }
+            console.log("offer: ", offer);
+            offer && setCreatingOrder(false);
+            // debugger;
+        }
+    }
+
+    // const placeBid = async (props: any) => {
+    //     const { order, accountAddress } = props;
+    //     const provider = await web3Modal.connect();
+    //     if (!accountAddress) {
+    //         provider.on()
+    //     }
+    // }
+
+
     useEffect(() => {
-        getSetUserAccount();
         (async () => {
             seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Rinkeby })
             console.log("seaport: ", seaport);
             console.log(id, tokenId);
             const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
-            setOsAsset(assetState);
+            assetState && setOsAsset(assetState);
             console.log("Assetstate: ", assetState);
             // debugger;
 
@@ -88,59 +151,7 @@ export function AssetDetails() {
             osAsset && setLoading(false);
         })();
 
-        // getAsset = axios
-        //     .get(
-        //         `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${tokenId}`
-        //     )
-        //     .then((response) => {
-        //         console.log('response: ', response);
-        //         setAsset(response.data);
-        //     })
-        //     .then(() => {
-        //         setLoading(false);
-        //     })
-        //     .catch((err) => console.error(err));
-    }, [id, tokenId]);
-
-    interface BuyActionProps {
-        id: string;
-        tokenId: string;
-    }
-
-    const buyAction = async (id: string, tokenId: any) => {
-        if (typeof window.ethereum !== 'undefined') {
-            console.log(window.ethereum);
-
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            console.log("Accounts: ", accounts);
-            if (!accounts[0]) {
-                await connectWallet();
-            }
-
-            const offerPrice = price ? price + 0.01 : 0.055;
-
-            const ethWrap = await seaport.wrapEth({
-                amountInEth: offerPrice,
-                accountAddress: accounts[0],
-            });
-            ethWrap && console.log("eth wrap: ", ethWrap);
-
-            const offer = await seaport.createBuyOrder({
-                asset: {
-                    tokenId: (tokenId?.toString()),
-                    tokenAddress: id,
-                    schemaName: "ERC1155",
-                },
-                accountAddress: accounts[0],
-                startAmount: offerPrice,
-            });
-            // try {
-
-            //  }
-            console.log("offer: ", offer);
-            // debugger;
-        }
-    }
+    }, [id, tokenId, accounts, provider]);
 
     return (
         <Box
@@ -249,27 +260,43 @@ export function AssetDetails() {
 
                                         {osAsset?.traits && <AssetMeta theAsset={osAsset} />}
                                     </Box>
+
                                     <Box p="30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
-                                        <Box>
+                                        <Box sx={{
+                                            "h3": {
+                                                fontSize: { base: "14px", lg: "16px" },
+                                            }
+                                        }}>
                                             <h3>Get your hands on the {osAsset.name}</h3>
-                                            <Box as="div">
-                                                {`Highest bid: ${price.toFixed(4)} ETH`}
+                                            <Box>
+                                                <ConnectWallet userWallet={setUserAccount} />
+
+                                                {userAccount && (
+                                                    <>
+                                                        <Box as="div">
+                                                            {`Highest bid: ${price.toFixed(4)} ETH`}
+                                                        </Box>
+                                                        <Box as="span" sx={{
+                                                            fontSize: "10px"
+                                                        }}>
+                                                            {osAsset.buyOrders.length > 0 && osAsset.buyOrders[0]?.maker === userAccount ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
+                                                        </Box>
+                                                        {creatingOrder && <Box>Processing ... please wait</Box>}
+                                                        <ButtonGroup
+                                                            size="sm"
+                                                            alignItems="center"
+                                                            justifyContent="center"
+                                                            width="100%"
+                                                        >
+                                                            {/* <Button width="120px" pt="5px" colorScheme="purple" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button> */}
+                                                            <Button width="120px" pt="5px" colorScheme="green" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BID</Button>
+                                                        </ButtonGroup>
+                                                    </>
+                                                )}
                                             </Box>
-                                                <Box as="span" sx={{
-                                                    fontSize: "10px"
-                                                }}>
-                                                    {osAsset.buyOrders.length > 0 && osAsset.buyOrders[0]?.maker === userAccount ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
-                                                </Box>
+
                                         </Box>
-                                        <ButtonGroup
-                                            size="sm"
-                                            alignItems="center"
-                                            justifyContent="center"
-                                            width="100%"
-                                        >
-                                            <Button width="120px" pt="5px" colorScheme="purple" onClick={() => buyAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button>
-                                            <Button width="120px" pt="5px" colorScheme="green">BID</Button>
-                                        </ButtonGroup>
+
                                     </Box>
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                     flex: "0 0 33%",

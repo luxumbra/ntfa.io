@@ -187,6 +187,9 @@ const theme = extendTheme({
                 lineHeight: { base: `1.2` },
                 fontWeight: `100`,
           },
+          "#WEB3_CONNECT_MODAL_ID > div": {
+              zIndex: 3000,
+          }
         },
     },
 });

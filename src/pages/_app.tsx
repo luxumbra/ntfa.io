@@ -106,7 +106,10 @@ const theme = extendTheme({
                 marginBottom: { base: `10px`, xl: `0.8vw` },
                 lineHeight: { base: `1.2` },
                 fontWeight: `100`,
-            },
+          },
+          "#WEB3_CONNECT_MODAL_ID > div": {
+              zIndex: 3000,
+          }
         },
     },
 });

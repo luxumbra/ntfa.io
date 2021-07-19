@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { Box, Heading, Link, Image, Button } from "@chakra-ui/react";
+import { Box, Heading, Link, Image, Button, ButtonGroup } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
@@ -13,8 +13,7 @@ import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
-import { rootCertificates } from "node:tls";
-import { KeyObjectType } from "node:crypto";
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 export let getAsset: any;
 export interface AssetDetailsInterface {
@@ -23,6 +22,8 @@ export interface AssetDetailsInterface {
     animation_url: string;
     image_preview_url: string;
     traits: Array<{}>;
+    permalink: string;
+    external_link: string;
 }
 
 export type AssetMetaType = {
@@ -31,9 +32,8 @@ export type AssetMetaType = {
     };
 
 }
-// export interface AssetTraitsInterface {
-//     traits:
-// }
+
+export const openseaRootUrl = "https://testnets.opensea.io";
 
 export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
     console.log('theAsset:', theAsset);
@@ -53,7 +53,7 @@ export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
                 }
                 const assetItem = item as ItemType;
                 return (
-                    <Box as="li" sx={{
+                    <Box key={index} as="li" sx={{
                         flex: "0 0 45%",
                         d: "flex",
                         flexFlow: "row wrap",
@@ -181,11 +181,10 @@ export function AssetDetails() {
                         </Box>
 
                         <Box
+                            // position="relative"
                             width={{ base: "100%", smd: "80%", lg: "100%" }}
-                            margin="0"
-                            // backgroundColor="rgba(255,255,255,0.6)"
-                            // backdropFilter="blur(7px)"
-                            height={{
+                                margin="0"
+                                height={{
                                 base: `${100 * (356 / 633)}%`,
                                 smd: `${100 - 31}%`,
                                 lg: `${100 - (356 / 633) - 45}%`
@@ -196,13 +195,18 @@ export function AssetDetails() {
                                 "&::scrollbar-track": {
                                     backgroundColor: "red",
                                 }
-                            }}
-                        >
-                            <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap" >
+                                }}>
+
+                                <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap">
+                                    <Box position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
+                                        <NextLink href={`/#section1`} passHref>
+                                            <Link variant="cta">Back to the NFTs</Link>
+                                        </NextLink>
+                                    </Box>
                                 <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
                                     {asset && asset.name}
                                 </Heading>
-                                <Box d="flex" className="asset--meta" flexFlow="column wrap" mb="4" sx={{
+                                    <Box d="flex" className="asset--meta" flexFlow="column wrap" mb={2} sx={{
                                     "& > span": {
                                         fontSize: { base: "10px", lg: "12px" },
                                         mb: 0,
@@ -211,6 +215,34 @@ export function AssetDetails() {
                                 }}>
 
                                     {asset?.traits && <AssetMeta theAsset={asset} />}
+
+                                    </Box>
+                                    <Box d="flex" justifyContent="center" mb={3} sx={{
+                                        "a > svg": {
+                                            opacity: 0.5,
+                                            transition: "opacity 0.2s ease-in-out"
+                                        },
+                                        "a:hover": {
+                                            ">svg": {
+                                                opacity: 1,
+                                            }
+                                        }
+                                    }}>
+                                        <ButtonGroup isAttached sx={{
+                                            borderRadius: "md",
+                                            boxShadow: "0 0 4px rgba(0,0,0,0.3)",
+                                            overflow: "hidden",
+                                        }}>
+                                            <NextLink href={asset?.permalink} passHref>
+                                                <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
+                                            </NextLink>
+                                            <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
+                                                <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
+                                            </NextLink>
+                                            <NextLink href={asset.external_link} passHref>
+                                                <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
+                                            </NextLink>
+                                        </ButtonGroup>
                                 </Box>
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                     flex: "0 0 33%",

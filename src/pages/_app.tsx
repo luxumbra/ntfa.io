@@ -21,6 +21,7 @@ const theme = extendTheme({
     colors: {
         brand: {
             100: "#f7fafc",
+            200: "#fc79b2",
             // ...
             900: "#1a202c",
         },
@@ -47,7 +48,44 @@ const theme = extendTheme({
                     color: "green"
                 }
             }
-        }
+        },
+        Link: {
+            baseStyle: {
+                color: "accent.primary",
+                _hover: "brand.200"
+            },
+            variants: {
+                cta: {
+                    backgroundColor: "white",
+                    borderRadius: "md",
+                    color: "brand.200",
+                    fontWeight: 900,
+                    p: "5px 15px",
+                    _hover: {
+                        backgroundColor: "brand.200",
+                        color: "white",
+                    }
+                },
+                "cta-small": {
+                    backgroundColor: "white",
+                    borderRadius: "md",
+                    color: "brand.200",
+                    fontWeight: 900,
+                    p: "5px 15px",
+                    _hover: {
+                        backgroundColor: "brand.200",
+                        color: "white",
+                    },
+                    fontSize: { base: "12px", lg: "14px" }
+                },
+                footer: {
+                    color: "white",
+                    _hover: {
+                        color: "yellow.500"
+                    },
+                }
+            },
+        },
     },
   styles: {
         global: {
@@ -67,11 +105,11 @@ const theme = extendTheme({
                 // }
             },
             "a.chakra-link": {
-                transition: `all 0.3s ease`,
-                "&:hover": {
-                    color: `yellow.500`,
-                    textDecoration: `none`,
-                },
+                transition: `all 0.2s ease-in-out`,
+                // "&:hover": {
+                //     color: `yellow.500`,
+                //     textDecoration: `none`,
+                // },
             },
             h2: {
                 fontFamily: "'Federal', serif",

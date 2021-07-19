@@ -15,14 +15,16 @@ export interface NFTCardInterface {
     id: number;
 }
 
-export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
-    function truncateString(str = '', n = 0) {
-        if (str.length > n) {
-            return str.substring(0, n) + "... read more";
-        } else {
-            return str;
-        }
+export function truncateString(str = '', n = 0) {
+    if (str.length > n) {
+        return str.substring(0, n) + "... read more";
+    } else {
+        return str;
     }
+}
+
+export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
+
     const summaryText = truncateString(asset.description, 160);
 
     return (

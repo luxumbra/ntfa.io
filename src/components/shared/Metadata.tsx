@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
+import { truncateString } from "../showcase/NFTCard";
 
 export interface MetadataInterface {
     title?: string;
@@ -9,8 +10,9 @@ export interface MetadataInterface {
 
 export const MetadataComponent: FC<MetadataInterface> = ({ title, description, socialImage }) => {
     const outputTitle = title ? `${title} - Gold backed NFT by Never Touch Fiat Again`  : 'Never Touch Fiat Again';
-    const outputDescription = description ? description : 'The Never Touch Fiat Again Store Front';
+    const outputDescription = description ? truncateString(description, 100) : 'The Never Touch Fiat Again Store Front';
     const imgPath = socialImage ? socialImage : '/assets/banner.jpg';
+
 
     return(
         <Head>
@@ -20,7 +22,7 @@ export const MetadataComponent: FC<MetadataInterface> = ({ title, description, s
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:title" content={outputTitle}/>
             <meta name="twitter:description" content={outputDescription} />
-            <meta name="twitter:image" content={imgPath}></meta>
+            <meta name="twitter:image" content={imgPath} />
             <meta property="og:title" content={outputTitle}/>
             <meta property="og:image" content={imgPath}/>
             <meta property="og:description" content={outputDescription} />

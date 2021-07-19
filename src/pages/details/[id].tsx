@@ -13,7 +13,7 @@ import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/icons';
 
 export let getAsset: any;
 export interface AssetDetailsInterface {
@@ -198,9 +198,9 @@ export function AssetDetails() {
                                 }}>
 
                                 <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap">
-                                    <Box position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
+                                    <Box className="back-link" position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
                                         <NextLink href={`/#section1`} passHref>
-                                            <Link variant="cta">Back to the NFTs</Link>
+                                            <Link variant="cta"><ArrowBackIcon mr={0} /> Back to NFTs</Link>
                                         </NextLink>
                                     </Box>
                                 <Heading as="h3" size={"sm"} color="accent.primary" mb="4">

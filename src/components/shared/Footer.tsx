@@ -40,7 +40,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                 w="auto"
                 textAlign="center"
                 border="5px solid white"
-                borderRadius={{base: 0, lg: "15px"}}
+                borderRadius={{ base: "15px 15px 0 0", lg: "15px" }}
                 backgroundColor="#01735C"
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"

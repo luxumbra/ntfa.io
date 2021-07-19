@@ -59,6 +59,7 @@ const theme = extendTheme({
                     backgroundColor: "white",
                     borderRadius: "md",
                     color: "brand.200",
+                    fontSize: { base: "12px", lg: "14px", xl: "16px" },
                     fontWeight: 900,
                     p: "5px 15px",
                     _hover: {
@@ -70,13 +71,13 @@ const theme = extendTheme({
                     backgroundColor: "white",
                     borderRadius: "md",
                     color: "brand.200",
+                    fontSize: { base: "10px", lg: "12px", xl: "14px" },
                     fontWeight: 900,
-                    p: "5px 15px",
+                    p: { base: "5px 5px", lg: "5px 15px" },
                     _hover: {
                         backgroundColor: "brand.200",
                         color: "white",
                     },
-                    fontSize: { base: "12px", lg: "14px" }
                 },
                 footer: {
                     color: "white",

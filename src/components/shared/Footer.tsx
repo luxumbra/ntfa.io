@@ -68,10 +68,10 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                     sx={{
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
-                    <NextLink href="/#section1">Home</NextLink>
-                    <NextLink href="/#section2">About NTFA</NextLink>
-                    <NextLink href="/#section3">Burn FIAT</NextLink>
-                    <NextLink href="/tos">Legal</NextLink>
+                    <NextLink href="/#section1" passHref><Link variant="footer">Home</Link></NextLink>
+                    <NextLink href="/#section2" passHref><Link variant="footer">About NTFA</Link></NextLink>
+                    <NextLink href="/#section3" passHref><Link variant="footer">Burn FIAT</Link></NextLink>
+                    <NextLink href="/tos" passHref><Link variant="footer">Legal</Link></NextLink>
                     <Button as="a" onClick={() => setReveal(!reveal)} sx={{
                         background: "transparent",
                         "&:hover, &:focus": {
@@ -132,8 +132,8 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                 <VStack spacing={{base: 1, lg: 3}} color="white" fontSize={{ base: "9px", lg: "12px" }} sx={{ "p": { fontSize: { base: "9px", lg: "12px" }, margin: 0 } }}>
                     <p>Copyright {currentYear} NTFA Limited. All rights reserved. NTFA Limited is a company registered in Hong Kong (Company No. 3048511)</p>
                     <UnorderedList sx={{ display: "inline-flex", listStyle: "none", m: 0, "li": { fontSize: {base: "9px", lg: "12px"}, mx: 3 } }}>
-                        <ListItem>Contact: <Link href="mailto:gold@ntfa.io">gold@ntfa.io</Link></ListItem>
-                        <ListItem>Report: <Link href="mailto:support@ntfa.io">support@ntfa.io</Link></ListItem>
+                        <ListItem>Contact: <Link href="mailto:gold@ntfa.io" variant="footer">gold@ntfa.io</Link></ListItem>
+                        <ListItem>Report: <Link href="mailto:support@ntfa.io" variant="footer">support@ntfa.io</Link></ListItem>
                     </UnorderedList>
                 </VStack>
                 <Box

@@ -186,9 +186,10 @@ export function SceneCore() {
 
             <SceneLambo playState={playState}/>
 
-            {missiles.map(missile => {
+            {missiles.map((missile, index) => {
                 return(
                     <SceneMissile
+                        key={index}
                         left={missile.left}
                         translation={missile.translation}
                         delay={missile.delay}

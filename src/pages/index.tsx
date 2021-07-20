@@ -16,9 +16,7 @@ export function IndexComponent() {
             <AboutCore />
 
             <SceneCore />
-            <NoticeBanner>
-                <Text>Rinkeby testnet. Mainnet NFTs dropping soon!! 😱</Text>
-            </NoticeBanner>
+            <NoticeBanner />
         </Box>
     )
 }

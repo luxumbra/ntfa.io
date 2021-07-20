@@ -372,9 +372,7 @@ export function AssetDetails() {
                 pointerEvents="none"
             />
             <FooterComponent toggler />
-            <NoticeBanner>
-                <Text>Rinkeby Testnet. Mainnet NFTs coming soon!! 😱</Text>
-            </NoticeBanner>
+            <NoticeBanner />
         </Box>
     );
 }

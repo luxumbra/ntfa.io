@@ -3,6 +3,7 @@ import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 // import { css, jsx } from "@emotion/react";
 // import { OpenSeaPort, Network } from "opensea-js";
 // import NextLink from 'next/link';
+import { SpinnerIcon } from "@chakra-ui/icons";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
@@ -12,6 +13,7 @@ import { get, remove, set } from '../../lib/store';
 
 const walletconnectKey = 'walletconnect';
 const mobileLinkChoiceKey = 'WALLETCONNECT_DEEPLINK_CHOICE';
+const injectedWalletKey = "WEB3_CONNECT_CACHED_PROVIDER";
 declare const window: any;
 export let provider: any;
 export let web3: any;
@@ -119,12 +121,11 @@ export default function ConnectWallet({ userWallet }: ConnectWalletProps) {
           <Box fontSize={{ base: "10px" }} mb={3}>
             {/* {`${address} connected.`} */}
           </Box>
-          <Button onClick={() => onClickDisconnect()}>Disconnect</Button>
+          <Button variant="cta" onClick={() => onClickDisconnect()}>Disconnect</Button>
         </>
       ) : (
         <ButtonGroup>
-          <Button onClick={() => onClickConnect()}>
-            {isConnecting && `Connecting...`}
+            <Button isLoading={isConnecting} loadingText={`Connecting...`} variant="cta" onClick={() => onClickConnect()}>
               {!isConnected && !isConnecting && `Connect`}
           </Button>
         </ButtonGroup >

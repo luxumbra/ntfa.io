@@ -20,8 +20,6 @@ import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/ico
 import 'simplebar/dist/simplebar.css';
 import { isJSDocAugmentsTag } from "typescript";
 import { AssetMeta } from "../../components/detail/AssetMeta";
-import { rootCertificates } from "node:tls";
-import { KeyObjectType } from "node:crypto";
 import { OpenSeaAsset } from "opensea-js/lib/types";
 import { connectWallet } from "../../constants";
 import ConnectWallet from "../../components/detail/ConnectWallet";
@@ -52,7 +50,7 @@ export function AssetDetails() {
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [asset, setAsset] = useState({} as AssetDetailsInterface);
+    // const [asset, setAsset] = useState({} as AssetDetailsInterface);
     const [osAsset, setOsAsset] = useState({} as OpenSeaAsset);
     const [price, setPrice] = useState(0);
     const [creatingOrder, setCreatingOrder] = useState(false);
@@ -133,15 +131,15 @@ export function AssetDetails() {
             console.log(id, tokenId);
             const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
             assetState && setOsAsset(assetState);
-            console.log("Assetstate: ", assetState);
+            console.log("Assetstate: ", osAsset);
             // debugger;
 
 
-            if (assetState.sellOrders && assetState.sellOrders.length > 0) {
+            if (osAsset.sellOrders && osAsset.sellOrders.length > 0) {
                 let price = 9999;
 
-                for (let i = 0; i < assetState.sellOrders.length; i++) {
-                    const order = assetState.sellOrders[i];
+                for (let i = 0; i < osAsset.sellOrders.length; i++) {
+                    const order = osAsset.sellOrders[0];
                     const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
 
                     if (basePrice < price) {
@@ -151,10 +149,11 @@ export function AssetDetails() {
                 setPrice(price);
             }
 
-            if (assetState && assetState.buyOrders && assetState.buyOrders.length > 0) {
-                const buyOrder = assetState.buyOrders[0];
-                const currentPrice = typeof buyOrder !== "undefined" ? (buyOrder.currentPrice.toNumber() / Math.pow(10, 18)) : 0;
-                currentPrice && setPrice(currentPrice);
+            if (osAsset.buyOrders && osAsset.buyOrders.length > 0) {
+                const buyOrder: any = osAsset.buyOrders[0];
+                // const buyOrder = osAsset.buyOrders[0];
+                const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
+                typeof currentPrice !== "undefined" && setPrice(currentPrice);
             }
 
 
@@ -215,7 +214,7 @@ export function AssetDetails() {
                             overflow="hidden"
                         >
                                 {/* <ReactPlayer
-                                url={asset?.animation_url}
+                                    url={osAsset?.animation_url}
                                 playing={true}
                                 volume={0}
                                 muted={true}
@@ -229,7 +228,7 @@ export function AssetDetails() {
                                     top: `0`,
                                     zIndex: 0,
                                 }}
-                            /> */}
+                                /> */}
                                 <Image src={osAsset.imageUrl} alt={osAsset.name} width="100%" height="100%" objectFit="cover" style={{
                                     position: "absolute",
                                     left: `0`,
@@ -327,7 +326,7 @@ export function AssetDetails() {
                                         </ButtonGroup>
                                     </Box>
 
-                                    <Box p="30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
+                                    <Box p="15px 30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
                                         <Box sx={{
                                             "h3": {
                                                 fontSize: { base: "14px", lg: "16px" },
@@ -337,16 +336,16 @@ export function AssetDetails() {
                                             <Box>
                                                 <ConnectWallet userWallet={setUserAccount} />
 
-                                                {userAccount && (
+                                                {userAccount && osAsset && (
                                                     <>
                                                         <Box as="div">
                                                             {`Highest bid: ${price.toFixed(4)} ETH`}
                                                         </Box>
-                                                        <Box as="span" sx={{
+                                                        {/* <Box as="span" sx={{
                                                             fontSize: "10px"
                                                         }}>
-                                                            {osAsset.buyOrders.length > 0 && osAsset.buyOrders[0]?.maker === userAccount ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
-                                                        </Box>
+                                                            {osAsset.buyOrders.length > 0 && osAsset.buyOrders[0].maker === userAccount ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
+                                                        </Box> */}
                                                         {creatingOrder && <Box>Processing ... please wait</Box>}
                                                         <ButtonGroup
                                                             size="sm"
@@ -363,10 +362,9 @@ export function AssetDetails() {
                                         </Box>
 
                                     </Box>
-                                </Box>
-                                <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
-                                    flex: "0 0 33%",
-                                    maxH: "33%",
+                                    <Box className="assetDescription" fontSize={{ base: "12px", lg: "14px" }} sx={{
+                                        flex: "0 0 33%",
+                                        maxH: "33%",
                                         width: "100%",
                                         "h2, h3": {
                                             fontFamily: "Hero, sans-serif",
@@ -391,12 +389,14 @@ export function AssetDetails() {
                                                 }
                                             },
                                         }
-                                }}>
-                                    <ReactMarkdown>
+                                    }}>
+                                        <ReactMarkdown>
                                             {osAsset?.description}
-                                    </ReactMarkdown>
+                                        </ReactMarkdown>
+                                    </Box>
                                 </Box>
-                        </Box>
+
+                            </Box>
                     </>
                 )}
             </Box>

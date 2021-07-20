@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
 export interface NoticeBannerInterface {
   children?: React.ReactElement;
@@ -6,9 +6,43 @@ export interface NoticeBannerInterface {
   color?: string;
 }
 
+export const get = (key: string): string | null =>
+  typeof window === 'undefined' ? null : localStorage.getItem(key);
+
+export const set = (key: string, value: string): void => {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(key, value);
+};
+export const remove = (key: string): void => {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(key);
+};
 
 export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color }) => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
+
+  const handleCloseClick = async () => {
+    setActive(false);
+    set("ntfa-banner", "false");
+  }
+
+  useEffect(() => {
+    (async () => {
+      const showBanner = await get("ntfa-banner");
+      console.log("showb: ", showBanner);
+
+      if (showBanner === null) {
+        await set("ntfa-banner", "true");
+        setActive(true);
+      } else if (showBanner === "true") {
+        setActive(true);
+      } else if (showBanner === "false") {
+        setActive(false);
+      }
+
+    })();
+
+  }, [active, setActive]);
 
   return (
     <>
@@ -17,7 +51,7 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
         d="flex"
         alignItems="center"
         justifyContent="center"
-        backgroundColor={color ? color : "rgba(252, 121, 178, 0.8)"}
+        backgroundColor={color ? color : "brand.300"}
         backdropFilter="blur(7px)"
         boxShadow="2px 0 5px 3px rgba(0, 0, 0, 0.6)"
         width="100%"
@@ -28,7 +62,8 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
         left="0"
         zIndex="2000"
         overflow="hidden"
-        transistion="opacity 0.3s ease"
+        transition="opacity 0.5s 0.2s ease, visibility 0.1s 0.6s ease"
+        visibility={active ? "visible" : "hidden"}
         opacity={active ? 1 : 0}
         sx={{
           "p": {
@@ -39,7 +74,7 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
         }}
       >
         <Box position="absolute" display="flex" alignItems="center" top="0" right="2vw" height="25px">
-          <Button variant="cta-inverse" onClick={() => setActive(!active)}>X</Button>
+          <Button variant="cta-inverse" onClick={() => handleCloseClick()}>X</Button>
         </Box>
         <Box zIndex="2000">
           {children ? (
@@ -47,7 +82,7 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
               {children}
             </>
           ) : (
-              <Text>Banner</Text>
+              <Text>Rinkeby testnet. Mainnet NFTs dropping soon!! 😱</Text>
           )}
         </Box>
       </Box>

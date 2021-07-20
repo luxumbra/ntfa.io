@@ -45,59 +45,7 @@ export interface AssetDetailsInterface {
     external_link: string;
 }
 
-export type AssetMetaType = {
-    theAsset: {
-        traits: Array<{}>;
-    };
-}
-
-export const openseaRootUrl = "https://opensea.io";
-
-export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
-    console.log('theAsset:', theAsset);
-    const metaItems = [] as Array<{}>;
-    const { traits } = theAsset;
-    traits?.map((trait: {}) => {
-        metaItems.push(trait);
-    });
-
-    return (
-        <Box as="ul" d="flex" w="100%" minW="100%" listStyleType="none" flexFlow="row wrap">
-            {metaItems.map((item, index) => {
-                console.log('item: ', item);
-                type ItemType = {
-                    trait_type: string;
-                    value: string;
-                }
-                const assetItem = item as ItemType;
-                return (
-                    <Box key={index} as="li" sx={{
-                        flex: "0 0 45%",
-                        d: "flex",
-                        flexFlow: "row wrap",
-                        mb: { base: 0, lg: 1 },
-                    }}>
-                        <Box as="span" key={`dt-${index}`} sx={{
-                            flex: "0 0 100%",
-                            fontSize: { base: "11px", lg: "14px" },
-                            fontWeight: "800",
-                        }}>
-                            {assetItem?.trait_type}
-                        </Box>
-                        <Box as="span" key={`dd-${index}`} sx={{
-                            flex: "1",
-                            fontSize: { base: "11px", lg: "14px" },
-                            fontWeight: "100",
-                        }}>
-                            {assetItem?.value}
-                        </Box>
-                    </Box>
-                );
-            }
-            )}
-        </Box>
-    )
-}
+export const openseaRootUrl = "https://testnets.opensea.io";
 
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
@@ -205,7 +153,7 @@ export function AssetDetails() {
 
             if (assetState && assetState.buyOrders && assetState.buyOrders.length > 0) {
                 const buyOrder = assetState.buyOrders[0];
-                const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
+                const currentPrice = typeof buyOrder !== "undefined" ? (buyOrder.currentPrice.toNumber() / Math.pow(10, 18)) : 0;
                 currentPrice && setPrice(currentPrice);
             }
 
@@ -348,7 +296,7 @@ export function AssetDetails() {
                                         }
                                     }}>
 
-                                        {asset?.traits && <AssetMeta theAsset={asset} />}
+                                        {osAsset?.traits && <AssetMeta theAsset={osAsset} />}
 
                                     </Box>
                                     <Box d="flex" justifyContent="center" mb={3} sx={{
@@ -367,20 +315,20 @@ export function AssetDetails() {
                                             boxShadow: "0 0 4px rgba(0,0,0,0.3)",
                                             overflow: "hidden",
                                         }}>
-                                            <NextLink href={asset?.permalink} passHref>
+                                            <NextLink href={osAsset?.openseaLink} passHref>
                                                 <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
                                             </NextLink>
                                             <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
                                                 <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
                                             </NextLink>
-                                            <NextLink href={asset.external_link} passHref>
+                                            <NextLink href={osAsset.externalLink} passHref>
                                                 <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
                                             </NextLink>
                                         </ButtonGroup>
                                     </Box>
 
                                     <Box p="30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
-                                        {/* <Box sx={{
+                                        <Box sx={{
                                             "h3": {
                                                 fontSize: { base: "14px", lg: "16px" },
                                             }
@@ -405,23 +353,15 @@ export function AssetDetails() {
                                                             alignItems="center"
                                                             justifyContent="center"
                                                             width="100%"
-                                                        > */}
+                                                        >
                                                             {/* <Button width="120px" pt="5px" colorScheme="purple" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button> */}
-                                                            {/* <Button width="120px" pt="5px" colorScheme="green" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BID</Button>
+                                                            <Button width="120px" pt="5px" colorScheme="green" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BID</Button>
                                                         </ButtonGroup>
                                                     </>
                                                 )}
-                                            </Box> */}
+                                            </Box>
+                                        </Box>
 
-                                        <ButtonGroup
-                                            size="sm"
-                                            alignItems="center"
-                                            justifyContent="center"
-                                            width="100%"
-                                        >
-                                            <Button width="120px" pt="5px" colorScheme="purple" onClick={() => buyAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button>
-                                            <Button width="120px" pt="5px" colorScheme="green">BID</Button>
-                                        </ButtonGroup>
                                     </Box>
                                 </Box>
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{

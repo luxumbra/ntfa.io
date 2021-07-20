@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { Box, Heading, Link, Image, Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Heading, Link, Image, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
@@ -372,7 +372,9 @@ export function AssetDetails() {
                 pointerEvents="none"
             />
             <FooterComponent toggler />
-            <NoticeBanner />
+            <NoticeBanner>
+                <Text>Rinkeby Testnet. Mainnet NFTs coming soon!! 😱</Text>
+            </NoticeBanner>
         </Box>
     );
 }

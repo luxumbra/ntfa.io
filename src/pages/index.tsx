@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { MetadataComponent } from '../components/shared/Metadata';
 import { SceneCore } from '../components/scene/Scene.core';
 import { StoreCore } from '../components/store/Store.core';
 import { AboutCore } from '../components/about/About.core';
+import { NoticeBanner } from '../components/shared/NoticeBanner';
 
 export function IndexComponent() {
     return(
@@ -14,7 +15,10 @@ export function IndexComponent() {
 
             <AboutCore />
 
-            <SceneCore/>
+            <SceneCore />
+            <NoticeBanner>
+                <Text>Rinkeby testnet. Mainnet NFTs dropping soon!! 😱</Text>
+            </NoticeBanner>
         </Box>
     )
 }

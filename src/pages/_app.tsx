@@ -49,6 +49,38 @@ const theme = extendTheme({
                 }
             }
         },
+        Button: {
+            baseStyle: {
+                color: "accent.primary",
+                _hover: "brand.200"
+            },
+            variants: {
+                cta: {
+                    backgroundColor: "white",
+                    borderRadius: "md",
+                    color: "brand.200",
+                    fontSize: { base: "12px", lg: "14px", xl: "16px" },
+                    fontWeight: 900,
+                    p: "5px 15px",
+                    _hover: {
+                        backgroundColor: "brand.200",
+                        color: "white",
+                    }
+                },
+                "cta-inverse": {
+                    backgroundColor: "transparent",
+                    borderRadius: "md",
+                    color: "white",
+                    fontSize: { base: "12px", lg: "14px", xl: "16px" },
+                    fontWeight: 900,
+                    p: "5px 15px",
+                    _hover: {
+                        backgroundColor: "white",
+                        color: "brand.200",
+                    }
+                },
+            },
+        },
         Link: {
             baseStyle: {
                 color: "accent.primary",

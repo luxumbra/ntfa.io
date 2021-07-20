@@ -7,13 +7,17 @@ import { OpenSeaPort, Network } from "opensea-js";
 import axios from "axios";
 import NextLink from 'next/link';
 import ReactMarkdown from "react-markdown";
+import SimpleBar from 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 //
 import { MetadataComponent } from "../../components/shared/Metadata";
 import { SceneBridge } from '../../components/scene/Scene.bridge';
 import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
+import { NoticeBanner } from '../../components/shared/NoticeBanner';
+
 import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/icons';
+import 'simplebar/dist/simplebar.css';
 
 export let getAsset: any;
 export interface AssetDetailsInterface {
@@ -189,13 +193,9 @@ export function AssetDetails() {
                                 smd: `${100 - 31}%`,
                                 lg: `${100 - (356 / 633) - 45}%`
                             }}
-                            overflowY="auto"
+                                overflowY="auto"
                             z={0}
-                            sx={{
-                                "&::scrollbar-track": {
-                                    backgroundColor: "red",
-                                }
-                                }}>
+                            >
 
                                 <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap">
                                     <Box className="back-link" position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
@@ -372,6 +372,7 @@ export function AssetDetails() {
                 pointerEvents="none"
             />
             <FooterComponent toggler />
+            <NoticeBanner />
         </Box>
     );
 }

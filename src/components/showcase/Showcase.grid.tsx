@@ -40,42 +40,6 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
     setLoading(false);
   };
 
-    const goldVids = [
-        {
-            creator: "Never Touch Fiat Again",
-            title: "Vector V777",
-            path: `/assets/nfts/Vector150768.mp4`,
-            summary:
-                "The Vector V777 comes equipped with 100 Grams of pure golden firepower. Make a splash as you enter the party with dual stage rocket launchers and Racer X upgrades. Handmade by time travelers from the year 1955 this car is as much a relic as it is a work of art. The Golden Vector comes with a matching gold certificate for 100 Grams of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 100Grams of gold Stored in a Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
-        {
-            creator: "Never Touch Fiat Again",
-            title: "Space Cowboy",
-            path: `/assets/nfts/Space_Cowboy_8642.mp4`,
-            summary:
-                "The Space Cowboy blasted off many moons ago and now lives in his street style space suit ready for the next launch. Space Cowboy comes with a matching gold certificate for 50 Grams of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 50Grams of gold Stored in a  Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
-        {
-            creator: "Never Touch Fiat Again",
-            title: "Piggy Banksy",
-            path: `/assets/nfts/PiggyBanksy619263_smallcloud.mp4`,
-            summary:
-                "The Piggy Banksy is the perfect thing to smash on the way out of the country to buy your next drop. Piggy Banksy comes with a matching gold certificate for 1 oz of gold!",
-            description:
-                "This asset has been paired to the following NFT. \n\n    Possession of this NFT enables the possessor to take custody of the physical bar of 1 oz of gold Stored in a Singaporean Vault. X.",
-            NFT: "FILLIN",
-            vault: "This asset is securely stored in the following facility: FILLIN",
-        },
-    ];
-
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -103,7 +67,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   useEffect(() => {
     getCollection = axios
       .get(
-        `https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&limit=6&collection=${collection}`
+        `https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&collection=${collection}`
       )
       .then((response) => {
         console.log(response);

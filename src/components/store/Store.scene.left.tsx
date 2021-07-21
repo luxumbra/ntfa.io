@@ -45,7 +45,7 @@ export const StoreSceneLeft: FC<StoreSceneLeftInterface> = ({ className, minW, a
 
             <Box
                 position="absolute"
-                bottom={{ base: "50%", xl: "30%" }}
+                bottom={{ base: "50%", xl: "25%" }}
                 right={{ base: "-42%", xl: "-30px" }}
                 height="auto"
                 width={{base: "200%", xl: "100%"}}

@@ -102,7 +102,7 @@ const theme = extendTheme({
                 },
                 "cta-small": {
                     backgroundColor: "white",
-                    borderRadius: "md",
+                    borderRadius: 0,
                     color: "brand.200",
                     fontSize: { base: "10px", lg: "12px", xl: "14px" },
                     fontWeight: 900,

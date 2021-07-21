@@ -16,8 +16,8 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
         <Box position="relative" className={className} as="footer" flexGrow={1} minW={minW}>
             <Box
                 position="absolute"
-                bottom={{ base: "8%", xl: "50px" }}
-                right={{ base: "15px", xl: "20px" }}
+                bottom={{ base: "13%", xl: "50px" }}
+                right={{ base: "-20px" }}
                 width={{base: "200%", xl: "100%"}}
                 maxW={{ base: "100px", xl: "150px" }}
                 height={{ base: "auto", xl: "auto" }}
@@ -44,7 +44,7 @@ export const StoreSceneRight: FC<StoreSceneRightInterface> = ({ className, minW 
                             textAlign: `center`,
                             backgroundImage: `url(/assets/effects/fingerprint.png)`,
                             backgroundRepeat: `no-repeat`,
-                            backgroundSize: { base: `90%`, xl: `fill` },
+                            backgroundSize: { base: `100%`, xl: `90%` },
                             backgroundPosition: 0,
                             opacity: 0.6,
                             "& > span": { visibility: `hidden` },

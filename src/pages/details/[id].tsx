@@ -18,6 +18,7 @@ import { NoticeBanner } from '../../components/shared/NoticeBanner';
 
 import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/icons';
 import 'simplebar/dist/simplebar.css';
+import { isJSDocAugmentsTag } from "typescript";
 
 export let getAsset: any;
 export interface AssetDetailsInterface {
@@ -185,7 +186,7 @@ export function AssetDetails() {
                         </Box>
 
                         <Box
-                            // position="relative"
+                                // position="relative"
                             width={{ base: "100%", smd: "80%", lg: "100%" }}
                                 margin="0"
                                 height={{
@@ -196,54 +197,56 @@ export function AssetDetails() {
                                 overflowY="auto"
                             z={0}
                             >
-
-                                <Box p={{ base: "15px", smd: "10px", lg: "25px" }} d="flex" flexFlow="column wrap">
+                                <Box position="sticky" top={0} d="flex" justifyContent="center" minW="100%" mb={3} sx={{
+                                    "a > svg": {
+                                        opacity: 0.5,
+                                        transition: "opacity 0.2s ease-in-out"
+                                    },
+                                    "a:hover": {
+                                        ">svg": {
+                                            opacity: 1,
+                                        }
+                                    }
+                                }}>
+                                    <ButtonGroup isAttached sx={{
+                                        backgroundColor: "white",
+                                        boxShadow: "0 0 4px rgba(0,0,0,0.3)",
+                                        overflow: "hidden",
+                                        minW: "100%",
+                                        justifyContent: "center"
+                                    }}>
+                                        <NextLink href={asset?.permalink} passHref>
+                                            <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
+                                        </NextLink>
+                                        <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
+                                            <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
+                                        </NextLink>
+                                        <NextLink href={asset.external_link} passHref>
+                                            <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
+                                        </NextLink>
+                                    </ButtonGroup>
+                                </Box>
+                                <Box p={{ base: "15px", smd: "10px", lg: "5px 25px 25px" }} d="flex" flexFlow="column wrap">
                                     <Box className="back-link" position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
                                         <NextLink href={`/#section1`} passHref>
                                             <Link variant="cta"><ArrowBackIcon mr={0} /> Back to NFTs</Link>
                                         </NextLink>
                                     </Box>
-                                <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
-                                    {asset && asset.name}
-                                </Heading>
+                                    <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
+                                        {asset && asset.name}
+                                    </Heading>
                                     <Box d="flex" className="asset--meta" flexFlow="column wrap" mb={2} sx={{
-                                    "& > span": {
-                                        fontSize: { base: "10px", lg: "12px" },
-                                        mb: 0,
-                                        fontWeight: "100"
-                                    }
-                                }}>
-
-                                    {asset?.traits && <AssetMeta theAsset={asset} />}
-
-                                    </Box>
-                                    <Box d="flex" justifyContent="center" mb={3} sx={{
-                                        "a > svg": {
-                                            opacity: 0.5,
-                                            transition: "opacity 0.2s ease-in-out"
-                                        },
-                                        "a:hover": {
-                                            ">svg": {
-                                                opacity: 1,
-                                            }
+                                        "& > span": {
+                                            fontSize: { base: "10px", lg: "12px" },
+                                            mb: 0,
+                                            fontWeight: "100"
                                         }
                                     }}>
-                                        <ButtonGroup isAttached sx={{
-                                            borderRadius: "md",
-                                            boxShadow: "0 0 4px rgba(0,0,0,0.3)",
-                                            overflow: "hidden",
-                                        }}>
-                                            <NextLink href={asset?.permalink} passHref>
-                                                <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
-                                            </NextLink>
-                                            <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
-                                                <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
-                                            </NextLink>
-                                            <NextLink href={asset.external_link} passHref>
-                                                <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
-                                            </NextLink>
-                                        </ButtonGroup>
-                                </Box>
+
+                                        {asset?.traits && <AssetMeta theAsset={asset} />}
+
+                                    </Box>
+
                                 <Box className="asset--description" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                     flex: "0 0 33%",
                                     maxH: "33%",

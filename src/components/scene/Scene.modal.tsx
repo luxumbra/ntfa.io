@@ -33,53 +33,22 @@ import ArrowImg from "../../assets/infographic/arrow.svg";
 // @ts-ignore
 import NftBurnedImg from "../../assets/infographic/nft-burned.svg";
 
+export type SceneModalType = {
+  setModalOpen: any;
+  modalOpen: boolean;
+}
 
-export function SceneModal() {
+export function SceneModal({ setModalOpen, modalOpen }: SceneModalType) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  return (
-    <Box position="absolute" bottom={{ base: "30px", lg: "55px", xxxl: "140px" }} right={{ base: "15px", lg: "10px", xxxl: "80px" }} width={{ base: "120", xxxl: "150px" }} height={{ base: "110px", xxxl: "210px" }}>
-      <Box position="relative" width="100%" height="100%">
-        <Button className="burnNftButton" onClick={onOpen}
-          sx={{
-            display: "flex",
-            flexFlow: "column wrap",
-            justifyItems: "center",
-            backgroundColor: "brand.300",
-            border: "5px solid",
-            borderColor: "white",
-            borderRadius: "lg",
-            color: "white",
-            width: "100%",
-            height: "100%",
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: { base: "15px", xl: "24px" },
-            fontWeight: "900",
-            transform: "skewY(-20deg) rotateX(0deg) rotateY(57deg)",
-            "span + span": {
-              textOrientation: "upright",
-              writingMode: "vertical-lr",
-            },
-            _hover: {
-              backgroundColor: "brand.300"
-            },
-            _before: {
-              content: "''",
-              display: "block",
-              position: "absolute",
-              right: "-15px",
-              top: "25px",
-              width: "15px",
-              height: "100%",
-              background: "linear-gradient(to right, rgba(62,95,105,1) 50%, rgba(178,207,226,1) 100%)",
-              borderLeft: "5px solid white",
-              transform: "skewY(25deg) rotateX(0deg) rotateY(0)",
-            }
-          }}
-        ><span>NFT</span><span>BURN</span></Button>
-      </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={"xl"} isCentered>
-        <ModalOverlay backgroundColor="rgba(0,0,0,0.75)" sx={{
+  console.log('modalopen: ', modalOpen);
+
+
+  return (
+    <Box position="absolute" bottom={{ base: "30px", lg: "55px", xxxl: "140px" }} right={{ base: "15px", lg: "10px", xxxl: "80px" }} width={{ base: "90px", xl: "120px", xxxl: "150px" }} height={{ base: "110px", xl: "190px", xxxl: "210px" }}>
+
+      <Modal isOpen={modalOpen} onClose={onClose} size={"xl"} isCentered>
+        <ModalOverlay backgroundColor="rgba(0,0,0,0.75)" onClick={() => setModalOpen(!modalOpen)} sx={{
           backdropFilter: "blur(3px)",
         }} />
         <ModalContent sx={{
@@ -87,7 +56,7 @@ export function SceneModal() {
           background: "linear-gradient(to bottom, rgba(62,95,105,0.6) 50%, rgba(178,207,226,0.8) 100%)",
           backdropFilter: "blur(10px)",
         }}>
-          <IconButton onClick={onClose} aria-label="Close modal" size="sm" variant="cta" icon={<CloseIcon />}
+          <IconButton onClick={() => setModalOpen(!modalOpen)} aria-label="Close modal" size="sm" variant="cta" icon={<CloseIcon />}
             sx={{
               position: "absolute",
               top: 3,

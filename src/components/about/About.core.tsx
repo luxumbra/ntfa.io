@@ -61,12 +61,10 @@ export function AboutCore() {
                                 what an NFT can
                                 be.</p>
 
-                            <br />
                             <p>We created a set of unique collectible gold bars that lets you have your NFT and GOLD BAR
-                                TOO! <br />
-                                The Genesis set offers 3 different sizes of gold and digital tokens; 100 grams, 50 grams
-                                and 1 oz of
-                                gold.</p>
+                                TOO!</p>
+                            <p>The Genesis set offers 3 different sizes of gold and digital tokens; 100 grams, 50 grams
+                                and 1 oz of gold.</p>
 
                             <p>To claim the gold your NFT must be turned in!!!</p>
 

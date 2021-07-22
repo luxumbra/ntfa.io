@@ -262,6 +262,17 @@ export function AssetDetails() {
                                         },
                                         "ul": {
                                             pl: "15px",
+                                        },
+                                        "a": {
+                                            color: "brand.300",
+                                            position: "relative",
+                                            transition: "all 0.2s ease",
+                                            _hover: {
+                                                color: "brand.200",
+                                                _after: {
+                                                    width: "100%",
+                                                }
+                                            },
                                         }
                                 }}>
                                     <ReactMarkdown>

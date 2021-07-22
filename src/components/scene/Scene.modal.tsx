@@ -14,19 +14,25 @@ import {
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 
+// @ts-ignore
 import BurnMechanics from "../../assets/infographic/burn-mechanics.svg";
+// @ts-ignore
 import NftBackedImg from "../../assets/infographic/nft-backed.svg";
+// @ts-ignore
 import ExchangeImg from "../../assets/infographic/exchange.svg";
+// @ts-ignore
 import GoldImg from "../../assets/infographic/gold.svg";
+// @ts-ignore
 import ConvertImg from "../../assets/infographic/convert.svg";
+// @ts-ignore
 import VaultedImg from "../../assets/infographic/vaulted.svg";
+// @ts-ignore
 import AshImg from "../../assets/infographic/ash.svg";
+// @ts-ignore
 import ArrowImg from "../../assets/infographic/arrow.svg";
+// @ts-ignore
 import NftBurnedImg from "../../assets/infographic/nft-burned.svg";
-// export interface ModalPropsInterface {
 
-
-//  }
 
 export function SceneModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()

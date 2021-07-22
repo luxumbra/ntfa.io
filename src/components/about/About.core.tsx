@@ -17,15 +17,14 @@ export function AboutCore() {
             <Box className="scene__center" flex={{base: "0 0 98%", smd: "0 0 50%", md: "0 0 45%", xxxl: "0 0 33%"}}
                  ml={["auto", "auto"]} mr={{base: "auto"}} d="flex" flexDirection="column" alignItems="center"
                  zIndex="1000">
-                <Box width="100%" height="auto" margin={{base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0"}}
-                     zIndex={1000} maxH={{base: "90%", smd: "85%", md: "90%"}} overflow="hidden" borderRadius="6px"
-                     boxShadow="0 0 15px rgba(0,0,0,0.5)" backgroundColor="rgba(0,0,0,0.6)">
+                <Box width="100%" height="auto" margin={{ base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0" }}
+                    zIndex={1000} maxH={{ base: "90%", smd: "85%", md: "90%" }} overflow="hidden" borderRadius="6px"
+                    boxShadow="0 0 15px rgba(0,0,0,0.5)" backgroundColor="rgba(0,0,0,0.8)" sx={{
+                        backdropFilter: "blur(7px)"
+                    }}>
                     <Box p="5%" sx={{
-                        // backgroundColor: `rgba(0,0,0,0.6)`,
-                        // backdropFilter: `blur(3px)`,
-                        // boxShadow: `0 0 15px rgba(0,0,0,0.5)`,
+                        backdropFilter: `blur(0)`,
                         color: `white`,
-                        // borderRadius: `6px`,
                         overflowY: `auto`,
                         height: `100%`
                     }}>
@@ -40,7 +39,7 @@ export function AboutCore() {
                                 mb: 3
                             }
                         }}>
-                            <Heading as="h2" fontSize={{base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px`}} sx={{
+                            <Heading as="h2" fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
                                 mb: 3
                             }}>Never Touch FIAT Again: Gold bullion with Collectible NFTs</Heading>
                             <p>Never Touch Fiat Again is a pilot NFT project utilizing Mattereum Real World NFT legal

@@ -26,24 +26,38 @@ export function AboutCore() {
                         <Box p={{base: "5%", xxxl: "4%"}} sx={{ "p:nth-of-type(even)": {fontSize: { base: `10px`, xl: `12px`, xxxl: `14px` }}, "p:nth-of-type(odd)": {mb: `0`}}}>
                             <Heading as="h2" fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
                                 mb: 2
-                            }}>Never Touch FIAT Again</Heading>
-                            <p>The desire for gold is not for gold. It is for the means of Freedom and Benefit</p>
-                            <p style={{ fontWeight: 'bold' }}>- Ralph Waldo Emerson</p>
-
-                            <p>With the exception only of the period of the gold standard, practically all governments of history have used their exclusive power to issue money to defraud and plunder the people.</p>
-                            <p style={{ fontWeight: 'bold' }}>- Friedrich August von Hayek </p>
-
-                            <p>He who bets on governments and government money bets against 6,000 years of recorded human history.</p>
-                            <p style={{ fontWeight: 'bold' }}>- Gary North </p>
-
-                            <p>Borrowers will default. Markets will collapse. Gold (the ultimate form of safe money) will skyrocket.</p>
-                            <p style={{ fontWeight: 'bold' }}>- Mike Belkin</p>
-
-                            <p>The history of paper money is an account of abuse, mismanagement, and financial disaster.</p>
-                            <p style={{ fontWeight: 'bold' }}>- Richard Ebeling</p>
-
-                            <p>Gold and Silver are money ... everything else is credit.</p>
-                            <p style={{ fontWeight: 'bold' }}>- J.P. Morgan</p>
+                            }}>Never Touch FIAT Again: Gold bullion with Collectible NFTs</Heading>
+                            <p>Never Touch Fiat Again is a pilot NFT project utilizing Mattereum Real World NFT legal contracts to ensure rights of real world assets, such as bars of gold, with NFTs and wrap them in collectible Art NFTs.</p>
+                            </br>
+                            <p>NTFA Presents a novel idea for an NFT.</p>
+                            <p>Buy the NFT, and you can get your specific real bar of gold and another NFT for turning in the NFT through the Claims Process!</p>
+                            </br>
+                            <p>NFT owner's have legal rights to the gold, and can request shipping. Exit to gold!</p>
+                            <p>We partner with Lohko Inc and Mattereum to ensure a seamless and legal transition of rights.</p>
+                            <p>Matteruem has refined the legal agreement between parties and will act as arbitration in the event of any disputes.</p>
+                            <p>Lohko will act as the custodian of the gold asset and handle claiming process.</p>
+                            </br>
+                            <p>In a world where people question the value of an NFT, NTFA is pushing the boundary of what an NFT can be.</p>
+                            </br>
+                            <p>We created a set of unique collectible gold bars that lets you have your NFT and GOLD BAR TOO!</p>
+                            <p>The Genesis set offers 3 different sizes of gold and digital tokens; 100 grams, 50 grams and 1 oz of gold.</p>
+                            </br>
+                            <p>To claim the gold your NFT must be turned in!!!</p>
+                            </br>
+                            <p>Once turned in and upon confirmation you will receive a "burned" version of the NFT which no longer has rights to the asset!</p>
+                            <p>The minting order of the burned tokens is based on the order of claims.</p>
+                            </br>
+                            <p>More than just a pretty picture, our NFTs provide multiple utilities.</p>
+                            </br>
+                            <p>We partner with amazing artists to do exclusive gold back NFTs!</p>
+                            </br>
+                            <p>Ethereum and NFT empowers us to support artists and creative people like you!</p>
+                            </br>
+                            <p>Who needs paper money, Never Touch Fiat Again!</p> 
+                            </br>
+                            <p>Thank you for your support!</p>
+                            </br>
+                            <p style={{ fontWeight: 'bold' }}>NTFA</p>
                         </Box>
                     </Box>
                 </Box>

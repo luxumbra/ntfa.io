@@ -33,14 +33,20 @@ export const missiles = [
     },
 ];
 
+// TODO: the lambo & missiles creep across the screen when the scene resets. A little more with each play. Needs fixing.
+
 export function SceneCore() {
     const [playState, setPlayState] = useState('paused');
     const [canReplay, setCanReplay] = useState(true);
     const [timeoutState, setTimeoutState] = useState(setTimeout(() => {}));
-    const [toggleTimeout, setToggleTimeout] = useState(setTimeout(() => {}));
+    const [toggleTimeout, setToggleTimeout] = useState(setTimeout(() => { }));
+    const [modalTimeout, setModalTimeout] = useState(setTimeout(() => { }));
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+
+    console.log('playstate: ', playState, canReplay);
 
     return(
         <Box
@@ -81,12 +87,18 @@ export function SceneCore() {
                         setCanReplay(false);
                         setPlayState('running');
 
+                        setModalTimeout(
+                            setTimeout(() => {
+                                setModalOpen(!modalOpen);
+                            }, 4.5 * 1000)
+                        );
+
                         setToggleTimeout(
                             setTimeout(() => {
                                 setToggle1(true);
                                 setToggle2(true);
                                 setToggle3(true);
-                            }, 2.5 * 1000)
+                            }, 2.4 * 1000)
                         )
 
                         setTimeoutState(
@@ -252,7 +264,7 @@ export function SceneCore() {
                 pointerEvents="none"
             />
 
-            <SceneModal />
+            <SceneModal setModalOpen={setModalOpen} modalOpen={modalOpen} />
 
             <FooterComponent toggler />
         </Box>

@@ -40,59 +40,73 @@ function TosCore({ content }: any) {
                     margin={{ base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0" }}
                     zIndex={1000}
                     maxH={{ base: "90%", smd: "85%", md: "100%" }}
-                    pt="75px"
-                    pb="50px"
+                    // pt="75px"
+                    // pb="50px"
                     overflow="hidden"
                     borderRadius="6px"
                     boxShadow="0 0 15px rgba(0,0,0,0.5)"
                     backgroundColor="rgba(0,0,0,0.8)"
-                    position="relative">
-                    <Heading
-                        as="h2"
-                        fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
-                        color: `white`,
-                            pl: `4%`,
-                        position: 'absolute',
-                            top: `35px`,
-                            left: `auto`,
-                            width: "100%",
-                        zIndex: 1100
-                    }}>NTFA Terms of Service</Heading>
-                    <Box
-                        p={{ base: "5%", xl: "2% 5%", xxl: "2% 4%" }}
-                        sx={{
-                        color: `white`,
-                        overflowY: `scroll`,
-                        height: `100%`,
-                        textAlign: `center`,
+                    position="relative"
+                    sx={{
+                        backdropFilter: "blur(7px)",
                     }}>
+                    <Box
+                        pt="75px"
+                        pb="50px"
+                        height="100%"
+                        width="100%"
+                        sx={{
+                            backdropFilter: "blur(0px)"
+                        }}
+                    >
+                        <Heading
+                            as="h2"
+                            fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
+                                color: `white`,
+                                pl: `4%`,
+                                position: 'absolute',
+                                top: `35px`,
+                                left: `auto`,
+                                width: "100%",
+                                zIndex: 1100
+                            }}>NTFA Terms of Service</Heading>
                         <Box
-                            p={{ base: "5%", xl: "2% 5%", xxxl: "4%" }}
-                            textAlign="left"
+                            p={{ base: "5%", xl: "2% 5%", xxl: "2% 4%" }}
                             sx={{
-                            "h2": {
-                                fontFamily: `'Hero', sans-serif`,
-                                fontSize: { base: `12px`, lg: "14px", xl: `18px`, xxxl: `18px` },
-                                fontWeight: `900`,
-                                mt: 6
-                            },
-                            "p": {
-                                fontSize: {
-                                    base: `10px`, lg: "12px", xl: `14px`,
-                                },
-                            },
-                            "ul > li": {
-                                fontSize: {
-                                    base: `10px`, lg: "12px", xl: `14px`,
-                                },
-                                ml: 7
-                            }
-                        }}>
-                            <ReactMarkdown>
-                                {content}
-                            </ReactMarkdown>
+                                color: `white`,
+                                overflowY: `scroll`,
+                                height: `100%`,
+                                textAlign: `center`,
+                            }}>
+                            <Box
+                                p={{ base: "5%", xl: "2% 5%", xxxl: "4%" }}
+                                textAlign="left"
+                                sx={{
+                                    "h2": {
+                                        fontFamily: `'Hero', sans-serif`,
+                                        fontSize: { base: `12px`, lg: "14px", xl: `18px`, xxxl: `18px` },
+                                        fontWeight: `900`,
+                                        mt: 6
+                                    },
+                                    "p": {
+                                        fontSize: {
+                                            base: `10px`, lg: "12px", xl: `14px`,
+                                        },
+                                    },
+                                    "ul > li": {
+                                        fontSize: {
+                                            base: `10px`, lg: "12px", xl: `14px`,
+                                        },
+                                        ml: 7
+                                    }
+                                }}>
+                                <ReactMarkdown>
+                                    {content}
+                                </ReactMarkdown>
+                            </Box>
                         </Box>
                     </Box>
+
                 </Box>
             </Box>
 

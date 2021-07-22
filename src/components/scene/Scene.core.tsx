@@ -8,6 +8,7 @@ import { SceneMissile } from './Scene.missile';
 import { SceneBuilding } from './Scene.building';
 import { SceneCopy } from './Scene.copy';
 import { FooterComponent } from '../shared/Footer';
+import { SceneModal } from './Scene.modal';
 
 export const missiles = [
     {
@@ -250,6 +251,9 @@ export function SceneCore() {
                 transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
                 pointerEvents="none"
             />
+
+            <SceneModal />
+
             <FooterComponent toggler />
         </Box>
     )

@@ -31,9 +31,9 @@ import NftBurnedImg from "../../assets/infographic/nft-burned.svg";
 export function SceneModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <Box position="absolute" bottom="110px" right="80px" width="150px" height="250px">
+    <Box position="absolute" bottom={{ base: "30px", lg: "55px", xxxl: "140px" }} right={{ base: "15px", lg: "10px", xxxl: "80px" }} width={{ base: "120", xxxl: "150px" }} height={{ base: "110px", xxxl: "210px" }}>
       <Box position="relative" width="100%" height="100%">
-        <Button onClick={onOpen}
+        <Button className="burnNftButton" onClick={onOpen}
           sx={{
             display: "flex",
             flexFlow: "column wrap",
@@ -46,14 +46,27 @@ export function SceneModal() {
             width: "100%",
             height: "100%",
             fontFamily: "Montserrat, sans-serif",
+            fontSize: { base: "15px", xl: "24px" },
             fontWeight: "900",
-            transform: "skewY(-25deg) rotateX(0deg) rotateY(57deg)",
+            transform: "skewY(-20deg) rotateX(0deg) rotateY(57deg)",
             "span + span": {
               textOrientation: "upright",
               writingMode: "vertical-lr",
             },
             _hover: {
               backgroundColor: "brand.300"
+            },
+            _before: {
+              content: "''",
+              display: "block",
+              position: "absolute",
+              right: "-15px",
+              top: "25px",
+              width: "15px",
+              height: "100%",
+              background: "linear-gradient(to right, rgba(62,95,105,1) 50%, rgba(178,207,226,1) 100%)",
+              borderLeft: "5px solid white",
+              transform: "skewY(25deg) rotateX(0deg) rotateY(0)",
             }
           }}
         ><span>NFT</span><span>BURN</span></Button>

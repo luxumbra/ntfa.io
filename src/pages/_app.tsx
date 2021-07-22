@@ -30,6 +30,10 @@ const theme = extendTheme({
             primary: "#6b7867",
         },
     },
+    zIndices: {
+        overlay: 2200,
+        modal: 2300,
+    },
     components: {
         Heading: {
             baseStyle: {
@@ -120,6 +124,10 @@ const theme = extendTheme({
                 }
             },
         },
+        // Modal: {
+        //     baseStyle: {},
+        //     variants: {},
+        // }
     },
   styles: {
         global: {
@@ -178,7 +186,7 @@ const theme = extendTheme({
                 marginBottom: { base: `10px`, xl: `0.8vw` },
                 lineHeight: { base: `1.2` },
                 fontWeight: `100`,
-            },
+          },
         },
     },
 });

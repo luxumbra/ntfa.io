@@ -35,10 +35,11 @@ export const MetadataComponent: FC<MetadataInterface> = ({ title, description, s
             <link rel="shortcut icon" href="/assets/favicon.ico"/>
             <meta name="msapplication-TileColor" content="#bbfcff"/>
             <meta name="msapplication-config" content="/assets/browserconfig.xml"/>
-            <meta name="theme-color" content="#bbfcff"/>
+            <meta name="theme-color" content="#bbfcff" />
 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" />
-            <link href="https://fonts.googleapis.com/css2?family=Asset&display=swap" rel="stylesheet"/>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Asset&display=swap" rel="stylesheet" />
 
         </Head>
     )

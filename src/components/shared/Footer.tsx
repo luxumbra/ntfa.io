@@ -183,7 +183,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                                 zIndex: 200
                             }}>Mattereum</IconButton>
                             <NextLink href="https://mattereum.com" passHref >
-                                <Link sx={{ mb: { base: 0, lg: 2 }, mx: "auto" }} isExternal >
+                                <Link sx={{ mb: { base: 2, lg: 2 }, mx: "auto" }} isExternal >
                                     <Image src="/assets/mattereum-logo.png" alt="Mattereum logo" height="auto" width="150px" />
                                 </Link>
                             </NextLink>

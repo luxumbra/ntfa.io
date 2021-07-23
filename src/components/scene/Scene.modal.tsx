@@ -41,18 +41,12 @@ export type SceneModalType = {
 export function SceneModal({ setModalOpen, modalOpen }: SceneModalType) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  console.log('modalopen: ', modalOpen);
-
-
   return (
-    <Box position="absolute" bottom={{ base: "30px", lg: "55px", xxxl: "140px" }} right={{ base: "15px", lg: "10px", xxxl: "80px" }} width={{ base: "90px", xl: "120px", xxxl: "150px" }} height={{ base: "110px", xl: "190px", xxxl: "210px" }}>
-
       <Modal isOpen={modalOpen} onClose={onClose} size={"xl"} isCentered>
         <ModalOverlay backgroundColor="rgba(0,0,0,0.75)" onClick={() => setModalOpen(!modalOpen)} sx={{
           backdropFilter: "blur(3px)",
         }} />
-        <ModalContent sx={{
-          // backgroundColor: "rgba(255,255,255,0.8)",
+      <ModalContent sx={{
           background: "linear-gradient(to bottom, rgba(62,95,105,0.6) 50%, rgba(178,207,226,0.8) 100%)",
           backdropFilter: "blur(10px)",
         }}>
@@ -65,7 +59,7 @@ export function SceneModal({ setModalOpen, modalOpen }: SceneModalType) {
               width: "32px"
             }} />
 
-          <ModalBody d="flex" justifyItems="center" alignContent="flex-start" p="50px" sx={{
+        <ModalBody d="flex" justifyItems="center" alignContent="flex-start" p={{ base: "15px", lg: "25px", xl: "50px" }} sx={{
             fontFamily: "'Montserrat', sans-serif",
             textTransform: "uppercase",
             "p > em": {
@@ -145,11 +139,9 @@ export function SceneModal({ setModalOpen, modalOpen }: SceneModalType) {
                 </Box>
                 <Box as="p" textAlign="center">After this redemption is confirmed, the asset & the new <em>non-backed</em> NFT is yours to keep</Box>
               </Box>
-            </Box>
-
+          </Box>
           </ModalBody>
         </ModalContent>
-      </Modal>
-    </Box >
+    </Modal>
   );
 }

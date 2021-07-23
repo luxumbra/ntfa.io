@@ -41,7 +41,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                 textAlign="center"
                 border="5px solid white"
                 borderRadius={{ base: "15px 15px 0 0", lg: "15px" }}
-                backgroundColor="#01735C"
+                backgroundColor={reveal ? "white" : "brand.300"}
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"
                 pos={{base: "absolute", lg: "relative"}}
@@ -127,7 +127,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
 
                         /* animation-play-state: paused; */
                     `}>
-                    <Box d="inline-flex" fontSize={{ base: "10px", lg: "12px" }} alignItems="center">Site from the <span className="heart">💛</span> of <Link href="#" d="inline-flex" alignItems="center"><Image src="/assets/dps-logo.png" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
+                    <Box d="inline-flex" fontSize={{ base: "10px", lg: "12px" }} alignItems="center">Site from the <span className="heart">💛</span> of <Link href="https://twitter.com/DefiantPixel" d="inline-flex" alignItems="center" isExternal><Image src="/assets/dps-logo.png" alt="Defiant Pixel Society logo" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
                 </HStack>
                 <VStack spacing={{base: 1, lg: 3}} color="white" fontSize={{ base: "9px", lg: "12px" }} sx={{ "p": { fontSize: { base: "9px", lg: "12px" }, margin: 0 } }}>
                     <p>Copyright {currentYear} NTFA Limited. All rights reserved. NTFA Limited is a company registered in Hong Kong (Company No. 3048511)</p>
@@ -153,7 +153,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                     borderRadius="6px"
                     overflow="hidden"
                     opacity={reveal ? 1 : 0}
-                    transition="opacity 0.3s 0.2s ease-in-out"
+                    transition="opacity 0.2s  ease-in-out"
                     zIndex={reveal ? "200" : -20}
                 >
 
@@ -164,27 +164,35 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                         width="100%"
                         height="100%"
                         margin="0"
-                        backgroundColor="#01735C"
-                        color="white"
+                        backgroundColor="brand.100"
+                        color="brand.300"
                         z={0}
                     >
-                        <Box p={{ base: "15px", lg: "25px" }}>
+                        <Box p={{ base: "15px", lg: "25px" }} d="flex" flexFlow="column nowrap" justifyContent="center" textAlign="left">
                             <IconButton icon={<CloseIcon />} size="sm" aria-label="Close overlay" onClick={() => setReveal(!reveal)} sx={{
                                 background: "transparent",
-                                color: "white",
+                                color: "brand.200",
                                 "&:hover, &:focus": {
-                                    background: "transparent",
-                                    // color: "yellow.500",
+                                    background: "brand.200",
+                                    color: "white",
                                     cursor: "pointer"
                                 },
                                 position: "absolute",
                                 top: "0",
-                                left: { base: "0", smd: "0", lg: "0" },
+                                right: { base: "0", smd: "0", lg: "0" },
                                 zIndex: 200
                             }}>Mattereum</IconButton>
-                            <Heading as="h3" size="md" fontFamily="Hero" fontWeight="900" fontSize={{ base: "12px", lg: "18px" }} mb={{ base: 0, lg: 2 }}>Mattereum</Heading>
-                            <Box sx={{ "p": { fontSize: { base: "9px", lg: "12px" } } }}>
-                                <p>Mattereum is a trading name and registered trademark of MTRM Industries Limited, registered in England company number 10899201. VAT registration number: GB 283834768. Registered office: 69 Kingfisher Heights, Waterside Way, London, England, N17 9GL.</p>
+                            <NextLink href="https://mattereum.com" passHref >
+                                <Link sx={{ mb: { base: 0, lg: 2 }, mx: "auto" }} isExternal >
+                                    <Image src="/assets/mattereum-logo.png" alt="Mattereum logo" height="auto" width="150px" />
+                                </Link>
+                            </NextLink>
+
+                            <Box px={6} sx={{ "p": { fontSize: { base: "9px", lg: "12px" } } }}>
+                                <p>Mattereum is a trading name and registered trademark of MTRM Industries Limited, registered in England company number 10899201.<br />
+                                    VAT registration number: GB 283834768. <br />
+                                    Registered office: 69 Kingfisher Heights, Waterside Way, London, England, N17 9GL.
+                                </p>
                             </Box>
                         </Box>
                     </Box>

@@ -28,7 +28,7 @@ export function AboutCore() {
                     height="auto"
                     margin={{ base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0" }}
                     zIndex={1000}
-                    maxH={{ base: "90%", smd: "85%", md: "90%", xl: "90%", xxl: "90%" }}
+                    maxH={{ base: "90%", smd: "85%", md: "90%", xl: "90%", xxl: "95%" }}
                     overflow="hidden"
                     borderRadius="6px"
                     boxShadow="0 0 15px rgba(0,0,0,0.5)"
@@ -59,7 +59,7 @@ export function AboutCore() {
                                 zIndex: 1100
                             }}>Never Touch FIAT Again: Gold bullion with Collectible NFTs</Heading>
                         <Box
-                            p={{ base: "0 5% 5%", xl: "2% 5%", xxl: "4%" }}
+                            p={{ base: "0 5% 5%", xl: "2% 5%", xxl: "0 4%", xxxl: "0 4%" }}
                             sx={{
                                 color: `white`,
                                 overflowY: { base: `scroll`, lg: `auto` },
@@ -67,7 +67,7 @@ export function AboutCore() {
                                 textAlign: `center`
                             }}>
                             <Box
-                                p={{ base: "0 5% 5%", xl: "2% 5%", xxxl: "4%" }}
+                                p={{ base: "0 5% 5%", xl: "2% 5%", xxl: "0 4%", xxxl: "4%" }}
                                 textAlign="left"
                                 sx={{
                                     "p": { fontSize: { base: `10px`, xl: `12px`, xxxl: `14px` }, mt: 0 },

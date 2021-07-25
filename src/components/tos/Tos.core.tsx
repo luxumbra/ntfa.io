@@ -40,8 +40,6 @@ function TosCore({ content }: any) {
                     margin={{ base: "50px 0 0", smd: "25px 0 0", lg: "50px 0 0" }}
                     zIndex={1000}
                     maxH={{ base: "90%", smd: "85%", md: "100%" }}
-                    // pt="75px"
-                    // pb="50px"
                     overflow="hidden"
                     borderRadius="6px"
                     boxShadow="0 0 15px rgba(0,0,0,0.5)"
@@ -61,7 +59,8 @@ function TosCore({ content }: any) {
                     >
                         <Heading
                             as="h2"
-                            fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }} sx={{
+                            fontSize={{ base: `9px`, lg: "14px", xl: `16px`, xxxl: `18px` }}
+                            sx={{
                                 color: `white`,
                                 pl: `4%`,
                                 position: 'absolute',
@@ -106,7 +105,6 @@ function TosCore({ content }: any) {
                             </Box>
                         </Box>
                     </Box>
-
                 </Box>
             </Box>
 

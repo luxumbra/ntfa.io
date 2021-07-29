@@ -103,7 +103,7 @@ export function AssetDetails() {
     useEffect(() => {
         getAsset = axios
             .get(
-                `https://rinkeby-api.opensea.io/api/v1/asset/${id}/${token}`
+                `https://api.opensea.io/api/v1/asset/${id}/${token}`
             )
             .then((response) => {
                 console.log('response: ', response);

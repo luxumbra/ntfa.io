@@ -82,7 +82,7 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
               {children}
             </>
           ) : (
-              <Text>We're on Mainnet!! 😱</Text>
+              <Text>🎉 We're on Mainnet!! 🎉</Text>
           )}
         </Box>
       </Box>

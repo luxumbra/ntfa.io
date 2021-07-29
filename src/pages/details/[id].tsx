@@ -38,7 +38,7 @@ export type AssetMetaType = {
 
 }
 
-export const openseaRootUrl = "https://testnets.opensea.io";
+export const openseaRootUrl = "https://opensea.io";
 
 export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
     console.log('theAsset:', theAsset);

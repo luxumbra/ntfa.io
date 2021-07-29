@@ -134,7 +134,7 @@ export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
                                 }}
                             />
                         </Box>
-                        <Box position="relative" width="100%" p={{ base: "4%" }} d={{ base: "block", xl: "block" }} h="auto">
+                        <Box position="relative" width="100%" p={{ base: "4%" }} d={{ base: "block", xl: "block" }} h="auto" backdropFilter="blur(0)">
                             <Heading as="h3" fontSize={{ base: "10px", xl: "14px", xxxl: "14px" }} color="accent.primary" mb="5px">{asset.name}</Heading>
                             <Box d={{ base: "block", lg: "block" }} sx={{
                                 "h2, h3": {

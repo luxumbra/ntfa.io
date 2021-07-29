@@ -43,7 +43,7 @@ export interface AssetDetailsInterface {
     external_link: string;
 }
 
-export const openseaRootUrl = "https://testnets.opensea.io";
+export const openseaRootUrl = "https://opensea.io";
 
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
@@ -128,7 +128,6 @@ export function AssetDetails() {
         (async () => {
             seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Rinkeby })
             console.log("seaport: ", seaport);
-            console.log(id, tokenId);
             const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
             assetState && setOsAsset(assetState);
             console.log("Assetstate: ", osAsset);
@@ -267,13 +266,13 @@ export function AssetDetails() {
                                         minW: "100%",
                                         justifyContent: "center"
                                     }}>
-                                        <NextLink href={asset?.permalink} passHref>
+                                        <NextLink href={osAsset?.openseaLink} passHref>
                                             <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
                                         </NextLink>
                                         <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
                                             <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
                                         </NextLink>
-                                        <NextLink href={asset.external_link} passHref>
+                                        <NextLink href={osAsset.externalLink} passHref>
                                             <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
                                         </NextLink>
                                     </ButtonGroup>
@@ -285,7 +284,7 @@ export function AssetDetails() {
                                         </NextLink>
                                     </Box>
                                     <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
-                                        {asset && asset.name}
+                                        {osAsset && osAsset.name}
                                     </Heading>
                                     <Box d="flex" className="asset--meta" flexFlow="column wrap" mb={2} sx={{
                                         "& > span": {
@@ -297,33 +296,6 @@ export function AssetDetails() {
 
                                         {osAsset?.traits && <AssetMeta theAsset={osAsset} />}
 
-                                    </Box>
-                                    <Box d="flex" justifyContent="center" mb={3} sx={{
-                                        "a > svg": {
-                                            opacity: 0.5,
-                                            transition: "opacity 0.2s ease-in-out"
-                                        },
-                                        "a:hover": {
-                                            ">svg": {
-                                                opacity: 1,
-                                            }
-                                        }
-                                    }}>
-                                        <ButtonGroup isAttached sx={{
-                                            borderRadius: "md",
-                                            boxShadow: "0 0 4px rgba(0,0,0,0.3)",
-                                            overflow: "hidden",
-                                        }}>
-                                            <NextLink href={osAsset?.openseaLink} passHref>
-                                                <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
-                                            </NextLink>
-                                            <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
-                                                <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
-                                            </NextLink>
-                                            <NextLink href={osAsset.externalLink} passHref>
-                                                <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
-                                            </NextLink>
-                                        </ButtonGroup>
                                     </Box>
 
                                     <Box p="15px 30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">

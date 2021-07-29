@@ -67,10 +67,10 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   useEffect(() => {
     getCollection = axios
       .get(
-        `https://api.opensea.io/api/v1/assets?order_direction=asc&collection=${collection}`
+        `https://rinkeby-api.opensea.io/api/v1/assets?order_direction=asc&collection=${collection}`
       )
       .then((response) => {
-        console.log(response);
+        console.log('OS response: ', response);
         // setGoldAssets(response.data.assets.slice(0, 2));
         // setAssets(response.data.assets.slice(3));
         setGoldAssets(response.data.assets);
@@ -122,7 +122,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
               ))} */}
             {goldAssets &&
               goldAssets.map((asset, i) => (
-                <NFTCard asset={asset} id={i} />
+                <NFTCard key={`nftcard${i}`} asset={asset} id={i} />
               ))}
           </Carousel>
         )}

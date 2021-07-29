@@ -10,24 +10,23 @@ export type AssetMetaType = {
 
 export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
   console.log('theAsset:', theAsset);
-  const metaItems = [] as Array<{}>;
   type ItemType = {
     trait_type: string;
     value: string;
   }
+  const metaItems = [] as Array<ItemType>;
   const { traits } = theAsset;
-  traits?.map((trait: {}) => {
-    metaItems.push(trait);
+  traits?.map((trait) => {
+    metaItems.push(trait as ItemType);
   });
 
-  const metaSort = metaItems.sort((a: {}, b: {}) => {
+  const metaSort = metaItems.sort((a, b) => {
     return a.trait_type.localeCompare(b.trait_type);
   });
 
   return (
     <Box as="ul" d="flex" w="100%" minW="100%" listStyleType="none" flexFlow="row wrap">
       {metaSort.map((item, index) => {
-        console.log('item: ', item);
 
         const assetItem = item as ItemType;
         return (

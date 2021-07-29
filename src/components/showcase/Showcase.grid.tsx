@@ -67,7 +67,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   useEffect(() => {
     getCollection = axios
       .get(
-        `https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&collection=${collection}`
+        `https://api.opensea.io/api/v1/assets?order_direction=asc&collection=${collection}`
       )
       .then((response) => {
         console.log(response);

@@ -59,7 +59,7 @@ export function AboutCore() {
                                 zIndex: 1100
                             }}>Never Touch FIAT Again: Gold bullion with Collectible NFTs</Heading>
                         <Box
-                            p={{ base: "0 5% 5%", xl: "2% 5%", xxl: "0 4%", xxxl: "0 4%" }}
+                            p={{ base: "0 5% 5%", xl: "2% 5%", xxl: "0 4%", xxxl: "5%" }}
                             sx={{
                                 color: `white`,
                                 overflowY: { base: `scroll`, lg: `auto` },

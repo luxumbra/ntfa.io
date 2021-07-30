@@ -39,33 +39,20 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
   const [yourBid, setYourBid] = useState<any>();
   const [isEnded, setIsEnded] = useState(false);
   const [yourOffer, setYourOffer] = useState<any | undefined>();
-  const [theAsset, setTheAsset] = useState<any | undefined>();
+  // const [asset, setasset] = useState<any | undefined>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   console.log("Asssset: ", asset);
-  asset && setTheAsset(asset);
-  const startAuction = (tokenUri) => {
-    return async () => {
-      // setAuctionToken(tokenUri);
-      // setModalVisible(true);
-    }
-  }
+  // asset && setasset(asset);
+  // const startAuction = (tokenUri) => {
+  //   return async () => {
+  //     // setAuctionToken(tokenUri);
+  //     // setModalVisible(true);
+  //   }
+  // }
 
   const placeBid = async (ethAmount, tokenId, id) => {
-    // if (typeof window.ethereum !== 'undefined') {
-    //   console.log(window.ethereum);
 
-    //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    //   console.log("Accounts: ", accounts);
-    //   if (!accounts[0]) {
-    //     await connectWallet();
-    //   }
-
-    // wallet connected?
-    // open modal with balance, current highest bid and an eth input for the bid amount.
-    // if (accounts[0]) {
-    //     return <Box>Hello</Box>
-    // }
     setCreatingOrder(true);
     const ethWrap = await seaport.wrapEth({
       amountInEth: ethAmount,
@@ -82,7 +69,7 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
       asset: {
         tokenId: (tokenId?.toString()),
         tokenAddress: id,
-        schemaName: "ERC1155",
+        schemaName: "ERC721",
       },
       accountAddress: userAccount,
       startAmount: ethAmount,
@@ -116,52 +103,7 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
     }
   }
 
-  // const bidAction = async (id: string, tokenId: any) => {
-  //   if (typeof window.ethereum !== 'undefined') {
-  //     console.log(window.ethereum);
 
-  //     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-  //     console.log("Accounts: ", accounts);
-  //     if (!accounts[0]) {
-  //       await connectWallet();
-  //     }
-
-  //     // wallet connected?
-  //     // open modal with balance, current highest bid and an eth input for the bid amount.
-  //     // if (accounts[0]) {
-  //     //     return <Box>Hello</Box>
-  //     // }
-
-
-  //     const offerPrice = price ? price + 0.01 : 0.055;
-
-  //     const ethWrap = await seaport.wrapEth({
-  //       amountInEth: offerPrice,
-  //       accountAddress: accounts[0],
-  //     });
-
-  //     !ethWrap && setCreatingOrder(true);
-  //     ethWrap && console.log("eth wrap: ", ethWrap);
-
-  //     setCreatingOrder(false);
-
-  //     const offer = await seaport.createBuyOrder({
-  //       asset: {
-  //         tokenId: (tokenId?.toString()),
-  //         tokenAddress: id,
-  //         schemaName: "ERC1155",
-  //       },
-  //       accountAddress: accounts[0],
-  //       startAmount: offerPrice,
-  //     });
-  //     !offer && setCreatingOrder(true);
-
-  //     //  }
-  //     console.log("offer: ", offer);
-  //     offer && setCreatingOrder(false);
-  //     // debugger;
-  //   }
-  // }
 
 
 
@@ -214,7 +156,7 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
                 <li>{(asset.buyOrders[0].currentPrice.toNumber() / Math.pow(10, 18))}</li>
               </ul>
             )}
-            {creatingOrder && (
+            {/* {creatingOrder && (
               <p>Creating order</p>
             )}
             {creatingOrder && processingOrder && (
@@ -222,9 +164,9 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
             )}
             {yourOffer && (
               <p>Your bid: {(yourOffer?.currentPrice.toNumber() / Math.pow(10, 18))}</p>
-            )}
+            )} */}
             {/* auctionDetails.push(auctionInfo.isActive ? ( */}
-            <div style={{ marginTop: "20px" }}>
+            <Box sx={{ marginTop: "20px" }}>
               <p style={{ fontWeight: "bold" }}>Auction is in progress</p>
               {/* {asset && (
                 <p style={{ margin: 0, marginBottom: "2px" }}>Current price is {(asset.buyOrders[0].currentPrice.toNumber() / Math.pow(10, 18))}Ξ </p>
@@ -238,19 +180,19 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
                   minimized={true}
                 /><p>{utils.formatEther(auctionInfo.maxBid)} ETH</p></div>}
               </div> */}
-              {theAsset && theAsset.buyOrders.map((order: any, i: number) => {
-                i !== 0 && false;
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+              {asset && (
+                <Box>
+                  <Box sx={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                    <h2>{asset.collection.name}</h2>
                     <p style={{ margin: 0, marginRight: "15px" }}>Your bid in ETH: </p>
-                    <NumberInput defaultValue={(theAsset.buyOrders[i].currentPrice.toNumber() / Math.pow(10, 18))} value={yourBid && yourBid[theAsset.tokenId]} onChange={newBid => setYourBid({ [theAsset.tokenId]: newBid })} style={{ flexGrow: 1 }}>
+                    {/* <NumberInput defaultValue={(asset.buyOrders[0].currentPrice.toNumber() / Math.pow(10, 18))} value={yourBid && yourBid[asset.tokenId]} onChange={newBid => setYourBid({ [asset.tokenId]: newBid })} style={{ flexGrow: 1 }}>
                       <NumberInputField />
-                    </NumberInput>
-                  </div>
-                  <Button style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid[theAsset.tokenId], theAsset.tokenId, theAsset.tokenAddress)} disabled={!yourBid[theAsset?.tokenId] || isEnded}>{creatingOrder ? `Placing bid...` : `Place a bid`}</Button>
-                </div>
-              })}
-            </div>
+                    </NumberInput> */}
+                  </Box>
+                  {/* <Button style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid[asset.tokenId], asset.tokenId, asset.tokenAddress)} disabled={!yourBid[asset?.tokenId] || isEnded}>{creatingOrder ? `Placing bid...` : `Place a bid`}</Button> */}
+                </Box>
+              )}
+            </Box>
             {/* ) : null); */}
           </Box>
         </ModalBody>

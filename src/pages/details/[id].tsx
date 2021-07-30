@@ -68,7 +68,7 @@ export function AssetDetails() {
     // set the current users account address so we can check it against the highest bidder address
     const getSetUserAccount = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        !accounts && console.log("Getting accounts...");
+        !!accounts && console.log("Getting accounts...");
 
         setUserAccount(accounts[0]);
         console.log('useraccount: ', userAccount);
@@ -101,7 +101,7 @@ export function AssetDetails() {
             console.log("seaport: ", seaport);
             const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
             assetState && setOsAsset(assetState);
-            console.log("Assetstate: ", osAsset);
+            assetState && console.log("Assetstate: ", assetState);
             // debugger;
 
 

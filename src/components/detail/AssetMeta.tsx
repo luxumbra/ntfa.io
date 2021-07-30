@@ -9,7 +9,7 @@ export type AssetMetaType = {
 }
 
 export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
-  console.log('theAsset:', theAsset);
+  // console.log('theAsset:', theAsset);
   type ItemType = {
     trait_type: string;
     value: string;

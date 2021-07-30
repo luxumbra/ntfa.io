@@ -1,12 +1,16 @@
 import * as Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import { PortisProvider } from 'portis'
+import { OpenSeaPort, Network } from "opensea-js";
+//
 
 export const GOOGLE_ANALYTICS_ID = 'UA-111688253-4'
-export const OPENSEA_URL = "https://opensea.io"
+export const OPENSEA_URL = "https://testnets.opensea.io"
+export const OPENSEA_API = "https://rinkeby-api.opensea.io/api/v1"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
 export const GITHUB_URL = "https://github.com/ProjectOpenSea/ships-log"
 export const DEFAULT_DECIMALS = 18
+export const NETWORK = Network.Rinkeby
 export let web3Provider = typeof web3 !== 'undefined'
   ? window.web3.currentProvider
   : new Web3.providers.HttpProvider('https://rinkeby.infura.io')

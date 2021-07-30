@@ -30,7 +30,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                 fontSize={{ base: `14px`, xl: `24px` }}
                 zIndex={3000}
                 transform={`rotate(${showMenu ? "90deg" : 0})`}
-                sx={{ "&:active, &:hover, &:focus, &[data-hover]": { backgroundColor: showMenu ? "#fff" : "#fc79b2" } }}
+                sx={{ "&:active, &:hover, &:focus, &[dataHover]": { backgroundColor: showMenu ? "#fff" : "#fc79b2" } }}
                 display={{ base: "block", lg: toggler ? "block" : "none" }}
                 pointerEvents="auto"
             />

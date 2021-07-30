@@ -15,7 +15,7 @@ import { SceneBuilding } from '../../components/scene/Scene.building';
 import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
 import { NoticeBanner } from '../../components/shared/NoticeBanner';
-
+//
 import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/icons';
 import 'simplebar/dist/simplebar.css';
 import { isJSDocAugmentsTag } from "typescript";
@@ -23,7 +23,10 @@ import { AssetMeta } from "../../components/detail/AssetMeta";
 import { OpenSeaAsset } from "opensea-js/lib/types";
 import { connectWallet } from "../../constants";
 import ConnectWallet from "../../components/detail/ConnectWallet";
-
+import { OpenseaToolbar } from "../../components/detail/OpenseaToolbar";
+import { OpenseaModal } from "../../components/shared/OpenseaModal";
+import { NETWORK, OPENSEA_URL } from "../../constants";
+//
 
 declare const window: any;
 export let getAsset: any;
@@ -43,8 +46,6 @@ export interface AssetDetailsInterface {
     external_link: string;
 }
 
-export const openseaRootUrl = "https://opensea.io";
-
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
@@ -55,6 +56,8 @@ export function AssetDetails() {
     const [price, setPrice] = useState(0);
     const [creatingOrder, setCreatingOrder] = useState(false);
     const [userAccount, setUserAccount] = useState();
+    const [bidding, setBidding] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const router = useRouter();
     const {
         query: { id, tokenId },
@@ -68,6 +71,8 @@ export function AssetDetails() {
         !accounts && console.log("Getting accounts...");
 
         setUserAccount(accounts[0]);
+        console.log('useraccount: ', userAccount);
+
     }
 
     interface BuyActionProps {
@@ -75,45 +80,11 @@ export function AssetDetails() {
         tokenId: string;
     }
 
-    const bidAction = async (id: string, tokenId: any) => {
-        if (typeof window.ethereum !== 'undefined') {
-            console.log(window.ethereum);
-
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            console.log("Accounts: ", accounts);
-            if (!accounts[0]) {
-                await connectWallet();
-            }
-
-            const offerPrice = price ? price + 0.01 : 0.055;
-
-            const ethWrap = await seaport.wrapEth({
-                amountInEth: offerPrice,
-                accountAddress: accounts[0],
-            });
-
-            !ethWrap && setCreatingOrder(true);
-            ethWrap && console.log("eth wrap: ", ethWrap);
-
-            setCreatingOrder(false);
-
-            const offer = await seaport.createBuyOrder({
-                asset: {
-                    tokenId: (tokenId?.toString()),
-                    tokenAddress: id,
-                    schemaName: "ERC1155",
-                },
-                accountAddress: accounts[0],
-                startAmount: offerPrice,
-            });
-            !offer && setCreatingOrder(true);
-
-            //  }
-            console.log("offer: ", offer);
-            offer && setCreatingOrder(false);
-            // debugger;
-        }
+    const onClickBidModal = () => {
+        setBidding(true);
+        setModalOpen(true);
     }
+
 
     // const placeBid = async (props: any) => {
     //     const { order, accountAddress } = props;
@@ -126,7 +97,7 @@ export function AssetDetails() {
 
     useEffect(() => {
         (async () => {
-            seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Rinkeby })
+            seaport = new OpenSeaPort(window.ethereum, { networkName: NETWORK })
             console.log("seaport: ", seaport);
             const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
             assetState && setOsAsset(assetState);
@@ -135,20 +106,23 @@ export function AssetDetails() {
 
 
             if (osAsset.sellOrders && osAsset.sellOrders.length > 0) {
-                let price = 9999;
+                // let price = number | null;
+                console.log("Sell orders true");
 
                 for (let i = 0; i < osAsset.sellOrders.length; i++) {
                     const order = osAsset.sellOrders[0];
                     const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
 
                     if (basePrice < price) {
-                        price = basePrice;
+                        setPrice(basePrice);
                     }
                 }
                 setPrice(price);
             }
 
             if (osAsset.buyOrders && osAsset.buyOrders.length > 0) {
+                console.log("Buy orders");
+
                 const buyOrder: any = osAsset.buyOrders[0];
                 // const buyOrder = osAsset.buyOrders[0];
                 const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
@@ -159,7 +133,7 @@ export function AssetDetails() {
             osAsset && setLoading(false);
         })();
 
-    }, [id, tokenId, accounts, provider]);
+    }, [price, id, tokenId, accounts, provider]);
 
     return (
         <Box
@@ -237,7 +211,7 @@ export function AssetDetails() {
                         </Box>
 
                         <Box
-                                // position="relative"
+
                             width={{ base: "100%", smd: "80%", lg: "100%" }}
                                 margin="0"
                                 height={{
@@ -248,35 +222,8 @@ export function AssetDetails() {
                                 overflowY="auto"
                             z={0}
                             >
-                                <Box position="sticky" top={0} d="flex" justifyContent="center" minW="100%" mb={3} sx={{
-                                    "a > svg": {
-                                        opacity: 0.5,
-                                        transition: "opacity 0.2s ease-in-out"
-                                    },
-                                    "a:hover": {
-                                        ">svg": {
-                                            opacity: 1,
-                                        }
-                                    }
-                                }}>
-                                    <ButtonGroup isAttached sx={{
-                                        backgroundColor: "white",
-                                        boxShadow: "0 0 4px rgba(0,0,0,0.3)",
-                                        overflow: "hidden",
-                                        minW: "100%",
-                                        justifyContent: "center"
-                                    }}>
-                                        <NextLink href={osAsset?.openseaLink} passHref>
-                                            <Link variant="cta-small" isExternal>Bid on it! <ExternalLinkIcon mx="2px" /></Link>
-                                        </NextLink>
-                                        <NextLink href={`${openseaRootUrl}/collection/ntfa`} passHref>
-                                            <Link variant="cta-small" isExternal>OpenSea Collection <ExternalLinkIcon mx="2px" /></Link>
-                                        </NextLink>
-                                        <NextLink href={osAsset.externalLink} passHref>
-                                            <Link variant="cta-small" isExternal>Mattereum Passport <ExternalLinkIcon mx="2px" /></Link>
-                                        </NextLink>
-                                    </ButtonGroup>
-                                </Box>
+                                <OpenseaToolbar assetOSUrl={osAsset?.openseaLink} osUrl={OPENSEA_URL} passport={osAsset?.externalLink} />
+
                                 <Box p={{ base: "15px", smd: "10px", lg: "5px 25px 25px" }} d="flex" flexFlow="column wrap">
                                     <Box className="back-link" position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
                                         <NextLink href={`/#section1`} passHref>
@@ -305,9 +252,10 @@ export function AssetDetails() {
                                             }
                                         }}>
                                             <h3>Get your hands on the {osAsset.name}</h3>
-                                            <Box>
-                                                <ConnectWallet userWallet={setUserAccount} />
-
+                                            <Box d="flex" flexFlow="row nowrap">
+                                                <Box flex="0 0 25%">
+                                                    <ConnectWallet setUserAccount={setUserAccount} userAccount={userAccount} />
+                                                </Box>
                                                 {userAccount && osAsset && (
                                                     <>
                                                         <Box as="div">
@@ -326,7 +274,7 @@ export function AssetDetails() {
                                                             width="100%"
                                                         >
                                                             {/* <Button width="120px" pt="5px" colorScheme="purple" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button> */}
-                                                            <Button width="120px" pt="5px" colorScheme="green" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BID</Button>
+                                                            <Button width="120px" pt="5px" variant="cta" onClick={() => onClickBidModal()}>{bidding ? `Bid in progress` : `BID`}</Button>
                                                         </ButtonGroup>
                                                     </>
                                                 )}
@@ -475,6 +423,7 @@ export function AssetDetails() {
             />
             <FooterComponent toggler />
             <NoticeBanner />
+            <OpenseaModal setModalOpen={setModalOpen} modalOpen={modalOpen} setBidding={setBidding} bidding={bidding} asset={osAsset} seaport={seaport} userAccount={userAccount} />
         </Box>
     );
 }

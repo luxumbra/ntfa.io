@@ -1,5 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
+import { NETWORK } from "../../constants";
+
 export interface NoticeBannerInterface {
   children?: React.ReactElement;
   sx?: any;
@@ -51,7 +53,7 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
         d="flex"
         alignItems="center"
         justifyContent="center"
-        backgroundColor={color ? color : "brand.300"}
+        backgroundColor={NETWORK !== "main" ? "brand.200" : (color ? color : "brand.300")}
         backdropFilter="blur(7px)"
         boxShadow="2px 0 5px 3px rgba(0, 0, 0, 0.6)"
         width="100%"
@@ -82,7 +84,7 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
               {children}
             </>
           ) : (
-              <Text>🎉 We're on Mainnet!! 🎉</Text>
+              <Text>{NETWORK !== "main" ? `⚔️ Dev on ${NETWORK}!! ⚔️` : `🎉 We're on Mainnet!! 🎉`}</Text>
           )}
         </Box>
       </Box>

@@ -41,7 +41,8 @@ const clearWalletConnect = (): void => {
 };
 
 export type ConnectWalletProps = {
-  userWallet: any;
+  setUserAccount: any;
+  userAccount: any;
 }
 
 export type ConnectWalletContextType = {
@@ -62,7 +63,7 @@ export const ConnectWalletContext = createContext<ConnectWalletContextType>({
   address: null,
 });
 
-export default function ConnectWallet({ userWallet }: ConnectWalletProps) {
+export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWalletProps) {
   const [provider, setProvider] = useState<providers.Web3Provider | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
@@ -76,9 +77,11 @@ export default function ConnectWallet({ userWallet }: ConnectWalletProps) {
     clearWalletConnect();
     setAddress(null);
     setProvider(null);
+    setUserAccount(null)
     setIsConnecting(false);
     setIsConnected(false);
   }, []);
+
 
   const onClickConnect = useCallback(async () => {
     if (web3Modal === false) return;
@@ -86,12 +89,14 @@ export default function ConnectWallet({ userWallet }: ConnectWalletProps) {
 
     try {
       const web3Provider = await web3Modal.connect();
-      const ethersProvider = new providers.Web3Provider(web3Provider);
+      const ethersProvider = new ethers.providers.Web3Provider(web3Provider);
 
       const ethAddress = await ethersProvider.getSigner().getAddress();
 
       setAddress(ethAddress);
       setProvider(ethersProvider);
+      ethAddress && setUserAccount(ethAddress);
+      // ethAddress && console.info(web3Provider, ethersProvider, ethAddress);
       setIsConnecting(false);
       setIsConnected(true);
     } catch (error) {
@@ -99,8 +104,9 @@ export default function ConnectWallet({ userWallet }: ConnectWalletProps) {
       setIsConnecting(false);
       onClickDisconnect();
     }
+
     return false;
-  }, [onClickDisconnect]);
+  }, [onClickDisconnect, setUserAccount]);
 
 
 

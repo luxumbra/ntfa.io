@@ -102,10 +102,10 @@ export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWa
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       setIsConnecting(false);
+      setIsConnected(false);
       onClickDisconnect();
     }
 
-    return false;
   }, [onClickDisconnect, setUserAccount]);
 
 

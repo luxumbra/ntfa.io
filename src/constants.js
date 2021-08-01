@@ -5,6 +5,7 @@ import { OpenSeaPort, Network } from "opensea-js";
 //
 
 export const GOOGLE_ANALYTICS_ID = 'UA-111688253-4'
+export const OPENSEA_API_KEY = "6f3c486638da4a48bcc2e2e8c89baab9"
 export const OPENSEA_URL = "https://testnets.opensea.io"
 export const OPENSEA_API = "https://rinkeby-api.opensea.io/api/v1"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"

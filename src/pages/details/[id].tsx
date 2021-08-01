@@ -7,7 +7,6 @@ import { OpenSeaPort, Network } from "opensea-js";
 import axios from "axios";
 import NextLink from 'next/link';
 import ReactMarkdown from "react-markdown";
-import SimpleBar from 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 //
 import { MetadataComponent } from "../../components/shared/Metadata";
 import { SceneBridge } from '../../components/scene/Scene.bridge';
@@ -17,7 +16,6 @@ import { Loading } from '../../components/shared/Loading';
 import { NoticeBanner } from '../../components/shared/NoticeBanner';
 //
 import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/icons';
-import 'simplebar/dist/simplebar.css';
 import { isJSDocAugmentsTag } from "typescript";
 import { AssetMeta } from "../../components/detail/AssetMeta";
 import { OpenSeaAsset } from "opensea-js/lib/types";
@@ -29,12 +27,15 @@ import { NETWORK, OPENSEA_URL } from "../../constants";
 //
 
 declare const window: any;
-export let getAsset: any;
 export let seaport: any;
 export let provider: any;
 export let web3: any;
 export let accounts: any;
 
+export interface BuyActionProps {
+    id: string;
+    tokenId: string;
+}
 
 export interface AssetDetailsInterface {
     name: string;
@@ -46,13 +47,51 @@ export interface AssetDetailsInterface {
     external_link: string;
 }
 
+export const fetchAsset = async (id: any, tokenId: any) => {
+    let price = 0;
+    let assetState: OpenSeaAsset;
+    try {
+        assetState = await seaport.api.getAsset({ tokenAddress: id, tokenId });
+        if (assetState.sellOrders && assetState.sellOrders.length > 0) {
+            // let price = number | null;
+            console.log("Sell orders true");
+
+            for (let i = 0; i < assetState.sellOrders.length; i++) {
+                const order = assetState.sellOrders[0];
+                const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
+
+                if (basePrice < price) {
+                    price = price;
+                } else {
+                    price = basePrice;
+                }
+            }
+
+        }
+
+        if (assetState.buyOrders && assetState.buyOrders.length > 0) {
+            console.log("Buy orders");
+
+            const buyOrder: any = assetState.buyOrders[0];
+            // const buyOrder = osAsset.buyOrders[0];
+            const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
+            price = currentPrice
+        }
+        return { price, assetState };
+    } catch (error) {
+        console.log("OS Error: ", error);
+        // router.push(current, '/404', { shallow: true });
+        // setLoading(false);
+        return null;
+    }
+}
+
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
     const [loading, setLoading] = useState(true);
-    // const [asset, setAsset] = useState({} as AssetDetailsInterface);
-    const [osAsset, setOsAsset] = useState({} as OpenSeaAsset);
+    const [osAsset, setOsAsset] = useState<any | undefined>();
     const [price, setPrice] = useState(0);
     const [creatingOrder, setCreatingOrder] = useState(false);
     const [userAccount, setUserAccount] = useState();
@@ -63,7 +102,24 @@ export function AssetDetails() {
         query: { id, tokenId },
     } = router;
 
+    console.log("router: ", router);
 
+    useEffect(() => {
+
+        seaport = new OpenSeaPort(window.ethereum, {
+            networkName: NETWORK,
+            apiKey: "6f3c486638da4a48bcc2e2e8c89baab9",
+        });
+        const asset = fetchAsset(id, tokenId);
+        asset.then(data => {
+            console.log("ASSET: ", data);
+            return data && (setOsAsset(data.assetState), setPrice(data.price), setLoading(false));
+        }).catch(error => {
+            console.log("assetError: ", error);
+
+        });
+
+    }, [seaport, id, tokenId]);
 
     // set the current users account address so we can check it against the highest bidder address
     const getSetUserAccount = async () => {
@@ -75,65 +131,12 @@ export function AssetDetails() {
 
     }
 
-    interface BuyActionProps {
-        id: string;
-        tokenId: string;
-    }
+
 
     const onClickBidModal = () => {
         setBidding(true);
         setModalOpen(true);
     }
-
-
-    // const placeBid = async (props: any) => {
-    //     const { order, accountAddress } = props;
-    //     const provider = await web3Modal.connect();
-    //     if (!accountAddress) {
-    //         provider.on()
-    //     }
-    // }
-
-
-    useEffect(() => {
-        (async () => {
-            seaport = new OpenSeaPort(window.ethereum, { networkName: NETWORK })
-            console.log("seaport: ", seaport);
-            const assetState: OpenSeaAsset = await seaport.api.getAsset({ tokenAddress: id, tokenId })
-            assetState && setOsAsset(assetState);
-            assetState && console.log("Assetstate: ", assetState);
-            // debugger;
-
-
-            if (osAsset.sellOrders && osAsset.sellOrders.length > 0) {
-                // let price = number | null;
-                console.log("Sell orders true");
-
-                for (let i = 0; i < osAsset.sellOrders.length; i++) {
-                    const order = osAsset.sellOrders[0];
-                    const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
-
-                    if (basePrice < price) {
-                        setPrice(basePrice);
-                    }
-                }
-                setPrice(price);
-            }
-
-            if (osAsset.buyOrders && osAsset.buyOrders.length > 0) {
-                console.log("Buy orders");
-
-                const buyOrder: any = osAsset.buyOrders[0];
-                // const buyOrder = osAsset.buyOrders[0];
-                const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
-                typeof currentPrice !== "undefined" && setPrice(currentPrice);
-            }
-
-
-            osAsset && setLoading(false);
-        })();
-
-    }, [price, id, tokenId, accounts, provider]);
 
     return (
         <Box
@@ -252,14 +255,21 @@ export function AssetDetails() {
                                             }
                                         }}>
                                             <h3>Get your hands on the {osAsset.name}</h3>
-                                            <Box d="flex" flexFlow="row nowrap">
-                                                <Box flex="0 0 25%">
+                                            <Box d="flex" flexFlow="row-reverse nowrap" alignItems="center">
+                                                <Box flex="0 0 25%" transform="translateY(-25%)">
                                                     <ConnectWallet setUserAccount={setUserAccount} userAccount={userAccount} />
                                                 </Box>
                                                 {userAccount && osAsset && (
                                                     <>
-                                                        <Box as="div">
-                                                            {`Highest bid: ${price.toFixed(4)} ETH`}
+                                                        <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" sx={{
+                                                            "span": {
+                                                                fontSize: { base: "17px", xxl: "18px" }
+                                                            },
+                                                            "strong": {
+                                                                fontSize: { base: "22px", xxl: "25px" }
+                                                            }
+                                                        }}>
+                                                            <span>{`Current bid:`}</span><strong>{`Ξ${price?.toFixed(2)} ETH`}</strong>
                                                         </Box>
                                                         {/* <Box as="span" sx={{
                                                             fontSize: "10px"
@@ -269,12 +279,13 @@ export function AssetDetails() {
                                                         {creatingOrder && <Box>Processing ... please wait</Box>}
                                                         <ButtonGroup
                                                             size="sm"
+                                                            flex="0 0 25%"
                                                             alignItems="center"
                                                             justifyContent="center"
                                                             width="100%"
                                                         >
                                                             {/* <Button width="120px" pt="5px" colorScheme="purple" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button> */}
-                                                            <Button width="120px" pt="5px" variant="cta" onClick={() => onClickBidModal()}>{bidding ? `Bid in progress` : `BID`}</Button>
+                                                            <Button isLoading={bidding} loadingText="Bid in progress..." width="auto" pt="5px" variant="cta" onClick={() => onClickBidModal()}>{`BID`}</Button>
                                                         </ButtonGroup>
                                                     </>
                                                 )}
@@ -429,3 +440,13 @@ export function AssetDetails() {
 }
 
 export default AssetDetails;
+
+
+// export async function getStaticProps() {
+//     const osApiKey = process.env.NEXT_PUBLIC_OPENSEA_API_KEY;
+//     return {
+//         props: {
+//             osApiKey
+//         }
+//     }
+// }

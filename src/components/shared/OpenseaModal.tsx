@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -19,57 +19,57 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { OpenSeaPort, Network } from "opensea-js";
 import { OpenSeaAsset } from "opensea-js/lib/types";
 import { utils } from "ethers";
-import { NETWORK, connectWallet, toBaseUnitAmount, toUnitAmount } from "../../constants";
+import { NETWORK, OPENSEA_API_KEY, toUnitAmount, toBaseUnitAmount } from "../../constants";
 import { stringify } from 'querystring';
+
+export let seaport: any;
+export let provider: any;
+export let web3: any;
+export let accounts: any;
 
 export type OpenseaModalType = {
   setModalOpen: any;
   modalOpen: boolean;
   setBidding: any;
   bidding: boolean;
-  asset: any | undefined;
+  asset: any;
   seaport: any;
   userAccount: string | undefined;
 }
 
-export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, asset, seaport, userAccount }: OpenseaModalType) {
-  const [price, setPrice] = useState(0);
-  const [creatingOrder, setCreatingOrder] = useState(false);
-  const [processingOrder, setProcessingOrder] = useState(false);
-  const [yourBid, setYourBid] = useState<any>();
-  const [isEnded, setIsEnded] = useState(false);
-  const [yourOffer, setYourOffer] = useState<any | undefined>();
-  // const [asset, setasset] = useState<any | undefined>();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export const placeBid = async (ethAmount: any, tokenId: any, id: any, userAccount: any) => {
+  let creatingOrder: boolean = false;
+  let processingOrder: boolean = false;
+  let isError: boolean = false;
+  let yourOffer: any | null;
 
-  console.log("Asssset: ", asset);
-  // asset && setasset(asset);
-  // const startAuction = (tokenUri) => {
-  //   return async () => {
-  //     // setAuctionToken(tokenUri);
-  //     // setModalVisible(true);
-  //   }
-  // }
+  try {
+    // setIsError(false);
+    console.log("fhjdfhkskd", seaport);
 
-  const placeBid = async (ethAmount, tokenId, id) => {
-
-    setCreatingOrder(true);
+    !seaport && false;
+    creatingOrder = true;
     const ethWrap = await seaport.wrapEth({
       amountInEth: ethAmount,
       accountAddress: userAccount,
     });
 
-    ethWrap && setProcessingOrder(true);
+    if (ethWrap) {
+      processingOrder = true;
+      creatingOrder = false;
+    }
     ethWrap && console.log("eth wrap: ", ethWrap);
 
-    // setCreatingOrder(true);
+      // setCreatingOrder(true);
+
+    console.log("order: ", ethAmount, tokenId, id);
 
 
     const offer = await seaport.createBuyOrder({
       asset: {
         tokenId: (tokenId?.toString()),
         tokenAddress: id,
-        schemaName: "ERC721",
+        schemaName: "ERC1155",
       },
       accountAddress: userAccount,
       startAmount: ethAmount,
@@ -77,33 +77,57 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
 
     //  }
     offer && console.log("offer: ", offer);
-    offer && setYourOffer(offer);
-    offer && setProcessingOrder(false);
-    offer && setCreatingOrder(false);
-
-    // debugger;
-
-  }
-
-  const completeAuction = (tokenUri) => {
-    return async () => {
-      // const tokenId = await readContracts.YourCollectible.uriToTokenId(utils.id(tokenUri));
-      // const nftAddress = readContracts.YourCollectible.address;
-      // await tx(writeContracts.Auction.executeSale(nftAddress, tokenId));
-      // updateYourCollectibles();
+    if (offer) {
+      yourOffer = offer;
+      processingOrder = false;
+      creatingOrder = false;
     }
+    return { yourOffer, creatingOrder, processingOrder };
+  } catch (error) {
+    console.log("placeBid() error: ", error);
+    isError = true;
+    return [isError, error];
   }
 
-  const cancelAuction = (tokenUri) => {
-    return async () => {
-      // const tokenId = await readContracts.YourCollectible.uriToTokenId(utils.id(tokenUri));
-      // const nftAddress = readContracts.YourCollectible.address;
-      // await tx(writeContracts.Auction.cancelAution(nftAddress, tokenId));
-      // updateYourCollectibles();
-    }
-  }
+}
+
+export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, asset, seaport, userAccount }: OpenseaModalType) {
+  const [isError, setIsError] = useState<any | undefined>();
+  const [price, setPrice] = useState(0);
+  const [creatingOrder, setCreatingOrder] = useState(false);
+  const [processingOrder, setProcessingOrder] = useState(false);
+  const [yourBid, setYourBid] = useState<any>();
+  const [isEnded, setIsEnded] = useState(false);
+  const [yourOffer, setYourOffer] = useState<any | undefined>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
 
+  asset !== "undefined" ? console.log("🙌 data : ", asset) : console.log("😥 data lost...");
+
+  seaport = seaport;
+
+
+  const buyOrder = asset?.buyOrders && asset.buyOrders[0];
+  buyOrder && setPrice((buyOrder.currentPrice.toNumber() / Math.pow(10, 18)));
+
+
+
+  // const completeAuction = (tokenUri) => {
+  //   return async () => {
+  //   }
+  // }
+
+  // const cancelAuction = (tokenUri) => {
+  //   return async () => {
+  //   }
+  // }
+
+  // const setTheState = async (stuff) => {
+  //   console.log("set the state: ", stuff.tokenId);
+  //   const theAsset = fetchAsset(stuff.tokenAddress, stuff.tokenId)
+  //   theAsset ? console.log("🎉 theAsset: ", theAsset) : console.log("😥 theAsset data lost...")
+  //   theAsset && setAssetState(theAsset)
+  // }
 
 
 
@@ -126,51 +150,61 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
           }} />
 
         <ModalBody d="flex" justifyItems="center" alignContent="flex-start" p={{ base: "15px", lg: "25px", xl: "50px" }} sx={{
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "'Hero', sans-serif",
           textTransform: "uppercase",
-          "p > em": {
-            color: "red",
-            fontStyle: "normal"
-          }
+          textAlign: "center",
         }}>
           <Box d="flex" flexFlow="column wrap" alignItems="center" flex="0 0 100%" sx={{
             "h3": {
               d: "inline-flex",
               flexFlow: "column wrap",
               textAlign: "center",
-              lineHeight: { base: "14px", xxl: "18px" },
+              lineHeight: { base: "14px", xxl: "28px" },
               "strong": {
                 display: "block",
                 textAlign: "center",
-                fontSize: { base: "14px", xxl: "25px" },
+                fontSize: { base: "14px", xxl: "28px" },
                 fontWeight: "900",
               },
               "span": {
                 fontWeight: "100",
+                fontSize: { base: "14px", xxl: "32px" },
               }
-            }
+            },
+            "ul li": {
+              fontSize: { base: "16px", xxl: "25px" }
+            },
+            "p": {
+              fontSize: { base: "16px", xxl: "25px" }
+            },
+            backdropFilter: "blur(0)"
           }}>
+            <p style={{ fontWeight: "bold" }}>{!isEnded ? `Auction is in progress` : `Auction has finished`}</p>
             <h3><strong>Bidding on</strong> <span>{asset?.name}</span></h3>
             {asset?.buyOrders && (
-              <ul>
-                <li>{(asset.buyOrders[0].currentPrice.toNumber() / Math.pow(10, 18))}</li>
+              <>
+                <ul>
+                  {asset.buyOrders.length > 0 && asset.buyOrders.map((order: any) => {
+                    <li>{toUnitAmount(order.currentPrice)}</li>
+                  })}
               </ul>
+              </>
             )}
-            {/* {creatingOrder && (
+            {creatingOrder && (
               <p>Creating order</p>
             )}
             {creatingOrder && processingOrder && (
               <p>Processing order...</p>
             )}
+            {isError && (
+              <p>Error in transaction. Try again</p>
+            )}
             {yourOffer && (
               <p>Your bid: {(yourOffer?.currentPrice.toNumber() / Math.pow(10, 18))}</p>
-            )} */}
+            )}
             {/* auctionDetails.push(auctionInfo.isActive ? ( */}
             <Box sx={{ marginTop: "20px" }}>
-              <p style={{ fontWeight: "bold" }}>Auction is in progress</p>
-              {/* {asset && (
-                <p style={{ margin: 0, marginBottom: "2px" }}>Current price is {(asset.buyOrders[0].currentPrice.toNumber() / Math.pow(10, 18))}Ξ </p>
-              )} */}
+              <p style={{ margin: 0, marginBottom: "2px" }}>{!price ? "You're the first to bid!" : `Current price: Ξ${(buyOrder?.currentPrice.toNumber() / Math.pow(10, 18))}`}</p>
               {/* <p style={{ marginTop: 0 }}>{!isEnded ? `Auction ends at ${format(deadline, "MMMM dd, hh:mm:ss")}` : 'Auction has already ended'}</p> */}
               {/* <div>
                 {auctionInfo.maxBidUser === constants.AddressZero ? "Highest bid was not made yet" : <div>Highest bid by: <Address
@@ -180,18 +214,17 @@ export function OpenseaModal({ setModalOpen, modalOpen, setBidding, bidding, ass
                   minimized={true}
                 /><p>{utils.formatEther(auctionInfo.maxBid)} ETH</p></div>}
               </div> */}
-              {asset && (
+              {/* {data && (
                 <Box>
-                  <Box sx={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
-                    <h2>{asset.collection.name}</h2>
-                    <p style={{ margin: 0, marginRight: "15px" }}>Your bid in ETH: </p>
-                    {/* <NumberInput defaultValue={(asset.buyOrders[0].currentPrice.toNumber() / Math.pow(10, 18))} value={yourBid && yourBid[asset.tokenId]} onChange={newBid => setYourBid({ [asset.tokenId]: newBid })} style={{ flexGrow: 1 }}>
+                  <Box sx={{ display: "flex", flexFlow: "column wrap", alignItems: "center", marginTop: "20px" }}>
+                    <p style={{ margin: 0, marginRight: "15px" }}>Bid amount in ETH:</p>
+                    <NumberInput defaultValue={`Set your bid amount`} value={yourBid && yourBid[data.tokenId]} onChange={newBid => setYourBid({ [data.tokenId]: newBid })} style={{ flexGrow: 1 }}>
                       <NumberInputField />
-                    </NumberInput> */}
+                    </NumberInput>
                   </Box>
-                  {/* <Button style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid[asset.tokenId], asset.tokenId, asset.tokenAddress)} disabled={!yourBid[asset?.tokenId] || isEnded}>{creatingOrder ? `Placing bid...` : `Place a bid`}</Button> */}
+                  <Button isLoading={creatingOrder} loadingText={`Placing bid...`} style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid[data.tokenId], data.tokenId, data.tokenAddress, userAccount)} disabled={!yourBid || isEnded}>{!creatingOrder && `Make a bid`}</Button>
                 </Box>
-              )}
+              )} */}
             </Box>
             {/* ) : null); */}
           </Box>

@@ -24,7 +24,7 @@ export const ShowcaseFeaturedComponent: FC<ShowcaseFeaturedInterface> = ({ title
             seaport = new OpenSeaPort(window.ethereum, { networkName: Network.Main })
 
             const assetState = await seaport.api.getAsset({ tokenAddress: contract, tokenId });
-            console.log(assetState);
+            // console.log(assetState);
 
             if (assetState.sellOrders && assetState.sellOrders.length > 0) {
                 let price = 99999;

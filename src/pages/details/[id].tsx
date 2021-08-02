@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useRef, useCallback } from "react";
 import { Box, Heading, Link, Image, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
@@ -20,10 +20,12 @@ import { isJSDocAugmentsTag } from "typescript";
 import { AssetMeta } from "../../components/detail/AssetMeta";
 import { OpenSeaAsset } from "opensea-js/lib/types";
 import { connectWallet } from "../../constants";
-import ConnectWallet from "../../components/detail/ConnectWallet";
+import ConnectWalletProvider from "../../components/detail/ConnectWalletContext";
+import { ConnectButton } from "../../components/detail/ConnectButton";
 import { OpenseaToolbar } from "../../components/detail/OpenseaToolbar";
 import { OpenseaModal } from "../../components/shared/OpenseaModal";
 import { NETWORK, OPENSEA_URL } from "../../constants";
+import { fetchAsset, useWeb3 } from '../../lib/hooks';
 //
 
 declare const window: any;
@@ -31,6 +33,8 @@ export let seaport: any;
 export let provider: any;
 export let web3: any;
 export let accounts: any;
+export let ntfaAsset: OpenSeaAsset;
+export let currentBidding: number;
 
 export interface BuyActionProps {
     id: string;
@@ -47,45 +51,6 @@ export interface AssetDetailsInterface {
     external_link: string;
 }
 
-export const fetchAsset = async (id: any, tokenId: any) => {
-    let price = 0;
-    let assetState: OpenSeaAsset;
-    try {
-        assetState = await seaport.api.getAsset({ tokenAddress: id, tokenId });
-        if (assetState.sellOrders && assetState.sellOrders.length > 0) {
-            // let price = number | null;
-            console.log("Sell orders true");
-
-            for (let i = 0; i < assetState.sellOrders.length; i++) {
-                const order = assetState.sellOrders[0];
-                const basePrice = (order.basePrice.toNumber() / Math.pow(10, 18));
-
-                if (basePrice < price) {
-                    price = price;
-                } else {
-                    price = basePrice;
-                }
-            }
-
-        }
-
-        if (assetState.buyOrders && assetState.buyOrders.length > 0) {
-            console.log("Buy orders");
-
-            const buyOrder: any = assetState.buyOrders[0];
-            // const buyOrder = osAsset.buyOrders[0];
-            const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
-            price = currentPrice
-        }
-        return { price, assetState };
-    } catch (error) {
-        console.log("OS Error: ", error);
-        // router.push(current, '/404', { shallow: true });
-        // setLoading(false);
-        return null;
-    }
-}
-
 export function AssetDetails() {
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
@@ -94,9 +59,12 @@ export function AssetDetails() {
     const [osAsset, setOsAsset] = useState<any | undefined>();
     const [price, setPrice] = useState(0);
     const [creatingOrder, setCreatingOrder] = useState(false);
-    const [userAccount, setUserAccount] = useState();
-    const [bidding, setBidding] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
+    const {
+        onClickConnect,
+        onClickDisconnect,
+        isConnected,
+        isConnecting,
+    } = useWeb3();
     const router = useRouter();
     const {
         query: { id, tokenId },
@@ -104,41 +72,32 @@ export function AssetDetails() {
 
     console.log("router: ", router);
 
+    const loadAsset = useCallback(async () => {
+        if (osAsset) return
+        try {
+            const asset = await fetchAsset(id, tokenId);
+            asset && setOsAsset(asset?.assetState);
+            asset && setPrice(asset?.price);
+            asset && setLoading(false);
+            return asset
+        } catch (error) {
+            console.log("Asset error: ", error);
+            return error;
+        } finally {
+            console.log("i fetchted the asset.", osAsset);
+        }
+
+    }, [id, tokenId, seaport]);
+
     useEffect(() => {
+        loadAsset();
 
-        seaport = new OpenSeaPort(window.ethereum, {
-            networkName: NETWORK,
-            apiKey: "6f3c486638da4a48bcc2e2e8c89baab9",
-        });
-        const asset = fetchAsset(id, tokenId);
-        asset.then(data => {
-            console.log("ASSET: ", data);
-            return data && (setOsAsset(data.assetState), setPrice(data.price), setLoading(false));
-        }).catch(error => {
-            console.log("assetError: ", error);
-
-        });
-
-    }, [seaport, id, tokenId]);
-
+    }, [id, tokenId, loadAsset])
     // set the current users account address so we can check it against the highest bidder address
-    const getSetUserAccount = async () => {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        !!accounts && console.log("Getting accounts...");
 
-        setUserAccount(accounts[0]);
-        console.log('useraccount: ', userAccount);
-
-    }
-
-
-
-    const onClickBidModal = () => {
-        setBidding(true);
-        setModalOpen(true);
-    }
 
     return (
+        <ConnectWalletProvider>
         <Box
             position="relative"
             width="100vw"
@@ -257,9 +216,9 @@ export function AssetDetails() {
                                             <h3>Get your hands on the {osAsset.name}</h3>
                                             <Box d="flex" flexFlow="row-reverse nowrap" alignItems="center">
                                                 <Box flex="0 0 25%" transform="translateY(-25%)">
-                                                    <ConnectWallet setUserAccount={setUserAccount} userAccount={userAccount} />
+                                                        <ConnectButton />
                                                 </Box>
-                                                {userAccount && osAsset && (
+                                                    {osAsset && (
                                                     <>
                                                         <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" sx={{
                                                             "span": {
@@ -285,7 +244,7 @@ export function AssetDetails() {
                                                             width="100%"
                                                         >
                                                             {/* <Button width="120px" pt="5px" colorScheme="purple" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button> */}
-                                                            <Button isLoading={bidding} loadingText="Bid in progress..." width="auto" pt="5px" variant="cta" onClick={() => onClickBidModal()}>{`BID`}</Button>
+                                                                {/* <OpenseaModal asset={osAsset} seaport={seaport} /> */}
                                                         </ButtonGroup>
                                                     </>
                                                 )}
@@ -433,9 +392,9 @@ export function AssetDetails() {
                 pointerEvents="none"
             />
             <FooterComponent toggler />
-            <NoticeBanner />
-            <OpenseaModal setModalOpen={setModalOpen} modalOpen={modalOpen} setBidding={setBidding} bidding={bidding} asset={osAsset} seaport={seaport} userAccount={userAccount} />
+                <NoticeBanner />
         </Box>
+        </ConnectWalletProvider>
     );
 }
 

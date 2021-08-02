@@ -10,6 +10,7 @@ import Web3Modal from "web3modal";
 import { ethers, providers } from 'ethers';
 import { CONFIG } from "../../../config";
 import { get, remove, set } from '../../lib/store';
+import { clearWalletConnect } from '../../lib/auth';
 
 const walletconnectKey = 'walletconnect';
 const mobileLinkChoiceKey = 'WALLETCONNECT_DEEPLINK_CHOICE';
@@ -17,7 +18,27 @@ const injectedWalletKey = "WEB3_CONNECT_CACHED_PROVIDER";
 declare const window: any;
 export let provider: any;
 export let web3: any;
+export let onClickConnect: any;
+export let onClickDisconnect: any;
 export let accounts: any;
+export let user: any;
+
+export type ConnectWalletContextType = {
+  provider: providers.Web3Provider | null;
+  onClickConnect: () => Promise<void>;
+  onClickDisconnect: () => void;
+  isConnecting: boolean;
+  isConnected: boolean;
+  address: string | null;
+};
+export const ConnectWalletContext = createContext<ConnectWalletContextType>({
+  provider: null,
+  onClickConnect: async () => { },
+  onClickDisconnect: () => undefined,
+  isConnecting: false,
+  isConnected: false,
+  address: null,
+});
 
 const providerOptions = {
   walletconnect: {
@@ -35,35 +56,12 @@ const web3Modal =
     cacheProvider: true,
     providerOptions,
   });
-const clearWalletConnect = (): void => {
-  remove(walletconnectKey);
-  remove(mobileLinkChoiceKey);
-};
 
-export type ConnectWalletProps = {
-  setUserAccount: any;
-  userAccount: any;
+interface ConnectWalletProviderOptions {
+  children: React.ReactElement;
 }
 
-export type ConnectWalletContextType = {
-  provider: providers.Web3Provider | null;
-  connectWeb3: () => Promise<void>;
-  disconnect: () => void;
-  isConnecting: boolean;
-  isConnected: boolean;
-  address: string | null;
-};
-
-export const ConnectWalletContext = createContext<ConnectWalletContextType>({
-  provider: null,
-  connectWeb3: async () => { },
-  disconnect: () => undefined,
-  isConnecting: false,
-  isConnected: false,
-  address: null,
-});
-
-export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWalletProps) {
+export default function ConnectWalletProvider({ children }: ConnectWalletProviderOptions) {
   const [provider, setProvider] = useState<providers.Web3Provider | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
@@ -77,15 +75,18 @@ export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWa
     clearWalletConnect();
     setAddress(null);
     setProvider(null);
-    setUserAccount(null)
     setIsConnecting(false);
     setIsConnected(false);
+    console.log("Web3 disconnected...");
+
   }, []);
+
 
 
   const onClickConnect = useCallback(async () => {
     if (web3Modal === false) return;
     setIsConnecting(true);
+    console.log("Web3 Connecting...");
 
     try {
       const web3Provider = await web3Modal.connect();
@@ -95,8 +96,7 @@ export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWa
 
       setAddress(ethAddress);
       setProvider(ethersProvider);
-      ethAddress && setUserAccount(ethAddress);
-      // ethAddress && console.info(web3Provider, ethersProvider, ethAddress);
+      ethAddress && console.info("Web3 set: ", web3Provider, ethersProvider, ethAddress);
       setIsConnecting(false);
       setIsConnected(true);
     } catch (error) {
@@ -106,7 +106,7 @@ export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWa
       onClickDisconnect();
     }
 
-  }, [onClickDisconnect, setUserAccount]);
+  }, [onClickDisconnect]);
 
 
 
@@ -121,21 +121,16 @@ export default function ConnectWallet({ setUserAccount, userAccount }: ConnectWa
   }, [onClickConnect]);
 
   return (
-    <>
-      {isConnected ? (
-        <>
-          <Box fontSize={{ base: "10px" }} mb={3}>
-            {/* {`${address} connected.`} */}
-          </Box>
-          <Button variant="cta" onClick={() => onClickDisconnect()}>Disconnect</Button>
-        </>
-      ) : (
-        <ButtonGroup>
-            <Button isLoading={isConnecting} loadingText={`Connecting...`} variant="cta" onClick={() => onClickConnect()}>
-              {!isConnected && !isConnecting && `Connect`}
-          </Button>
-        </ButtonGroup >
-      )}
-    </>
+    <ConnectWalletContext.Provider
+      value={{
+        provider,
+        onClickConnect,
+        onClickDisconnect,
+        isConnected,
+        isConnecting,
+        address,
+      }}>
+      {children}
+    </ConnectWalletContext.Provider>
   );
 }

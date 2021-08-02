@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import { Box, Link, Image, HStack, VStack, UnorderedList, ListItem, Button, IconButton, Heading } from "@chakra-ui/react";
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { css, jsx } from "@emotion/react";
@@ -13,7 +13,14 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
     const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear())
     const [reveal, setReveal] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
-    console.log(toggler);
+    const calledOnce = useRef<boolean>(false);
+    console.log("TOGGLER: ", toggler);
+
+    useEffect(() => {
+        if (calledOnce.current) return;
+        calledOnce.current = true;
+    }, [])
+
 
     return (
         <Box position={"fixed"} bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={1000} pointerEvents={{ base: showMenu ? "auto" : "none", lg: toggler ? (showMenu ? "auto" : "none") : "auto" }}>
@@ -44,13 +51,13 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                 backgroundColor={reveal ? "white" : "brand.300"}
                 boxShadow="0 0 2px rgba(0,0,0,0.5)"
                 justifyItems="center"
-                pos={{base: "absolute", lg: "relative"}}
+                pos={{ base: "absolute", lg: "relative" }}
                 // top={{ base: showMenu ? "0" : "-200vh", smd: showMenu ? "-76vh" : "-200vh", lg: 0 }}
                 bottom={0}
                 transform={{ base: showMenu ? "translateY(0)" : "translateY(200%)" }}
                 overflow="hidden"
                 alignContent={{ base: "center", xl: "flex-start" }}
-                h={{base: "100vh", lg: "100%"}}
+                h={{ base: "100vh", lg: "100%" }}
                 maxH={{ base: "125px", lg: "300px", xl: "200px" }}
                 width="100%"
                 maxW="768px"
@@ -64,7 +71,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
             >
                 <HStack
                     spacing={{ base: "20px", lg: "30px" }}
-                    maxH={{base: "20px", lg: "50px"}}
+                    maxH={{ base: "20px", lg: "50px" }}
                     sx={{
                         "a": { color: "white", fontFamily: "Hero", fontSize: { base: "10px", xl: "18px", xxxl: "25px" }, textTransform: "uppercase", fontWeight: "900", py: { base: 0, xl: 2 } }, mx: "auto"
                     }}>
@@ -83,7 +90,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                     }}>Mattereum</Button>
                 </HStack>
                 <HStack
-                    spacing={{base: "10px", lg: "30px"}}
+                    spacing={{ base: "10px", lg: "30px" }}
                     sx={{
                         "a": {
                             color: "white",
@@ -129,9 +136,9 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
                     `}>
                     <Box d="inline-flex" fontSize={{ base: "10px", lg: "12px" }} alignItems="center">Site from the <span className="heart">💛</span> of <Link href="https://twitter.com/DefiantPixel" d="inline-flex" alignItems="center" isExternal><Image src="/assets/dps-logo.png" alt="Defiant Pixel Society logo" width="20px" height="20px" sx={{ ml: "5px", borderRadius: "100%" }} /></Link></Box>
                 </HStack>
-                <VStack spacing={{base: 1, lg: 3}} color="white" fontSize={{ base: "9px", lg: "12px" }} sx={{ "p": { fontSize: { base: "9px", lg: "12px" }, margin: 0 } }}>
+                <VStack spacing={{ base: 1, lg: 3 }} color="white" fontSize={{ base: "9px", lg: "12px" }} sx={{ "p": { fontSize: { base: "9px", lg: "12px" }, margin: 0 } }}>
                     <p>Copyright {currentYear} NTFA Limited. All rights reserved. NTFA Limited is a company registered in Hong Kong (Company No. 3048511)</p>
-                    <UnorderedList sx={{ display: "inline-flex", listStyle: "none", m: 0, "li": { fontSize: {base: "9px", lg: "12px"}, mx: 3 } }}>
+                    <UnorderedList sx={{ display: "inline-flex", listStyle: "none", m: 0, "li": { fontSize: { base: "9px", lg: "12px" }, mx: 3 } }}>
                         <ListItem>Contact: <Link href="mailto:gold@ntfa.io" variant="footer">gold@ntfa.io</Link></ListItem>
                         <ListItem>Report: <Link href="mailto:support@ntfa.io" variant="footer">support@ntfa.io</Link></ListItem>
                     </UnorderedList>
@@ -200,5 +207,5 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
             </Box>
 
         </Box>
-    )
+    );
 }

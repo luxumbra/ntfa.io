@@ -1,9 +1,9 @@
-import React, { FC, useState, useEffect, useRef, useCallback } from "react";
+import React, { FC, useState, useEffect, useRef, useCallback, useContext } from "react";
 import { Box, Heading, Link, Image, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { css, jsx } from "@emotion/react";
-import { OpenSeaPort, Network } from "opensea-js";
+import { OpenSeaPort, Network, EventType } from "opensea-js";
 import axios from "axios";
 import NextLink from 'next/link';
 import ReactMarkdown from "react-markdown";
@@ -15,17 +15,14 @@ import { FooterComponent } from "../../components/shared/Footer";
 import { Loading } from '../../components/shared/Loading';
 import { NoticeBanner } from '../../components/shared/NoticeBanner';
 //
-import { ExternalLinkIcon, ChevronLeftIcon, ArrowBackIcon } from '@chakra-ui/icons';
-import { isJSDocAugmentsTag } from "typescript";
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import { AssetMeta } from "../../components/detail/AssetMeta";
 import { OpenSeaAsset } from "opensea-js/lib/types";
-import { connectWallet } from "../../constants";
-import ConnectWalletProvider from "../../components/detail/ConnectWalletContext";
 import { ConnectButton } from "../../components/detail/ConnectButton";
 import { OpenseaToolbar } from "../../components/detail/OpenseaToolbar";
 import { OpenseaModal } from "../../components/shared/OpenseaModal";
 import { NETWORK, OPENSEA_URL } from "../../constants";
-import { fetchAsset, useWeb3 } from '../../lib/hooks';
+import { fetchAsset, useWeb3, formatAddress, newSeaport } from '../../lib/hooks';
 //
 
 declare const window: any;
@@ -57,27 +54,28 @@ export function AssetDetails() {
     const [toggle3, setToggle3] = useState(false);
     const [loading, setLoading] = useState(true);
     const [osAsset, setOsAsset] = useState<any | undefined>();
-    const [price, setPrice] = useState(0);
     const [creatingOrder, setCreatingOrder] = useState(false);
     const {
         onClickConnect,
         onClickDisconnect,
         isConnected,
         isConnecting,
+        price,
+        address,
+        priceSetter,
     } = useWeb3();
     const router = useRouter();
     const {
         query: { id, tokenId },
     } = router;
 
-    console.log("router: ", router);
 
     const loadAsset = useCallback(async () => {
         if (osAsset) return
         try {
             const asset = await fetchAsset(id, tokenId);
             asset && setOsAsset(asset?.assetState);
-            asset && setPrice(asset?.price);
+            asset && priceSetter(asset?.price);
             asset && setLoading(false);
             return asset
         } catch (error) {
@@ -86,68 +84,67 @@ export function AssetDetails() {
         } finally {
             console.log("i fetchted the asset.", osAsset);
         }
-
-    }, [id, tokenId, seaport]);
+    }, [id, tokenId, osAsset]);
 
     useEffect(() => {
         loadAsset();
-
-    }, [id, tokenId, loadAsset])
+        osAsset && console.log("addy comparison: ", formatAddress(osAsset.buyOrders[0].maker), formatAddress(address));
+    }, [loadAsset, osAsset, address])
     // set the current users account address so we can check it against the highest bidder address
 
 
     return (
-        <ConnectWalletProvider>
-        <Box
-            position="relative"
-            width="100vw"
-            height="100vh"
-            backgroundImage="url(/assets/scenes/bg-scene.png)"
-            backgroundSize="cover"
-            overflow="hidden"
-            id="section"
-        >
-            <MetadataComponent title={osAsset?.name} description={osAsset?.description} socialImage={osAsset?.imagePreviewUrl} />
+        <>
             <Box
-                className="content"
                 position="relative"
-                flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 45%", xxxl: "0 0 33%" }}
-                width={{ base: "98%", smd: "98%", lg: "45%", xxxl: "33%" }}
-                maxH={{ base: "83vh", lg: "83vh", xxxl: "75vh" }}
-                height="100%"
-                d="flex"
-                flexDirection={{ base: "column", smd: "row", lg: "column" }}
-                alignItems={{ base: "flex-start", smd: "center", lg: "flex-start" }}
-                mt={{ base: 7, lg: "10px", xl: "10px", xxl: "50px" }}
-                ml={{ base: "auto", smd: "auto", lg: "auto" }}
-                mr={{ base: "auto", smd: "auto", lg: "auto" }}
-                px="0"
-                boxShadow="0 0 10px rgba(0,0,0,.6)"
-                borderRadius="6px"
+                width="100vw"
+                height="100vh"
+                backgroundImage="url(/assets/scenes/bg-scene.png)"
+                backgroundSize="cover"
                 overflow="hidden"
-                zIndex={{ base: 100 }}
-                backgroundColor="rgba(255,255,255,0.6)"
-                sx={{
-                    backdropFilter: "blur(7px)",
-                }}
+                id="section"
             >
-                {loading ? (
-                    <Loading />
-                ) : (
-                    <>
-                        <Box
-                            className="playerWrapper"
-                            position="relative"
-                            paddingTop={{
-                                base: `${(356 / 633) * 100}%`,
-                                smd: `${31}%`,
-                                lg: `${(356 / 633) * 100}%`
-                            }}
-                            width="100%"
-                            height="0"
-                            zIndex={200}
-                            overflow="hidden"
-                        >
+                <MetadataComponent title={osAsset?.name} description={osAsset?.description} socialImage={osAsset?.imagePreviewUrl} />
+                <Box
+                    className="content"
+                    position="relative"
+                    flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 45%", xxxl: "0 0 33%" }}
+                    width={{ base: "98%", smd: "98%", lg: "45%", xxxl: "33%" }}
+                    maxH={{ base: "83vh", lg: "83vh", xxxl: "75vh" }}
+                    height="100%"
+                    d="flex"
+                    flexDirection={{ base: "column", smd: "row", lg: "column" }}
+                    alignItems={{ base: "flex-start", smd: "center", lg: "flex-start" }}
+                    mt={{ base: 7, lg: "10px", xl: "10px", xxl: "50px" }}
+                    ml={{ base: "auto", smd: "auto", lg: "auto" }}
+                    mr={{ base: "auto", smd: "auto", lg: "auto" }}
+                    px="0"
+                    boxShadow="0 0 10px rgba(0,0,0,.6)"
+                    borderRadius="6px"
+                    overflow="hidden"
+                    zIndex={{ base: 100 }}
+                    backgroundColor="rgba(255,255,255,0.6)"
+                    sx={{
+                        backdropFilter: "blur(7px)",
+                    }}
+                >
+                    {loading ? (
+                        <Loading />
+                    ) : (
+                        <>
+                            <Box
+                                className="playerWrapper"
+                                position="relative"
+                                paddingTop={{
+                                    base: `${(356 / 633) * 100}%`,
+                                    smd: `${31}%`,
+                                    lg: `${(356 / 633) * 100}%`
+                                }}
+                                width="100%"
+                                height="0"
+                                zIndex={200}
+                                overflow="hidden"
+                            >
                                 {/* <ReactPlayer
                                     url={osAsset?.animation_url}
                                 playing={true}
@@ -170,19 +167,19 @@ export function AssetDetails() {
                                     top: `0`,
                                     zIndex: 0,
                                 }} />
-                        </Box>
+                                </Box>
 
-                        <Box
+                                <Box
 
-                            width={{ base: "100%", smd: "80%", lg: "100%" }}
+                                    width={{ base: "100%", smd: "80%", lg: "100%" }}
                                 margin="0"
                                 height={{
-                                base: `${100 * (356 / 633)}%`,
-                                smd: `${100 - 31}%`,
-                                lg: `${100 - (356 / 633) - 45}%`
-                            }}
+                                    base: `${100 * (356 / 633)}%`,
+                                    smd: `${100 - 31}%`,
+                                    lg: `${100 - (356 / 633) - 45}%`
+                                }}
                                 overflowY="auto"
-                            z={0}
+                                    z={0}
                             >
                                 <OpenseaToolbar assetOSUrl={osAsset?.openseaLink} osUrl={OPENSEA_URL} passport={osAsset?.externalLink} />
 
@@ -214,27 +211,33 @@ export function AssetDetails() {
                                             }
                                         }}>
                                             <h3>Get your hands on the {osAsset.name}</h3>
+
+
                                             <Box d="flex" flexFlow="row-reverse nowrap" alignItems="center">
                                                 <Box flex="0 0 25%" transform="translateY(-25%)">
                                                         <ConnectButton />
                                                 </Box>
-                                                    {osAsset && (
+                                                    {address && osAsset && (
                                                     <>
                                                         <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" sx={{
                                                             "span": {
                                                                 fontSize: { base: "17px", xxl: "18px" }
                                                             },
+                                                                "span:last-child": {
+                                                                    fontSize: { base: "12px", xxl: "14px" }
+                                                                },
                                                             "strong": {
                                                                 fontSize: { base: "22px", xxl: "25px" }
                                                             }
                                                         }}>
-                                                            <span>{`Current bid:`}</span><strong>{`Ξ${price?.toFixed(2)} ETH`}</strong>
-                                                        </Box>
-                                                        {/* <Box as="span" sx={{
-                                                            fontSize: "10px"
-                                                        }}>
-                                                            {osAsset.buyOrders.length > 0 && osAsset.buyOrders[0].maker === userAccount ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
-                                                        </Box> */}
+                                                                <span>{`Current bid:`}</span><strong>{`Ξ${price.toFixed(2)} ETH`}</strong>
+                                                                <Box as="span" sx={{
+                                                                    fontSize: { base: "10px" }
+                                                                }}>
+                                                                    {formatAddress(osAsset.buyOrders[0].maker) === formatAddress(address) ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
+                                                                </Box>
+                                                            </Box>
+
                                                         {creatingOrder && <Box>Processing ... please wait</Box>}
                                                         <ButtonGroup
                                                             size="sm"
@@ -243,12 +246,14 @@ export function AssetDetails() {
                                                             justifyContent="center"
                                                             width="100%"
                                                         >
-                                                            {/* <Button width="120px" pt="5px" colorScheme="purple" onClick={() => bidAction(osAsset.tokenAddress, osAsset.tokenId)}>BUY</Button> */}
-                                                                {/* <OpenseaModal asset={osAsset} seaport={seaport} /> */}
+
+                                                                <OpenseaModal asset={osAsset} />
                                                         </ButtonGroup>
+
                                                     </>
                                                 )}
                                             </Box>
+                                                {address && <Box maxW="100%" fontSize="10px">{`Connected account: ${address.substr(0, 8,)}`}</Box>}
                                         </Box>
 
                                     </Box>
@@ -287,20 +292,20 @@ export function AssetDetails() {
                                 </Box>
 
                             </Box>
-                    </>
-                )}
-            </Box>
+                        </>
+                    )}
+                </Box>
 
-            <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 0, smd: 0, lg: 0 }}>
-                <NextLink href="/#section1" passHref>
-                    <Link
-                        display="inline-block"
-                        position="relative"
-                        // pt="26.25%"
-                        height="0"
-                        width="100%"
-                        maxW="100px"
-                        css={css`
+                <Box position="absolute" width="100%" height={{ base: "10%", xl: "10%" }} maxW={{ base: "25px", lg: "40px", xl: "40px", xxl: "45px", xxxl: "55px" }} bottom={{ base: "220px", smd: "245px", lg: "63%", xxl: "500px", xxxl: "750px" }} left={{ base: "50%", smd: "520px", lg: "165px", xl: "1100px", xxl: "1150px", xxxl: "1450px" }} zIndex={{ base: 0, smd: 0, lg: 0 }}>
+                    <NextLink href="/#section1" passHref>
+                        <Link
+                            display="inline-block"
+                            position="relative"
+                            // pt="26.25%"
+                            height="0"
+                            width="100%"
+                            maxW="100px"
+                            css={css`
                         @keyframes logo-anim {
                             0% { transform: translateY(25px); }
                             50% { transform: translateY(35px); }
@@ -316,85 +321,85 @@ export function AssetDetails() {
                         /* animation: logo-anim 5s infinite; */
                         /* animation-play-state: paused; */
                     `}
-                        sx={{ animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1' }}
-                    >
-                        <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
-                    </Link>
-                </NextLink>
-            </Box>
+                            sx={{ animation: !toggle1 ? 'logo-anim 5s infinite' : 'pig-release 10s 1' }}
+                        >
+                            <Image src="/assets/pig-string.png" alt="logo" width="100%" height="auto" objectFit="fill" sx={{ position: `absolute`, left: 0, top: 0 }} />
+                        </Link>
+                    </NextLink>
+                </Box>
 
-            <SceneBridge />
+                <SceneBridge />
 
-            <Box onClick={e => setToggle1(!toggle1)}>
-                <SceneBuilding
-                    src="/assets/buildings/building-4.png"
-                    left={{ base: '180px', smd: '520px', lg: '120px', xl: '1050px', xxl: '1100px', xxxl: '1400px' }}
-                    bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '110px', xxxl: '170px' }}
+                <Box onClick={e => setToggle1(!toggle1)}>
+                    <SceneBuilding
+                        src="/assets/buildings/building-4.png"
+                        left={{ base: '180px', smd: '520px', lg: '120px', xl: '1050px', xxl: '1100px', xxxl: '1400px' }}
+                        bottom={{ base: '0', lg: '0' }}
+                        width={{ base: '50px', lg: '110px', xxxl: '170px' }}
+                    />
+                </Box>
+
+                <Image
+                    src="/assets/buildings/building-4.destroyed.png"
+                    position="absolute"
+                    left={{ base: '166px', smd: '506px', lg: '96px', xl: '1026px', xxl: '1076px', xxxl: '1361px' }}
+                    bottom={{ base: '14px', lg: '58px', xxxl: '86px' }}
+                    width={{ base: '95px', lg: '196px', xxxl: '306px' }}
+                    opacity={toggle1 ? 1 : 0}
+                    transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
+                    pointerEvents="none"
                 />
-            </Box>
 
-            <Image
-                src="/assets/buildings/building-4.destroyed.png"
-                position="absolute"
-                left={{ base: '166px', smd: '506px', lg: '96px', xl: '1026px', xxl: '1076px', xxxl: '1361px' }}
-                bottom={{ base: '14px', lg: '58px', xxxl: '86px' }}
-                width={{ base: '95px', lg: '196px', xxxl: '306px' }}
-                opacity={toggle1 ? 1 : 0}
-                transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
-                pointerEvents="none"
-            />
+                <Box onClick={e => setToggle3(!toggle3)}>
+                    <SceneBuilding
+                        src="/assets/buildings/building-1.png"
+                        left={{ base: '140px', smd: '480px', lg: '190px', xl: '970px', xxl: '990px', xxxl: '1250px' }}
+                        bottom={{ base: '0', lg: '-25px', xxxl: '0' }}
+                        width={{ base: '50px', lg: '120px', xxxl: '180px' }}
+                    />
+                </Box>
 
-            <Box onClick={e => setToggle3(!toggle3)}>
-                <SceneBuilding
-                    src="/assets/buildings/building-1.png"
-                    left={{ base: '140px', smd: '480px', lg: '190px', xl: '970px', xxl: '990px', xxxl: '1250px' }}
-                    bottom={{ base: '0', lg: '-25px', xxxl: '0' }}
-                    width={{ base: '50px', lg: '120px', xxxl: '180px' }}
+                <Box onClick={e => setToggle2(!toggle2)}>
+                    <SceneBuilding
+                        src="/assets/buildings/building-3.png"
+                        left={{ base: '230px', smd: '550px', lg: '20px', xl: '1150px', xxl: '1200px', xxxl: '1550px' }}
+                        bottom={{ base: '0', lg: '0' }}
+                        width={{ base: '50px', lg: '120px', xxxl: '180px' }}
+                    />
+                </Box>
+
+                <Image
+                    src="/assets/effects/b3.png"
+                    position="absolute"
+                    left={{ base: '230px', smd: '553px', lg: '23px', xl: '1153px', xxl: '1203px', xxxl: '1553px' }}
+                    bottom={{ base: '110px', lg: '252px', xxxl: '370px' }}
+                    width={{ base: '58px', lg: '138px', xxxl: '210px' }}
+                    opacity={toggle2 ? 1 : 0}
+                    transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
+                    pointerEvents="none"
                 />
-            </Box>
 
-            <Box onClick={e => setToggle2(!toggle2)}>
                 <SceneBuilding
-                    src="/assets/buildings/building-3.png"
-                    left={{ base: '230px', smd: '550px', lg: '20px', xl: '1150px', xxl: '1200px', xxxl: '1550px' }}
-                    bottom={{ base: '0', lg: '0' }}
-                    width={{ base: '50px', lg: '120px', xxxl: '180px' }}
+                    src="/assets/buildings/building-2.png"
+                    left={{ base: '100px', smd: '420px', lg: '-100px', xl: '950px', xxl: '930px', xxxl: '1150px' }}
+                    bottom={{ base: '-2px', lg: '-20px', xxxl: '-20px' }}
+                    width={{ base: '200px', lg: '540px', xxl: '540px', xxxl: '640px' }}
                 />
-            </Box>
 
-            <Image
-                src="/assets/effects/b3.png"
-                position="absolute"
-                left={{ base: '230px', smd: '553px', lg: '23px', xl: '1153px', xxl: '1203px', xxxl: '1553px' }}
-                bottom={{ base: '110px', lg: '252px', xxxl: '370px' }}
-                width={{ base: '58px', lg: '138px', xxxl: '210px' }}
-                opacity={toggle2 ? 1 : 0}
-                transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
-                pointerEvents="none"
-            />
-
-            <SceneBuilding
-                src="/assets/buildings/building-2.png"
-                left={{ base: '100px', smd: '420px', lg: '-100px', xl: '950px', xxl: '930px', xxxl: '1150px' }}
-                bottom={{ base: '-2px', lg: '-20px', xxxl: '-20px' }}
-                width={{ base: '200px', lg: '540px', xxl: '540px', xxxl: '640px' }}
-            />
-
-            <Image
-                src="/assets/effects/fog.png"
-                position="absolute"
-                left={{ base: '164px', smd: '504px', lg: '250px', xl: '1030px', xxl: '1050px', xxxl: '1300px' }}
-                bottom={{ base: '100px', lg: '220px', xxxl: '380px' }}
-                width={{ base: '140px', lg: '400px', xxxl: '640px' }}
-                opacity={toggle3 ? 1 : 0}
-                transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
-                pointerEvents="none"
-            />
-            <FooterComponent toggler />
+                <Image
+                    src="/assets/effects/fog.png"
+                    position="absolute"
+                    left={{ base: '164px', smd: '504px', lg: '250px', xl: '1030px', xxl: '1050px', xxxl: '1300px' }}
+                    bottom={{ base: '100px', lg: '220px', xxxl: '380px' }}
+                    width={{ base: '140px', lg: '400px', xxxl: '640px' }}
+                    opacity={toggle3 ? 1 : 0}
+                    transition="opacity 1s cubic-bezier(0.5, 1, 0.89, 1)"
+                    pointerEvents="none"
+                />
+                <FooterComponent toggler />
                 <NoticeBanner />
-        </Box>
-        </ConnectWalletProvider>
+            </Box>
+        </>
     );
 }
 

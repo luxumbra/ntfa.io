@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ConnectWalletContext, ConnectWalletContextType } from '../../components/detail/ConnectWalletContext';
 // import { useGetMeQuery } from 'graphql/autogen/types';
 // import { MeType } from 'graphql/types';
-import { useRouter } from 'next/router';
+import { utils } from 'ethers';
 import { OpenSeaPort, Network } from "opensea-js";
-import { OpenSeaAsset } from "opensea-js/lib/types";
+import { OpenSeaAsset, OrderSide } from "opensea-js/lib/types";
 import { NETWORK, OPENSEA_API_KEY } from "../../constants";
 
 export let seaport: any;
@@ -13,7 +13,7 @@ export const useWeb3 = (): ConnectWalletContextType => useContext(ConnectWalletC
 
 export const useMounted = (): boolean => {
   // https://www.joshwcomeau.com/react/the-perils-of-rehydration/
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -21,7 +21,6 @@ export const useMounted = (): boolean => {
 };
 
 export const newSeaport = () => {
-
   if (typeof window !== 'undefined') {
     seaport = new OpenSeaPort(window.ethereum, {
       networkName: NETWORK,
@@ -33,12 +32,10 @@ export const newSeaport = () => {
 }
 
 export const fetchAsset = async (id: any, tokenId: any) => {
-
   let price = 0;
   let assetState = {} as OpenSeaAsset;
 
   if (typeof window !== "undefined") {
-
     try {
       assetState = await newSeaport().api.getAsset({ tokenAddress: id, tokenId });
       if (assetState.sellOrders && assetState.sellOrders.length > 0) {
@@ -66,6 +63,8 @@ export const fetchAsset = async (id: any, tokenId: any) => {
         const currentPrice = (buyOrder.currentPrice.toNumber() / Math.pow(10, 18));
         price = currentPrice
       }
+      console.log("Asset: ", assetState);
+
       return { price, assetState };
     } catch (error) {
       console.log("OS Error: ", error);
@@ -76,57 +75,39 @@ export const fetchAsset = async (id: any, tokenId: any) => {
   }
 }
 
-export const placeBid = async (ethAmount: any, tokenId: any, id: any, address: any) => {
-  const [creatingOrder, setCreatingOrder] = useState(false);
-  const [processingOrder, setProcessingOrder] = useState(false);
-  const [yourBid, setYourBid] = useState<any>();
+// export type FetchAssetOrdersType = {
+//   tokenAddress: string,
+//   tokenId: string,
+// }
+export const fetchAssetOrders = async (tokenAddress: string, tokenId: string) => {
+  const { orders, count } = await newSeaport().api.getOrders({
+    asset_contract_address: tokenAddress,
+    token_id: tokenId,
+    side: OrderSide.Buy
+  })
+  count && console.log(`We have ${count} orders!`, orders);
 
-  let isError: boolean = false;
-
-  console.log("Bid: ", ethAmount, tokenId, id, address);
-  try {
-    // setIsError(false);
-    console.log("fhjdfhkskd", seaport);
-
-    setCreatingOrder(true);
-    const ethWrap = await newSeaport().wrapEth({
-      amountInEth: ethAmount,
-      accountAddress: address,
-    });
-
-    if (ethWrap) {
-      setProcessingOrder(true);
-      setCreatingOrder(false);
-    }
-    ethWrap && console.log("eth wrap: ", ethWrap);
-
-    // setCreatingOrder(true);
-
-    console.log("order: ", ethAmount, tokenId, id, address);
-
-
-    const offer = await seaport.createBuyOrder({
-      asset: {
-        tokenId: (tokenId?.toString()),
-        tokenAddress: id,
-        schemaName: "ERC1155",
-      },
-      accountAddress: address,
-      startAmount: ethAmount,
-    });
-
-    //  }
-    offer && console.log("offer: ", offer);
-    if (offer) {
-      setYourBid(offer);
-      setProcessingOrder(false);
-      setCreatingOrder(false);
-    }
-    return { yourBid, creatingOrder, processingOrder };
-  } catch (error) {
-    console.log("placeBid() error: ", error);
-    isError = true;
-    return [isError, error];
-  }
-
+  return { orders, count };
 }
+
+export const formatAddress = (address: string | null) => {
+  if (!address) return;
+  return utils.getAddress(address);
+}
+// export const getLatestPrice = async (tokenAddress: string, tokenId: string) => {
+//   let play: any = false;
+
+//   play = await setTimeout(() => {
+//     return true;
+//   }, 20000);
+
+//   if (play) {
+//     const { orders } = await fetchAssetOrders(tokenAddress, tokenId)
+//     setInterval(() => {
+//       console.log("Updating price...");
+
+//       console.log(`Price updated ${(orders[0].currentPrice.toNumber() / Math.pow(10, 18))}`);
+//       return orders ? (orders[0].currentPrice.toNumber() / Math.pow(10, 18)) : `fetching`;
+//     }, 5000);
+//   }
+// }

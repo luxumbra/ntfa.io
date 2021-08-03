@@ -2,7 +2,9 @@ import React from "react";
 import App, { AppContext, AppInitialProps } from "next/app";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
-
+//
+import ConnectWalletProvider, { ConnectWalletContext } from "../components/detail/ConnectWalletContext";
+//
 import "../../public/css/font-face.css";
 import "../../public/css/stylesheet.css";
 
@@ -211,7 +213,9 @@ export class NTFApp extends App<AppInitialProps> {
 
         return (
             <ChakraProvider theme={theme} resetCSS={true}>
-                <Component {...pageProps} />
+                <ConnectWalletProvider>
+                    <Component {...pageProps} />
+                </ConnectWalletProvider>
             </ChakraProvider>
         );
     }

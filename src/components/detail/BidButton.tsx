@@ -1,13 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import { Box, Button, Link, Image } from '@chakra-ui/react';
-import NextLink from 'next/link';
-import * as Web3 from 'web3';
-import { OpenSeaPort, Network } from 'opensea-js'
-import Web3Modal from "web3modal";
-
-const seaport = new OpenSeaPort(provider, {
-  networkName: Network.Main
-})
+//
+import { ConnectWalletContext } from "./ConnectWalletContext";
+import { placeBid, useWeb3 } from "../../lib/hooks";
+//
 
 export interface BidButtonProps {
   tokenContract: string;

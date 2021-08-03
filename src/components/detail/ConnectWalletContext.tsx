@@ -7,7 +7,7 @@ import { SpinnerIcon } from "@chakra-ui/icons";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
-import { ethers, providers } from 'ethers';
+import { ethers, providers, utils } from 'ethers';
 import { CONFIG } from "../../../config";
 import { get, remove, set } from '../../lib/store';
 import { clearWalletConnect } from '../../lib/auth';
@@ -18,10 +18,8 @@ const injectedWalletKey = "WEB3_CONNECT_CACHED_PROVIDER";
 declare const window: any;
 export let provider: any;
 export let web3: any;
-export let onClickConnect: any;
-export let onClickDisconnect: any;
 export let accounts: any;
-export let user: any;
+
 
 export type ConnectWalletContextType = {
   provider: providers.Web3Provider | null;
@@ -30,7 +28,24 @@ export type ConnectWalletContextType = {
   isConnecting: boolean;
   isConnected: boolean;
   address: string | null;
+  bidding: boolean,
+  modalOpen: boolean,
+  onClickBidModalOpen: () => void,
+  onClickBidModalClose: () => void,
+  price: number,
+  yourBid: { asset: string | null, amount: number, assetAddress: string | null } | undefined,
+  isEnded: boolean,
+  creatingOrder: boolean,
+  processingOrder: boolean,
+  sendingOrder: boolean,
+  priceSetter: (price: number) => void,
+  doCreatingOrder: (status: boolean) => void,
+  doProcessingOrder: (status: boolean) => void,
+  doSendingOrder: (status: boolean) => void,
+  cancelOrder: () => void,
+  storeBid: (assetId: string | null, bid: string | null, assetAddress: string | null) => void,
 };
+
 export const ConnectWalletContext = createContext<ConnectWalletContextType>({
   provider: null,
   onClickConnect: async () => { },
@@ -38,6 +53,22 @@ export const ConnectWalletContext = createContext<ConnectWalletContextType>({
   isConnecting: false,
   isConnected: false,
   address: null,
+  bidding: false,
+  modalOpen: false,
+  onClickBidModalOpen: () => { },
+  onClickBidModalClose: () => { },
+  price: 0,
+  yourBid: undefined,
+  isEnded: false,
+  creatingOrder: false,
+  processingOrder: false,
+  sendingOrder: false,
+  priceSetter: () => { },
+  doCreatingOrder: () => { },
+  doProcessingOrder: () => { },
+  doSendingOrder: () => { },
+  cancelOrder: () => { },
+  storeBid: () => { },
 });
 
 const providerOptions = {
@@ -66,7 +97,17 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
   const [address, setAddress] = useState<string | null>(null);
+  const [bidding, setBidding] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [price, setPrice] = useState<number>(0);
+  const [yourBid, setYourBid] = useState<any>(undefined);
+  const [isEnded, setIsEnded] = useState(false);
+  const [creatingOrder, setCreatingOrder] = useState(false);
+  const [sendingOrder, setSendingOrder] = useState(false);
+  const [processingOrder, setProcessingOrder] = useState(false);
+
   const calledOnce = useRef<boolean>(false);
+
 
   const onClickDisconnect = useCallback(async () => {
     if (web3Modal === false) return;
@@ -77,10 +118,14 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
     setProvider(null);
     setIsConnecting(false);
     setIsConnected(false);
+    setBidding(false);
+    setYourBid(undefined)
+    setCreatingOrder(false);
+    setSendingOrder(false);
+    setProcessingOrder(false);
     console.log("Web3 disconnected...");
 
   }, []);
-
 
 
   const onClickConnect = useCallback(async () => {
@@ -90,13 +135,17 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
 
     try {
       const web3Provider = await web3Modal.connect();
+      web3Provider && console.log("web3 provider ready...", web3Provider);
+
       const ethersProvider = new ethers.providers.Web3Provider(web3Provider);
-
-      const ethAddress = await ethersProvider.getSigner().getAddress();
-
-      setAddress(ethAddress);
       setProvider(ethersProvider);
-      ethAddress && console.info("Web3 set: ", web3Provider, ethersProvider, ethAddress);
+
+      console.log("Getting your address...");
+      const ethAddress = await ethersProvider.getSigner().getAddress();
+      ethAddress && console.info("address obtained, web3 set: ", web3Provider, ethersProvider, ethAddress);
+
+      ethAddress &&
+        setAddress(ethAddress);
       setIsConnecting(false);
       setIsConnected(true);
     } catch (error) {
@@ -109,6 +158,42 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
   }, [onClickDisconnect]);
 
 
+  const onClickBidModalOpen = useCallback(async () => {
+    setBidding(true);
+    setModalOpen(true);
+  }, []);
+
+  const onClickBidModalClose = useCallback(async () => {
+    setBidding(false);
+    setModalOpen(false);
+    setBidding(false);
+    setYourBid(undefined)
+    setCreatingOrder(false);
+    setSendingOrder(false);
+    setProcessingOrder(false);
+  }, []);
+
+  const doCreatingOrder = useCallback(async (status: boolean) => {
+    setCreatingOrder(status);
+  }, []);
+  const doProcessingOrder = useCallback(async (status: boolean) => {
+    setProcessingOrder(status);
+  }, []);
+  const doSendingOrder = useCallback(async (status: boolean) => {
+    setSendingOrder(status);
+  }, []);
+  const cancelOrder = useCallback(async () => {
+    setCreatingOrder(false);
+    setProcessingOrder(false);
+  }, []);
+
+  const priceSetter = useCallback((price: number) => {
+    setPrice(price);
+  }, []);
+
+  const storeBid = useCallback((assetId, bid, assetAddress) => {
+    setYourBid({ asset: assetId, amount: bid, assetAddress: assetAddress })
+  }, []);
 
   useEffect(() => {
     if (calledOnce.current) return;
@@ -129,6 +214,22 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
         isConnected,
         isConnecting,
         address,
+        bidding,
+        modalOpen,
+        onClickBidModalOpen,
+        onClickBidModalClose,
+        price,
+        yourBid,
+        isEnded,
+        creatingOrder,
+        processingOrder,
+        sendingOrder,
+        priceSetter,
+        doCreatingOrder,
+        doProcessingOrder,
+        doSendingOrder,
+        cancelOrder,
+        storeBid,
       }}>
       {children}
     </ConnectWalletContext.Provider>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Box } from '@chakra-ui/react';
-import { NextPage } from 'next'
-import matter from "gray-matter";
 import { MetadataComponent } from '../components/shared/Metadata';
 import { FooterComponent } from "../components/shared/Footer";
 import TosCore from '../components/tos/Tos.core';

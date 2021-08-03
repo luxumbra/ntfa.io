@@ -1,9 +1,7 @@
-import React, { FC, useState, useContext } from 'react';
-import { Box, Button, Link, Image } from '@chakra-ui/react';
+import React, { FC, useState } from 'react';
+import { Box, Button } from '@chakra-ui/react';
 //
-import { ConnectWalletContext } from "./ConnectWalletContext";
-import { placeBid, useWeb3 } from "../../lib/hooks";
-//
+
 
 export interface BidButtonProps {
   tokenContract: string;
@@ -16,35 +14,35 @@ export const BidButton: FC<BidButtonProps> = ({ tokenContract }) => {
   const [bidStatus, setBidStatus] = useState('');
   const [bidError, setBidError] = useState('');
 
-  const onBidClick = (e) => {
+  const onBidClick = (e: any) => {
     e.preventDefault();
     setIsBid(true);
   };
 
-  const onBidSuccess = (e) => {
-    e.preventDefault();
-    setIsBid(false);
-    setBidPrice(e.detail.price);
-    setBidAmount(e.detail.amount);
-    setBidStatus('success');
-  };
+  // const onBidSuccess = (e) => {
+  //   e.preventDefault();
+  //   setIsBid(false);
+  //   setBidPrice(e.detail.price);
+  //   setBidAmount(e.detail.amount);
+  //   setBidStatus('success');
+  // };
 
-  const onBidError = (e) => {
-    e.preventDefault();
-    setIsBid(false);
-    setBidPrice(0);
-    setBidAmount(0);
-    setBidStatus('error');
-    setBidError(e.detail.message);
-  };
+  // const onBidError = (e) => {
+  //   e.preventDefault();
+  //   setIsBid(false);
+  //   setBidPrice(0);
+  //   setBidAmount(0);
+  //   setBidStatus('error');
+  //   setBidError(e.detail.message);
+  // };
 
-  const onBidCancel = (e) => {
-    e.preventDefault();
-    setIsBid(false);
-    setBidPrice(0);
-    setBidAmount(0);
-    setBidStatus('');
-  };
+  // const onBidCancel = (e) => {
+  //   e.preventDefault();
+  //   setIsBid(false);
+  //   setBidPrice(0);
+  //   setBidAmount(0);
+  //   setBidStatus('');
+  // };
 
   return (
     <Box px={4} py={4} width={[1, 2, 2, 2]}>

@@ -227,7 +227,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                           <NumberInputField />
                         </NumberInput>
                       </Box>
-                      <Button isLoading={creatingOrder} loadingText={`Placing bid...`} style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid.amount, yourBid.asset, yourBid.assetAddress)} disabled={!yourBid || isEnded || yourBid.amount < price} variant="cta">{!creatingOrder && `Make a bid`}</Button>
+                      <Button isLoading={creatingOrder} loadingText={`Placing bid...`} style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid?.amount, yourBid?.asset, yourBid?.assetAddress)} disabled={!yourBid || isEnded || yourBid.amount < price} variant="cta">{!creatingOrder && `Make a bid`}</Button>
                     </Box>
                   )}
                 </Box>

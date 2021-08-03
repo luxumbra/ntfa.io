@@ -1,15 +1,9 @@
 import React, { FC } from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import ReactMarkdown from "react-markdown";
 //
-import { MetadataComponent } from "../../components/shared/Metadata";
-import { SceneBridge } from '../../components/scene/Scene.bridge';
-import { SceneBuilding } from '../../components/scene/Scene.building';
-import { FooterComponent } from "../../components/shared/Footer";
-import { Loading } from '../../components/shared/Loading';
-import { NoticeBanner } from '../../components/shared/NoticeBanner';
 
-export const Custom404Core: FC = (props) => {
+export const Custom404Core: FC = () => {
     return (
 
 
@@ -42,7 +36,7 @@ export const Custom404Core: FC = (props) => {
             }
         }}>
             <ReactMarkdown>
-                {osAsset?.description}
+                #### 404 Page Not Found.
             </ReactMarkdown>
         </Box>
 

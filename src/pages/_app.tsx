@@ -74,6 +74,18 @@ const theme = extendTheme({
                         color: "white",
                     }
                 },
+                "cta-small": {
+                    backgroundColor: "white",
+                    borderRadius: 0,
+                    color: "brand.200",
+                    fontSize: { base: "10px", lg: "12px", xl: "14px" },
+                    fontWeight: 900,
+                    p: { base: "5px 5px", lg: "5px 15px" },
+                    _hover: {
+                        backgroundColor: "brand.200",
+                        color: "white",
+                    },
+                },
                 "cta-inverse": {
                     backgroundColor: "transparent",
                     borderRadius: "md",

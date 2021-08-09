@@ -21,14 +21,14 @@ export const ConnectButton: FC = () => {
     <>
       {isConnected ? (
         <>
-          <Button variant="cta" onClick={() => onClickDisconnect()}>Disconnect</Button>
+          <Button variant="cta-small" onClick={() => onClickDisconnect()}>Disconnect</Button>
         </>
       ) : (
-        <ButtonGroup>
-          <Button isLoading={isConnecting} loadingText={`Connecting...`} variant="cta" onClick={() => onClickConnect()}>
-            {!isConnected && !isConnecting && `Connect`}
+          <>
+            <Button isLoading={isConnecting} loadingText={`Connecting...`} variant="cta-small" onClick={() => onClickConnect()}>
+              {!isConnected && !isConnecting && `Connect to bid`}
           </Button>
-        </ButtonGroup >
+          </>
       )}
     </>
   )

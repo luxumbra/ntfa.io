@@ -22,6 +22,7 @@ import { utils } from "ethers";
 import { NETWORK, OPENSEA_API_KEY, toUnitAmount, toBaseUnitAmount } from "../../constants";
 import { stringify } from 'querystring';
 import { newSeaport, useWeb3 } from '../../lib/hooks';
+import { ConnectButton } from "../detail/ConnectButton";
 
 export let seaport: any;
 export let provider: any;
@@ -35,17 +36,26 @@ export type OpenseaModalType = {
 }
 
 
-
 export const OpenBidModalButton: FC = () => {
   const {
     bidding,
     modalOpen,
     onClickBidModalOpen,
-    onClickBidModalClose
+    onClickBidModalClose,
+    address
   } = useWeb3();
 
   return (
-    <Button isLoading={bidding} loadingText="Bid in progress..." width="auto" pt="5px" variant="cta" onClick={() => !modalOpen ? onClickBidModalOpen() : onClickBidModalClose()}>{`BID`}</Button>
+    <>
+      {address ? (
+        <>
+          <ConnectButton />
+          <Button isLoading={bidding} loadingText="Bid in progress..." width="auto" pt="5px" variant="cta-small" onClick={() => !modalOpen ? onClickBidModalOpen() : onClickBidModalClose()}> {`Bid`}</Button >
+        </>
+      ) : (
+        <ConnectButton />
+      )}
+    </>
   )
 }
 
@@ -123,14 +133,14 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
   return (
     <>
       <OpenBidModalButton />
-      <Box>
+
         <Modal isOpen={modalOpen} onClose={onClose} size={"xl"} isCentered>
-          <ModalOverlay backgroundColor="rgba(0,0,0,0.75)" onClick={() => onClickBidModalClose()} sx={{
-            backdropFilter: "blur(3px)",
+        <ModalOverlay backgroundColor="rgba(0,0,0,0.7)" onClick={() => onClickBidModalClose()} sx={{
+          backdropFilter: "blur(8px)",
           }} />
           <ModalContent sx={{
-            background: "linear-gradient(to bottom, rgba(62,95,105,0.6) 50%, rgba(178,207,226,0.8) 100%)",
-            backdropFilter: "blur(10px)",
+          background: "linear-gradient(to bottom, rgba(62,95,105,1) 50%, rgba(178,207,226,1) 100%)",
+          boxShadow: "0 0 15px rgba(0,0,0,0.5)"
           }}>
             <IconButton onClick={() => onClickBidModalClose()} aria-label="Close modal" size="sm" variant="cta" icon={<CloseIcon />}
               sx={{
@@ -239,8 +249,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
               </Box>
             </ModalBody>
           </ModalContent>
-        </Modal>
-      </Box>
+      </Modal>
     </>
   );
 }

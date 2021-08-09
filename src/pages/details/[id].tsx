@@ -18,7 +18,6 @@ import { NoticeBanner } from '../../components/shared/NoticeBanner';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { AssetMeta } from "../../components/detail/AssetMeta";
 import { OpenSeaAsset } from "opensea-js/lib/types";
-import { ConnectButton } from "../../components/detail/ConnectButton";
 import { OpenseaToolbar } from "../../components/detail/OpenseaToolbar";
 import { OpenseaModal } from "../../components/shared/OpenseaModal";
 import { NETWORK, OPENSEA_URL } from "../../constants";
@@ -180,7 +179,7 @@ export function AssetDetails() {
                                     z={0}
                                 >
                                     {osAsset && (
-                                        <OpenseaToolbar assetOSUrl={osAsset?.permalink} osUrl={OPENSEA_URL} passport={osAsset?.external_link} />
+                                        <OpenseaToolbar bid={<OpenseaModal asset={osAsset} />} osUrl={OPENSEA_URL} passport={osAsset?.external_link} />
                                     )}
 
                                 <Box p={{ base: "15px", smd: "10px", lg: "5px 25px 25px" }} d="flex" flexFlow="column wrap">
@@ -188,6 +187,7 @@ export function AssetDetails() {
                                         <NextLink href={`/#section1`} passHref>
                                             <Link variant="cta"><ArrowBackIcon mr={0} /> Back to NFTs</Link>
                                         </NextLink>
+
                                     </Box>
                                     <Heading as="h3" size={"sm"} color="accent.primary" mb="4">
                                         {osAsset && osAsset.name}
@@ -204,66 +204,34 @@ export function AssetDetails() {
 
                                     </Box>
 
-                                    <Box p="15px 30px" width="100%" d="flex" flexFlow="column wrap" textAlign="center">
-                                        <Box sx={{
-                                            "h3": {
-                                                fontSize: { base: "14px", lg: "16px" },
-                                            }
-                                        }}>
-                                            <h3>Get your hands on the {osAsset.name}</h3>
+                                        <Box p="15px 30px" width="100%" d="flex" flexFlow="column wrap" alignItems="flex-end">
+                                            {osAsset && (
+                                                <>
+                                                    <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" textAlign="center" sx={{
+                                                        "span": {
+                                                            fontSize: { base: "17px", xxl: "18px" }
+                                                        },
+                                                        "span:last-child": {
+                                                            fontSize: { base: "12px", xxl: "14px" }
+                                                        },
+                                                        "strong": {
+                                                            fontSize: { base: "22px", xxl: "25px" }
+                                                        }
+                                                    }}>
+                                                        <span>{osAsset.orders && osAsset.orders.length > 0 ? `Current bid:` : `Be the first to bid! 🐷`}</span><strong>{`Ξ${price.toFixed(2)} ETH`}</strong>
 
+                                                    </Box>
 
-                                                <Box d="flex" flexFlow="row-reverse nowrap" alignContent="center" alignItems="center">
-                                                    <Box flex="0 0 25%" transform="translateY(0)">
-                                                        <ConnectButton />
-                                                </Box>
-                                                    {osAsset && address && (
-                                                    <>
-                                                        <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" sx={{
-                                                            "span": {
-                                                                fontSize: { base: "17px", xxl: "18px" }
-                                                            },
-                                                                "span:last-child": {
-                                                                    fontSize: { base: "12px", xxl: "14px" }
-                                                                },
-                                                            "strong": {
-                                                                fontSize: { base: "22px", xxl: "25px" }
-                                                            }
-                                                        }}>
-                                                                <span>{osAsset.orders && osAsset.orders.length > 0 ? `Current bid:` : `Be the first to bid! 🐷`}</span><strong>{`Ξ${price.toFixed(2)} ETH`}</strong>
-                                                                {osAsset.orders && osAsset.orders.length > 0 && (
-                                                                    <Box as="span" sx={{
-                                                                        fontSize: { base: "10px" }
-                                                                    }}>
-                                                                        {formatAddress(osAsset.orders[0].maker.address) === formatAddress(address) ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
-                                                                    </Box>
-                                                                )}
-                                                            </Box>
-
-                                                        {creatingOrder && <Box>Processing ... please wait</Box>}
-                                                        <ButtonGroup
-                                                            size="sm"
-                                                            flex="0 0 25%"
-                                                            alignItems="center"
-                                                            justifyContent="center"
-                                                            width="100%"
-                                                            >
-                                                                {/* {address && ( */}
-                                                                <OpenseaModal asset={osAsset} />
-                                                                {/* )} */}
-                                                        </ButtonGroup>
-
-                                                    </>
-                                                )}
-                                            </Box>
-                                                {address && <Box maxW="100%" fontSize="10px">{`Connected account: ${address.substr(0, 8,)}`}</Box>}
-                                        </Box>
+                                                </>
+                                            )}
+                                            {address && <Box pos="absolute" top={{ base: 4 }} left={{ base: 4 }} maxW="100%" fontSize="14px" fontWeight="900" color="white" zIndex={200}>{`Connected account: ${address.substr(0, 8,)}`}</Box>}
 
                                     </Box>
                                     <Box className="assetDescription" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                         flex: "0 0 33%",
                                         maxH: "33%",
-                                        width: "100%",
+                                            width: "100%",
+                                            transform: "translateY(-75px)",
                                         "h2, h3": {
                                             fontFamily: "Hero, sans-serif",
                                             fontSize: { base: "12px", lg: "16px", xl: "18px" },
@@ -276,6 +244,9 @@ export function AssetDetails() {
                                         "ul": {
                                             pl: "15px",
                                         },
+                                            "p:first-of-type": {
+                                                maxW: "66%"
+                                            },
                                         "a": {
                                             color: "brand.300",
                                             position: "relative",

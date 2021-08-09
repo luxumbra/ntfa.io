@@ -22,7 +22,7 @@ import { ConnectButton } from "../../components/detail/ConnectButton";
 import { OpenseaToolbar } from "../../components/detail/OpenseaToolbar";
 import { OpenseaModal } from "../../components/shared/OpenseaModal";
 import { NETWORK, OPENSEA_URL } from "../../constants";
-import { fetchAsset, useWeb3, formatAddress, newSeaport } from '../../lib/hooks';
+import { fetchAssetApi, useWeb3, formatAddress } from '../../lib/hooks';
 //
 
 declare const window: any;
@@ -56,10 +56,6 @@ export function AssetDetails() {
     const [osAsset, setOsAsset] = useState<any | undefined>();
     const [creatingOrder, setCreatingOrder] = useState(false);
     const {
-        onClickConnect,
-        onClickDisconnect,
-        isConnected,
-        isConnecting,
         price,
         address,
         priceSetter,
@@ -73,7 +69,7 @@ export function AssetDetails() {
     const loadAsset = useCallback(async () => {
         if (osAsset) return
         try {
-            const asset = await fetchAsset(id, tokenId);
+            const asset = await fetchAssetApi(id, tokenId);
             asset && setOsAsset(asset?.assetState);
             asset && priceSetter(asset?.price);
             asset && setLoading(false);
@@ -81,14 +77,13 @@ export function AssetDetails() {
         } catch (error) {
             console.log("Asset error: ", error);
             return error;
-        } finally {
-            console.log("i fetchted the asset.", osAsset);
         }
     }, [id, tokenId, osAsset]);
 
     useEffect(() => {
         loadAsset();
-        osAsset && console.log("addy comparison: ", formatAddress(osAsset.buyOrders[0].maker), formatAddress(address));
+        osAsset && console.log("osAsset: ", osAsset.external_link);
+
     }, [loadAsset, osAsset, address])
     // set the current users account address so we can check it against the highest bidder address
 
@@ -144,29 +139,32 @@ export function AssetDetails() {
                                 height="0"
                                 zIndex={200}
                                 overflow="hidden"
-                            >
-                                {/* <ReactPlayer
-                                    url={osAsset?.animation_url}
-                                playing={true}
-                                volume={0}
-                                muted={true}
-                                loop={true}
-                                controls={true}
-                                width="100%"
-                                height="auto"
-                                style={{
-                                    position: "absolute",
-                                    left: `0`,
-                                    top: `0`,
-                                    zIndex: 0,
-                                }}
-                                /> */}
-                                <Image src={osAsset.imageUrl} alt={osAsset.name} width="100%" height="100%" objectFit="cover" style={{
-                                    position: "absolute",
-                                    left: `0`,
-                                    top: `0`,
-                                    zIndex: 0,
-                                }} />
+                                >
+                                    {osAsset && osAsset.animation_url && (
+                                        <ReactPlayer
+                                            url={osAsset.animation_url}
+                                            playing={true}
+                                            volume={0}
+                                            muted={true}
+                                            loop={true}
+                                            controls={true}
+                                            width="100%"
+                                            height="auto"
+                                            style={{
+                                                position: "absolute",
+                                                left: `0`,
+                                                top: `0`,
+                                                zIndex: 0,
+                                            }}
+                                        />
+                                    )}
+                                    {/* <Image src={osAsset.imageUrl} alt={osAsset.name} width="100%" height="100%" objectFit="cover" style={{
+                                        position: "absolute",
+                                        left: `0`,
+                                        top: `0`,
+                                        zIndex: 0,
+                                    }} /> */}
+
                                 </Box>
 
                                 <Box
@@ -180,8 +178,10 @@ export function AssetDetails() {
                                 }}
                                 overflowY="auto"
                                     z={0}
-                            >
-                                <OpenseaToolbar assetOSUrl={osAsset?.openseaLink} osUrl={OPENSEA_URL} passport={osAsset?.externalLink} />
+                                >
+                                    {osAsset && (
+                                        <OpenseaToolbar assetOSUrl={osAsset?.permalink} osUrl={OPENSEA_URL} passport={osAsset?.external_link} />
+                                    )}
 
                                 <Box p={{ base: "15px", smd: "10px", lg: "5px 25px 25px" }} d="flex" flexFlow="column wrap">
                                     <Box className="back-link" position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
@@ -213,11 +213,11 @@ export function AssetDetails() {
                                             <h3>Get your hands on the {osAsset.name}</h3>
 
 
-                                            <Box d="flex" flexFlow="row-reverse nowrap" alignItems="center">
-                                                <Box flex="0 0 25%" transform="translateY(-25%)">
+                                                <Box d="flex" flexFlow="row-reverse nowrap" alignContent="center" alignItems="center">
+                                                    <Box flex="0 0 25%" transform="translateY(0)">
                                                         <ConnectButton />
                                                 </Box>
-                                                    {address && osAsset && (
+                                                    {osAsset && address && (
                                                     <>
                                                         <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" sx={{
                                                             "span": {
@@ -230,12 +230,14 @@ export function AssetDetails() {
                                                                 fontSize: { base: "22px", xxl: "25px" }
                                                             }
                                                         }}>
-                                                                <span>{`Current bid:`}</span><strong>{`Ξ${price.toFixed(2)} ETH`}</strong>
-                                                                <Box as="span" sx={{
-                                                                    fontSize: { base: "10px" }
-                                                                }}>
-                                                                    {formatAddress(osAsset.buyOrders[0].maker) === formatAddress(address) ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
-                                                                </Box>
+                                                                <span>{osAsset.orders && osAsset.orders.length > 0 ? `Current bid:` : `Be the first to bid! 🐷`}</span><strong>{`Ξ${price.toFixed(2)} ETH`}</strong>
+                                                                {osAsset.orders && osAsset.orders.length > 0 && (
+                                                                    <Box as="span" sx={{
+                                                                        fontSize: { base: "10px" }
+                                                                    }}>
+                                                                        {formatAddress(osAsset.orders[0].maker.address) === formatAddress(address) ? `(You're the highest bidder)` : `(You're not the highest bidder)`}
+                                                                    </Box>
+                                                                )}
                                                             </Box>
 
                                                         {creatingOrder && <Box>Processing ... please wait</Box>}
@@ -245,9 +247,10 @@ export function AssetDetails() {
                                                             alignItems="center"
                                                             justifyContent="center"
                                                             width="100%"
-                                                        >
-
+                                                            >
+                                                                {/* {address && ( */}
                                                                 <OpenseaModal asset={osAsset} />
+                                                                {/* )} */}
                                                         </ButtonGroup>
 
                                                     </>

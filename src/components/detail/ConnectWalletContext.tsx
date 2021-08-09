@@ -44,6 +44,8 @@ export type ConnectWalletContextType = {
   doSendingOrder: (status: boolean) => void,
   cancelOrder: () => void,
   storeBid: (assetId: string | null, bid: string | null, assetAddress: string | null) => void,
+  storeNFTVideoUrl: (nftId: string, videoUrl: string) => void,
+  videos: Array<StoreVideoPropType>,
 };
 
 export const ConnectWalletContext = createContext<ConnectWalletContextType>({
@@ -69,6 +71,8 @@ export const ConnectWalletContext = createContext<ConnectWalletContextType>({
   doSendingOrder: () => { },
   cancelOrder: () => { },
   storeBid: () => { },
+  storeNFTVideoUrl: () => { },
+  videos: [{ nftId: "", videoUrl: "" }],
 });
 
 const providerOptions = {
@@ -91,6 +95,10 @@ const web3Modal =
 interface ConnectWalletProviderOptions {
   children: React.ReactElement;
 }
+type StoreVideoPropType = {
+  nftId: string;
+  videoUrl: string;
+}
 
 export default function ConnectWalletProvider({ children }: ConnectWalletProviderOptions) {
   const [provider, setProvider] = useState<providers.Web3Provider | null>(null);
@@ -105,9 +113,9 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
   const [creatingOrder, setCreatingOrder] = useState(false);
   const [sendingOrder, setSendingOrder] = useState(false);
   const [processingOrder, setProcessingOrder] = useState(false);
+  const [videos, setVideos] = useState<Array<StoreVideoPropType>>([{ nftId: "", videoUrl: "" }]);
 
   const calledOnce = useRef<boolean>(false);
-
 
   const onClickDisconnect = useCallback(async () => {
     if (web3Modal === false) return;
@@ -135,14 +143,14 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
 
     try {
       const web3Provider = await web3Modal.connect();
-      web3Provider && console.log("web3 provider ready...", web3Provider);
+      web3Provider && console.log("web3 provider ready...");
 
       const ethersProvider = new ethers.providers.Web3Provider(web3Provider);
       setProvider(ethersProvider);
 
       console.log("Getting your address...");
       const ethAddress = await ethersProvider.getSigner().getAddress();
-      ethAddress && console.info("address obtained, web3 set: ", web3Provider, ethersProvider, ethAddress);
+      ethAddress && console.info("address obtained, web3 set: ", ethAddress);
 
       ethAddress &&
         setAddress(ethAddress);
@@ -195,6 +203,10 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
     setYourBid({ asset: assetId, amount: bid, assetAddress: assetAddress })
   }, []);
 
+  const storeNFTVideoUrl = (id: string, url: string) => {
+    setVideos(videos => [...videos, { nftId: id, videoUrl: url }]);
+  }
+
   useEffect(() => {
     if (calledOnce.current) return;
     calledOnce.current = true;
@@ -230,6 +242,8 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
         doSendingOrder,
         cancelOrder,
         storeBid,
+        storeNFTVideoUrl,
+        videos
       }}>
       {children}
     </ConnectWalletContext.Provider>

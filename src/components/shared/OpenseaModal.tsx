@@ -31,7 +31,7 @@ export let accounts: any;
 export type OpenseaModalType = {
   // setModalOpen: any;
   // setBidding: any;
-  asset: OpenSeaAsset;
+  asset: any;
 }
 
 
@@ -71,7 +71,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
     priceSetter
   } = useWeb3();
 
-  // asset !== "undefined" ? console.log("🙌 data : ", asset) : console.log("😥 data lost...");
+  asset && console.log("🙌 data : ", asset);
 
   const placeBid = async (ethAmount: any, tokenId: any, id: any) => {
 
@@ -160,6 +160,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                     fontWeight: "900",
                   },
                   "span": {
+                    color: "brand.100",
                     fontWeight: "100",
                     fontSize: { base: "14px", xxl: "32px" },
                   }
@@ -188,7 +189,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                     <p>Creating order...</p>
                 )}
                   {sendingOrder && (
-                    <p>Bid sent to OpenSea!</p>
+                    <p>🎉 Bid sent to OpenSea! 🎉</p>
                 )}
                 {isError && (
                   <p>Error in transaction. Try again</p>
@@ -196,20 +197,22 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                 </Box>
                 {yourBid && (
                   <Box sx={{
-                    color: yourBid.amount < price ? `brand.200` : `brand.900`,
+                    color: yourBid.amount <= price ? `brand.200` : `white`,
+                    transition: "color 0.2s ease",
                     "span": {
                       fontSize: "20px",
                       "& + span": {
-                        fontSize: "14px"
+                        fontSize: "18px",
+                        fontWeight: "900"
                       }
                     }
                   }}>
-                    <p><span>Your bid: {yourBid.amount}</span> <span>{yourBid.amount < price && `Bid over Ξ${price}`}</span></p>
+                    <p><span>Your bid: {yourBid.amount}</span></p>
                   </Box>
                 )}
                 {/* auctionDetails.push(auctionInfo.isActive ? ( */}
                 <Box sx={{ marginTop: "20px" }}>
-                  <p style={{ margin: 0, marginBottom: "2px" }}>{!price ? "You're the first to bid!" : `Current price: Ξ${price}`}</p>
+                  <p style={{ margin: 0, marginBottom: "2px" }}>{!price ? "You're the first to bid! 🐷" : `Current price: Ξ${price}`}</p>
                   {/* <p style={{ marginTop: 0 }}>{!isEnded ? `Auction ends at ${format(deadline, "MMMM dd, hh:mm:ss")}` : 'Auction has already ended'}</p> */}
                   {/* <div>
                 {auctionInfo.maxBidUser === constants.AddressZero ? "Highest bid was not made yet" : <div>Highest bid by: <Address
@@ -223,9 +226,10 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                     <Box>
                       <Box sx={{ display: "flex", flexFlow: "column wrap", alignItems: "center", marginTop: "20px" }}>
                         <p style={{ margin: 0, marginRight: "15px" }}>Bid amount in ETH:</p>
-                        <NumberInput defaultValue={`Set your bid amount`} value={yourBid && yourBid.amount} onChange={newBid => storeBid(asset.tokenId, newBid, asset.tokenAddress)} style={{ flexGrow: 1 }}>
+                        <NumberInput defaultValue={`Set your bid amount`} min={price} value={yourBid && yourBid.amount} onChange={newBid => storeBid(asset.token_id, newBid, asset.asset_contract.address)} style={{ flexGrow: 1 }} errorBorderColor="brand.200">
                           <NumberInputField />
                         </NumberInput>
+                        {yourBid && yourBid.amount <= price && (<Box as="span" color="brand.200">{`Bid over Ξ${price}`}</Box>)}
                       </Box>
                       <Button isLoading={creatingOrder} loadingText={`Placing bid...`} style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid?.amount, yourBid?.asset, yourBid?.assetAddress)} disabled={!yourBid || isEnded || yourBid.amount < price} variant="cta">{!creatingOrder && `Make a bid`}</Button>
                     </Box>

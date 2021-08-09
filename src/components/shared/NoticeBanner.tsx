@@ -31,7 +31,6 @@ export const NoticeBanner: FC<NoticeBannerInterface> = ({ children, sx, color })
   useEffect(() => {
     (async () => {
       const showBanner = await get("ntfa-banner");
-      console.log("showb: ", showBanner);
 
       if (showBanner === null) {
         await set("ntfa-banner", "true");

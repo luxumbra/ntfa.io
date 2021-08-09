@@ -21,9 +21,6 @@ export const ConnectButton: FC = () => {
     <>
       {isConnected ? (
         <>
-          <Box fontSize={{ base: "10px" }} mb={3}>
-            {/* {`${address} connected.`} */}
-          </Box>
           <Button variant="cta" onClick={() => onClickDisconnect()}>Disconnect</Button>
         </>
       ) : (

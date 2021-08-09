@@ -3,9 +3,10 @@ import { ConnectWalletContext, ConnectWalletContextType } from '../../components
 // import { useGetMeQuery } from 'graphql/autogen/types';
 // import { MeType } from 'graphql/types';
 import { utils } from 'ethers';
+import axios from 'axios';
 import { OpenSeaPort, Network } from "opensea-js";
 import { OpenSeaAsset, OrderSide } from "opensea-js/lib/types";
-import { NETWORK, OPENSEA_API_KEY } from "../../constants";
+import { NETWORK, OPENSEA_API_KEY, OPENSEA_API } from "../../constants";
 
 export let seaport: any;
 export const useWeb3 = (): ConnectWalletContextType => useContext(ConnectWalletContext);
@@ -29,6 +30,47 @@ export const newSeaport = () => {
     return seaport;
   }
   return seaport;
+}
+
+export const fetchAssetApi = async (id: any, tokenId: any): Promise<any> => {
+  let price = 0;
+  let assetState = {} as OpenSeaAsset;
+  let buyOrders = [] as any;
+  const orderSide = 0;
+
+
+  if (typeof window !== "undefined") {
+    try {
+      const assetRequest = await axios.get(`${OPENSEA_API}/asset/${id}/${tokenId}`, {
+        headers: {
+          'X-API-KEY': process.env.NEXT_OPENSEA_API_KEY,
+        }
+      });
+      assetRequest && console.log("request: ", assetRequest);
+      if (assetRequest) {
+        const { data } = assetRequest
+        assetState = data;
+
+        buyOrders = data.orders.filter((o: any) => o.side === orderSide);
+        if (buyOrders && buyOrders.length > 0) {
+          console.log("Buy orders");
+
+          const buyOrder: any = buyOrders[0];
+          // console.log(typeof +buyOrder.current_price, buyOrder.current_price);
+          const currentPrice = (+buyOrder.current_price / Math.pow(10, 18));
+          // debugger;
+          price = currentPrice
+        }
+      }
+
+      return { price, assetState };
+    } catch (error) {
+      console.log("OS Error: ", error);
+      // router.push(current, '/404', { shallow: true });
+      // setLoading(false);
+      return { price, assetState };
+    }
+  }
 }
 
 export const fetchAsset = async (id: any, tokenId: any) => {

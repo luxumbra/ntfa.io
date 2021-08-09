@@ -11,7 +11,7 @@ export type OpenseaToolbarType = {
 
 export const OpenseaToolbar: FC<OpenseaToolbarType> = ({ assetOSUrl, osUrl, passport }) => {
   return (
-    <Box className="openseaToolbar" position="sticky" top={0} d="flex" justifyContent="center" minW="100%" mb={3} sx={{
+    <Box className="openseaToolbar" position="sticky" top={0} d="flex" justifyContent="center" minW="100%" mb={3} zIndex={2} sx={{
       "a > svg": {
         opacity: 0.5,
         transition: "opacity 0.2s ease-in-out"

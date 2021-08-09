@@ -14,7 +14,6 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
     const [reveal, setReveal] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const calledOnce = useRef<boolean>(false);
-    console.log("TOGGLER: ", toggler);
 
     useEffect(() => {
         if (calledOnce.current) return;

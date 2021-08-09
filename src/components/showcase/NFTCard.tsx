@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import ReactMarkdown from "react-markdown";
 import Web3 from 'web3';
-import { OpenSeaPort, Network } from 'opensea-js';
+import { useWeb3, fetchAssetApi } from '../../lib/hooks';
 
 
 declare const window: any;
@@ -29,9 +29,14 @@ export function truncateString(str = '', n = 0) {
 }
 
 export const NFTCard: FC<NFTCardInterface> = ({ asset, id }) => {
-
+    const { storeNFTVideoUrl } = useWeb3();
     const summaryText = truncateString(asset.description, 160);
 
+    useEffect(() => {
+        (async () => {
+            await fetchAssetApi(asset.asset_contract.address, asset.token_id);
+        })();
+    }, [asset]);
 
     return (
         <Box>

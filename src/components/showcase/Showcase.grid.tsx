@@ -21,6 +21,7 @@ import { CustomCarouselDot } from "./CustomCarouselDot";
 //
 import { OPENSEA_API, OPENSEA_URL } from "../../constants";
 
+
 export let getCollection: any;
 
 export interface ShowcaseGridInterface {

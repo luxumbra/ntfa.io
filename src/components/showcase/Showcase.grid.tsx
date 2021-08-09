@@ -69,7 +69,7 @@ export const ShowcaseGridComponent: FC<ShowcaseGridInterface> = ({
   useEffect(() => {
     getCollection = axios
       .get(
-        `${OPENSEA_API}/assets?order_direction=asc&collection=${collection}`,
+        `${OPENSEA_API}/assets?order_direction=desc&collection=${collection}`,
         {
           headers: {
             'X-API-KEY': process.env.NEXT_OPENSEA_API_KEY

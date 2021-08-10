@@ -243,7 +243,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                     <Box>
                       <Box sx={{ display: "flex", flexFlow: "column wrap", alignItems: "center", marginTop: "20px" }}>
                       <p style={{ margin: "0" }}>Bid amount in ETH:</p>
-                        <NumberInput defaultValue={`Set your bid amount`} min={price} value={yourBid && yourBid.amount} onChange={newBid => storeBid(asset.token_id, newBid, asset.asset_contract.address)} style={{ flexGrow: 1 }} errorBorderColor="brand.200">
+                      <NumberInput defaultValue={`Set your bid amount`} min={price} value={yourBid && yourBid.amount} onChange={newBid => storeBid(asset.token_id, newBid, asset.asset_contract.address)} style={{ flexGrow: 1 }} errorBorderColor="brand.200">
                           <NumberInputField />
                         </NumberInput>
                       {yourBid && yourBid.amount <= price && (<Box as="span" color="brand.900">{`Bid over Ξ${price}`}</Box>)}

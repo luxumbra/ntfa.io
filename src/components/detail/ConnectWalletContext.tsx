@@ -204,7 +204,7 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
     setPrice(price);
   }, []);
 
-  const storeBid = useCallback((assetId: string | null, bid: number | null, assetAddress: string | null) => {
+  const storeBid = useCallback((assetId: string | null, bid: string | null, assetAddress: string | null) => {
     setYourBid({ asset: assetId, amount: bid, assetAddress: assetAddress })
   }, []);
 

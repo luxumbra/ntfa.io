@@ -25,7 +25,7 @@ export const FooterComponent: FC<FooterComponentInterface> = ({ toggler }) => {
         <Box position={"fixed"} bottom="0" left="0" width="100vw" height={{ base: "90px", lg: "120px", xl: "150px", xxxl: "160px" }} zIndex={1000} pointerEvents={{ base: showMenu ? "auto" : "none", lg: toggler ? (showMenu ? "auto" : "none") : "auto" }}>
             <IconButton
                 position="absolute"
-                top={{ base: "4vh", smd: "-75vh", xl: "-78vh", xxl: "-80vh" }}
+                top={{ base: "4vh", smd: "-75vh", xl: "-75vh", xxl: "-80vh" }}
                 right={{ base: "2.5vw", xl: `2vw` }}
                 onClick={() => setShowMenu(!showMenu)}
                 icon={<HamburgerIcon />}

@@ -134,7 +134,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
     <>
       <OpenBidModalButton />
 
-        <Modal isOpen={modalOpen} onClose={onClose} size={"xl"} isCentered>
+      <Modal isOpen={modalOpen} onClose={onClose} size={"xl"} isCentered>
         <ModalOverlay backgroundColor="rgba(0,0,0,0.7)" onClick={() => onClickBidModalClose()} sx={{
           backdropFilter: "blur(8px)",
           }} />
@@ -142,13 +142,14 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
           background: "linear-gradient(to bottom, rgba(62,95,105,1) 50%, rgba(178,207,226,1) 100%)",
           boxShadow: "0 0 15px rgba(0,0,0,0.5)"
           }}>
-            <IconButton onClick={() => onClickBidModalClose()} aria-label="Close modal" size="sm" variant="cta" icon={<CloseIcon />}
+          <IconButton onClick={onClickBidModalClose} aria-label="Close modal" size="sm" variant="cta" icon={<CloseIcon />}
               sx={{
                 position: "absolute",
                 top: 3,
                 right: 3,
                 backgroundColor: "transparent",
-                width: "32px"
+                width: "32px",
+                zIndex: 200
               }} />
 
             <ModalBody d="flex" justifyItems="center" alignContent="flex-start" p={{ base: "15px", lg: "25px", xl: "50px" }} sx={{
@@ -162,38 +163,30 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                   d: "inline-flex",
                   flexFlow: "column wrap",
                   textAlign: "center",
-                  lineHeight: { base: "14px", xxl: "28px" },
+                  lineHeight: { base: "22px", xl: "28px" },
                   "strong": {
                     display: "block",
                     textAlign: "center",
-                    fontSize: { base: "14px", xxl: "28px" },
+                    fontSize: { base: "20px", xl: "28px" },
                     fontWeight: "900",
                   },
                   "span": {
                     color: "brand.100",
                     fontWeight: "100",
-                    fontSize: { base: "14px", xxl: "32px" },
+                    fontSize: { base: "24px", xl: "32px" },
                   }
                 },
                 "ul li": {
-                  fontSize: { base: "16px", xxl: "25px" }
+                  fontSize: { base: "16px", xl: "25px" }
                 },
                 "p": {
-                  fontSize: { base: "16px", xxl: "25px" }
+                  fontSize: { base: "18px", xl: "25px" }
                 },
                 backdropFilter: "blur(0)"
               }}>
                 <p style={{ fontWeight: "bold" }}>{!isEnded ? `Auction is in progress` : `Auction has finished`}</p>
                 <h3><strong>Bidding on</strong> <span>{asset?.name}</span></h3>
-                {asset?.buyOrders && (
-                  <>
-                    <ul>
-                      {asset.buyOrders.length > 0 && asset.buyOrders.map((order: any) => {
-                        <li>{toUnitAmount(order.currentPrice)}</li>
-                      })}
-                    </ul>
-                  </>
-                )}
+
                 <Box sx={{ color: "brand.200" }}>
                 {creatingOrder && (
                     <p>Creating order...</p>
@@ -208,20 +201,21 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                 {yourBid && (
                   <Box sx={{
                     color: yourBid.amount <= price ? `brand.200` : `white`,
-                    transition: "color 0.2s ease",
-                    "span": {
-                      fontSize: "20px",
-                      "& + span": {
-                        fontSize: "18px",
-                        fontWeight: "900"
-                      }
-                    }
+                  transition: "color 0.2s ease",
+                  fontWeight: "900",
+                    // "span": {
+                    //   fontSize: {base: "20px"},
+                    //   "& + span": {
+                    //     fontSize: "18px",
+                    //     fontWeight: "900"
+                    //   }
+                    // }
                   }}>
                     <p><span>Your bid: {yourBid.amount}</span></p>
                   </Box>
                 )}
                 {/* auctionDetails.push(auctionInfo.isActive ? ( */}
-                <Box sx={{ marginTop: "20px" }}>
+              <Box>
                   <p style={{ margin: 0, marginBottom: "2px" }}>{!price ? "You're the first to bid! 🐷" : `Current price: Ξ${price}`}</p>
                   {/* <p style={{ marginTop: 0 }}>{!isEnded ? `Auction ends at ${format(deadline, "MMMM dd, hh:mm:ss")}` : 'Auction has already ended'}</p> */}
                   {/* <div>
@@ -235,13 +229,13 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                   {asset && (
                     <Box>
                       <Box sx={{ display: "flex", flexFlow: "column wrap", alignItems: "center", marginTop: "20px" }}>
-                        <p style={{ margin: 0, marginRight: "15px" }}>Bid amount in ETH:</p>
+                      <p style={{ margin: "0" }}>Bid amount in ETH:</p>
                         <NumberInput defaultValue={`Set your bid amount`} min={price} value={yourBid && yourBid.amount} onChange={newBid => storeBid(asset.token_id, newBid, asset.asset_contract.address)} style={{ flexGrow: 1 }} errorBorderColor="brand.200">
                           <NumberInputField />
                         </NumberInput>
-                        {yourBid && yourBid.amount <= price && (<Box as="span" color="brand.200">{`Bid over Ξ${price}`}</Box>)}
+                      {yourBid && yourBid.amount <= price && (<Box as="span" color="brand.900">{`Bid over Ξ${price}`}</Box>)}
                       </Box>
-                      <Button isLoading={creatingOrder} loadingText={`Placing bid...`} style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid?.amount, yourBid?.asset, yourBid?.assetAddress)} disabled={!yourBid || isEnded || yourBid.amount < price} variant="cta">{!creatingOrder && `Make a bid`}</Button>
+                    <Button isLoading={creatingOrder} loadingText={`Placing bid...`} style={{ marginTop: "7px" }} onClick={() => placeBid(yourBid?.amount, yourBid?.asset, yourBid?.assetAddress)} disabled={!yourBid || isEnded || yourBid.amount <= price} variant="cta">{!creatingOrder && `Make a bid`}</Button>
                     </Box>
                   )}
                 </Box>

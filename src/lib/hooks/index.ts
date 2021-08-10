@@ -61,14 +61,15 @@ export const fetchAssetApi = async (id: any, tokenId: any): Promise<any> => {
           // debugger;
           price = currentPrice
         }
+        return { price, assetState };
       }
 
-      return { price, assetState };
     } catch (error) {
-      console.log("OS Error: ", error);
-      // router.push(current, '/404', { shallow: true });
+      console.log("OS API Error: ", error);
+      throw new Error(error);
+
       // setLoading(false);
-      return { price, assetState };
+      // return null;
     }
   }
 }

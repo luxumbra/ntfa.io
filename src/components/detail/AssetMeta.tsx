@@ -32,9 +32,12 @@ export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
         return (
           <Box key={index} as="li" sx={{
             flex: "0 0 45%",
+            maxW: "45%",
             d: "flex",
             flexFlow: "row wrap",
-            mb: { base: 0, lg: 1 },
+            alignItems: "flex-start",
+            alignContent: "flex-start",
+            mb: { base: 1, lg: 1 },
           }}>
             <Box as="span" key={`dt-${index}`} sx={{
               flex: "0 0 100%",
@@ -47,6 +50,8 @@ export const AssetMeta: FC<AssetMetaType> = ({ theAsset }) => {
               flex: "1",
               fontSize: { base: "11px", lg: "14px" },
               fontWeight: "100",
+              pr: 2,
+              wordBreak: "break-word",
             }}>
               {assetItem?.value}
             </Box>

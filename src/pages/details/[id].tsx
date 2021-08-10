@@ -21,7 +21,7 @@ import { OpenSeaAsset } from "opensea-js/lib/types";
 import { OpenseaToolbar } from "../../components/detail/OpenseaToolbar";
 import { OpenseaModal } from "../../components/shared/OpenseaModal";
 import { NETWORK, OPENSEA_URL } from "../../constants";
-import { fetchAssetApi, useWeb3, formatAddress } from '../../lib/hooks';
+import { fetchAssetApi, useWeb3, useMounted } from '../../lib/hooks';
 //
 
 declare const window: any;
@@ -70,21 +70,23 @@ export function AssetDetails() {
         try {
             const asset = await fetchAssetApi(id, tokenId);
             asset && setOsAsset(asset?.assetState);
-            asset && priceSetter(asset?.price);
-            asset && setLoading(false);
-            return asset
+            priceSetter(asset?.price);
+            setLoading(false);
+            return asset;
         } catch (error) {
-            console.log("Asset error: ", error);
-            return error;
+            console.log("Load asset error: ", error);
+            router.push('/404');
+            return null;
         }
     }, [id, tokenId, osAsset]);
 
     useEffect(() => {
-        loadAsset();
+        let isSubscribed = true;
+        isSubscribed && loadAsset();
         osAsset && console.log("osAsset: ", osAsset.external_link);
+        return () => { isSubscribed = false };
 
-    }, [loadAsset, osAsset, address])
-    // set the current users account address so we can check it against the highest bidder address
+    }, [loadAsset, osAsset])
 
 
     return (
@@ -104,12 +106,12 @@ export function AssetDetails() {
                     position="relative"
                     flex={{ base: "0 0 90%", smd: "0 0 98%", lg: "0 0 45%", xxxl: "0 0 33%" }}
                     width={{ base: "98%", smd: "98%", lg: "45%", xxxl: "33%" }}
-                    maxH={{ base: "83vh", lg: "83vh", xxxl: "75vh" }}
+                    maxH={{ base: "83vh", lg: "83vh", xl: "88vh", xxl: "75vh" }}
                     height="100%"
                     d="flex"
                     flexDirection={{ base: "column", smd: "row", lg: "column" }}
                     alignItems={{ base: "flex-start", smd: "center", lg: "flex-start" }}
-                    mt={{ base: 7, lg: "10px", xl: "10px", xxl: "50px" }}
+                    mt={{ base: 7, lg: "10px", xl: "50px", xxl: "50px" }}
                     ml={{ base: "auto", smd: "auto", lg: "auto" }}
                     mr={{ base: "auto", smd: "auto", lg: "auto" }}
                     px="0"
@@ -173,7 +175,9 @@ export function AssetDetails() {
                                 height={{
                                     base: `${100 * (356 / 633)}%`,
                                     smd: `${100 - 31}%`,
-                                    lg: `${100 - (356 / 633) - 45}%`
+                                    lg: `${100 - (356 / 633) - 45}%`,
+                                    xxl: `${100 - (326 / 633) - 45}%`,
+                                    xxxl: `${100 - (356 / 633) - 45}%`
                                 }}
                                 overflowY="auto"
                                     z={0}
@@ -182,7 +186,7 @@ export function AssetDetails() {
                                         <OpenseaToolbar bid={<OpenseaModal asset={osAsset} />} osUrl={OPENSEA_URL} passport={osAsset?.external_link} />
                                     )}
 
-                                <Box p={{ base: "15px", smd: "10px", lg: "5px 25px 25px" }} d="flex" flexFlow="column wrap">
+                                    <Box p={{ base: "0 15px", smd: "10px", lg: "5px 25px 25px", xxl: "5px 25px 25px" }} d="flex" flexFlow="column wrap">
                                     <Box className="back-link" position="absolute" top={{ base: 4 }} right={{ base: 4 }} zIndex="200">
                                         <NextLink href={`/#section1`} passHref>
                                             <Link variant="cta"><ArrowBackIcon mr={0} /> Back to NFTs</Link>
@@ -204,18 +208,18 @@ export function AssetDetails() {
 
                                     </Box>
 
-                                        <Box p="15px 30px" width="100%" d="flex" flexFlow="column wrap" alignItems="flex-end">
+                                        <Box p="0" width="100%" d="flex" flexFlow="column wrap" alignItems="flex-end">
                                             {osAsset && (
                                                 <>
-                                                    <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" textAlign="center" sx={{
+                                                    <Box d="flex" flexFlow="column wrap" flex="0 0 50%" fontWeight="100" alignItems="center" textAlign="center" sx={{
                                                         "span": {
-                                                            fontSize: { base: "17px", xxl: "18px" }
+                                                            fontSize: { base: "15px", xl: "18px" }
                                                         },
                                                         "span:last-child": {
-                                                            fontSize: { base: "12px", xxl: "14px" }
+                                                            fontSize: { base: "12px", xl: "14px" }
                                                         },
                                                         "strong": {
-                                                            fontSize: { base: "22px", xxl: "25px" }
+                                                            fontSize: { base: "19px", xl: "25px" }
                                                         }
                                                     }}>
                                                         <span>{osAsset.orders && osAsset.orders.length > 0 ? `Current bid:` : `Be the first to bid! 🐷`}</span><strong>{`Ξ${price.toFixed(2)} ETH`}</strong>
@@ -224,14 +228,14 @@ export function AssetDetails() {
 
                                                 </>
                                             )}
-                                            {address && <Box pos="absolute" top={{ base: 4 }} left={{ base: 4 }} maxW="100%" fontSize="14px" fontWeight="900" color="white" zIndex={200}>{`Connected account: ${address.substr(0, 8,)}`}</Box>}
+                                            {address && <Box pos="absolute" top={{ base: 4 }} left={{ base: 4 }} maxW="100%" fontSize={{ base: "12px", xl: "14px" }} fontWeight="900" color="white" zIndex={200}>{`Connected account: ${address.substr(0, 8,)}`}</Box>}
 
                                     </Box>
                                     <Box className="assetDescription" fontSize={{ base: "12px", lg: "14px" }} sx={{
                                         flex: "0 0 33%",
                                         maxH: "33%",
                                             width: "100%",
-                                            transform: "translateY(-75px)",
+                                            transform: { base: "translateY(-45px)", xl: "translateY(-55px)" },
                                         "h2, h3": {
                                             fontFamily: "Hero, sans-serif",
                                             fontSize: { base: "12px", lg: "16px", xl: "18px" },
@@ -245,7 +249,8 @@ export function AssetDetails() {
                                             pl: "15px",
                                         },
                                             "p:first-of-type": {
-                                                maxW: "66%"
+                                                maxW: "66%",
+                                                mb: "3"
                                             },
                                         "a": {
                                             color: "brand.300",

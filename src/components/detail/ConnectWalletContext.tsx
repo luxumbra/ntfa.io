@@ -166,12 +166,12 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
   }, [onClickDisconnect]);
 
 
-  const onClickBidModalOpen = useCallback(async () => {
+  const onClickBidModalOpen = useCallback(() => {
     setBidding(true);
     setModalOpen(true);
   }, []);
 
-  const onClickBidModalClose = useCallback(async () => {
+  const onClickBidModalClose = useCallback(() => {
     setBidding(false);
     setModalOpen(false);
     setBidding(false);
@@ -179,6 +179,8 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
     setCreatingOrder(false);
     setSendingOrder(false);
     setProcessingOrder(false);
+    console.log("Bid modal closed...");
+
   }, []);
 
   const doCreatingOrder = useCallback(async (status: boolean) => {
@@ -195,7 +197,7 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
     setProcessingOrder(false);
   }, []);
 
-  const priceSetter = useCallback((price: number) => {
+  const priceSetter = useCallback(async (price: number) => {
     setPrice(price);
   }, []);
 

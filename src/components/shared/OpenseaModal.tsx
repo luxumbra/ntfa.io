@@ -111,7 +111,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
       if (offer) {
         doCreatingOrder(false);
         doSendingOrder(true)
-        storeBid("", "", "0x");
+        // storeBid("", 0, "0x");
       }
       // we don't need ethWrap as all we need currently is to place the offer. eth wrap sends the eth for it.
       // if (ethWrap) {
@@ -129,7 +129,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
       setIsError({ state: true, message: error.message });
       doCreatingOrder(false);
       doSendingOrder(false);
-      storeBid("", "", "0x");
+      // storeBid("", 0, "0x");
       return false;
     }
 
@@ -211,7 +211,7 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                   <p>{isError.message}</p>
                   )}
                 </Box>
-                {yourBid && (
+              {yourBid && yourBid.amount !== 0 && (
                   <Box sx={{
                     color: yourBid.amount <= price ? `brand.200` : `white`,
                   transition: "color 0.2s ease",

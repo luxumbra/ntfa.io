@@ -17,7 +17,7 @@ export const OpenseaToolbar: FC<OpenseaToolbarType> = ({ bid, osUrl, passport })
 
   return (
     <>
-      {!price ? (
+      {!passport ? (
         <Box>Loading...</Box>
       ) : (
           <Box className="openseaToolbar" position="sticky" top={0} d="flex" justifyContent="center" minW="100%" mb={3} zIndex={2} sx={{

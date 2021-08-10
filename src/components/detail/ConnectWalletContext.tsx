@@ -184,13 +184,16 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
   }, []);
 
   const doCreatingOrder = useCallback(async (status: boolean) => {
+    !status && setCreatingOrder(false);
     setCreatingOrder(status);
   }, []);
   const doProcessingOrder = useCallback(async (status: boolean) => {
+    !status && setProcessingOrder(false);
     setProcessingOrder(status);
   }, []);
-  const doSendingOrder = useCallback(async (status: boolean) => {
-    setSendingOrder(status);
+  const doSendingOrder = useCallback(async (status: boolean | null) => {
+    !status && setSendingOrder(false);
+    setSendingOrder(!!status);
   }, []);
   const cancelOrder = useCallback(async () => {
     setCreatingOrder(false);
@@ -201,7 +204,7 @@ export default function ConnectWalletProvider({ children }: ConnectWalletProvide
     setPrice(price);
   }, []);
 
-  const storeBid = useCallback((assetId, bid, assetAddress) => {
+  const storeBid = useCallback((assetId: string | null, bid: string | null, assetAddress: string | null) => {
     setYourBid({ asset: assetId, amount: bid, assetAddress: assetAddress })
   }, []);
 

@@ -66,10 +66,10 @@ export const fetchAssetApi = async (id: any, tokenId: any): Promise<any> => {
 
     } catch (error) {
       console.log("OS API Error: ", error);
-      throw new Error(error);
+      // throw new Error(error);
 
       // setLoading(false);
-      // return null;
+      return null;
     }
   }
 }

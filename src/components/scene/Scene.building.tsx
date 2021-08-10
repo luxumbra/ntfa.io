@@ -17,6 +17,11 @@ export const SceneBuilding: FC<SceneBuildingInterface> = ({ src, left, bottom, w
             left={left}
             bottom={bottom}
             width={width}
+            sx={{
+                _hover: {
+                    cursor: 'cell'
+                }
+            }}
         />
     )
 }

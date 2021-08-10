@@ -60,7 +60,7 @@ export const OpenBidModalButton: FC = () => {
 }
 
 export function OpenseaModal({ asset }: OpenseaModalType) {
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState({ state: false, message: "" } as { state: boolean, message: string });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     address,
@@ -81,13 +81,13 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
     priceSetter
   } = useWeb3();
 
-  asset && console.log("🙌 data : ", asset);
+  // asset && console.log("🙌 data : ", asset);
 
   const placeBid = async (ethAmount: any, tokenId: any, id: any) => {
 
     console.log("Bid: ", ethAmount, tokenId, id);
     try {
-
+      setIsError({ state: false, message: "" });
       doCreatingOrder(true);
       const offer = await newSeaport().createBuyOrder({
         asset: {
@@ -99,33 +99,38 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
         startAmount: ethAmount,
       });
 
-      const ethWrap = await newSeaport().wrapEth({
-        amountInEth: ethAmount,
-        accountAddress: address,
-      });
+      // const ethWrap = await newSeaport().wrapEth({
+      //   amountInEth: ethAmount,
+      //   accountAddress: address,
+      // });
       // openSeaPort.addListener(EventType.WrapEth, ({ accountAddress, amount }) => {
       //   console.info({ accountAddress, amount })
       //   dispatch({ type: ActionTypes.WRAP_ETH })
       // })
-      offer && console.log("offer: ", offer);
+      offer && console.log("offer: ", typeof offer);
       if (offer) {
         doCreatingOrder(false);
         doSendingOrder(true)
-        // storeBid({ null, null, null});
+        storeBid("", "", "0x");
       }
-      if (ethWrap) {
-        console.log("eth wrap: ", ethWrap);
-        doCreatingOrder(false);
-        doSendingOrder(false);
-        console.log("order: ", ethAmount, tokenId, id, address);
-        storeBid(null, null, null);
-        priceSetter(+ethAmount);
-      }
+      // we don't need ethWrap as all we need currently is to place the offer. eth wrap sends the eth for it.
+      // if (ethWrap) {
+      //   console.log("eth wrap: ", ethWrap);
+      //   doCreatingOrder(false);
+      //   doSendingOrder(false);
+      //   console.log("order: ", ethAmount, tokenId, id, address);
+      //   storeBid(null, null, null);
+      //   priceSetter(+ethAmount);
+      // }
 
       return true;
     } catch (error) {
-      console.log("placeBid() error: ", error);
-      return error;
+      console.info("placeBid() error: ", error);
+      setIsError({ state: true, message: error.message });
+      doCreatingOrder(false);
+      doSendingOrder(false);
+      storeBid("", "", "0x");
+      return false;
     }
 
   }
@@ -187,15 +192,23 @@ export function OpenseaModal({ asset }: OpenseaModalType) {
                 <p style={{ fontWeight: "bold" }}>{!isEnded ? `Auction is in progress` : `Auction has finished`}</p>
                 <h3><strong>Bidding on</strong> <span>{asset?.name}</span></h3>
 
-                <Box sx={{ color: "brand.200" }}>
+              <Box sx={{
+                color: "brand.200",
+                "p": {
+                  fontSize: {
+                    base: "12px", xl: "16px"
+                  },
+                  fontWeight: "900"
+                }
+              }}>
                 {creatingOrder && (
-                    <p>Creating order...</p>
+                  <p>Creating bid...</p>
                 )}
                   {sendingOrder && (
                     <p>🎉 Bid sent to OpenSea! 🎉</p>
                 )}
-                {isError && (
-                  <p>Error in transaction. Try again</p>
+                {isError.state && (
+                  <p>{isError.message}</p>
                   )}
                 </Box>
                 {yourBid && (
